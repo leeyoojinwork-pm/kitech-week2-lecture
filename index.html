@@ -14,7 +14,7 @@
   <meta name="author" content="이유진 (Lee Yoojin)" />
   <meta name="copyright" content="© 2026 이유진. All Rights Reserved." />
   <meta name="robots" content="index, follow, noarchive, noimageindex" />
-  <title>KITECH 2주차 | 이유진 멘토 발표안</title>
+  <title>KITECH 2주차 | 이유진 멘토 발표안 — 문제 좁히기 · 암묵지 형식화 · 스킬</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -390,54 +390,34 @@
       <div class="title">이유진 멘토 발표안</div>
     </div>
 
-    <button class="nav-section" onclick="toggleNavSection('mentor')">
-      <span>유진 멘토 발표 파트</span>
+    <button class="nav-section" onclick="toggleNavSection('am')">
+      <span>Part 1 — 문제 좁히기</span>
       <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
     </button>
-    <div class="nav-group" id="nav-group-mentor">
-      <a href="#mentor-overview"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>발표안 개요</a>
-      <a href="#mentor-narrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 5v6M5 8h6"/></svg>문제 좁히기 사례</a>
-      <a href="#mentor-tacit-case"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>암묵지 형식화 사례</a>
-      <a href="#mentor-skill-case"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>스킬 개발 사례</a>
-      <a href="#mentor-case-closing"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M3 8h10M3 4h10"/></svg>마무리 메시지</a>
-    </div>
-
-    <button class="nav-section collapsed-sec" onclick="toggleNavSection('am')">
-      <span>오전 — 20분</span>
-      <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
-    </button>
-    <div class="nav-group hidden" id="nav-group-am">
-      <a href="#opening"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1"/></svg>오늘 목표</a>
+    <div class="nav-group" id="nav-group-am">
+      <a href="#opening"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1"/></svg>섹션 진입</a>
       <a href="#am-why"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="4"/></svg>왜 좁혀야 하는가</a>
       <a href="#am-narrow-concept"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4l-8 8M4 4h8v8"/></svg>좁힌다는 것의 의미</a>
-      <a href="#am-crit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>좁히기 기준 2가지</a>
-      <a href="#am-check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>판단 체크리스트</a>
+      <a href="#am-crit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>좁히기 기준</a>
       <a href="#am-ex"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M8 3l5 5-5 5"/></svg>Before / After 사례</a>
-      <a href="#am-practice"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg>실습 워크시트</a>
-      <a href="#am-mentor"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>멘토 체크 포인트</a>
     </div>
 
-    <button class="nav-section collapsed-sec" onclick="toggleNavSection('vs')">
-      <span>VS Code 실습</span>
+    <button class="nav-section collapsed-sec" onclick="toggleNavSection('p2')">
+      <span>Part 2 — 암묵지 형식화</span>
       <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
     </button>
-    <div class="nav-group hidden" id="nav-group-vs">
-      <a href="#vscode-guide"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 5l3 3-3 3M9 11h2"/></svg>단계별 실습 가이드</a>
-      <a href="#vscode-advanced"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg>스킬·프로젝트·에이전트화</a>
-    </div>
-
-    <button class="nav-section collapsed-sec" onclick="toggleNavSection('pm')">
-      <span>오후 — 40분</span>
-      <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
-    </button>
-    <div class="nav-group hidden" id="nav-group-pm">
+    <div class="nav-group hidden" id="nav-group-p2">
       <a href="#pm-tacit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 13c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>암묵지란?</a>
       <a href="#pm-case"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 6h6M5 9h4"/></svg>회의록 에이전트 사례</a>
       <a href="#pm-doc"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8l2 3v9H2V5z"/><path d="M10 2v3h4M5 8h6M5 11h4"/></svg>기준 문서 만들기</a>
+    </div>
+
+    <button class="nav-section collapsed-sec" onclick="toggleNavSection('p3')">
+      <span>Part 3 — 스킬 개발 및 활용</span>
+      <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
+    </button>
+    <div class="nav-group hidden" id="nav-group-p3">
       <a href="#pm-skill"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>스킬로 만들기</a>
-      <a href="#pm-practice"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg>실습 워크시트</a>
-      <a href="#pm-mentor"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>멘토 체크 포인트</a>
-      <a href="#pm-retro"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8a5 5 0 1 1 1.4 3.4"/><path d="M3 12V8h4"/></svg>회고</a>
     </div>
   </div><!-- /nav-content -->
 </nav>
@@ -569,9 +549,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- 페이지 헤더 -->
 <div class="page-head">
-  <div class="kicker">KITECH AI 업무 자동화 · 2주차</div>
-  <h1>KITECH 2주차 | 이유진 멘토 발표안</h1>
-  <div class="desc">문제 좁히기 · 암묵지 형식화 · 스킬 개발 및 활용 사례</div>
+  <div class="kicker">KITECH 2주차 · 이유진 멘토 발표안</div>
+  <h1>문제 좁히기 · 암묵지 형식화 · 스킬 개발 및 활용 사례</h1>
+  <div class="desc">전체 강의안이 아닌 <strong>유진 멘토 담당 사례 발표 파트</strong>만 정리한 자료입니다</div>
+</div>
+
+<!-- ═══ 자료 용도 안내 (전체 강의안 아님 명시) ═══ -->
+<div style="background:var(--blue-bg);border:1.5px solid var(--blue-bd);border-radius:12px;padding:18px 22px;margin:0 0 18px;">
+  <div style="display:flex;align-items:flex-start;gap:12px;">
+    <div style="width:30px;height:30px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M8 5v3M8 11h.01"/><circle cx="8" cy="8" r="6"/></svg>
+    </div>
+    <div style="flex:1;">
+      <div style="font-size:13.5px;font-weight:700;color:var(--blue-dk);margin-bottom:6px;">이 자료는 KITECH 2주차 전체 강의안이 아닙니다</div>
+      <div style="font-size:12.5px;color:var(--gray-700);line-height:1.75;">
+        전체 교육 흐름·실습 운영은 메인 강의안에 따르고,<br/>
+        이 자료에서는 <strong>이유진 멘토가 담당하는 아래 3가지 사례 발표만</strong> 다룹니다.
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+        <span style="font-size:12px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue-bd);border-radius:99px;padding:4px 12px;">1. 문제 좁히기</span>
+        <span style="font-size:12px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue-bd);border-radius:99px;padding:4px 12px;">2. 암묵지 형식화</span>
+        <span style="font-size:12px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue-bd);border-radius:99px;padding:4px 12px;">3. 스킬 개발 및 활용</span>
+      </div>
+      <div style="font-size:11.5px;color:var(--gray-500);margin-top:10px;line-height:1.6;">
+        ※ 데이터 확보·VS Code 실습·전체 교육 운영은 유진 멘토 담당 범위가 아니며, 본 자료에서는 다루지 않습니다.
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ 강의 슬라이드 바로가기 + 미니 미리보기 ═══ -->
@@ -602,223 +606,37 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </a>
 
-<!-- ═══ 메인 탭 ═══ -->
+<!-- ═══ 메인 탭 (Part 1·2·3) ═══ -->
 <div class="main-tabs" role="tablist">
-  <button class="main-tab active" role="tab" data-panel="panel-mentor" onclick="switchTab('panel-mentor')">
-    <span class="mt-label">Mentor</span>
-    <span class="mt-title">유진 멘토 사례 발표</span>
-    <span class="mt-meta">문제 좁히기 · 암묵지 · 스킬</span>
-  </button>
-  <button class="main-tab" role="tab" data-panel="panel-am" onclick="switchTab('panel-am')">
-    <span class="mt-label">Section 1</span>
-    <span class="mt-title">오전 — 문제 좁히기</span>
-    <span class="mt-meta">20분 · 첫 자동화 후보 고르기</span>
+  <button class="main-tab active" role="tab" data-panel="panel-am" onclick="switchTab('panel-am')">
+    <span class="mt-label">Part 1</span>
+    <span class="mt-title">문제 좁히기 사례</span>
+    <span class="mt-meta">큰 업무를 한 단계로 줄이기</span>
   </button>
   <button class="main-tab" role="tab" data-panel="panel-lab" onclick="switchTab('panel-lab')">
-    <span class="mt-label">Section 2</span>
-    <span class="mt-title">VS Code 실습</span>
-    <span class="mt-meta">단계별 환경 설정 가이드</span>
+    <span class="mt-label">Part 2</span>
+    <span class="mt-title">암묵지 형식화 사례</span>
+    <span class="mt-meta">머릿속 기준을 문서로 꺼내기</span>
   </button>
   <button class="main-tab" role="tab" data-panel="panel-pm" onclick="switchTab('panel-pm')">
-    <span class="mt-label">Section 3</span>
-    <span class="mt-title">오후 — 암묵지 + 스킬</span>
-    <span class="mt-meta">40분 · 기준 문서 + 회의록 에이전트</span>
+    <span class="mt-label">Part 3</span>
+    <span class="mt-title">스킬 개발 및 활용 사례</span>
+    <span class="mt-meta">반복 업무를 스킬로 고정</span>
   </button>
 </div>
 
-<!-- ═══ 패널 0: 유진 멘토 사례 발표 ═══ -->
-<section class="tab-panel active" id="panel-mentor" role="tabpanel">
-  <div class="session-head am" id="mentor-overview">
-    <div class="stag">발표안</div>
-    <div class="sinfo">
-      <div class="stitle">유진 멘토 사례 발표</div>
-      <div class="ssub">실제 제출 사례를 바탕으로 문제 좁히기, 암묵지 형식화, 스킬 개발 흐름을 설명합니다</div>
-    </div>
-    <div class="tbadge">사례 중심</div>
-  </div>
-
-  <div class="time-table">
-    <div class="time-row"><div class="t-min">Part 1</div><div class="t-label">문제 좁히기 사례 발표</div><div class="t-type">범위 조정</div></div>
-    <div class="time-row"><div class="t-min">Part 2</div><div class="t-label">암묵지 형식화 사례 발표</div><div class="t-type">기준 문서화</div></div>
-    <div class="time-row"><div class="t-min">Part 3</div><div class="t-label">스킬 개발 및 활용 사례 발표</div><div class="t-type">반복 실행</div></div>
-  </div>
-
-  <div class="note blue">
-    이 탭은 기존 강의/실습 운영 자료와 분리된 <strong>이유진 멘토 사례 발표 전용 탭</strong>입니다. 기존 오전, VS Code, 오후 탭은 그대로 두고, 발표자가 사례를 설명할 때 필요한 멘토 관점과 다음 단계를 이 탭에만 모았습니다.
-  </div>
-
-  <h2 id="mentor-narrow">Part 1. 문제 좁히기 사례 발표</h2>
-  <div class="analogy">
-    <div class="a-label">교육 포인트</div>
-    멘토는 “무엇을 만들까?”보다 <strong>“이번 주에 무엇을 검증할까?”</strong>를 먼저 봅니다. 좋은 주제도 처음부터 대시보드, 전체 보고서, 전체 자동화로 가면 작동 여부를 확인하기 어렵습니다.
-  </div>
-
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>실제 사례 기반 Before</th><th>멘토라면 이렇게 좁힘</th><th>다음 단계</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>i-Tube 데이터와 원내 자산정보를 대조하고 결과 대시보드까지 만들고 싶다.</td>
-          <td>샘플 데이터에서 불일치 항목만 찾아 목록으로 출력하는 에이전트로 줄입니다.</td>
-          <td>불일치 목록이 맞는지 확인한 뒤, 유형별 비율과 대시보드는 다음 단계로 둡니다.</td>
-        </tr>
-        <tr>
-          <td>교육 신청 데이터를 분석해서 직군별 교육 기획 근거를 만들고 싶다.</td>
-          <td>기관 주관 교육과 외부 교육을 먼저 분리하는 에이전트로 줄입니다.</td>
-          <td>이상하게 분류된 교육명 1개를 찾아 분류 기준을 보완합니다.</td>
-        </tr>
-        <tr>
-          <td>전문지 원고에 쓸 유사 사례를 자동으로 찾아 정리하고 싶다.</td>
-          <td>원고 주제 1개에 대해 3년 이내·출처 명기 사례만 추려보게 합니다.</td>
-          <td>실제로 원고에 쓸 수 없는 사례 유형을 메모해 수집 기준을 보완합니다.</td>
-        </tr>
-        <tr>
-          <td>10개 본부의 엑셀과 직무기술서를 한 번에 취합하고 싶다.</td>
-          <td>본부 엑셀 1개를 넣고 취합이 어디서 막히는지 확인하게 합니다.</td>
-          <td>누락·오류 컬럼 목록을 보고, 가장 구조가 제각각인 본부부터 기준을 만듭니다.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="mentor-note">
-    <div class="mn-label">멘토 발표 멘트</div>
-    <p>멘토링할 때 저는 아이디어가 좋은지 나쁜지를 먼저 보지 않습니다. 대신 이번 주에 실제로 돌려볼 수 있는 첫 장면이 있는지를 봅니다. 첫 장면이 잡히면 데이터, 기준, 스킬이 차례로 따라옵니다.</p>
-  </div>
-
-  <div class="note green">
-    <strong>다른 사람들도 가져갈 인사이트</strong> — 좋은 에이전트 주제는 “큰 업무”가 아니라 “반복되고, 기준을 설명할 수 있고, 이번 주에 결과를 확인할 수 있는 작은 장면”에서 시작됩니다.
-  </div>
-
-  <h2 id="mentor-tacit-case">Part 2. 암묵지 형식화 사례 발표</h2>
-  <div class="analogy">
-    <div class="a-label">교육 포인트</div>
-    멘토는 “AI가 왜 틀렸지?”를 <strong>“내가 어떤 기준을 아직 안 알려줬지?”</strong>로 바꿔 묻습니다. 수강생이 결과물을 손으로 고치는 지점이 바로 암묵지입니다.
-  </div>
-
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>실제 업무 상황</th><th>숨어 있던 암묵지</th><th>기준 문서로 바꾸면</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>i-Tube 데이터와 원내 자산정보를 대조한다.</td>
-          <td>불일치는 장비명 표기 차이, 등록번호 없음, 수량 불일치처럼 유형이 다릅니다.</td>
-          <td>불일치 유형 기준표와 확인 필요 사유를 출력 규칙으로 만듭니다.</td>
-        </tr>
-        <tr>
-          <td>교육 신청 데이터를 직무·교육 유형별로 분류한다.</td>
-          <td>기관 주관 교육과 외부 교육을 먼저 분리해야 이후 분류 결과를 믿을 수 있습니다.</td>
-          <td>분류에 쓰는 컬럼, 예외 교육명, 애매한 경우의 처리 기준을 적습니다.</td>
-        </tr>
-        <tr>
-          <td>원장 세부내역에서 불일치 원인을 역추적한다.</td>
-          <td>1원 차이도 그냥 넘기지 않고 날짜, 금액 합산, 적요 키워드 순서로 봅니다.</td>
-          <td>역추적 순서, 자주 발생하는 가설, 사람 검토 지점을 체크리스트로 만듭니다.</td>
-        </tr>
-        <tr>
-          <td>뉴스 50건 중 데일리 메일에 넣을 10건을 고른다.</td>
-          <td>좋은 뉴스는 최신순만이 아니라 내부 공유 가치, 업무 관련성, 중복 여부가 함께 작동합니다.</td>
-          <td>선별 기준 4축과 좋은/나쁜 예시를 기준 문서에 넣습니다.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="mentor-note">
-    <div class="mn-label">멘토가 던질 질문</div>
-    <ul>
-      <li>결과물을 손으로 고칠 때 가장 자주 고치는 부분은 무엇인가요?</li>
-      <li>사람이면 바로 예외로 보는 케이스가 있나요?</li>
-      <li>중요하다고 판단하는 이유는 금액, 일정, 책임자, 보고 대상 중 무엇에 가깝나요?</li>
-    </ul>
-  </div>
-
-  <div class="note amber">
-    <strong>교육 인사이트</strong> — 암묵지는 거창한 노하우가 아닙니다. 내가 결과물을 고칠 때 반복해서 보는 기준이 바로 암묵지입니다.
-  </div>
-
-  <h2 id="mentor-skill-case">Part 3. 스킬 개발 및 활용 사례 발표</h2>
-  <div class="analogy">
-    <div class="a-label">교육 포인트</div>
-    멘토는 “스킬을 만들자”보다 <strong>“반복해서 안정적으로 돌릴 기준이 생겼나?”</strong>를 먼저 확인합니다. 스킬은 자동화의 시작점이 아니라 반복 검증을 통과한 기준을 저장하는 방식입니다.
-  </div>
-
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>반복 업무</th><th>스킬로 만들면 좋은 이유</th><th>스킬 실행 단위</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>데일리뉴스 메일 작성</td>
-          <td>뉴스 50건 중 10건을 고르는 기준과 메일 문장 톤을 매번 다시 설명하기 번거롭습니다.</td>
-          <td>뉴스 목록 입력 → 선별 기준 적용 → 한 문장 요약 → 메일 초안 출력</td>
-        </tr>
-        <tr>
-          <td>유사사례 자료 수집</td>
-          <td>전문지 원고마다 3년 이내, 출처 명기, 원고 활용 가능성 기준이 반복됩니다.</td>
-          <td>원고 주제 입력 → 후보 사례 수집 → 기준 충족 여부 표시 → 출처 포함 목록 출력</td>
-        </tr>
-        <tr>
-          <td>본부별 엑셀 취합</td>
-          <td>엑셀 구조가 조금씩 달라도 컬럼 확인, 누락 점검, 취합 초안 생성 흐름은 반복됩니다.</td>
-          <td>엑셀 1개 입력 → 컬럼 구조 확인 → 취합 초안 → 누락·오류 컬럼 목록 출력</td>
-        </tr>
-        <tr>
-          <td>회의록 정리</td>
-          <td>결정사항, 논의 중인 내용, 액션 아이템, 보류 사항을 같은 구조로 계속 분류해야 합니다.</td>
-          <td>회의 원문 입력 → 기준 문서 적용 → 결정사항·액션 아이템 도출 → 회의록 출력</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>다음 단계</th><th>할 일</th><th>확인할 것</th></tr></thead>
-      <tbody>
-        <tr><td>1. 기준 고정</td><td>업무 기준, 출력 형식, 금지 사항을 기준문서로 정리합니다.</td><td>같은 입력을 보면 사람이 비슷하게 판단할 만큼 구체적인가?</td></tr>
-        <tr><td>2. 3회 반복 테스트</td><td>서로 다른 입력 3개로 같은 흐름을 돌려봅니다.</td><td>매번 다시 설명하지 않아도 결과 구조가 유지되는가?</td></tr>
-        <tr><td>3. 실패 패턴 기록</td><td>AI가 놓친 기준, 잘못 분류한 항목, 사람이 고친 문장을 적습니다.</td><td>실패가 데이터 문제인지, 기준 문제인지, 출력 형식 문제인지 구분되는가?</td></tr>
-        <tr><td>4. 스킬 후보화</td><td>반복 실행할 이름, 입력 파일, 출력 결과, 예외 처리를 정합니다.</td><td>다음 달에도 같은 방식으로 다시 쓸 일인가?</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="mentor-note">
-    <div class="mn-label">멘토 발표 멘트</div>
-    <p>스킬은 멋있어 보이려고 만드는 게 아닙니다. 매번 같은 기준을 다시 설명하고 있다면 그 반복을 줄이기 위해 만드는 겁니다. 그래서 먼저 기준 문서가 안정돼야 하고, 그 다음에 스킬로 고정합니다.</p>
-  </div>
-
-  <h2 id="mentor-case-closing">발표 마무리 메시지</h2>
-  <div style="background:linear-gradient(135deg,#111827,#1E3A8A);border-radius:10px;padding:20px 22px;margin:16px 0 24px;color:#fff;">
-    <strong>오늘 유진 멘토 파트의 핵심</strong>
-    <ul style="margin-top:10px;color:#fff;">
-      <li>큰 업무를 한 번에 자동화하려고 하지 않는다.</li>
-      <li>내가 평소 쓰던 판단 기준을 문서로 꺼낸다.</li>
-      <li>반복되는 업무는 스킬로 만들어 다시 설명하지 않게 한다.</li>
-    </ul>
-    <p style="margin-top:10px;color:#DBEAFE;">AI 에이전트는 처음부터 완성된 시스템을 만드는 것이 아니라, 작은 업무 하나를 맡기고 기준을 보완하면서 키워가는 방식으로 시작하면 됩니다.</p>
-  </div>
-</section>
-
 <!-- ═══ 패널 1: 오전 ═══ -->
-<section class="tab-panel" id="panel-am" role="tabpanel">
+<section class="tab-panel active" id="panel-am" role="tabpanel">
 
 <!-- ══════════════════════════════════════
      오전 세션
 ══════════════════════════════════════ -->
 <div class="session-head am" id="opening">
-  <div class="stag">오전</div>
+  <div class="stag">Part 1</div>
   <div class="sinfo">
-    <div class="stitle">문제 좁히기</div>
-    <div class="ssub">넓은 과제를 이번 주 안에 작동시킬 수 있는 단위로 줄이기</div>
+    <div class="stitle">문제 좁히기 사례</div>
+    <div class="ssub">수강생이 작성한 넓은 과제를 보고, 오늘 만들 수 있는 한 단계로 줄이는 법</div>
   </div>
-  <div class="tbadge">20분</div>
-</div>
-
-<div class="time-table">
-  <div class="time-row"><div class="t-min">0–5분</div><div class="t-label">오늘 목표 + 왜 좁혀야 하는가</div><div class="t-type">설명</div></div>
-  <div class="time-row"><div class="t-min">5–12분</div><div class="t-label">기준 3가지 + Before/After 사례</div><div class="t-type">설명</div></div>
-  <div class="time-row prac"><div class="t-min">12–20분</div><div class="t-label">내 과제 좁히기</div><div class="t-type">실습</div></div>
 </div>
 
 
@@ -1227,57 +1045,6 @@ window.nacc = function(idx) {
 };
 </script>
 
-<!-- 오늘 하루 흐름 다이어그램 -->
-<div style="margin:20px 0 28px; padding:18px 20px; background:#fff; border:1px solid var(--gray-200); border-radius:10px;">
-  <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--gray-400); margin-bottom:16px;">오늘 실습 흐름</div>
-  <div style="display:flex; align-items:center; gap:0; flex-wrap:nowrap; overflow-x:auto;">
-    <!-- Step 1 -->
-    <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:var(--blue-bg);border:1.5px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-      </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">문제<br/>좁히기</div>
-      <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">오전 12분</div>
-    </div>
-    <div style="flex:1;min-width:20px;height:2px;background:linear-gradient(90deg,var(--blue-bd),var(--green-bd));border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
-    <!-- Step 2 -->
-    <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:var(--green-bg);border:1.5px solid var(--green-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8"><path d="M4 4h16v5H4z"/><path d="M4 13h8v7H4z"/><path d="M16 13h4v7h-4z"/></svg>
-      </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">데이터<br/>준비</div>
-      <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">실습 초반</div>
-    </div>
-    <div style="flex:1;min-width:20px;height:2px;background:var(--blue-bd);border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
-    <!-- Step 3 -->
-    <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:var(--blue-bg);border:1.5px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-      </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">기준 문서<br/>작성</div>
-      <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">오후 핵심</div>
-    </div>
-    <div style="flex:1;min-width:20px;height:2px;background:var(--blue-bd);border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
-    <!-- Step 4 -->
-    <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:var(--purple-bg);border:1.5px solid var(--purple-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
-      </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">에이전트<br/>실행</div>
-      <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">VS Code</div>
-    </div>
-    <div style="flex:1;min-width:20px;height:2px;background:linear-gradient(90deg,var(--blue-bd),#BFDBFE);border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
-    <!-- Step 5 -->
-    <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;border:1.5px solid #BFDBFE;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">결과<br/>확인</div>
-      <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">보완 반복</div>
-    </div>
-  </div>
-</div>
-
 <!-- 기준 3가지 -->
 <h2 id="am-crit">문제를 좁히는 기준 3가지</h2>
 
@@ -1297,10 +1064,6 @@ window.nacc = function(idx) {
     <div class="cname">가능성</div>
     <div class="cq">오늘 안에 결과를 볼 수 있는가?</div>
   </div>
-</div>
-
-<div class="note amber">
-  세 가지 중 하나라도 부족하면 아직 더 좁혀야 합니다. 오늘은 전체 업무를 완성하는 날이 아니라, AI에게 맡길 첫 번째 한 단계를 고르는 날입니다.
 </div>
 
 
@@ -1410,1112 +1173,89 @@ window.nacc = function(idx) {
 
 
 <!-- 실습 -->
-<h2 id="am-practice">실습 — 내 과제 좁히기 <span style="font-size:13px; font-weight:400; color:var(--gray-400);">8분</span></h2>
+<h2 id="am-practice">참고 자료 — 수강생용 워크시트</h2>
+<p style="font-size:13.5px;color:var(--gray-500);margin-bottom:14px;">발표 후 수강생이 가져갈 수 있는 워크시트입니다. 본 발표안에서는 직접 작성하지 않고, 사후 자료로 공유합니다.</p>
 
 <div class="dl-block">
   <div class="dl-head">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
-    <span class="dl-tag">실습 자료</span>
+    <span class="dl-tag">참고 자료</span>
   </div>
   <div class="dl-title">문제 좁히기 워크시트 (Markdown)</div>
-  <div class="dl-desc">VS Code나 노트앱에 그대로 붙여넣고 빈 칸을 채우면서 진행하세요. 4분면 매트릭스 + 자기 검증 체크리스트 포함.</div>
+  <div class="dl-desc">발표 후 본인 업무에 적용해보고 싶은 분들께 공유하는 자료. 4분면 매트릭스 + 자가진단 체크리스트 포함.</div>
   <div class="dl-grid cols-1">
     <a class="dl-card" href="samples/worksheet-문제좁히기.md" download>
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
       <div>
         <div class="dlc-name">worksheet-문제좁히기.md</div>
-        <div class="dlc-meta">4단계 워크시트 · 1사분면 자가진단 체크리스트 포함</div>
+        <div class="dlc-meta">4단계 워크시트 · 1사분면 자가진단 체크리스트</div>
       </div>
     </a>
   </div>
 </div>
 
-<div class="todo-box">
-  <div class="todo-label">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>
-    지금 할 일
+<!-- 추가 사례: 행사·교육 운영 -->
+<h3>추가 사례 — 행사·교육 운영</h3>
+<div class="ba">
+  <div class="ba-item bef">
+    <div class="ba-label">Before — 너무 큰 범위</div>
+    <div class="ba-task">"교육 운영 전체를 자동화하고 싶다"</div>
+    <ul>
+      <li>참석자 모집·확정</li>
+      <li>강사 일정 조율</li>
+      <li>안내 메일·자료 배포</li>
+      <li>출석 체크·후속 메일</li>
+      <li>피드백 수집·정리</li>
+    </ul>
   </div>
-  <ol>
-    <li>내 과제 정의서를 연다.</li>
-    <li>업무 단계를 3~5개로 나눠본다.</li>
-    <li>가장 자주 반복되는 단계를 하나 고른다.</li>
-    <li>그 단계의 입력 자료와 출력 결과물을 적는다.</li>
-    <li>오늘 만들 에이전트 이름을 한 문장으로 정한다.</li>
-  </ol>
-</div>
-
-<div class="practice">
-  <div class="phead">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h10v10H3z"/><path d="M6 7h4M6 10h3"/></svg>
-    내 과제 좁히기 워크시트
-  </div>
-  <div class="prow">
-    <div class="pl">원래 과제</div>
-    <div class="pv">
-      <div class="pq">AI에게 맡기고 싶은 업무를 크게 적어보세요</div>
-      <div class="ex">예) 기술 트렌드 보고서 작성 전체 자동화</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">포함된 단계들</div>
-    <div class="pv">
-      <div class="pq">이 업무 안에 어떤 단계들이 있나요?</div>
-      <div class="ex">예) 자료 수집 → 요약 → 분류 → 초안 → 검토</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">가장 반복되는 단계</div>
-    <div class="pv">
-      <div class="pq">그 중 가장 자주 반복되고 번거로운 단계는?</div>
-      <div class="ex">예) 논문/기사 본문 요약</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">입력 데이터</div>
-    <div class="pv">
-      <div class="pq">AI가 읽어야 하는 자료는 무엇인가요?</div>
-      <div class="ex">예) PDF 본문 텍스트 (민감정보 없음)</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">출력 결과물</div>
-    <div class="pv">
-      <div class="pq">결과물이 어떤 형태로 나오면 바로 쓸 수 있나요?</div>
-      <div class="ex">예) 핵심 내용 3줄 + 시사점 1줄</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">오늘 만들 에이전트</div>
-    <div class="pv">
-      <div class="pq">한 문장으로 정리해보세요</div>
-      <div class="ex">예) "기사 3건 요약 → 보고서 서두 단락 생성"</div>
-      <div class="blank"></div>
-    </div>
+  <div class="ba-item aft">
+    <div class="ba-label">After — 좁힌 한 단계</div>
+    <div class="ba-task">참석자 명단을 기준으로 안내 메일 초안을 만들어주는 에이전트</div>
+    <ul>
+      <li>입력: 참석자 명단 CSV + 교육 일정 + 안내 문구 기준</li>
+      <li>출력: 안내 메일 초안 + 누락 정보 체크리스트</li>
+      <li>회차마다 반복 → 반복성 충족</li>
+      <li>형식 고정 → 명확성 충족</li>
+    </ul>
   </div>
 </div>
 
-<!-- 데이터 보안 -->
-<h3>데이터 준비 전 확인사항</h3>
-
-<div class="note amber">
-  <strong>데이터가 걱정될 때</strong> — 원본을 그대로 넣지 않아도 됩니다. 아래 세 가지 방법 중 하나를 선택하면 됩니다.
+<!-- Part 1 핵심 메시지 -->
+<div style="background:var(--blue-bg);border:1.5px solid var(--blue);border-radius:10px;padding:18px 22px;margin:24px 0 20px;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">한 줄로</div>
+  <div style="font-size:15px;font-weight:700;color:var(--blue-dk);line-height:1.7;">오늘은 전체 업무를 완성하는 날이 아니라,<br/>AI에게 맡길 첫 번째 한 단계를 고르는 날입니다.</div>
 </div>
 
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>방법</th><th>설명</th></tr></thead>
-    <tbody>
-      <tr><td><strong>1. 비식별화</strong></td><td>이름, 기관명, 연락처, 담당자명을 지운다</td></tr>
-      <tr><td><strong>2. 더미 데이터</strong></td><td>실제 금액, 실제 이름 대신 예시값으로 바꾼다</td></tr>
-      <tr><td><strong>3. 구조만 가져오기</strong></td><td>원본 내용은 빼고, 표의 컬럼명·문서 형식만 가져온다</td></tr>
-    </tbody>
-  </table>
+<!-- Part 1 발표 멘트 -->
+<div class="script">
+  <div class="sc-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10M3 9h10M3 13h6"/></svg>발표 멘트</div>
+  <p>처음부터 큰 업무 전체를 자동화하려고 하면 생각보다 어렵습니다. 업무 단계가 많아지고, 필요한 데이터도 많아지고, 판단 기준도 복잡해지기 때문입니다.</p>
+  <p>그래서 오늘은 전체 업무를 완성하는 게 아니라, <strong>그 안에서 가장 먼저 작동시켜볼 수 있는 한 단계를 고르는 것</strong>이 목표입니다.</p>
+  <p>문제를 좁힐 때는 세 가지를 보면 좋습니다. <span class="sc-pause">잠깐 pause</span> 자주 반복되는 일인지, 입력과 출력이 분명한지, 오늘 안에 결과를 확인할 수 있는지입니다.</p>
+  <p>예를 들어 정산 업무 전체를 자동화한다고 하면 범위가 너무 큽니다. 하지만 그중에서 <strong>엑셀의 이상값을 찾아 요약하는 일</strong>로 줄이면 훨씬 명확해집니다.</p>
+  <p>오늘은 AI에게 맡길 첫 번째 업무를 정하는 것만으로도 충분합니다.</p>
 </div>
 
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>상황</th><th>처리 방법</th></tr></thead>
-    <tbody>
-      <tr><td>개인정보가 있다</td><td>삭제 또는 가명 처리</td></tr>
-      <tr><td>내부 기관명이 있다</td><td>"A기관", "B부서"처럼 변경</td></tr>
-      <tr><td>금액·계약 정보가 있다</td><td>예시 금액으로 변경</td></tr>
-      <tr><td>문서 구조만 필요하다</td><td>내용은 지우고 제목·항목만 남김</td></tr>
-      <tr><td>공개 자료다</td><td>출처와 함께 사용 가능</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="note green">
-  <strong>처음엔 3~5개만 넣으세요.</strong> 많이 넣는다고 결과가 좋아지지 않습니다. 50개부터 시작하면 어디서 틀렸는지 못 잡습니다. 적게 넣고 괜찮다 싶으면 그때 조금씩 늘리세요.
-</div>
-
-<!-- 멘토 체크 포인트 -->
-<div class="mentor-note" id="am-mentor">
-  <div class="mn-label">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-    멘토 체크 포인트 — 오전 실습 중
+<!-- 데이터 확보 다리 안내 -->
+<div class="connect-banner" style="margin-top:20px;">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M8 14l-4-4M8 14l4-4"/></svg>
+  <div>
+    <strong>데이터 확보로 이어지는 부분</strong><br/>
+    <span style="font-size:13px; color:var(--gray-600);">문제를 좁힌 뒤에는 해당 과업에 필요한 데이터가 무엇인지 정리해야 합니다. <strong>데이터 확보·구조화는 별도 담당 파트에서 이어서 다룹니다.</strong></span>
   </div>
-  <p style="margin-bottom:8px;">수강생이 과제를 좁히지 못하면 아래 질문을 던진다.</p>
-  <ul>
-    <li>이 업무에서 가장 자주 반복되는 단계는 무엇인가요?</li>
-    <li>그 단계에 필요한 자료는 무엇인가요?</li>
-    <li>결과물은 어떤 형태로 나오면 좋나요?</li>
-    <li>오늘 안에 한 번 테스트해볼 수 있을 만큼 작은가요?</li>
-    <li>만약 크다면 더 작은 단계로 줄이면 무엇이 남나요?</li>
-  </ul>
 </div>
-
-
 
 </section><!-- /panel-am -->
 
-<!-- ═══ 패널 2: VS Code 실습 ═══ -->
+<!-- ═══ 패널 2: 암묵지 형식화 사례 ═══ -->
 <section class="tab-panel" id="panel-lab" role="tabpanel">
 
-<!-- ══════════════════════════════════════
-     VS Code 실습 가이드
-══════════════════════════════════════ -->
-<div class="session-head lab" id="vscode-guide">
-  <div class="stag">실습 가이드</div>
-  <div class="sinfo">
-    <div class="stitle">VS Code에서 에이전트 실습하는 법</div>
-    <div class="ssub">폴더 구성 → 기준 문서 작성 → Claude 실행까지 단계별 안내</div>
-  </div>
-</div>
-
-<p>처음 VS Code를 써보시는 분들을 위해 실습 흐름을 단계별로 정리했습니다.</p>
-
-<div class="dl-block">
-  <div class="dl-head">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
-    <span class="dl-tag">스타터 키트</span>
-  </div>
-  <div class="dl-title">에이전트 시작 파일 — 그대로 받아서 폴더에 넣기</div>
-  <div class="dl-desc">두 파일을 받아 새 프로젝트 폴더에 넣으면 Claude가 자동으로 읽어주는 환경이 완성됩니다. 본인 업무에 맞춰 빈 칸만 채우세요.</div>
-  <div class="dl-grid cols-2">
-    <a class="dl-card" href="samples/starter-CLAUDE.md" download>
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
-      <div>
-        <div class="dlc-name">CLAUDE.md (스타터)</div>
-        <div class="dlc-meta">Claude가 자동으로 읽는 프로젝트 안내</div>
-      </div>
-    </a>
-    <a class="dl-card" href="samples/template-기준문서.md" download>
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
-      <div>
-        <div class="dlc-name">기준문서.md (백지 템플릿)</div>
-        <div class="dlc-meta">7개 섹션 가이드 — 채우면 그대로 작동</div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<div id="stepViewer" style="margin:24px 0;">
-  <div style="margin-bottom:12px;">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
-      <div id="sv-label" style="font-size:11.5px; color:#9CA3AF; font-weight:700; letter-spacing:.05em; text-transform:uppercase;">Step 1 / 7</div>
-      <div id="sv-title" style="font-size:12.5px; font-weight:700; color:#374151;"></div>
-    </div>
-    <div style="background:#E5E7EB; border-radius:99px; height:5px; overflow:hidden;">
-      <div id="sv-prog" style="height:100%; background:linear-gradient(90deg,#2563EB,#1D4ED8); border-radius:99px; transition:width .45s cubic-bezier(.22,1,.36,1); width:14.3%;"></div>
-    </div>
-  </div>
-  <div id="stepNav" style="display:flex; gap:5px; margin-bottom:12px; flex-wrap:wrap;"></div>
-  <div id="stepContent" style="border-radius:10px; overflow:hidden; border:1.5px solid #374151; background:#1E1E1E; min-height:300px;"></div>
-  <div style="display:flex; align-items:center; gap:8px; margin-top:14px;">
-    <button id="btnAutoPlay" onclick="toggleAutoPlay()" style="display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:6px; border:1px solid #D1D5DB; background:#fff; font-size:12.5px; cursor:pointer; color:#374151; transition:all .15s;">
-      <svg id="apIcon" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><polygon points="2,1 9,5 2,9"/></svg><span id="apLabel">자동 재생</span>
-    </button>
-    <div style="flex:1;"></div>
-    <button id="btnPrev" onclick="changeStep(-1)" style="padding:7px 18px; border-radius:6px; border:1px solid #D1D5DB; background:#fff; font-size:13px; cursor:pointer; color:#374151;">← 이전</button>
-    <button id="btnNext" onclick="changeStep(1)" style="padding:7px 18px; border-radius:6px; border:none; background:#2563EB; font-size:13px; cursor:pointer; color:#fff; font-weight:600;">다음 →</button>
-  </div>
-</div>
-
-<script>
-// ── Animation CSS ──────────────────────────────────
-(function(){
-  const s = document.createElement('style');
-  s.textContent = `
-    @keyframes vsStepIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes blinkCursor { 0%,100%{opacity:1} 50%{opacity:0} }
-    @keyframes checkPop { 0%{transform:scale(0) rotate(-30deg)} 60%{transform:scale(1.3) rotate(5deg)} 100%{transform:scale(1) rotate(0)} }
-    @keyframes treeIn { from{opacity:0;transform:translateX(-6px)} to{opacity:1;transform:translateX(0)} }
-  `;
-  document.head.appendChild(s);
-})();
-
-// ── Steps ──────────────────────────────────────────
-// ── State ──────────────────────────────────────────
-let current = 0, autoPlay = null;
-const visited = new Set();
-
-// ── Step Data ──────────────────────────────────────
-const STEPS = [
-  {
-    title:"Step 1. 프로젝트 폴더 만들기", subtitle:"탐색기에서 빈 폴더를 하나 만드세요",
-    content:`<div style="display:flex;height:300px;">
-      <div style="width:180px;background:#252526;border-right:1px solid #3E3E3E;display:flex;flex-direction:column;padding:10px 0;">
-        <div style="padding:0 12px 8px;font-size:10.5px;font-weight:700;text-transform:uppercase;color:#BDBDBD;letter-spacing:.06em;">탐색기</div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;color:#555;font-size:12px;text-align:center;padding:16px;line-height:1.7;">아직 폴더를<br/>열지 않았어요</div>
-      </div>
-      <div style="flex:1;padding:18px 20px;color:#D4D4D4;font-size:13px;line-height:1.9;overflow-y:auto;">
-        <div style="display:flex;gap:6px;margin-bottom:14px;">
-          <button id="s1-mac" onclick="s1OS('mac')" style="padding:4px 14px;border-radius:4px;border:none;background:#0E639C;color:#fff;font-size:12px;cursor:pointer;font-weight:600;">Mac</button>
-          <button id="s1-win" onclick="s1OS('win')" style="padding:4px 14px;border-radius:4px;border:1px solid #555;background:transparent;color:#9CDCFE;font-size:12px;cursor:pointer;">Windows</button>
-        </div>
-        <div id="s1-mac-c" style="background:#252526;border-radius:6px;padding:14px;">
-          <div style="color:#6A9955;font-size:11px;margin-bottom:8px;">▸ Mac</div>
-          <ol style="margin-left:16px;color:#CE9178;font-size:12.5px;line-height:2.1;">
-            <li>Finder 열기</li><li>원하는 위치 우클릭</li><li>"새 폴더" 클릭</li>
-            <li>이름: <code style="background:#0D0D0D;padding:1px 6px;border-radius:3px;color:#4EC9B0;">기술동향_에이전트</code></li>
-          </ol>
-        </div>
-        <div id="s1-win-c" style="display:none;background:#252526;border-radius:6px;padding:14px;">
-          <div style="color:#6A9955;font-size:11px;margin-bottom:8px;">▸ Windows</div>
-          <ol style="margin-left:16px;color:#CE9178;font-size:12.5px;line-height:2.1;">
-            <li>파일 탐색기 열기</li><li>원하는 위치 우클릭</li><li>"새로 만들기" → "폴더"</li>
-            <li>이름: <code style="background:#0D0D0D;padding:1px 6px;border-radius:3px;color:#4EC9B0;">기술동향_에이전트</code></li>
-          </ol>
-        </div>
-        <div style="margin-top:12px;background:#1E2E4A;border-left:3px solid #4EC9B0;padding:10px 13px;border-radius:0 6px 6px 0;font-size:12.5px;color:#BAE6FD;">
-          바탕화면보다 <strong>문서(Documents)</strong> 폴더 안 권장. 한글 OK, 띄어쓰기 대신 <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:3px;">_</code>
-        </div>
-      </div>
-    </div>`,
-    onRender(){ window.s1OS=function(o){['mac','win'].forEach(k=>{document.getElementById('s1-'+k+'-c').style.display=k===o?'block':'none';document.getElementById('s1-'+k).style.background=k===o?'#0E639C':'transparent';document.getElementById('s1-'+k).style.border=k===o?'none':'1px solid #555';});}; }
-  },
-  {
-    title:"Step 2. VS Code에서 폴더 열기", subtitle:"만든 폴더를 VS Code로 여는 방법",
-    content:`<div style="display:flex;flex-direction:column;height:300px;">
-      <div style="background:#3C3C3C;padding:6px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #252526;">
-        <div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div><div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div></div>
-        <div style="font-size:12px;color:#CCC;">Visual Studio Code</div>
-      </div>
-      <div style="background:#3C3C3C;padding:3px 14px;font-size:12px;color:#CCC;display:flex;gap:16px;border-bottom:1px solid #252526;">
-        <span id="s2-file-menu" onclick="s2toggleMenu()" style="cursor:pointer;padding:2px 6px;border-radius:3px;transition:background .15s;" onmouseover="this.style.background='#505050'" onmouseout="this.style.background=''">File</span>
-        <span style="opacity:.4;">Edit</span><span style="opacity:.4;">View</span>
-      </div>
-      <div style="position:relative;flex:1;display:flex;">
-        <div id="s2-dropdown" style="display:none;position:absolute;top:0;left:28px;background:#252526;border:1px solid #454545;border-radius:4px;min-width:200px;padding:5px 0;font-size:12.5px;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.5);">
-          <div style="padding:5px 14px;color:#888;cursor:default;">New Text File</div>
-          <div style="height:1px;background:#454545;margin:4px 0;"></div>
-          <div id="s2-open" onclick="s2openFolder()" style="padding:5px 14px;color:#4FC1FF;cursor:pointer;font-weight:600;background:#04395E;">Open Folder…</div>
-          <div style="padding:5px 14px;color:#888;cursor:default;">Recent</div>
-        </div>
-        <div style="width:44px;background:#333;display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:14px;border-right:1px solid #252526;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5C5C5" stroke-width="1.5"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/></svg>
-        </div>
-        <div id="s2-body" style="flex:1;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D4D4D4;font-size:13px;">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px;">
-            <div onclick="s2toggleMenu()" style="background:#252526;border:1px solid #3E3E3E;border-radius:6px;padding:14px;cursor:pointer;transition:border-color .15s;" onmouseover="this.style.borderColor='#0E639C'" onmouseout="this.style.borderColor='#3E3E3E'">
-              <div style="color:#4FC1FF;font-weight:600;font-size:12px;margin-bottom:6px;">방법 1 — 메뉴</div>
-              <div style="color:#CE9178;font-size:11.5px;line-height:1.8;">File → Open Folder</div>
-              <div style="margin-top:8px;font-size:11px;color:#6A9955;">↑ File 눌러보세요</div>
-            </div>
-            <div style="background:#252526;border:1px solid #3E3E3E;border-radius:6px;padding:14px;">
-              <div style="color:#4FC1FF;font-weight:600;font-size:12px;margin-bottom:6px;">방법 2 — 드래그</div>
-              <div style="color:#CE9178;font-size:11.5px;line-height:1.8;">Finder에서 폴더를 VS Code 위로 드래그</div>
-            </div>
-          </div>
-        </div>
-        <div id="s2-done" style="display:none;flex:1;align-items:center;justify-content:center;flex-direction:column;color:#4EC9B0;font-size:13px;text-align:center;">
-          <div style="font-size:28px;margin-bottom:8px;">✓</div>
-          <div style="font-weight:700;">폴더 열림!</div>
-          <div style="font-size:12px;color:#9CDCFE;margin-top:4px;">왼쪽 탐색기에 폴더 이름이 보입니다</div>
-        </div>
-      </div>
-    </div>`,
-    onRender(){
-      window.s2toggleMenu=function(){const d=document.getElementById('s2-dropdown');d.style.display=d.style.display==='none'?'block':'none';};
-      window.s2openFolder=function(){document.getElementById('s2-dropdown').style.display='none';document.getElementById('s2-body').style.display='none';const done=document.getElementById('s2-done');done.style.display='flex';};
-    }
-  },
-  {
-    title:"Step 3. 폴더 구조 만들기", subtitle:"탐색기 아이콘을 클릭해 직접 만들어보세요",
-    content:`<div style="display:flex;height:300px;">
-      <div style="width:190px;background:#252526;border-right:1px solid #3E3E3E;display:flex;flex-direction:column;">
-        <div style="padding:8px 10px;font-size:10.5px;font-weight:700;text-transform:uppercase;color:#BDBDBD;display:flex;align-items:center;justify-content:space-between;">
-          탐색기
-          <div style="display:flex;gap:6px;">
-            <svg title="새 폴더" onclick="s3addFolder()" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#C5C5C5" stroke-width="1.5" style="cursor:pointer;" onmouseover="this.style.stroke='#fff'" onmouseout="this.style.stroke='#C5C5C5'"><path d="M1 4h5l1 2h8v7H1z"/><path d="M8 8v4M6 10h4"/></svg>
-            <svg title="새 파일" onclick="s3addFile()" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#C5C5C5" stroke-width="1.5" style="cursor:pointer;" onmouseover="this.style.stroke='#fff'" onmouseout="this.style.stroke='#C5C5C5'"><path d="M4 2h5l4 4v8H4z"/><path d="M9 2v4h4"/><path d="M7 9v4M5 11h4"/></svg>
-          </div>
-        </div>
-        <div style="padding:3px 8px 3px 8px;color:#DCDCAA;font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px;">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="#DCDCAA"><polygon points="0,2 10,2 10,9 0,9"/></svg>기술동향_에이전트
-        </div>
-        <div id="s3-tree" style="padding-left:14px;font-size:12px;"></div>
-      </div>
-      <div style="flex:1;padding:18px 20px;color:#D4D4D4;font-size:13px;line-height:1.9;">
-        <div style="color:#DCDCAA;font-weight:600;margin-bottom:10px;">목표 구조</div>
-        <div style="background:#0D0D0D;border-radius:6px;padding:12px 14px;font-family:monospace;font-size:12.5px;margin-bottom:14px;line-height:1.9;">
-          <div style="color:#4EC9B0;">기술동향_에이전트/</div>
-          <div style="color:#CE9178;padding-left:14px;">├── <span style="color:#4EC9B0;">data/</span></div>
-          <div style="color:#6A9955;padding-left:28px;font-size:11px;">└── (데이터 파일)</div>
-          <div style="color:#CE9178;padding-left:14px;">└── <span style="color:#9CDCFE;">기준문서.md</span></div>
-        </div>
-        <div id="s3-status" style="font-size:12.5px;background:#1E2E4A;border-left:3px solid #4EC9B0;padding:9px 12px;border-radius:0 6px 6px 0;color:#BAE6FD;transition:all .3s;">왼쪽 아이콘을 눌러 폴더와 파일을 만들어보세요</div>
-      </div>
-    </div>`,
-    onRender(){
-      let hF=false,hM=false;
-      const tree=document.getElementById('s3-tree'),st=document.getElementById('s3-status');
-      function upd(){if(hF&&hM)st.textContent='✓ 완성! 다음 단계로 이동하세요.';else if(hF)st.textContent='data/ 생성됨. 이제 기준문서.md 파일을 만드세요.';else if(hM)st.textContent='기준문서.md 생성됨. 이제 data/ 폴더를 만드세요.';else st.textContent='왼쪽 아이콘을 눌러 폴더와 파일을 만들어보세요.';}
-      window.s3addFolder=function(){if(hF)return;hF=true;const e=document.createElement('div');e.style.cssText='display:flex;align-items:center;gap:5px;padding:3px 0;color:#4EC9B0;opacity:0;transition:opacity .3s,transform .3s;transform:translateX(-6px);';e.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12" fill="#4EC9B0"><path d="M0 2h4l1 2h7v6H0z"/></svg>data/';tree.insertBefore(e,tree.firstChild);requestAnimationFrame(()=>{e.style.opacity='1';e.style.transform='translateX(0)';});upd();};
-      window.s3addFile=function(){if(hM)return;hM=true;const e=document.createElement('div');e.style.cssText='display:flex;align-items:center;gap:5px;padding:3px 0;color:#9CDCFE;background:#37373D;opacity:0;transition:opacity .3s,transform .3s;transform:translateX(-6px);';e.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#9CDCFE" stroke-width="1.2"><path d="M2 1h5l3 3v7H2z"/><path d="M7 1v3h3"/></svg>기준문서.md';tree.appendChild(e);requestAnimationFrame(()=>{e.style.opacity='1';e.style.transform='translateX(0)';});upd();};
-    }
-  },
-  {
-    title:"Step 4. 데이터 파일 넣기", subtitle:"에이전트가 읽을 파일을 data/ 폴더에 넣어요",
-    content:`<div style="padding:16px 18px;color:#D4D4D4;font-size:13px;line-height:1.8;height:300px;overflow-y:auto;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-        <div style="background:#1E2E4A;border:1px solid #1E3A8A;border-radius:6px;padding:13px;">
-          <div style="color:#4EC9B0;font-weight:700;font-size:12px;margin-bottom:8px;">✓ 넣어도 되는 것</div>
-          <div id="s4-good" style="font-size:12px;line-height:2.1;"></div>
-        </div>
-        <div style="background:#3B1818;border:1px solid #6B2D2D;border-radius:6px;padding:13px;">
-          <div style="color:#F48771;font-weight:700;font-size:12px;margin-bottom:8px;">✗ 넣으면 안 되는 것</div>
-          <div id="s4-bad" style="font-size:12px;line-height:2.1;"></div>
-        </div>
-      </div>
-      <div style="background:#252526;border-radius:6px;padding:13px;margin-bottom:10px;">
-        <div style="color:#DCDCAA;font-weight:600;margin-bottom:8px;font-size:12.5px;">PDF → 텍스트 변환</div>
-        <div style="font-size:12.5px;color:#CE9178;line-height:2;">1. PDF를 Chrome으로 열기<br/>2. <code style="background:#0D0D0D;padding:1px 5px;border-radius:3px;">Ctrl+A</code> → <code style="background:#0D0D0D;padding:1px 5px;border-radius:3px;">Ctrl+C</code><br/>3. VS Code 새 파일에 붙여넣고 <code style="background:#0D0D0D;padding:1px 5px;border-radius:3px;">data/</code>에 저장</div>
-      </div>
-      <div style="background:#1E2E4A;border-left:3px solid #4EC9B0;padding:9px 13px;border-radius:0 6px 6px 0;font-size:12.5px;color:#BAE6FD;">처음엔 <strong>3~5개만</strong> 넣으세요. 결과 확인 후 늘립니다.</div>
-    </div>`,
-    onRender(){
-      const good=['공개 논문 (PDF → 텍스트)','뉴스 기사 본문','업무 매뉴얼 (기관명 제거)','비식별화 통계자료'];
-      const bad=['개인정보 (이름, 연락처)','계약·예산 원본','내부 의사결정 문서','미공개 내부 보고서'];
-      const g=document.getElementById('s4-good'),b=document.getElementById('s4-bad');
-      good.forEach((t,i)=>setTimeout(()=>{const d=document.createElement('div');d.style.cssText='color:#93C5FD;opacity:0;transition:opacity .3s .05s,transform .3s;transform:translateX(-4px);';d.textContent='✓ '+t;g.appendChild(d);requestAnimationFrame(()=>{d.style.opacity='1';d.style.transform='translateX(0)';});},i*120+100));
-      bad.forEach((t,i)=>setTimeout(()=>{const d=document.createElement('div');d.style.cssText='color:#FCA5A5;opacity:0;transition:opacity .3s .05s,transform .3s;transform:translateX(-4px);';d.textContent='✗ '+t;b.appendChild(d);requestAnimationFrame(()=>{d.style.opacity='1';d.style.transform='translateX(0)';});},i*120+100));
-    }
-  },
-  {
-    title:"Step 5. 기준문서.md 작성하기", subtitle:"AI에게 줄 업무 기준을 문서로 씁니다",
-    content:`<div style="display:flex;flex-direction:column;height:300px;">
-      <div style="background:#252526;display:flex;border-bottom:1px solid #1E1E1E;">
-        <div style="padding:6px 16px;background:#1E1E1E;color:#CE9178;font-size:12px;border-top:2px solid #0E639C;display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#CE9178" stroke-width="1.2"><path d="M2 1h5l3 3v7H2z"/><path d="M7 1v3h3"/></svg>기준문서.md
-        </div>
-      </div>
-      <div id="s5-editor" style="flex:1;padding:12px 16px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;overflow-y:auto;background:#1E1E1E;"></div>
-    </div>`,
-    onRender(){
-      const lines=[
-        {t:'# 기술동향 논문 요약 에이전트',c:'#569CD6',d:0},
-        {t:'',c:'',d:180},
-        {t:'## 1. 목적',c:'#569CD6',d:360},
-        {t:'논문과 기사를 읽고 핵심 내용을 정리한다.',c:'#D4D4D4',d:540},
-        {t:'',c:'',d:700},
-        {t:'## 2. 입력',c:'#569CD6',d:880},
-        {t:'- data/ 폴더의 텍스트 파일',c:'#6A9955',d:1060},
-        {t:'',c:'',d:1220},
-        {t:'## 3. 출력 형식',c:'#569CD6',d:1400},
-        {t:'- 핵심 내용 3줄',c:'#6A9955',d:1560},
-        {t:'- 시사점 1줄',c:'#6A9955',d:1700},
-        {t:'- 출처 (제목, 연도)',c:'#6A9955',d:1840},
-        {t:'',c:'',d:1980},
-        {t:'## 4. 판단 기준',c:'#569CD6',d:2160},
-        {t:'- 결과 중심으로 정리 (배경 최소화)',c:'#6A9955',d:2320},
-        {t:'- 한계점 있으면 반드시 포함',c:'#6A9955',d:2480},
-        {t:'',c:'',d:2640},
-        {t:'## 5. 하면 안 되는 것',c:'#569CD6',d:2820},
-        {t:'- 원문에 없는 내용 추가 금지',c:'#6A9955',d:2980},
-        {t:'- 연구자 실명 포함 금지',c:'#6A9955',d:3140},
-      ];
-      const el=document.getElementById('s5-editor');
-      lines.forEach(l=>setTimeout(()=>{const d=document.createElement('div');d.style.cssText='color:'+(l.c||'#D4D4D4')+';opacity:0;transition:opacity .2s;';d.textContent=l.t||'​';el.appendChild(d);requestAnimationFrame(()=>d.style.opacity='1');el.scrollTop=el.scrollHeight;},l.d));
-    }
-  },
-  {
-    title:"Step 6. Claude 실행하기", subtitle:"VS Code 터미널에서 claude를 실행해요",
-    content:`<div style="display:flex;flex-direction:column;height:300px;background:#0D0D0D;">
-      <div style="background:#252526;padding:3px 0;border-bottom:1px solid #3E3E3E;display:flex;">
-        <div style="padding:5px 14px;background:#1E1E1E;color:#CCC;font-size:11.5px;border-top:1px solid #0E639C;display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="#9CDCFE" stroke-width="1.2"><path d="M1 2.5l3 3-3 3M6 8.5h4"/></svg>터미널
-        </div>
-      </div>
-      <div id="s6-term" style="flex:1;padding:13px 15px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.85;overflow-y:auto;color:#CCC;"></div>
-    </div>`,
-    onRender(){
-      const tb=document.getElementById('s6-term');
-      function addLine(html,delay){setTimeout(()=>{const d=document.createElement('div');d.innerHTML=html;tb.appendChild(d);tb.scrollTop=tb.scrollHeight;},delay);}
-      addLine('<span style="color:#6A9955;font-size:11px;">// 터미널 열기: Ctrl+` (백틱) 또는 View → Terminal</span>',300);
-      addLine('<span style="color:#4EC9B0;">기술동향_에이전트 % </span>',600);
-      setTimeout(()=>{
-        const row=document.createElement('div');
-        const prompt=document.createElement('span');prompt.style.color='#4EC9B0';prompt.textContent='기술동향_에이전트 % ';
-        const typed=document.createElement('span');typed.style.color='#DCDCAA';
-        const cursor=document.createElement('span');cursor.style.cssText='display:inline-block;width:8px;height:13px;background:#DCDCAA;animation:blinkCursor 1s infinite;vertical-align:middle;margin-left:1px;';
-        row.appendChild(prompt);row.appendChild(typed);row.appendChild(cursor);
-        tb.appendChild(row);tb.scrollTop=tb.scrollHeight;
-        let i=0;const cmd='claude';
-        const t=setInterval(()=>{if(i<cmd.length){typed.textContent+=cmd[i++];}else{clearInterval(t);cursor.style.display='none';}},90);
-      },900);
-      addLine('',1900);
-      addLine('<span style="color:#1E3A8A;">╭────────────────────────────────╮</span>',2000);
-      addLine('<span style="color:#9CDCFE;">│  Claude Code에 오신 것을 환영합니다   │</span>',2150);
-      addLine('<span style="color:#1E3A8A;">╰────────────────────────────────╯</span>',2300);
-      addLine('',2450);
-      setTimeout(()=>{
-        const box=document.createElement('div');
-        box.style.cssText='background:#1E1E1E;border-radius:4px;padding:10px 12px;border-left:2px solid #1E3A8A;opacity:0;transition:opacity .4s;margin-top:4px;';
-        box.innerHTML='<div style="color:#6A9955;font-size:11px;margin-bottom:5px;">// 이렇게 입력하세요</div><div style="color:#CE9178;line-height:1.8;">기준문서.md에 있는 기준대로<br/>data/ 폴더의 파일들을 요약해줘.<br/>결과는 요약_보고서.md로 저장해줘.</div>';
-        tb.appendChild(box);tb.scrollTop=tb.scrollHeight;
-        requestAnimationFrame(()=>box.style.opacity='1');
-      },2700);
-    }
-  },
-  {
-    title:"Step 7. 결과 확인 + 보완하기", subtitle:"체크리스트로 결과물을 점검하세요",
-    content:`<div style="padding:16px 18px;color:#D4D4D4;font-size:13px;line-height:1.8;height:300px;overflow-y:auto;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <div style="color:#DCDCAA;font-weight:600;">결과물 점검 체크리스트</div>
-        <div id="s7-counter" style="font-size:12px;color:#4EC9B0;background:#1E2E4A;padding:3px 10px;border-radius:99px;font-weight:700;transition:all .3s;">0 / 4 완료</div>
-      </div>
-      <div id="s7-checks" style="margin-bottom:14px;"></div>
-      <div style="background:#252526;border-radius:6px;padding:13px;">
-        <div style="color:#DCDCAA;font-weight:600;margin-bottom:8px;font-size:12.5px;">잘 안 됐을 때 보완 방법</div>
-        <div style="font-size:12.5px;color:#CE9178;line-height:2;">1. 어떤 부분이 기대와 다른지 확인<br/>2. <span style="color:#4EC9B0;">기준문서.md</span>에 빠진 기준 추가<br/>3. 재실행: <span style="color:#9CDCFE;">"기준문서.md 업데이트했어. 다시 해줘."</span></div>
-      </div>
-    </div>`,
-    onRender(){
-      const items=['핵심 내용이 잘 뽑혔는가','시사점이 의미 있는가','출처가 정확히 붙었는가','형식이 기준문서대로 나왔는가'];
-      const c=document.getElementById('s7-checks'),counter=document.getElementById('s7-counter');
-      let checked=0;
-      items.forEach((text,i)=>{
-        const div=document.createElement('div');
-        div.style.cssText='display:flex;align-items:center;gap:10px;padding:9px 12px;background:#252526;border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .15s;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s,background .15s;';
-        div.innerHTML='<div class="cb" style="width:18px;height:18px;border-radius:4px;border:1.5px solid #555;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;"></div><span style="font-size:12.5px;">'+text+'</span>';
-        c.appendChild(div);
-        setTimeout(()=>{div.style.opacity='1';div.style.transform='translateX(0)';},i*110+100);
-        div.onclick=function(){
-          const box=div.querySelector('.cb');
-          const on=box.dataset.on==='1';
-          if(!on){box.dataset.on='1';box.style.background='#4EC9B0';box.style.borderColor='#4EC9B0';box.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="2.2"><path d="M1.5 5l2.5 3L8.5 2"/></svg>';box.style.animation='checkPop .3s ease both';div.style.background='#1E2E4A';checked++;}
-          else{box.dataset.on='';box.style.background='transparent';box.style.borderColor='#555';box.innerHTML='';box.style.animation='';div.style.background='#252526';checked--;}
-          counter.textContent=checked+' / 4 완료';
-          if(checked===4){counter.style.background='#2563EB';}else{counter.style.background='#1E2E4A';}
-        };
-      });
-    }
-  }
-];
-
-// ── Render Functions ───────────────────────────────
-function renderNav(){
-  document.getElementById('stepNav').innerHTML=STEPS.map((s,i)=>`
-    <button onclick="goStep(${i})" title="${s.title}" style="width:32px;height:32px;border-radius:50%;border:2px solid ${i===current?'#2563EB':visited.has(i)?'#4EC9B0':'#374151'};background:${i===current?'#2563EB':visited.has(i)?'#1E2E4A':'transparent'};color:${i===current?'#fff':visited.has(i)?'#4EC9B0':'#9CA3AF'};font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;">${visited.has(i)&&i!==current?'✓':i+1}</button>
-  `).join('');
-}
-
-function renderStep(){
-  const s=STEPS[current];
-  visited.add(current);
-  document.getElementById('sv-prog').style.width=((current+1)/STEPS.length*100)+'%';
-  document.getElementById('sv-label').textContent='Step '+(current+1)+' / '+STEPS.length;
-  document.getElementById('sv-title').textContent=s.title;
-  document.getElementById('stepContent').innerHTML=`
-    <div style="animation:vsStepIn .28s cubic-bezier(.22,1,.36,1) both;">
-      <div style="background:#252526;padding:10px 16px;border-bottom:1px solid #3E3E3E;display:flex;align-items:center;gap:10px;">
-        <div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div><div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div></div>
-        <div style="font-size:13px;font-weight:600;color:#CCCCCC;flex:1;">${s.title}</div>
-        <div style="font-size:11px;color:#4EC9B0;">${current+1} / ${STEPS.length}</div>
-      </div>
-      <div style="background:#252526;padding:5px 16px;border-bottom:1px solid #1E1E1E;"><div style="font-size:12px;color:#9CDCFE;">${s.subtitle}</div></div>
-      ${s.content}
-    </div>`;
-  if(s.onRender) s.onRender();
-  document.getElementById('btnPrev').style.opacity=current===0?'.4':'1';
-  document.getElementById('btnPrev').disabled=current===0;
-  const nb=document.getElementById('btnNext');
-  nb.textContent=current===STEPS.length-1?'완료 ✓':'다음 →';
-  nb.style.background=current===STEPS.length-1?'#2563EB':'#2563EB';
-}
-
-function goStep(i){current=i;renderNav();renderStep();}
-function changeStep(d){const n=current+d;if(n>=0&&n<STEPS.length)goStep(n);}
-
-// ── Auto-play ──────────────────────────────────────
-function toggleAutoPlay(){
-  if(autoPlay){
-    clearInterval(autoPlay);autoPlay=null;
-    document.getElementById('apLabel').textContent='자동 재생';
-    document.getElementById('apIcon').innerHTML='<polygon points="2,1 9,5 2,9"/>';
-    document.getElementById('btnAutoPlay').style.cssText='display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1px solid #D1D5DB;background:#fff;font-size:12.5px;cursor:pointer;color:#374151;transition:all .15s;';
-  } else {
-    document.getElementById('apLabel').textContent='정지';
-    document.getElementById('apIcon').innerHTML='<rect x="1" y="1" width="3" height="8"/><rect x="6" y="1" width="3" height="8"/>';
-    document.getElementById('btnAutoPlay').style.cssText='display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:none;background:#2563EB;font-size:12.5px;cursor:pointer;color:#fff;transition:all .15s;';
-    autoPlay=setInterval(()=>{if(current<STEPS.length-1)goStep(current+1);else{toggleAutoPlay();goStep(0);}},4200);
-  }
-}
-
-goStep(0);
-</script>
-
-<!-- VS Code 텍스트 가이드라인 -->
-<h3>단계별 텍스트 가이드라인</h3>
-<p style="margin-bottom:20px; font-size:13.5px; color:var(--gray-500);">인터랙티브 뷰어와 함께 참고하세요. 각 단계를 따라가면 에이전트 첫 실행까지 20분 내로 완료됩니다.</p>
-
-<div style="border:1px solid var(--gray-200); border-radius:8px; overflow:hidden; margin-bottom:32px;">
-
-  <!-- Step 1 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">프로젝트 폴더 만들기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>Finder(Mac) 또는 파일 탐색기(Windows)에서 적당한 위치에 새 폴더를 만듭니다. 바탕화면보다는 <strong>문서(Documents) 폴더 안</strong>을 권장합니다. 폴더 이름은 한글 OK, 띄어쓰기 대신 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">_</code> 사용을 권장합니다.</p>
-      <div class="md-block" style="font-size:12px; margin:8px 0;">
-        <span class="tx">기술동향_에이전트 &nbsp;&nbsp;</span><span style="color:#6A9955; font-size:11px;">← 예시 이름</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 2 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">VS Code에서 폴더 열기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>두 가지 방법 중 하나를 선택합니다.</p>
-      <ul style="margin-left:16px; margin-top:6px;">
-        <li><strong>메뉴로:</strong> VS Code 상단 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">File → Open Folder</code> → 만든 폴더 선택</li>
-        <li style="margin-top:4px;"><strong>드래그로:</strong> Finder에서 폴더를 VS Code 아이콘 위로 드래그</li>
-      </ul>
-      <div class="note blue" style="margin-top:10px; font-size:13px;">열리면 왼쪽 탐색기 패널에 폴더 이름이 표시됩니다. 이 패널이 안 보이면 <code style="background:rgba(255,255,255,.3); padding:1px 5px; border-radius:3px;">Ctrl+Shift+E</code>를 누르세요.</div>
-    </div>
-  </div>
-
-  <!-- Step 3 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">폴더 구조 만들기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>탐색기 패널에서 두 가지를 만듭니다.</p>
-      <ul style="margin-left:16px; margin-top:6px;">
-        <li><strong>data 폴더:</strong> 탐색기 패널 상단 폴더 아이콘 클릭 → <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">data</code> 입력 → Enter</li>
-        <li style="margin-top:4px;"><strong>기준문서.md:</strong> 파일 아이콘 클릭 → <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">기준문서.md</code> 입력 → Enter</li>
-      </ul>
-      <div class="md-block" style="font-size:12px; margin:10px 0;">
-        <span class="tx">기술동향_에이전트/</span><br/>
-        <span class="li" style="padding-left:16px;">├── data/</span><br/>
-        <span class="tx" style="padding-left:16px;">└── 기준문서.md</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 4 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">데이터 파일 넣기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>에이전트가 읽을 파일을 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">data/</code> 폴더에 복사합니다. PDF는 텍스트로 변환이 필요합니다.</p>
-      <ul style="margin-left:16px; margin-top:6px;">
-        <li>PDF를 Chrome으로 열기 → <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">Ctrl+A</code> → <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">Ctrl+C</code></li>
-        <li style="margin-top:4px;">VS Code에서 새 파일(예: <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">paper_01.txt</code>) 만들고 붙여넣기 → <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">data/</code> 안에 저장</li>
-      </ul>
-      <div class="note amber" style="margin-top:10px; font-size:13px;"><strong>처음엔 3~5개만 넣으세요.</strong> 결과가 괜찮으면 그때 늘립니다. 개인정보·계약서·미공개 내부 보고서는 넣지 않습니다.</div>
-    </div>
-  </div>
-
-  <!-- Step 5 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">5</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">기준문서.md 작성하기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>탐색기에서 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">기준문서.md</code>를 클릭해 에디터에서 열고, 아래 구조를 참고해 작성합니다. 처음에는 2~3개 항목만 채워도 됩니다.</p>
-      <div class="md-block" style="font-size:12px; margin:10px 0; line-height:1.9;">
-        <span class="h"># 에이전트 이름 (예: 기술동향 논문 요약)</span><br/><br/>
-        <span class="h">## 1. 목적</span><br/>
-        <span class="tx">논문과 기사를 읽고 핵심 내용을 정리한다.</span><br/><br/>
-        <span class="h">## 2. 입력</span><br/>
-        <span class="li">- data/ 폴더의 텍스트 파일</span><br/><br/>
-        <span class="h">## 3. 출력 형식</span><br/>
-        <span class="li">- 핵심 내용 3줄</span><br/>
-        <span class="li">- 시사점 1줄</span><br/>
-        <span class="li">- 출처 (제목, 연도)</span><br/><br/>
-        <span class="h">## 4. 판단 기준</span><br/>
-        <span class="li">- 연구 배경이 아닌 결과 중심으로 정리</span><br/>
-        <span class="li">- 한계점이 있으면 반드시 포함</span><br/><br/>
-        <span class="h">## 5. 하면 안 되는 것</span><br/>
-        <span class="li">- 원문에 없는 내용 추가 금지</span><br/>
-        <span class="li">- 연구자 실명 포함 금지</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 6 -->
-  <div style="border-bottom:1px solid var(--gray-200);">
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">6</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">Claude 실행하기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>VS Code 터미널을 열고 Claude를 실행합니다.</p>
-      <ul style="margin-left:16px; margin-top:6px;">
-        <li><strong>터미널 열기:</strong> <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">Ctrl + &#96;</code> (백틱) 또는 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">View → Terminal</code></li>
-        <li style="margin-top:4px;"><strong>Claude 실행:</strong> 터미널에 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">claude</code> 입력 → Enter</li>
-        <li style="margin-top:4px;"><strong>지시 입력:</strong></li>
-      </ul>
-      <div class="md-block" style="font-size:12.5px; margin:10px 0; line-height:1.9;">
-        <span class="tx">기준문서.md에 있는 기준대로</span><br/>
-        <span class="tx">data/ 폴더의 파일들을 요약해줘.</span><br/>
-        <span class="tx">결과는 요약_보고서.md로 저장해줘.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 7 -->
-  <div>
-    <div style="display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--gray-50);">
-      <div style="width:24px; height:24px; border-radius:50%; background:var(--green); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">7</div>
-      <div style="font-weight:700; font-size:14px; color:var(--gray-900);">결과 확인 + 보완하기</div>
-    </div>
-    <div style="padding:14px 18px 16px 54px; font-size:13.5px; color:var(--gray-600); line-height:1.85;">
-      <p>생성된 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12px;">요약_보고서.md</code>를 열어 결과를 확인합니다. 기대와 다른 부분이 있으면 기준문서.md에 빠진 기준을 추가하고 다시 실행하면 됩니다.</p>
-      <ul style="margin-left:16px; margin-top:6px;">
-        <li>결과가 엉뚱하다 → 기준문서.md의 판단 기준 항목 보완</li>
-        <li style="margin-top:4px;">형식이 매번 달라진다 → 출력 형식 항목을 더 구체적으로 수정</li>
-        <li style="margin-top:4px;">내용이 너무 길다/짧다 → 기준 항목에 분량 기준 추가</li>
-      </ul>
-      <div class="note green" style="margin-top:10px; font-size:13px;">한 번에 완벽하지 않아도 됩니다. <strong>보완 → 재실행 → 확인</strong>이 실제 에이전트 개발 방식입니다.</div>
-    </div>
-  </div>
-
-</div>
-
-
-<!-- ══════════════════════════════════════
-     스킬·프로젝트·에이전트화 가이드
-══════════════════════════════════════ -->
-<h2 id="vscode-advanced">한 단계 더 — 스킬·프로젝트·에이전트화</h2>
-
-<p>에이전트를 한 번 돌려봤다면, 이제 반복해서 쓸 수 있는 형태로 만들 차례입니다. 챙길 건 셋입니다.</p>
-
-<!-- 3탭 선택기 -->
-<div style="display:flex;gap:0;margin:16px 0 0;border-bottom:2px solid var(--gray-200);">
-  <button id="adv-tab-0" onclick="advTab(0)" style="padding:9px 18px;font-size:13px;font-weight:700;border:none;background:transparent;cursor:pointer;color:var(--blue);border-bottom:2px solid var(--blue);margin-bottom:-2px;transition:all .15s;">스킬 만들기</button>
-  <button id="adv-tab-1" onclick="advTab(1)" style="padding:9px 18px;font-size:13px;font-weight:600;border:none;background:transparent;cursor:pointer;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;">프로젝트 설정</button>
-  <button id="adv-tab-2" onclick="advTab(2)" style="padding:9px 18px;font-size:13px;font-weight:600;border:none;background:transparent;cursor:pointer;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;">에이전트화</button>
-</div>
-
-<!-- ── 탭 0: 스킬 만들기 ── -->
-<div id="adv-panel-0" style="margin-top:0;">
-
-  <div class="note blue" style="margin:16px 0 14px;">
-    <strong>스킬이란?</strong> — 기준 문서를 매번 새 대화에서 붙여넣지 않아도 되도록, Claude가 자동으로 읽어오는 지침 파일입니다. <code style="background:rgba(255,255,255,.5);padding:1px 5px;border-radius:3px;">/스킬이름</code>을 입력하면 해당 지침이 즉시 적용됩니다.
-  </div>
-
-  <div style="display:flex;height:360px;border-radius:10px;overflow:hidden;border:1.5px solid #374151;margin-bottom:14px;">
-    <!-- 탐색기 -->
-    <div style="width:210px;background:#252526;border-right:1px solid #3E3E3E;display:flex;flex-direction:column;flex-shrink:0;">
-      <div style="padding:8px 10px;font-size:10.5px;font-weight:700;text-transform:uppercase;color:#BDBDBD;letter-spacing:.06em;border-bottom:1px solid #3E3E3E;">탐색기</div>
-      <div style="padding:6px 8px;font-size:12px;line-height:2;color:#CCC;">
-        <div style="color:#DCDCAA;font-weight:600;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="#DCDCAA"><polygon points="0,1 9,1 9,8 0,8"/></svg>기술동향_에이전트/</div>
-        <div style="padding-left:14px;color:#4EC9B0;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="#4EC9B0"><polygon points="0,1 9,1 9,8 0,8"/></svg>.claude/</div>
-        <div style="padding-left:28px;color:#4EC9B0;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="#4EC9B0"><polygon points="0,1 9,1 9,8 0,8"/></svg>skills/</div>
-        <div style="padding-left:42px;color:#CE9178;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="#4EC9B0"><polygon points="0,1 9,1 9,8 0,8"/></svg>논문요약/</div>
-        <div style="padding-left:56px;background:#37373D;color:#9CDCFE;border-radius:3px;padding-right:6px;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" stroke="#9CDCFE" stroke-width="1"><path d="M1 1h4l3 3v4H1z"/></svg>SKILL.md</div>
-        <div style="padding-left:14px;color:#6B6B6B;">data/</div>
-        <div style="padding-left:14px;color:#6B6B6B;">기준문서.md</div>
-      </div>
-    </div>
-    <!-- 에디터 -->
-    <div style="flex:1;display:flex;flex-direction:column;background:#1E1E1E;">
-      <div style="background:#252526;padding:0;display:flex;border-bottom:1px solid #1E1E1E;">
-        <div style="padding:6px 16px;background:#1E1E1E;color:#9CDCFE;font-size:12px;border-top:2px solid #0E639C;display:flex;align-items:center;gap:5px;white-space:nowrap;">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#9CDCFE" stroke-width="1.2"><path d="M2 1h5l3 3v7H2z"/></svg>.claude/skills/논문요약/SKILL.md
-        </div>
-      </div>
-      <div style="flex:1;padding:14px 18px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;overflow-y:auto;color:#D4D4D4;">
-        <div style="color:#569CD6;"># 논문요약 스킬</div>
-        <div style="color:#6A9955;font-size:11px;margin-bottom:4px;"># 이 파일을 두면 /논문요약 명령으로 즉시 호출 가능</div>
-        <br/>
-        <div style="color:#569CD6;">## 역할</div>
-        <div>논문과 기사를 읽고 정해진 형식으로 핵심 내용을 정리한다.</div>
-        <br/>
-        <div style="color:#569CD6;">## 출력 형식</div>
-        <div style="color:#6A9955;">- 핵심 내용: 3줄 이내</div>
-        <div style="color:#6A9955;">- 시사점: 1줄</div>
-        <div style="color:#6A9955;">- 출처: 제목 + 연도</div>
-        <br/>
-        <div style="color:#569CD6;">## 판단 기준</div>
-        <div style="color:#6A9955;">- 연구 결과 중심 (배경 최소화)</div>
-        <div style="color:#6A9955;">- 한계점 있으면 반드시 포함</div>
-        <div style="color:#6A9955;">- 수치는 원문 그대로, 없으면 "확인 필요" 표시</div>
-        <br/>
-        <div style="color:#569CD6;">## 하면 안 되는 것</div>
-        <div style="color:#6A9955;">- 원문에 없는 내용 추가 금지</div>
-        <div style="color:#6A9955;">- 연구자 실명 포함 금지</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
-    <div style="background:#0F172A;border-radius:8px;padding:14px 16px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;">
-      <div style="color:#6A9955;font-size:11px;margin-bottom:6px;">// 폴더 만드는 방법 (터미널)</div>
-      <div style="color:#4EC9B0;">기술동향_에이전트 %</div>
-      <div><span style="color:#9CDCFE;">mkdir</span><span style="color:#CE9178;"> -p .claude/skills/논문요약</span></div>
-      <div><span style="color:#9CDCFE;">touch</span><span style="color:#CE9178;"> .claude/skills/논문요약/SKILL.md</span></div>
-    </div>
-    <div style="background:#0F172A;border-radius:8px;padding:14px 16px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;">
-      <div style="color:#6A9955;font-size:11px;margin-bottom:6px;">// Claude에서 호출하는 방법</div>
-      <div style="color:#4EC9B0;">기술동향_에이전트 %</div>
-      <div><span style="color:#DCDCAA;">claude</span></div>
-      <div style="margin-top:6px;color:#CE9178;">&gt; /논문요약</div>
-      <div style="color:#9CDCFE;font-size:11.5px;margin-top:4px;">→ SKILL.md 기준이 자동 적용됨</div>
-    </div>
-  </div>
-
-  <div class="note green" style="font-size:13px;">
-    <strong>스킬 = 재사용 가능한 기준 문서.</strong> 한 번 만들어두면 이 폴더에서 claude를 실행할 때마다 <code style="background:rgba(255,255,255,.3);padding:1px 5px;border-radius:3px;">/논문요약</code>으로 즉시 호출할 수 있습니다. 다른 프로젝트 폴더에서도 복사해서 쓸 수 있습니다.
-  </div>
-
-  <!-- 실제 입력 예시 -->
-  <h3>실제로 이렇게 입력하세요</h3>
-  <p style="font-size:13.5px;color:var(--gray-500);margin-bottom:12px;">Claude가 실행된 상태에서 아래 순서대로 입력합니다. <strong style="color:var(--blue);">파란색</strong>이 내가 치는 것, 회색이 Claude 응답입니다.</p>
-
-  <div style="background:#0D0D0D;border-radius:10px;overflow:hidden;border:1px solid #374151;margin-bottom:12px;">
-    <!-- 헤더 -->
-    <div style="background:#252526;padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #3E3E3E;">
-      <div style="display:flex;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FFBD2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div></div>
-      <span style="font-size:12px;color:#9CA3AF;font-family:monospace;">Claude 대화 — 스킬 사용</span>
-    </div>
-    <div style="padding:16px 18px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1;">
-
-      <!-- Step 1 -->
-      <div style="margin-bottom:14px;">
-        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6A9955;margin-bottom:6px;">① 스킬 불러오기</div>
-        <div style="display:flex;align-items:flex-start;gap:10px;">
-          <div style="background:#1E3A8A;color:#93C5FD;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">나</div>
-          <div style="background:#1E3558;border:1px solid #2563EB;border-radius:6px;padding:10px 13px;color:#93C5FD;flex:1;line-height:1.6;">/논문요약</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:8px;">
-          <div style="background:#374151;color:#9CA3AF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">AI</div>
-          <div style="background:#1E1E1E;border:1px solid #374151;border-radius:6px;padding:10px 13px;color:#9CA3AF;flex:1;line-height:1.6;">논문요약 스킬이 로드됐습니다. data/ 폴더의 파일을 처리할 준비가 됐습니다.<br/><span style="color:#6A9955;font-size:11px;">→ SKILL.md 기준이 자동 적용된 상태</span></div>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div style="margin-bottom:14px;">
-        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6A9955;margin-bottom:6px;">② 실제 작업 지시</div>
-        <div style="display:flex;align-items:flex-start;gap:10px;">
-          <div style="background:#1E3A8A;color:#93C5FD;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">나</div>
-          <div style="background:#1E3558;border:1px solid #2563EB;border-radius:6px;padding:10px 13px;color:#93C5FD;flex:1;line-height:1.7;">data/ 폴더의 파일들 모두 요약해줘.<br/>결과는 output/요약_오늘날짜.md 로 저장해줘.</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:8px;">
-          <div style="background:#374151;color:#9CA3AF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">AI</div>
-          <div style="background:#1E1E1E;border:1px solid #374151;border-radius:6px;padding:10px 13px;color:#9CA3AF;flex:1;line-height:1.6;">data/ 폴더에서 파일 3개를 읽었습니다. 핵심 내용 3줄 + 시사점 형식으로 정리하겠습니다...<br/><span style="color:#4EC9B0;font-size:11px;">→ 결과 파일 자동 저장됨</span></div>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div style="margin-bottom:4px;">
-        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6A9955;margin-bottom:6px;">③ 보완이 필요할 때</div>
-        <div style="display:flex;align-items:flex-start;gap:10px;">
-          <div style="background:#1E3A8A;color:#93C5FD;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">나</div>
-          <div style="background:#1E3558;border:1px solid #2563EB;border-radius:6px;padding:10px 13px;color:#93C5FD;flex:1;line-height:1.7;">결론 부분이 너무 짧아. SKILL.md에 "결론 2문장 이상"을 추가했어.<br/>다시 해줘.</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:8px;">
-          <div style="background:#374151;color:#9CA3AF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;margin-top:1px;">AI</div>
-          <div style="background:#1E1E1E;border:1px solid #374151;border-radius:6px;padding:10px 13px;color:#9CA3AF;flex:1;line-height:1.6;">업데이트된 기준으로 다시 처리하겠습니다. 결론을 2문장 이상으로 작성합니다...<br/><span style="color:#4EC9B0;font-size:11px;">→ SKILL.md 수정 → 재실행 패턴</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div style="background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:12px 16px;font-size:12.5px;color:var(--blue-dk);line-height:1.8;">
-    <strong>핵심 패턴:</strong> <code style="background:rgba(255,255,255,.6);padding:1px 5px;border-radius:3px;">/스킬이름</code> → 작업 지시 → 결과 확인 → 부족한 기준 SKILL.md에 추가 → 재실행. 이 사이클을 3번만 돌리면 안정적인 스킬이 됩니다.
-  </div>
-</div>
-
-<!-- ── 탭 1: 프로젝트 설정 ── -->
-<div id="adv-panel-1" style="display:none;margin-top:0;">
-
-  <div class="note blue" style="margin:16px 0 14px;">
-    <strong>CLAUDE.md란?</strong> — 프로젝트 폴더에 두면 Claude가 이 폴더에서 실행될 때마다 자동으로 읽습니다. "이 프로젝트에서는 항상 이렇게 해줘"라는 영구 지침서입니다.
-  </div>
-
-  <div style="display:flex;height:360px;border-radius:10px;overflow:hidden;border:1.5px solid #374151;margin-bottom:14px;">
-    <!-- 탐색기 -->
-    <div style="width:210px;background:#252526;border-right:1px solid #3E3E3E;display:flex;flex-direction:column;flex-shrink:0;">
-      <div style="padding:8px 10px;font-size:10.5px;font-weight:700;text-transform:uppercase;color:#BDBDBD;letter-spacing:.06em;border-bottom:1px solid #3E3E3E;">탐색기</div>
-      <div style="padding:6px 8px;font-size:12px;line-height:2;color:#CCC;">
-        <div style="color:#DCDCAA;font-weight:600;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="#DCDCAA"><polygon points="0,1 9,1 9,8 0,8"/></svg>기술동향_에이전트/</div>
-        <div style="padding-left:14px;background:#37373D;color:#4EC9B0;border-radius:3px;padding-right:6px;display:flex;align-items:center;gap:4px;"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" stroke="#4EC9B0" stroke-width="1"><path d="M1 1h4l3 3v4H1z"/></svg>CLAUDE.md</div>
-        <div style="padding-left:14px;color:#6B6B6B;">.claude/</div>
-        <div style="padding-left:14px;color:#6B6B6B;">data/</div>
-        <div style="padding-left:14px;color:#6B6B6B;">기준문서.md</div>
-      </div>
-    </div>
-    <!-- 에디터 -->
-    <div style="flex:1;display:flex;flex-direction:column;background:#1E1E1E;">
-      <div style="background:#252526;padding:0;display:flex;border-bottom:1px solid #1E1E1E;">
-        <div style="padding:6px 16px;background:#1E1E1E;color:#4EC9B0;font-size:12px;border-top:2px solid #0E639C;display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#4EC9B0" stroke-width="1.2"><path d="M2 1h5l3 3v7H2z"/></svg>CLAUDE.md
-        </div>
-      </div>
-      <div style="flex:1;padding:14px 18px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;overflow-y:auto;color:#D4D4D4;">
-        <div style="color:#569CD6;"># 기술동향 에이전트 프로젝트</div>
-        <br/>
-        <div style="color:#569CD6;">## 이 프로젝트에서 항상 지킬 것</div>
-        <div style="color:#6A9955;">- data/ 폴더의 파일만 읽을 것</div>
-        <div style="color:#6A9955;">- 기준문서.md에 적힌 형식을 반드시 따를 것</div>
-        <div style="color:#6A9955;">- 결과물은 항상 output/ 폴더에 저장할 것</div>
-        <div style="color:#6A9955;">- 파일명에 날짜 포함: 결과_YYYYMMDD.md</div>
-        <br/>
-        <div style="color:#569CD6;">## 이 프로젝트에서 하면 안 되는 것</div>
-        <div style="color:#6A9955;">- 개인정보 포함된 내용 처리 금지</div>
-        <div style="color:#6A9955;">- data/ 폴더 외부 파일 읽기 금지</div>
-        <div style="color:#6A9955;">- 원문에 없는 내용 추가 금지</div>
-        <br/>
-        <div style="color:#569CD6;">## 결과물 형식 기본값</div>
-        <div style="color:#6A9955;">- 핵심 내용 3줄 / 시사점 1줄 / 출처</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
-    <div style="background:var(--green-bg);border:1px solid var(--green-bd);border-radius:8px;padding:13px 14px;font-size:12.5px;line-height:1.9;">
-      <div style="font-weight:700;color:var(--green);margin-bottom:6px;">CLAUDE.md가 있으면</div>
-      <div style="color:var(--gray-700);">Claude 실행 시 자동으로 읽음<br/>매번 같은 룰을 설명할 필요 없음<br/>프로젝트 컨텍스트가 유지됨<br/>팀 공유 시 같은 기준 적용</div>
-    </div>
-    <div style="background:var(--red-bg);border:1px solid var(--red-bd);border-radius:8px;padding:13px 14px;font-size:12.5px;line-height:1.9;">
-      <div style="font-weight:700;color:var(--red);margin-bottom:6px;">CLAUDE.md가 없으면</div>
-      <div style="color:var(--gray-700);">실행할 때마다 기준 다시 설명<br/>대화가 끊기면 컨텍스트 소실<br/>결과 형식이 매번 달라질 수 있음<br/>실수할 여지가 더 많아짐</div>
-    </div>
-  </div>
-
-  <div class="note amber" style="font-size:13px;">
-    <strong>CLAUDE.md vs 기준문서.md 차이:</strong> CLAUDE.md는 "이 폴더에서 Claude에게 항상 적용되는 규칙"이고, 기준문서.md는 "이번 에이전트가 읽는 업무 지침"입니다. 둘 다 있으면 CLAUDE.md가 먼저 읽힙니다.
-  </div>
-
-  <!-- 실제 입력 예시: CLAUDE.md -->
-  <div style="margin-top:18px;">
-    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:10px;">실제로 이렇게 입력하세요</div>
-
-    <!-- 대화 버블 -->
-    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;background:#F9FAFB;border:1px solid var(--gray-200);border-radius:10px;font-size:12.5px;">
-
-      <!-- 나: CLAUDE.md 만들어줘 -->
-      <div style="display:flex;justify-content:flex-end;">
-        <div style="background:#2563EB;color:#fff;border-radius:12px 12px 2px 12px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:rgba(255,255,255,.7);margin-bottom:3px;font-weight:600;">나</div>
-          이 폴더용 CLAUDE.md 만들어줘.<br/>
-          규칙: data/ 폴더만 읽기, 기준문서.md 형식 따르기,<br/>
-          결과는 output/ 폴더에 날짜 포함 파일명으로 저장.
-        </div>
-      </div>
-
-      <!-- AI: 생성 완료 -->
-      <div style="display:flex;justify-content:flex-start;">
-        <div style="background:#fff;border:1px solid var(--gray-200);color:var(--gray-700);border-radius:12px 12px 12px 2px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:var(--gray-400);margin-bottom:3px;font-weight:600;">AI</div>
-          CLAUDE.md를 생성했습니다. 내용을 확인해주세요.<br/>
-          <span style="color:var(--green);font-weight:600;">- data/ 폴더 외부 읽기 금지</span> 규칙이 포함됐습니다.<br/>
-          추가로 넣고 싶은 규칙이 있으시면 말씀해주세요.
-        </div>
-      </div>
-
-      <!-- 나: 규칙 하나 추가 -->
-      <div style="display:flex;justify-content:flex-end;">
-        <div style="background:#2563EB;color:#fff;border-radius:12px 12px 2px 12px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:rgba(255,255,255,.7);margin-bottom:3px;font-weight:600;">나</div>
-          규칙 하나 추가해줘 — 결과 파일 맨 위에<br/>
-          "요약 날짜: YYYY-MM-DD" 한 줄을 항상 넣을 것.
-        </div>
-      </div>
-
-      <!-- AI: 업데이트 완료 -->
-      <div style="display:flex;justify-content:flex-start;">
-        <div style="background:#fff;border:1px solid var(--gray-200);color:var(--gray-700);border-radius:12px 12px 12px 2px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:var(--gray-400);margin-bottom:3px;font-weight:600;">AI</div>
-          CLAUDE.md에 <span style="color:var(--blue);font-weight:600;">"결과물 형식 기본값"</span> 섹션을<br/>
-          업데이트했습니다. 이제 모든 실행에서 자동 적용됩니다.
-        </div>
-      </div>
-
-    </div>
-    <div style="margin-top:8px;padding:8px 12px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:6px;font-size:12px;color:var(--gray-700);">
-      <strong style="color:var(--blue);">핵심 패턴:</strong> 처음엔 기본 규칙 3개로 시작 → 실행하면서 부족한 규칙 발견 → CLAUDE.md에 추가. 프로젝트 룰은 이렇게 조금씩 쌓입니다.
-    </div>
-  </div>
-
-</div>
-
-<!-- ── 탭 2: 에이전트화 ── -->
-<div id="adv-panel-2" style="display:none;margin-top:0;">
-
-  <div class="note blue" style="margin:16px 0 14px;">
-    <strong>에이전트화란?</strong> — 매번 Claude를 열고 지시를 타이핑하는 게 아니라, <strong>명령 한 줄</strong>로 전체 업무를 실행하는 형태로 만드는 것입니다. 진짜 "버튼 하나로 돌아가는 에이전트"가 됩니다.
-  </div>
-
-  <!-- 에이전트화 3단계 흐름 -->
-  <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;margin-bottom:16px;">
-    <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:13px;text-align:center;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--gray-400);margin-bottom:8px;">지금까지</div>
-      <div style="margin-bottom:6px;display:flex;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 11h.01M11 11h.01M15 11h.01M8 14h8"/></svg></div>
-      <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">claude 실행<br/>→ 지시 타이핑<br/>→ 결과 확인</div>
-      <div style="font-size:11.5px;color:var(--gray-400);margin-top:6px;">매번 사람이 개입</div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:center;padding:20px 8px 0;">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9CA3AF" stroke-width="1.8"><path d="M3 9h12M11 4l5 5-5 5"/></svg>
-    </div>
-    <div style="background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:13px;text-align:center;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">에이전트화 후</div>
-      <div style="margin-bottom:6px;display:flex;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
-      <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">run.sh 실행<br/>→ 자동으로 처리<br/>→ 결과 파일 생성</div>
-      <div style="font-size:11.5px;color:var(--blue);margin-top:6px;">명령 한 줄로 완료</div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:center;padding:20px 8px 0;">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9CA3AF" stroke-width="1.8"><path d="M3 9h12M11 4l5 5-5 5"/></svg>
-    </div>
-    <div style="background:var(--green-bg);border:1px solid var(--green-bd);border-radius:8px;padding:13px;text-align:center;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:8px;">완전한 에이전트</div>
-      <div style="margin-bottom:6px;display:flex;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-      <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">스케줄 등록<br/>→ 자동 실행<br/>→ 결과 자동 저장</div>
-      <div style="font-size:11.5px;color:var(--green);margin-top:6px;">사람 개입 최소화</div>
-    </div>
-  </div>
-
-  <!-- run.sh 만들기 -->
-  <h3 style="margin-bottom:10px;">Step 1 — run.sh 파일 만들기</h3>
-  <div style="display:flex;height:300px;border-radius:10px;overflow:hidden;border:1.5px solid #374151;margin-bottom:12px;">
-    <!-- 탐색기 -->
-    <div style="width:210px;background:#252526;border-right:1px solid #3E3E3E;flex-shrink:0;">
-      <div style="padding:8px 10px;font-size:10.5px;font-weight:700;text-transform:uppercase;color:#BDBDBD;letter-spacing:.06em;border-bottom:1px solid #3E3E3E;">탐색기</div>
-      <div style="padding:6px 8px;font-size:12px;line-height:2;color:#CCC;">
-        <div style="color:#DCDCAA;font-weight:600;">기술동향_에이전트/</div>
-        <div style="padding-left:14px;background:#37373D;color:#4EC9B0;border-radius:3px;padding-right:6px;">run.sh  ← 새로 만들 것</div>
-        <div style="padding-left:14px;color:#6B6B6B;">CLAUDE.md</div>
-        <div style="padding-left:14px;color:#6B6B6B;">.claude/</div>
-        <div style="padding-left:14px;color:#6B6B6B;">data/</div>
-        <div style="padding-left:14px;color:#6B6B6B;">기준문서.md</div>
-        <div style="padding-left:14px;color:#6B6B6B;">output/</div>
-      </div>
-    </div>
-    <!-- 에디터 -->
-    <div style="flex:1;display:flex;flex-direction:column;background:#1E1E1E;">
-      <div style="background:#252526;padding:0;display:flex;border-bottom:1px solid #1E1E1E;">
-        <div style="padding:6px 16px;background:#1E1E1E;color:#4EC9B0;font-size:12px;border-top:2px solid #0E639C;display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#4EC9B0" stroke-width="1.2"><path d="M2 1h5l3 3v7H2z"/></svg>run.sh
-        </div>
-      </div>
-      <div style="flex:1;padding:14px 18px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:1.9;overflow-y:auto;color:#D4D4D4;">
-        <div style="color:#6A9955;">#!/bin/bash</div>
-        <div style="color:#6A9955;"># 기술동향 에이전트 실행 스크립트</div>
-        <div style="color:#6A9955;"># 사용법: bash run.sh</div>
-        <br/>
-        <div style="color:#6A9955;"># 오늘 날짜로 결과 파일명 설정</div>
-        <div><span style="color:#9CDCFE;">DATE</span>=<span style="color:#CE9178;">$(date +%Y%m%d)</span></div>
-        <div><span style="color:#9CDCFE;">OUTPUT</span>=<span style="color:#CE9178;">"output/결과_${DATE}.md"</span></div>
-        <br/>
-        <div style="color:#6A9955;"># Claude에게 지시 (대화 없이 바로 실행)</div>
-        <div><span style="color:#DCDCAA;">claude</span> <span style="color:#9CDCFE;">-p</span> <span style="color:#CE9178;">"기준문서.md에 있는 기준대로 \</span></div>
-        <div><span style="color:#CE9178;">data/ 폴더의 파일들을 요약해줘. \</span></div>
-        <div><span style="color:#CE9178;">결과는 ${OUTPUT} 로 저장해줘."</span></div>
-        <br/>
-        <div style="color:#6A9955;"># 완료 알림</div>
-        <div><span style="color:#DCDCAA;">echo</span> <span style="color:#CE9178;">"✓ 완료: ${OUTPUT} 저장됨"</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div style="background:#0F172A;border-radius:8px;padding:14px 16px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12.5px;line-height:2;margin-bottom:12px;">
-    <div style="color:#6A9955;font-size:11px;margin-bottom:6px;">// 터미널에서 실행권한 부여 후 실행</div>
-    <div><span style="color:#4EC9B0;">기술동향_에이전트 %</span> <span style="color:#DCDCAA;">chmod</span> <span style="color:#CE9178;">+x run.sh</span>&nbsp;&nbsp;<span style="color:#6A9955;font-size:11px;">← 최초 1회만</span></div>
-    <div><span style="color:#4EC9B0;">기술동향_에이전트 %</span> <span style="color:#DCDCAA;">bash run.sh</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6A9955;font-size:11px;">← 이후 매번 이것만</span></div>
-    <div style="margin-top:8px;color:#9CDCFE;">✓ 완료: output/결과_20260505.md 저장됨</div>
-  </div>
-
-  <div class="note green" style="font-size:13px;margin-bottom:0;">
-    <strong>-p 플래그</strong>는 Claude를 대화 없이 바로 실행하는 옵션입니다. data/ 폴더에 새 파일을 넣고 <code style="background:rgba(255,255,255,.3);padding:1px 5px;border-radius:3px;">bash run.sh</code>만 치면 결과 파일이 자동 생성됩니다. 이게 에이전트화의 핵심입니다.
-  </div>
-
-  <!-- 실제 입력 예시: 에이전트화 -->
-  <div style="margin-top:18px;">
-    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:10px;">실제로 이렇게 입력하세요</div>
-    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;background:#F9FAFB;border:1px solid var(--gray-200);border-radius:10px;font-size:12.5px;">
-
-      <div style="display:flex;justify-content:flex-end;">
-        <div style="background:#2563EB;color:#fff;border-radius:12px 12px 2px 12px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:rgba(255,255,255,.7);margin-bottom:3px;font-weight:600;">나</div>
-          run.sh 파일 만들어줘.<br/>
-          data/ 폴더 파일들을 기준문서.md 형식대로 요약해서<br/>
-          output/결과_날짜.md 로 저장하는 스크립트.
-        </div>
-      </div>
-
-      <div style="display:flex;justify-content:flex-start;">
-        <div style="background:#fff;border:1px solid var(--gray-200);color:var(--gray-700);border-radius:12px 12px 12px 2px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:var(--gray-400);margin-bottom:3px;font-weight:600;">AI</div>
-          run.sh를 생성했습니다.<br/>
-          <span style="color:#4EC9B0;font-family:monospace;font-size:11.5px;">bash run.sh</span> 로 실행하시면 됩니다.<br/>
-          최초 1회 <span style="color:#4EC9B0;font-family:monospace;font-size:11.5px;">chmod +x run.sh</span>이 필요합니다.
-        </div>
-      </div>
-
-      <div style="display:flex;justify-content:flex-end;">
-        <div style="background:#2563EB;color:#fff;border-radius:12px 12px 2px 12px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:rgba(255,255,255,.7);margin-bottom:3px;font-weight:600;">나 (1주일 후)</div>
-          data/ 파일이 많아질 때 처리 속도가 너무 느려.<br/>
-          이미 output/에 결과 있는 파일은 건너뛰도록 수정해줘.
-        </div>
-      </div>
-
-      <div style="display:flex;justify-content:flex-start;">
-        <div style="background:#fff;border:1px solid var(--gray-200);color:var(--gray-700);border-radius:12px 12px 12px 2px;padding:9px 14px;max-width:82%;line-height:1.7;">
-          <div style="font-size:10.5px;color:var(--gray-400);margin-bottom:3px;font-weight:600;">AI</div>
-          중복 처리 방지 로직을 추가했습니다.<br/>
-          output/ 폴더에 같은 날짜 파일이 있으면 자동으로 건너뜁니다.
-        </div>
-      </div>
-
-    </div>
-    <div style="margin-top:8px;padding:8px 12px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:6px;font-size:12px;color:var(--gray-700);">
-      <strong style="color:var(--green);">핵심 패턴:</strong> run.sh를 처음부터 완벽하게 만들 필요 없습니다. 기본 버전 만들기 → 실행 → 불편한 점 발견 → 개선 요청. 이 사이클로 점점 나은 에이전트가 됩니다.
-    </div>
-  </div>
-
-</div>
-
-<script>
-window.advTab = function(idx) {
-  [0,1,2].forEach(function(i) {
-    const tab = document.getElementById('adv-tab-' + i);
-    const panel = document.getElementById('adv-panel-' + i);
-    const active = i === idx;
-    tab.style.color = active ? 'var(--blue)' : 'var(--gray-500)';
-    tab.style.borderBottom = active ? '2px solid var(--blue)' : '2px solid transparent';
-    tab.style.fontWeight = active ? '700' : '600';
-    panel.style.display = active ? 'block' : 'none';
-  });
-};
-</script>
-
-
-</section><!-- /panel-lab -->
-
-<!-- ═══ 패널 3: 오후 ═══ -->
-<section class="tab-panel" id="panel-pm" role="tabpanel">
-
-<!-- ══════════════════════════════════════
-     오후 세션
-══════════════════════════════════════ -->
-
 <div class="session-head pm" id="pm-tacit">
-  <div class="stag">오후</div>
+  <div class="stag">Part 2</div>
   <div class="sinfo">
-    <div class="stitle">암묵지 형식화 + 스킬 활용</div>
-    <div class="ssub">내 판단 기준을 문서로 만들고, 반복 업무를 스킬로 고정하기</div>
+    <div class="stitle">암묵지 형식화 사례</div>
+    <div class="ssub">사람이 머릿속으로 하던 판단 기준을 문서로 꺼내는 법</div>
   </div>
-  <div class="tbadge">40분</div>
-</div>
-
-<div class="time-table">
-  <div class="time-row"><div class="t-min">0–8분</div><div class="t-label">암묵지란? + 회의록 에이전트 사례</div><div class="t-type">설명</div></div>
-  <div class="time-row"><div class="t-min">8–15분</div><div class="t-label">기준 문서 구조 + 스킬 판단 기준</div><div class="t-type">설명</div></div>
-  <div class="time-row prac"><div class="t-min">15–35분</div><div class="t-label">기준 문서 작성 + 스킬 설계</div><div class="t-type">실습</div></div>
-  <div class="time-row retro"><div class="t-min">35–40분</div><div class="t-label">회고</div><div class="t-type">회고</div></div>
 </div>
 
 
@@ -2700,7 +1440,6 @@ window.advTab = function(idx) {
     <tbody>
       <tr><td>핵심 안건</td><td>회의에서 가장 중요하게 다룬 주제</td></tr>
       <tr><td>결정 사항</td><td>최종적으로 합의된 내용 (논의 중인 것과 구분)</td></tr>
-      <tr><td>논의 중인 내용</td><td>아직 최종 합의되지 않았고 추가 확인이 필요한 내용</td></tr>
       <tr><td>액션 아이템</td><td>담당자 + 기한이 붙은 할 일 (없으면 보류로 분류)</td></tr>
       <tr><td>보류 사항</td><td>아직 결정 안 됐지만 다음에 다시 봐야 하는 것</td></tr>
       <tr><td>문서 톤</td><td>내부 공유용은 편하게, 보고용은 격식체로</td></tr>
@@ -2779,7 +1518,7 @@ window.advTab = function(idx) {
       </ol>
 
       <div style="margin-top:12px;padding:10px 14px;background:#fff;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px;color:var(--gray-700);line-height:1.7;">
-        <strong style="color:var(--blue);">팁 —</strong> 첫 시도에서 50점이 나와도 정상입니다. 양식 + 프롬프트 + 원문 3가지를 매번 같이 주는 패턴을 3~5번 반복하면, 양식 파일이 점점 "내 회의록 기준 문서"로 진화합니다. 그게 오후 실습의 본질입니다.
+        <strong style="color:var(--blue);">팁 —</strong> 첫 시도에서 50점이 나와도 정상입니다. 양식 + 프롬프트 + 원문 3가지를 매번 같이 주는 패턴을 3~5번 반복하면, 양식 파일이 점점 "내 회의록 기준 문서"로 진화합니다. 그게 암묵지 형식화의 본질입니다.
       </div>
     </div>
   </div>
@@ -2899,6 +1638,33 @@ window.advTab = function(idx) {
 </div>
 
 
+<!-- Part 2 마무리: 핵심 메시지 + 발표 멘트 -->
+<div style="background:var(--blue-bg);border:1.5px solid var(--blue);border-radius:10px;padding:18px 22px;margin:24px 0 20px;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">한 줄로</div>
+  <div style="font-size:15px;font-weight:700;color:var(--blue-dk);line-height:1.7;">AI가 못하는 게 아니라,<br/>내가 일하는 기준을 아직 알려주지 않은 것일 수 있습니다.</div>
+</div>
+
+<div class="script">
+  <div class="sc-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10M3 9h10M3 13h6"/></svg>발표 멘트</div>
+  <p>회의록은 단순히 회의 내용을 줄이는 문서가 아닙니다. 좋은 회의록은 <strong>결정된 내용, 논의 중인 내용, 담당자가 해야 할 일</strong>을 구분하는 문서입니다.</p>
+  <p>그런데 그 구분 기준은 사실 평소에 회의록을 쓰는 사람의 머릿속에만 있습니다. <span class="sc-pause">잠깐 pause</span> 그래서 AI에게 회의록을 시키면 단순 요약이 나오는 거죠.</p>
+  <p>같은 회의 내용이라도 "결정사항과 논의 중인 것을 구분해라, 담당자와 기한이 있으면 액션 아이템으로 분리해라"라는 기준을 한 번만 알려주면, 그때부터 결과물이 완전히 달라집니다.</p>
+  <p>즉, AI가 못한다고 느껴질 때 가장 먼저 의심해야 할 것은 <strong>"내가 평소 쓰던 기준을 아직 안 알려줬구나"</strong>입니다.</p>
+</div>
+
+</section><!-- /panel-lab -->
+
+<!-- ═══ 패널 3: 스킬 개발 및 활용 사례 ═══ -->
+<section class="tab-panel" id="panel-pm" role="tabpanel">
+
+<div class="session-head pm" id="pm-skill-head">
+  <div class="stag">Part 3</div>
+  <div class="sinfo">
+    <div class="stitle">스킬 개발 및 활용 사례</div>
+    <div class="ssub">반복 업무를 매번 다시 설명하지 않고 한 번에 돌리는 법</div>
+  </div>
+</div>
+
 <!-- 스킬 -->
 <h2 id="pm-skill">스킬로 만들기</h2>
 
@@ -2980,196 +1746,45 @@ window.advTab = function(idx) {
   <li><div class="sn">5</div><div>회의록 형식으로 출력</div></li>
 </ul>
 
-
-<!-- 실습 -->
-<h2 id="pm-practice">실습 — 기준 문서 + 스킬 설계 <span style="font-size:13px; font-weight:400; color:var(--gray-400);">20분</span></h2>
-
-<div class="todo-box">
-  <div class="todo-label">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>
-    지금 할 일
-  </div>
+<!-- 스킬 판단 질문 -->
+<h3>이걸 스킬로 만들어야 할까? — 판단 질문</h3>
+<div class="todo-box" style="border-color:var(--blue-bd);">
+  <div class="todo-label">스킬 후보 판단 — 4개 중 2개 이상 "예"라면 만들 가치 있음</div>
   <ol>
-    <li>오전에 고른 업무를 가져온다.</li>
-    <li>AI가 자주 틀릴 것 같은 부분을 먼저 적는다. (Part A, 4번 칸)</li>
-    <li>그 부분의 기준을 말로 써본다. (Part A, 5번 칸)</li>
-    <li>기준 문서 초안을 완성한다.</li>
-    <li>스킬로 만들지 판단하고 Part B를 채운다.</li>
+    <li>이 일을 다음 달에도 또 할 것인가?</li>
+    <li>같은 형식으로 결과물이 나와야 하는가?</li>
+    <li>매번 같은 기준을 다시 설명하는 게 번거로운가?</li>
+    <li>결과물을 바로 복붙해서 쓰고 싶은가?</li>
   </ol>
 </div>
 
-<h3>Part A. 기준 문서 초안 작성 (12분)</h3>
-<div class="practice">
-  <div class="phead">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8l2 3v9H2V5z"/><path d="M10 2v3h4"/></svg>
-    기준 문서 워크시트
-  </div>
-  <div class="prow">
-    <div class="pl">1. 업무명</div>
-    <div class="pv">
-      <div class="pq">AI에게 맡길 업무를 한 문장으로 쓰면?</div>
-      <div class="ex">예) 기술동향 논문 요약 에이전트</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">2. 입력 자료</div>
-    <div class="pv">
-      <div class="pq">AI가 읽어야 하는 자료는 무엇인가?</div>
-      <div class="ex">예) 논문 PDF 본문 텍스트 (민감정보 없음)</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">3. 출력 형식</div>
-    <div class="pv">
-      <div class="pq">결과물이 어떤 형태로 나오면 바로 쓸 수 있는가?</div>
-      <div class="ex">예) 핵심 내용 3줄 + 시사점 1줄</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">4. AI가 틀릴 것 같은 부분</div>
-    <div class="pv">
-      <div class="pq">지금 AI가 자주 놓칠 것 같은 부분은?</div>
-      <div class="ex">예) 연구 배경만 정리하고 결과를 빠뜨림</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">5. 내가 쓰는 판단 기준</div>
-    <div class="pv">
-      <div class="pq">나는 평소 어떤 기준으로 맞고 틀림을 판단하는가?</div>
-      <div class="ex">예) 결과 중심 요약, 한계점 반드시 포함, 출처 연도 명시</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">6. 예외 처리</div>
-    <div class="pv">
-      <div class="pq">애매한 경우 어떻게 처리해야 하는가?</div>
-      <div class="ex">예) 결과가 불분명하면 "추가 확인 필요"로 표시</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">7. 하면 안 되는 것</div>
-    <div class="pv">
-      <div class="pq">AI가 절대 하지 말아야 할 것은?</div>
-      <div class="ex">예) 원문에 없는 내용 추가, 연구자 실명 포함</div>
-      <div class="blank"></div>
-    </div>
-  </div>
+<!-- Part 3 핵심 메시지 -->
+<div style="background:var(--blue-bg);border:1.5px solid var(--blue);border-radius:10px;padding:18px 22px;margin:24px 0 20px;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">한 줄로</div>
+  <div style="font-size:15px;font-weight:700;color:var(--blue-dk);line-height:1.7;">스킬은 멋있어 보이려고 만드는 게 아니라,<br/>반복 업무를 편하게 돌리려고 만드는 겁니다.</div>
 </div>
 
-<div class="note amber">
-  <strong>기준 문서 작성 팁</strong> — 처음부터 잘 쓰려고 하지 않아도 됩니다. AI가 자주 틀릴 것 같은 부분 하나만 적어보세요. 그게 기준 문서의 시작입니다.
+<!-- Part 3 발표 멘트 -->
+<div class="script">
+  <div class="sc-label"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10M3 9h10M3 13h6"/></svg>발표 멘트</div>
+  <p>스킬은 어렵게 생각하지 않으셔도 됩니다. <strong>매번 같은 기준을 다시 설명하지 않아도 되게 만드는 반복 실행 버튼</strong>이라고 보면 됩니다.</p>
+  <p>예를 들어 회의록을 매번 같은 형식으로 정리해야 한다면, 그 기준을 매번 프롬프트로 다시 쓰는 건 번거롭습니다. <span class="sc-pause">잠깐 pause</span> 이럴 때 회의록 작성 기준을 스킬로 만들어두면, 회의 내용만 넣어도 같은 구조로 결과물을 받을 수 있습니다.</p>
+  <p>다만 <strong>모든 작업을 스킬로 만들 필요는 없습니다.</strong> 자주 반복되고, 출력 형식이 정해져 있고, 매번 같은 기준으로 처리해야 하는 업무부터 스킬로 만드는 게 좋습니다.</p>
 </div>
 
-<h3>Part B. 스킬 설계 (8분)</h3>
-<div class="practice">
-  <div class="phead">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>
-    스킬 설계 워크시트
+<!-- ═══ 발표 마무리 메시지 ═══ -->
+<div style="margin:36px 0 12px;padding:24px 28px;background:linear-gradient(135deg, var(--blue-dk) 0%, var(--blue-mid) 100%);border-radius:12px;color:#fff;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:8px;">발표 마무리</div>
+  <div style="font-size:17px;font-weight:800;margin-bottom:14px;line-height:1.4;">유진 멘토 파트 핵심 — 셋</div>
+  <ol style="font-size:14px;line-height:1.95;margin-left:22px;color:#E0E7FF;">
+    <li><strong style="color:#fff;">큰 업무를 한 번에 자동화하려고 하지 않습니다.</strong></li>
+    <li><strong style="color:#fff;">내가 평소 쓰던 판단 기준을 문서로 꺼냅니다.</strong></li>
+    <li><strong style="color:#fff;">반복되는 업무는 스킬로 만들어 다시 설명하지 않게 합니다.</strong></li>
+  </ol>
+  <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:13px;color:#C7D5F0;line-height:1.75;">
+    AI 에이전트는 처음부터 완성된 시스템을 만드는 게 아니라,<br/>
+    <strong style="color:#fff;">작은 업무 하나를 맡기고 기준을 보완하면서 키워가는 방식</strong>으로 시작하면 됩니다.
   </div>
-  <div class="prow">
-    <div class="pl">반복 업무</div>
-    <div class="pv">
-      <div class="pq">이 일을 다음 달에도 또 할 것인가?</div>
-      <div class="ex">예) 월 2회 기술동향 보고서 작성 시 논문 요약</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">기존 문제</div>
-    <div class="pv">
-      <div class="pq">지금 방식에서 번거로운 점은?</div>
-      <div class="ex">예) 매번 프롬프트 새로 쓰고 결과 형식이 달라짐</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">스킬 입력</div>
-    <div class="pv">
-      <div class="pq">매번 무엇을 넣게 되나?</div>
-      <div class="ex">예) 논문 텍스트 붙여넣기</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-  <div class="prow">
-    <div class="pl">스킬 출력</div>
-    <div class="pv">
-      <div class="pq">결과물을 바로 복붙해서 쓸 수 있는 형태는?</div>
-      <div class="ex">예) 핵심 3줄 + 시사점 1줄 (보고서 바로 붙여넣기 가능)</div>
-      <div class="blank"></div>
-    </div>
-  </div>
-</div>
-
-<!-- 멘토 체크 포인트 -->
-<div class="mentor-note" id="pm-mentor">
-  <div class="mn-label">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-    멘토 체크 포인트 — 오후 실습 중
-  </div>
-  <p style="margin-bottom:8px;">수강생이 기준 문서를 못 쓰면 아래 질문을 던진다.</p>
-  <ul>
-    <li>이 업무를 사람이 한다면 무엇부터 확인하나요?</li>
-    <li>결과물이 좋다고 판단하는 기준은 무엇인가요?</li>
-    <li>반대로 결과물이 틀렸다고 느끼는 경우는 언제인가요?</li>
-    <li>AI가 절대 하면 안 되는 것은 무엇인가요?</li>
-  </ul>
-  <p style="margin-top:10px; padding-top:10px; border-top:1px dashed var(--slate-bd);">수강생 기준이 모호할 때 이렇게 피드백한다:<br/><em>"좋은 기준이에요. 다만 AI가 바로 이해하려면 조금 더 구체적으로 써주시면 좋겠어요. 예를 들어 '중요한 내용 중심으로 정리'보다는 '결정사항, 담당자, 기한이 있는 내용은 액션 아이템으로 분리'처럼 써주시면 더 잘 작동합니다."</em></p>
-</div>
-
-
-<!-- 회고 -->
-<h2 id="pm-retro">회고 <span style="font-size:13px; font-weight:400; color:var(--gray-400);">5분</span></h2>
-
-<p>아래 한 문장 포맷으로 돌아가면서 한 명씩 말해보세요. 완성 못 해도 괜찮습니다. 오늘 발견한 것만 공유하면 됩니다.</p>
-
-<div style="background: var(--purple-bg); border:1px solid var(--purple-bd); border-radius:8px; padding:16px 20px; margin:16px 0;">
-  <div style="font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--purple); margin-bottom:10px;">회고 한 문장 포맷</div>
-  <div style="font-size:14px; color:var(--gray-700); line-height:2;">
-    오늘 저는 <span style="background:#fff; border:1px solid var(--purple-bd); border-radius:4px; padding:1px 10px; min-width:80px; display:inline-block;">&nbsp;&nbsp;업무명&nbsp;&nbsp;</span> 중에서
-    <span style="background:#fff; border:1px solid var(--purple-bd); border-radius:4px; padding:1px 10px; min-width:80px; display:inline-block;">&nbsp;&nbsp;작은 단계&nbsp;&nbsp;</span>를 에이전트로 만들어보기로 했습니다.<br/>
-    이를 위해 <span style="background:#fff; border:1px solid var(--purple-bd); border-radius:4px; padding:1px 10px;">&nbsp;&nbsp;입력 데이터&nbsp;&nbsp;</span>를 준비했고,<br/>
-    AI에게 <span style="background:#fff; border:1px solid var(--purple-bd); border-radius:4px; padding:1px 10px;">&nbsp;&nbsp;판단 기준&nbsp;&nbsp;</span>을 알려줘야 한다는 것을 알게 되었습니다.<br/>
-    다음 주까지는 <span style="background:#fff; border:1px solid var(--purple-bd); border-radius:4px; padding:1px 10px;">&nbsp;&nbsp;보완할 점&nbsp;&nbsp;</span>을 수정해보겠습니다.
-  </div>
-</div>
-
-<div class="note" style="margin-top:4px; font-size:13px; color:var(--gray-500);">
-  예시 — "오늘 저는 교육 운영 업무 중에서 안내 메일 초안 작성을 에이전트로 만들어보기로 했습니다. 이를 위해 참석자 명단과 교육 일정표를 준비했고, AI에게 메일 문장 톤과 필수 포함 항목을 알려줘야 한다는 것을 알게 되었습니다. 다음 주까지는 메일 템플릿과 예외 상황 기준을 보완해보겠습니다."
-</div>
-
-<div class="tbl-wrap" style="margin-top:16px;">
-  <table>
-    <thead><tr><th>#</th><th>회고 질문</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>오늘 처음으로 작동시켜볼 에이전트는 어떤 업무인가요?</td></tr>
-      <tr><td>2</td><td>에이전트를 돌려봤을 때 잘 된 부분이 있었다면?</td></tr>
-      <tr><td>3</td><td>기준 문서를 쓰면서 "이런 게 내 암묵지였구나" 싶었던 게 있나요?</td></tr>
-      <tr><td>4</td><td>다음 주까지 보완하고 싶은 부분이 있다면?</td></tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-
-<!-- 오늘 가져가는 것 -->
-<h2>오늘 가져가는 것</h2>
-<ul class="check-list">
-  <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>좁혀진 업무 과제 1개</li>
-  <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>에이전트가 읽을 데이터 폴더 구성</li>
-  <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>업무 기준이 정리된 기준문서.md 초안</li>
-  <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>한 번 돌려본 단일 에이전트</li>
-  <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>스킬로 만들 업무 후보 1개</li>
-</ul>
-
-<div class="note" style="margin-top:24px; font-size:13px;">
-  <strong>이번 교육 범위</strong> — 단일 에이전트 작동 + 기준 문서화 + 스킬 초안까지. 웹 서비스·DB·API·MCP 구축은 이번 범위 밖입니다.
 </div>
 
 </section><!-- /panel-pm -->

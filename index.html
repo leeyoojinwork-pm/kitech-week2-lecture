@@ -79,9 +79,25 @@
     .main { flex: 1; padding: 40px 48px 100px; max-width: 900px; }
 
     /* ── Typography ── */
-    h2 { font-size: 18px; font-weight: 700; color: var(--gray-900); margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1.5px solid var(--gray-200); }
+    h2 {
+      font-size: 19px; font-weight: 800; color: var(--gray-900);
+      margin: 44px 0 16px; padding: 10px 16px;
+      background: linear-gradient(90deg, var(--blue-bg) 0%, transparent 100%);
+      border-left: 4px solid var(--blue);
+      border-radius: 2px 8px 8px 2px;
+      letter-spacing: -.01em;
+    }
     h2:first-child { margin-top: 0; }
-    h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin: 20px 0 8px; }
+    h2::before {
+      content: ""; display: inline-block; width: 6px; height: 6px;
+      background: var(--blue); border-radius: 50%; margin-right: 10px;
+      vertical-align: middle; margin-top: -3px;
+    }
+    h3 {
+      font-size: 15px; font-weight: 700; color: var(--blue-dk);
+      margin: 24px 0 10px; padding-left: 11px;
+      border-left: 3px solid var(--blue-bd);
+    }
     p  { margin-bottom: 10px; line-height: 1.75; }
     p:last-child { margin-bottom: 0; }
 
@@ -118,7 +134,7 @@
     /* ── Time rows ── */
     .time-table { margin: 0 0 22px; }
     .time-row { display:flex; align-items:center; gap:12px; padding:6px 12px; border-radius:5px; font-size:13px; margin-bottom:3px; background:#fff; border:1px solid var(--gray-200); }
-    .time-row .t-min { width:46px; font-weight:700; font-size:11.5px; color:var(--gray-400); flex-shrink:0; }
+    .time-row .t-min { min-width:62px; white-space:nowrap; font-weight:700; font-size:11.5px; color:var(--gray-400); flex-shrink:0; }
     .time-row .t-label { flex:1; font-weight:600; color:var(--gray-700); }
     .time-row .t-type { font-size:11.5px; color:var(--gray-400); }
     .time-row.prac { background:var(--blue-bg); border-color:var(--blue-bd); }
@@ -241,6 +257,39 @@
     }
     .connect-banner svg { width:18px; height:18px; color:var(--blue); flex-shrink:0; }
 
+    /* ── 메인 탭 (오전 / VS Code 실습 / 오후) ── */
+    .main-tabs {
+      display: flex; gap: 6px; margin: 0 0 28px;
+      background: #fff; border: 1px solid var(--gray-200); border-radius: 12px;
+      padding: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+      position: sticky; top: 16px; z-index: 5;
+    }
+    .main-tab {
+      flex: 1; display: flex; flex-direction: column; gap: 2px;
+      padding: 12px 16px; border-radius: 8px;
+      background: transparent; border: none; cursor: pointer;
+      text-align: left; transition: all .18s cubic-bezier(.22,1,.36,1);
+      font-family: inherit;
+    }
+    .main-tab:hover { background: var(--gray-50); }
+    .main-tab.active { background: var(--blue); box-shadow: 0 2px 8px rgba(37,99,235,.25); }
+    .main-tab .mt-label {
+      font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gray-400);
+    }
+    .main-tab .mt-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-top: 2px; }
+    .main-tab .mt-meta { font-size: 11.5px; color: var(--gray-500); margin-top: 1px; }
+    .main-tab.active .mt-label { color: rgba(255,255,255,.75); }
+    .main-tab.active .mt-title { color: #fff; }
+    .main-tab.active .mt-meta { color: rgba(255,255,255,.85); }
+
+    .tab-panel { display: none; animation: panelFade .25s ease-out; }
+    .tab-panel.active { display: block; }
+    @keyframes panelFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* ── 단락 분할 방지 (인쇄·반응형 시 카드가 중간에 끊기지 않도록) ── */
     .gb-item, .ba-item, .crit-card, .mentor-note, .todo-box,
     .practice, .analogy, .note, .connect-banner, .session-head,
@@ -320,6 +369,48 @@ function toggleNavSection(id) {
   group.classList.toggle('hidden');
   btn.classList.toggle('collapsed-sec');
 }
+
+/* ── 메인 탭 전환 ── */
+function switchTab(panelId) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById(panelId);
+  const tab = document.querySelector('.main-tab[data-panel="' + panelId + '"]');
+  if (panel) panel.classList.add('active');
+  if (tab) tab.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* 사이드바 앵커 → 해당 anchor가 속한 탭으로 자동 전환 후 스크롤 */
+function activateTabForAnchor(hash) {
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const panel = target.closest('.tab-panel');
+  if (!panel) return;
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  panel.classList.add('active');
+  const tab = document.querySelector('.main-tab[data-panel="' + panel.id + '"]');
+  if (tab) tab.classList.add('active');
+  setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  /* 사이드바 a[href^="#"] 클릭 인터셉트 */
+  document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const hash = a.getAttribute('href');
+      if (hash && hash.length > 1) {
+        e.preventDefault();
+        activateTabForAnchor(hash);
+        history.replaceState(null, '', hash);
+      }
+    });
+  });
+  /* URL 해시로 들어왔을 때 해당 탭 활성화 */
+  if (location.hash) activateTabForAnchor(location.hash);
+});
 </script>
 
 <!-- ═══ MAIN ═══ -->
@@ -332,6 +423,27 @@ function toggleNavSection(id) {
   <div class="desc">이유진 멘토 담당 파트 강의안 &nbsp;·&nbsp; 오전 20분 / 오후 40분</div>
 </div>
 
+<!-- ═══ 메인 탭 ═══ -->
+<div class="main-tabs" role="tablist">
+  <button class="main-tab active" role="tab" data-panel="panel-am" onclick="switchTab('panel-am')">
+    <span class="mt-label">Section 1</span>
+    <span class="mt-title">오전 — 문제 좁히기</span>
+    <span class="mt-meta">20분 · 첫 자동화 후보 고르기</span>
+  </button>
+  <button class="main-tab" role="tab" data-panel="panel-lab" onclick="switchTab('panel-lab')">
+    <span class="mt-label">Section 2</span>
+    <span class="mt-title">VS Code 실습</span>
+    <span class="mt-meta">단계별 환경 설정 가이드</span>
+  </button>
+  <button class="main-tab" role="tab" data-panel="panel-pm" onclick="switchTab('panel-pm')">
+    <span class="mt-label">Section 3</span>
+    <span class="mt-title">오후 — 암묵지 + 스킬</span>
+    <span class="mt-meta">40분 · 기준 문서 + 회의록 에이전트</span>
+  </button>
+</div>
+
+<!-- ═══ 패널 1: 오전 ═══ -->
+<section class="tab-panel active" id="panel-am" role="tabpanel">
 
 <!-- ══════════════════════════════════════
      오전 세션
@@ -447,13 +559,13 @@ function toggleNavSection(id) {
     <!-- 레벨 2: 단계 분해 -->
     <div>
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-400);margin-bottom:8px;text-align:center;">2단계 — 단계 분해</div>
-      <div style="background:var(--amber-bg);border:1.5px solid var(--amber-bd);border-radius:8px;padding:14px 12px;">
-        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:10px;text-align:center;">기술동향 파악을 쪼개면</div>
+      <div style="background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:8px;padding:14px 12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:10px;text-align:center;">기술동향 파악을 쪼개면</div>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <div style="background:rgba(255,255,255,.7);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">① 논문·기사 수집</div>
-          <div style="background:#FEF3C7;border:1.5px solid #FCD34D;border-radius:5px;padding:6px 10px;font-size:12px;color:#92400E;font-weight:600;">② 핵심 내용 요약 ← 오늘 이것</div>
-          <div style="background:rgba(255,255,255,.7);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">③ 팀 내 공유</div>
-          <div style="background:rgba(255,255,255,.7);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">④ 보고서에 반영</div>
+          <div style="background:#fff;border:1px solid var(--gray-200);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">① 논문·기사 수집</div>
+          <div style="background:var(--blue-bg);border:1.5px solid var(--blue);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--blue-dk);font-weight:600;">② 핵심 내용 요약 ← 오늘 이것</div>
+          <div style="background:#fff;border:1px solid var(--gray-200);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">③ 팀 내 공유</div>
+          <div style="background:#fff;border:1px solid var(--gray-200);border-radius:5px;padding:6px 10px;font-size:12px;color:var(--gray-600);">④ 보고서에 반영</div>
         </div>
       </div>
     </div>
@@ -576,11 +688,7 @@ function toggleNavSection(id) {
       </marker>
     </defs>
 
-    <!-- 사분면 번호 (모서리 — 둥근 테두리 안쪽으로 충분히 밀어넣음) -->
-    <text x="78" y="46" font-size="20" fill="#E5E7EB" font-weight="800" font-family="sans-serif">2</text>
-    <text x="514" y="46" font-size="20" fill="#93C5FD" font-weight="800" font-family="sans-serif">1</text>
-    <text x="78" y="350" font-size="20" fill="#E5E7EB" font-weight="800" font-family="sans-serif">4</text>
-    <text x="514" y="350" font-size="20" fill="#E5E7EB" font-weight="800" font-family="sans-serif">3</text>
+    <!-- (모서리 숫자 제거 — 각 분면 타이틀 "1사분면", "2사분면"이 이미 번호를 알려주므로 중복 + 시각 노이즈) -->
 
     <!-- 2사분면: 데이터·매뉴얼 먼저 (좌상) -->
     <text x="170" y="46" text-anchor="middle" font-size="11.5" fill="#374151" font-weight="700">2사분면 — 데이터·매뉴얼 먼저</text>
@@ -724,7 +832,7 @@ function toggleNavSection(id) {
   <div class="nacc-item" style="border:1px solid var(--gray-200);border-radius:8px;overflow:hidden;">
     <div onclick="nacc(2)" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:#fff;cursor:pointer;transition:background .12s;" onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--gray-50')" onmouseout="this.style.background='#fff'">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:28px;height:28px;border-radius:6px;background:var(--amber-bg);border:1px solid var(--amber-bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="2.5" height="4" rx=".5"/><rect x="6.25" y="6" width="2.5" height="7" rx=".5"/><rect x="10.5" y="3" width="2.5" height="10" rx=".5"/></svg></div>
+        <div style="width:28px;height:28px;border-radius:6px;background:var(--blue-bg);border:1px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="2.5" height="4" rx=".5"/><rect x="6.25" y="6" width="2.5" height="7" rx=".5"/><rect x="10.5" y="3" width="2.5" height="10" rx=".5"/></svg></div>
         <div>
           <div style="font-size:13.5px;font-weight:700;color:var(--gray-900);">데이터 현황 파악 및 보고</div>
           <div style="font-size:12px;color:var(--gray-400);">연구지원·데이터 관리 업무</div>
@@ -782,16 +890,16 @@ window.nacc = function(idx) {
       <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">데이터<br/>준비</div>
       <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">실습 초반</div>
     </div>
-    <div style="flex:1;min-width:20px;height:2px;background:linear-gradient(90deg,var(--green-bd),var(--amber-bd));border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
+    <div style="flex:1;min-width:20px;height:2px;background:var(--blue-bd);border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
     <!-- Step 3 -->
     <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
-      <div style="width:48px;height:48px;border-radius:12px;background:var(--amber-bg);border:1.5px solid var(--amber-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      <div style="width:48px;height:48px;border-radius:12px;background:var(--blue-bg);border:1.5px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
       </div>
       <div style="font-size:11.5px;font-weight:700;color:var(--gray-900);text-align:center;line-height:1.4;">기준 문서<br/>작성</div>
       <div style="font-size:10.5px;color:var(--gray-400);text-align:center;margin-top:3px;">오후 핵심</div>
     </div>
-    <div style="flex:1;min-width:20px;height:2px;background:linear-gradient(90deg,var(--amber-bd),var(--purple-bd));border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
+    <div style="flex:1;min-width:20px;height:2px;background:var(--blue-bd);border-radius:1px;margin:0 4px;margin-bottom:20px;"></div>
     <!-- Step 4 -->
     <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
       <div style="width:48px;height:48px;border-radius:12px;background:var(--purple-bg);border:1.5px solid var(--purple-bd);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
@@ -1063,6 +1171,11 @@ window.nacc = function(idx) {
 </div>
 
 
+
+</section><!-- /panel-am -->
+
+<!-- ═══ 패널 2: VS Code 실습 ═══ -->
+<section class="tab-panel" id="panel-lab" role="tabpanel">
 
 <!-- ══════════════════════════════════════
      VS Code 실습 가이드
@@ -1705,8 +1818,8 @@ goStep(0);
     </div>
   </div>
 
-  <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:8px;padding:12px 16px;font-size:12.5px;color:var(--amber);line-height:1.8;">
-    <strong>핵심 패턴:</strong> <code style="background:rgba(255,255,255,.5);padding:1px 5px;border-radius:3px;">/스킬이름</code> → 작업 지시 → 결과 확인 → 부족한 기준 SKILL.md에 추가 → 재실행. 이 사이클을 3번만 돌리면 안정적인 스킬이 됩니다.
+  <div style="background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:12px 16px;font-size:12.5px;color:var(--blue-dk);line-height:1.8;">
+    <strong>핵심 패턴:</strong> <code style="background:rgba(255,255,255,.6);padding:1px 5px;border-radius:3px;">/스킬이름</code> → 작업 지시 → 결과 확인 → 부족한 기준 SKILL.md에 추가 → 재실행. 이 사이클을 3번만 돌리면 안정적인 스킬이 됩니다.
   </div>
 </div>
 
@@ -1842,11 +1955,11 @@ goStep(0);
     <div style="display:flex;align-items:center;justify-content:center;padding:20px 8px 0;">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9CA3AF" stroke-width="1.8"><path d="M3 9h12M11 4l5 5-5 5"/></svg>
     </div>
-    <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:8px;padding:13px;text-align:center;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">에이전트화 후</div>
-      <div style="margin-bottom:6px;display:flex;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+    <div style="background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:13px;text-align:center;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">에이전트화 후</div>
+      <div style="margin-bottom:6px;display:flex;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
       <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">run.sh 실행<br/>→ 자동으로 처리<br/>→ 결과 파일 생성</div>
-      <div style="font-size:11.5px;color:var(--amber);margin-top:6px;">명령 한 줄로 완료</div>
+      <div style="font-size:11.5px;color:var(--blue);margin-top:6px;">명령 한 줄로 완료</div>
     </div>
     <div style="display:flex;align-items:center;justify-content:center;padding:20px 8px 0;">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9CA3AF" stroke-width="1.8"><path d="M3 9h12M11 4l5 5-5 5"/></svg>
@@ -1975,6 +2088,11 @@ window.advTab = function(idx) {
 </script>
 
 
+</section><!-- /panel-lab -->
+
+<!-- ═══ 패널 3: 오후 ═══ -->
+<section class="tab-panel" id="panel-pm" role="tabpanel">
+
 <!-- ══════════════════════════════════════
      오후 세션
 ══════════════════════════════════════ -->
@@ -2019,15 +2137,15 @@ window.advTab = function(idx) {
 <div style="margin:0 0 20px; padding:20px; background:#fff; border:1px solid var(--gray-200); border-radius:10px;">
   <div style="font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:16px;">왜 기준 문서가 필요한가</div>
   <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;">
-    <!-- 사람 -->
-    <div style="background:var(--amber-bg);border:1.5px solid var(--amber-bd);border-radius:10px;padding:14px;text-align:center;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8" style="margin-bottom:6px;"><circle cx="12" cy="7" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      <div style="font-size:12px;font-weight:700;color:#92400E;">사람의 암묵지</div>
-      <div style="font-size:11px;color:#B45309;margin-top:4px;line-height:1.5;">말 안 해도<br/>당연히 아는 기준</div>
+    <!-- 사람 (중립 톤 — 출발점) -->
+    <div style="background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:10px;padding:14px;text-align:center;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.8" style="margin-bottom:6px;"><circle cx="12" cy="7" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <div style="font-size:12px;font-weight:700;color:var(--gray-700);">사람의 암묵지</div>
+      <div style="font-size:11px;color:var(--gray-500);margin-top:4px;line-height:1.5;">말 안 해도<br/>당연히 아는 기준</div>
     </div>
     <!-- 화살표 + 변환 -->
     <div style="display:flex;flex-direction:column;align-items:center;padding:0 12px;">
-      <div style="font-size:18px;color:var(--amber);">→</div>
+      <div style="font-size:18px;color:var(--gray-400);">→</div>
       <div style="font-size:10px;color:var(--gray-400);margin-top:3px;white-space:nowrap;">문서화</div>
     </div>
     <!-- 기준문서 -->
@@ -2130,11 +2248,11 @@ window.advTab = function(idx) {
     <table style="margin:0;">
       <thead><tr><th>항목</th><th>내용</th></tr></thead>
       <tbody>
-        <tr><td style="font-weight:600;">업무</td><td>회의록 정리</td></tr>
-        <tr><td style="font-weight:600;color:var(--amber);">암묵지</td><td>핵심 안건, 결정사항, 할 일을 구분하는 기준</td></tr>
+        <tr><td style="font-weight:600;color:var(--gray-700);">업무</td><td>회의록 정리</td></tr>
+        <tr><td style="font-weight:600;color:var(--gray-700);">암묵지</td><td>핵심 안건, 결정사항, 할 일을 구분하는 기준</td></tr>
         <tr><td style="font-weight:600;color:var(--blue);">문서화</td><td>회의록 템플릿, 문장 톤, 표 구조 정리</td></tr>
-        <tr><td style="font-weight:600;color:var(--purple);">스킬화</td><td>반복적으로 회의록을 만들 수 있도록 실행 방식 고정</td></tr>
-        <tr><td style="font-weight:600;color:var(--green);">기대 효과</td><td>작성 시간 단축, 결과물 품질 안정화</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">스킬화</td><td>반복적으로 회의록을 만들 수 있도록 실행 방식 고정</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue-dk);">기대 효과</td><td>작성 시간 단축, 결과물 품질 안정화</td></tr>
       </tbody>
     </table>
   </div>
@@ -2191,6 +2309,83 @@ window.advTab = function(idx) {
       <tr><td>문서 톤</td><td>내부 공유용은 편하게, 보고용은 격식체로</td></tr>
     </tbody>
   </table>
+</div>
+
+
+<!-- ─── 회의록 샘플 다운로드 + Claude 활용 가이드 ─── -->
+<div style="margin:24px 0;background:#fff;border:1.5px solid var(--blue-bd);border-radius:12px;overflow:hidden;">
+  <div style="background:var(--blue-bg);padding:14px 20px;border-bottom:1px solid var(--blue-bd);">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;">실습 자료</div>
+    <div style="font-size:15px;font-weight:700;color:var(--gray-900);">회의록 샘플 + 양식 3종 — 다운로드해서 직접 써보기</div>
+  </div>
+
+  <div style="padding:18px 20px;">
+    <p style="font-size:13.5px;color:var(--gray-600);margin-bottom:14px;">아래 파일을 받아 Claude에게 첨부하면, "이 양식처럼 우리 회의록도 만들어줘"라고 시킬 수 있습니다. 같은 회의 내용도 어떤 양식을 쓰느냐에 따라 결과물이 달라집니다.</p>
+
+    <!-- 다운로드 카드 4개 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+
+      <!-- 실제 샘플 -->
+      <a href="samples/회의록-실제샘플.md" download style="text-decoration:none;color:inherit;display:block;background:var(--blue-bg);border:1.5px solid var(--blue-bd);border-radius:8px;padding:13px 15px;transition:transform .12s,box-shadow .12s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(37,99,235,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);">완성 샘플</span>
+        </div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--gray-900);margin-bottom:3px;">회의록-실제샘플.md</div>
+        <div style="font-size:11.5px;color:var(--gray-600);line-height:1.55;">멘토가 실제로 만들어 쓴 KITECH R&amp;D 회의록 1편 (참고용)</div>
+      </a>
+
+      <!-- 양식 A -->
+      <a href="samples/template-A-구조형.md" download style="text-decoration:none;color:inherit;display:block;background:#fff;border:1.5px solid var(--gray-200);border-radius:8px;padding:13px 15px;transition:all .12s;" onmouseover="this.style.borderColor='var(--blue-bd)';this.style.background='var(--blue-bg)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.background='#fff'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--gray-500)" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-500);">양식 A</span>
+        </div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--gray-900);margin-bottom:3px;">구조형 — 격식·추적</div>
+        <div style="font-size:11.5px;color:var(--gray-600);line-height:1.55;">표 중심 / 결정·액션 번호 부여 / 공식 보고·감사 대비</div>
+      </a>
+
+      <!-- 양식 B -->
+      <a href="samples/template-B-내러티브형.md" download style="text-decoration:none;color:inherit;display:block;background:#fff;border:1.5px solid var(--gray-200);border-radius:8px;padding:13px 15px;transition:all .12s;" onmouseover="this.style.borderColor='var(--blue-bd)';this.style.background='var(--blue-bg)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.background='#fff'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--gray-500)" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-500);">양식 B</span>
+        </div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--gray-900);margin-bottom:3px;">내러티브형 — 흐름·맥락</div>
+        <div style="font-size:11.5px;color:var(--gray-600);line-height:1.55;">서술 중심 / 분위기·뉘앙스 보존 / 팀 내부 공유·워크숍</div>
+      </a>
+
+      <!-- 양식 C -->
+      <a href="samples/template-C-액션중심.md" download style="text-decoration:none;color:inherit;display:block;background:#fff;border:1.5px solid var(--gray-200);border-radius:8px;padding:13px 15px;transition:all .12s;" onmouseover="this.style.borderColor='var(--blue-bd)';this.style.background='var(--blue-bg)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.background='#fff'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--gray-500)" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-500);">양식 C</span>
+        </div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--gray-900);margin-bottom:3px;">액션중심형 — 빠른 실행</div>
+        <div style="font-size:11.5px;color:var(--gray-600);line-height:1.55;">체크박스 / 1페이지 압축 / 스프린트·데일리 미팅</div>
+      </a>
+
+    </div>
+
+    <!-- Claude 활용 가이드 -->
+    <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:14px 18px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px;">이 양식대로 만들어달라고 Claude에게 시키는 법</div>
+
+      <ol style="margin-left:18px;font-size:13px;color:var(--gray-700);line-height:1.85;">
+        <li><strong>마음에 드는 양식 1개를 다운로드</strong> — 위 카드에서 A/B/C 중 하나 선택. 처음이라면 격식 있는 <strong>양식 A</strong>부터 권장.</li>
+        <li><strong>Claude에 양식 파일을 첨부</strong> — VS Code에서 <code style="background:#fff;padding:1px 5px;border-radius:3px;font-size:12px;border:1px solid var(--gray-200);">@template-A-구조형.md</code> 또는 채팅 창에 끌어다 놓기.</li>
+        <li><strong>회의 원문을 함께 첨부 또는 붙여넣기</strong> — 녹취 텍스트, 요점 메모, Slack 스레드 등.</li>
+        <li><strong>아래 프롬프트로 시키기</strong>:
+          <div style="background:#0F172A;color:#E2E8F0;border-radius:6px;padding:10px 14px;margin-top:6px;font-family:'Menlo','Monaco','Consolas',monospace;font-size:12px;line-height:1.7;">첨부한 <span style="color:#7DD3FC;">template-A-구조형.md</span> 양식 그대로 따라서<br/>아래 회의 내용을 회의록으로 만들어줘.<br/><br/><span style="color:#94A3B8;"># 지킬 것</span><br/>- 양식의 헤딩 구조 변경 금지<br/>- 결정사항은 D-1, D-2처럼 번호 부여<br/>- 담당자/마감 없는 액션은 "보류"로 분류<br/>- 추정 금지 — 원문에 없는 내용은 [확인 필요]로 표시<br/><br/><span style="color:#94A3B8"># 회의 원문</span><br/><span style="color:#A7B8E8;">[여기에 붙여넣기]</span></div>
+        </li>
+        <li><strong>결과 확인 후 양식 수정</strong> — Claude가 빠뜨린 항목·잘못 분류한 부분을 메모해두고, 양식 파일 자체에 "이 칸에는 ~을 적는다" 같은 주석을 추가. 다음번부터 결과가 안정됩니다.</li>
+      </ol>
+
+      <div style="margin-top:12px;padding:10px 14px;background:#fff;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px;color:var(--gray-700);line-height:1.7;">
+        <strong style="color:var(--blue);">팁 —</strong> 첫 시도에서 50점이 나와도 정상입니다. 양식 + 프롬프트 + 원문 3가지를 매번 같이 주는 패턴을 3~5번 반복하면, 양식 파일이 점점 "내 회의록 기준 문서"로 진화합니다. 그게 오후 실습의 본질입니다.
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -2536,6 +2731,8 @@ window.advTab = function(idx) {
 <div class="note" style="margin-top:24px; font-size:13px;">
   <strong>이번 교육 범위</strong> — 단일 에이전트 작동 + 기준 문서화 + 스킬 초안까지. 웹 서비스·DB·API·MCP 구축은 이번 범위 밖입니다.
 </div>
+
+</section><!-- /panel-pm -->
 
 </main>
 </div>

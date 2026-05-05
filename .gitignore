@@ -4,6 +4,7 @@
 # Allow only the deployment files
 !index.html
 !slides.html
+!mentor-case-slides.html
 !.nojekyll
 !README.md
 !.gitignore

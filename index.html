@@ -395,11 +395,11 @@
       <svg class="ns-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5l3 3 3-3"/></svg>
     </button>
     <div class="nav-group" id="nav-group-mentor">
-      <a href="#mentor-scope"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>자료 용도 안내</a>
-      <a href="#am-crit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 5v6M5 8h6"/></svg>문제 좁히기</a>
-      <a href="#pm-tacit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>암묵지 형식화</a>
-      <a href="#pm-skill"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>스킬 개발 및 활용</a>
-      <a href="#mentor-closing"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M3 8h10M3 4h10"/></svg>마무리 메시지</a>
+      <a href="#mentor-overview"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>발표안 개요</a>
+      <a href="#mentor-narrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 5v6M5 8h6"/></svg>문제 좁히기 사례</a>
+      <a href="#mentor-tacit-case"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>암묵지 형식화 사례</a>
+      <a href="#mentor-skill-case"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>스킬 개발 사례</a>
+      <a href="#mentor-case-closing"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M3 8h10M3 4h10"/></svg>마무리 메시지</a>
     </div>
 
     <button class="nav-section collapsed-sec" onclick="toggleNavSection('am')">
@@ -574,30 +574,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="desc">문제 좁히기 · 암묵지 형식화 · 스킬 개발 및 활용 사례</div>
 </div>
 
-<!-- ═══ 유진 멘토 발표 파트 안내 ═══ -->
-<div id="mentor-scope" style="background:#fff;border:1.5px solid var(--blue-bd);border-radius:12px;padding:20px 22px;margin:0 0 18px;box-shadow:0 6px 18px rgba(37,99,235,.08);">
-  <div style="display:flex;align-items:flex-start;gap:14px;">
-    <div style="width:38px;height:38px;border-radius:10px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--blue)" stroke-width="1.8"><path d="M4 5h12M4 10h12M4 15h7"/></svg>
-    </div>
-    <div style="flex:1;min-width:0;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">자료 용도 안내</div>
-      <p style="font-size:14px;color:var(--gray-700);line-height:1.8;margin-bottom:12px;">
-        이 페이지는 기존 KITECH 2주차 자료를 유지하면서, <strong>이유진 멘토가 맡은 사례 발표 파트</strong>를 상단에서 바로 찾을 수 있도록 보강한 자료입니다.
-        전체 교육 흐름과 실습 운영은 기존 자료를 따르고, 유진 멘토 발표의 핵심은 아래 3가지입니다.
-      </p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px;">
-        <div style="background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:11px 13px;font-size:13px;font-weight:800;color:var(--blue-dk);">1. 문제 좁히기 사례 발표</div>
-        <div style="background:var(--purple-bg);border:1px solid var(--purple-bd);border-radius:8px;padding:11px 13px;font-size:13px;font-weight:800;color:var(--purple);">2. 암묵지 형식화 사례 발표</div>
-        <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:11px 13px;font-size:13px;font-weight:800;color:var(--gray-900);">3. 스킬 개발 및 활용 사례 발표</div>
-      </div>
-      <div style="background:var(--gray-50);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:10px 13px;font-size:12.5px;color:var(--gray-600);line-height:1.7;">
-        데이터 확보, VS Code 실습, 전체 교육 운영은 이 페이지에 남겨두되, 유진 멘토 발표의 상세 담당 범위는 아닙니다.
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ═══ 강의 슬라이드 바로가기 + 미니 미리보기 ═══ -->
 <a href="slides.html" target="_blank" rel="noopener" class="slides-card" style="display:block;text-decoration:none;color:inherit;background:#fff;border:1.5px solid var(--blue-bd);border-radius:12px;overflow:hidden;margin:0 0 18px;transition:all .15s cubic-bezier(.22,1,.36,1);box-shadow:0 1px 3px rgba(37,99,235,.06);" onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 18px rgba(37,99,235,.18)'" onmouseout="this.style.borderColor='var(--blue-bd)';this.style.transform='';this.style.boxShadow='0 1px 3px rgba(37,99,235,.06)'">
   <!-- 상단: 아이콘 + 텍스트 + 화살표 -->
@@ -628,7 +604,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══ 메인 탭 ═══ -->
 <div class="main-tabs" role="tablist">
-  <button class="main-tab active" role="tab" data-panel="panel-am" onclick="switchTab('panel-am')">
+  <button class="main-tab active" role="tab" data-panel="panel-mentor" onclick="switchTab('panel-mentor')">
+    <span class="mt-label">Mentor</span>
+    <span class="mt-title">유진 멘토 사례 발표</span>
+    <span class="mt-meta">문제 좁히기 · 암묵지 · 스킬</span>
+  </button>
+  <button class="main-tab" role="tab" data-panel="panel-am" onclick="switchTab('panel-am')">
     <span class="mt-label">Section 1</span>
     <span class="mt-title">오전 — 문제 좁히기</span>
     <span class="mt-meta">20분 · 첫 자동화 후보 고르기</span>
@@ -645,8 +626,182 @@ document.addEventListener('DOMContentLoaded', () => {
   </button>
 </div>
 
+<!-- ═══ 패널 0: 유진 멘토 사례 발표 ═══ -->
+<section class="tab-panel active" id="panel-mentor" role="tabpanel">
+  <div class="session-head am" id="mentor-overview">
+    <div class="stag">발표안</div>
+    <div class="sinfo">
+      <div class="stitle">유진 멘토 사례 발표</div>
+      <div class="ssub">실제 제출 사례를 바탕으로 문제 좁히기, 암묵지 형식화, 스킬 개발 흐름을 설명합니다</div>
+    </div>
+    <div class="tbadge">사례 중심</div>
+  </div>
+
+  <div class="time-table">
+    <div class="time-row"><div class="t-min">Part 1</div><div class="t-label">문제 좁히기 사례 발표</div><div class="t-type">범위 조정</div></div>
+    <div class="time-row"><div class="t-min">Part 2</div><div class="t-label">암묵지 형식화 사례 발표</div><div class="t-type">기준 문서화</div></div>
+    <div class="time-row"><div class="t-min">Part 3</div><div class="t-label">스킬 개발 및 활용 사례 발표</div><div class="t-type">반복 실행</div></div>
+  </div>
+
+  <div class="note blue">
+    이 탭은 기존 강의/실습 운영 자료와 분리된 <strong>이유진 멘토 사례 발표 전용 탭</strong>입니다. 기존 오전, VS Code, 오후 탭은 그대로 두고, 발표자가 사례를 설명할 때 필요한 멘토 관점과 다음 단계를 이 탭에만 모았습니다.
+  </div>
+
+  <h2 id="mentor-narrow">Part 1. 문제 좁히기 사례 발표</h2>
+  <div class="analogy">
+    <div class="a-label">교육 포인트</div>
+    멘토는 “무엇을 만들까?”보다 <strong>“이번 주에 무엇을 검증할까?”</strong>를 먼저 봅니다. 좋은 주제도 처음부터 대시보드, 전체 보고서, 전체 자동화로 가면 작동 여부를 확인하기 어렵습니다.
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>실제 사례 기반 Before</th><th>멘토라면 이렇게 좁힘</th><th>다음 단계</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>i-Tube 데이터와 원내 자산정보를 대조하고 결과 대시보드까지 만들고 싶다.</td>
+          <td>샘플 데이터에서 불일치 항목만 찾아 목록으로 출력하는 에이전트로 줄입니다.</td>
+          <td>불일치 목록이 맞는지 확인한 뒤, 유형별 비율과 대시보드는 다음 단계로 둡니다.</td>
+        </tr>
+        <tr>
+          <td>교육 신청 데이터를 분석해서 직군별 교육 기획 근거를 만들고 싶다.</td>
+          <td>기관 주관 교육과 외부 교육을 먼저 분리하는 에이전트로 줄입니다.</td>
+          <td>이상하게 분류된 교육명 1개를 찾아 분류 기준을 보완합니다.</td>
+        </tr>
+        <tr>
+          <td>전문지 원고에 쓸 유사 사례를 자동으로 찾아 정리하고 싶다.</td>
+          <td>원고 주제 1개에 대해 3년 이내·출처 명기 사례만 추려보게 합니다.</td>
+          <td>실제로 원고에 쓸 수 없는 사례 유형을 메모해 수집 기준을 보완합니다.</td>
+        </tr>
+        <tr>
+          <td>10개 본부의 엑셀과 직무기술서를 한 번에 취합하고 싶다.</td>
+          <td>본부 엑셀 1개를 넣고 취합이 어디서 막히는지 확인하게 합니다.</td>
+          <td>누락·오류 컬럼 목록을 보고, 가장 구조가 제각각인 본부부터 기준을 만듭니다.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mentor-note">
+    <div class="mn-label">멘토 발표 멘트</div>
+    <p>멘토링할 때 저는 아이디어가 좋은지 나쁜지를 먼저 보지 않습니다. 대신 이번 주에 실제로 돌려볼 수 있는 첫 장면이 있는지를 봅니다. 첫 장면이 잡히면 데이터, 기준, 스킬이 차례로 따라옵니다.</p>
+  </div>
+
+  <div class="note green">
+    <strong>다른 사람들도 가져갈 인사이트</strong> — 좋은 에이전트 주제는 “큰 업무”가 아니라 “반복되고, 기준을 설명할 수 있고, 이번 주에 결과를 확인할 수 있는 작은 장면”에서 시작됩니다.
+  </div>
+
+  <h2 id="mentor-tacit-case">Part 2. 암묵지 형식화 사례 발표</h2>
+  <div class="analogy">
+    <div class="a-label">교육 포인트</div>
+    멘토는 “AI가 왜 틀렸지?”를 <strong>“내가 어떤 기준을 아직 안 알려줬지?”</strong>로 바꿔 묻습니다. 수강생이 결과물을 손으로 고치는 지점이 바로 암묵지입니다.
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>실제 업무 상황</th><th>숨어 있던 암묵지</th><th>기준 문서로 바꾸면</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>i-Tube 데이터와 원내 자산정보를 대조한다.</td>
+          <td>불일치는 장비명 표기 차이, 등록번호 없음, 수량 불일치처럼 유형이 다릅니다.</td>
+          <td>불일치 유형 기준표와 확인 필요 사유를 출력 규칙으로 만듭니다.</td>
+        </tr>
+        <tr>
+          <td>교육 신청 데이터를 직무·교육 유형별로 분류한다.</td>
+          <td>기관 주관 교육과 외부 교육을 먼저 분리해야 이후 분류 결과를 믿을 수 있습니다.</td>
+          <td>분류에 쓰는 컬럼, 예외 교육명, 애매한 경우의 처리 기준을 적습니다.</td>
+        </tr>
+        <tr>
+          <td>원장 세부내역에서 불일치 원인을 역추적한다.</td>
+          <td>1원 차이도 그냥 넘기지 않고 날짜, 금액 합산, 적요 키워드 순서로 봅니다.</td>
+          <td>역추적 순서, 자주 발생하는 가설, 사람 검토 지점을 체크리스트로 만듭니다.</td>
+        </tr>
+        <tr>
+          <td>뉴스 50건 중 데일리 메일에 넣을 10건을 고른다.</td>
+          <td>좋은 뉴스는 최신순만이 아니라 내부 공유 가치, 업무 관련성, 중복 여부가 함께 작동합니다.</td>
+          <td>선별 기준 4축과 좋은/나쁜 예시를 기준 문서에 넣습니다.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mentor-note">
+    <div class="mn-label">멘토가 던질 질문</div>
+    <ul>
+      <li>결과물을 손으로 고칠 때 가장 자주 고치는 부분은 무엇인가요?</li>
+      <li>사람이면 바로 예외로 보는 케이스가 있나요?</li>
+      <li>중요하다고 판단하는 이유는 금액, 일정, 책임자, 보고 대상 중 무엇에 가깝나요?</li>
+    </ul>
+  </div>
+
+  <div class="note amber">
+    <strong>교육 인사이트</strong> — 암묵지는 거창한 노하우가 아닙니다. 내가 결과물을 고칠 때 반복해서 보는 기준이 바로 암묵지입니다.
+  </div>
+
+  <h2 id="mentor-skill-case">Part 3. 스킬 개발 및 활용 사례 발표</h2>
+  <div class="analogy">
+    <div class="a-label">교육 포인트</div>
+    멘토는 “스킬을 만들자”보다 <strong>“반복해서 안정적으로 돌릴 기준이 생겼나?”</strong>를 먼저 확인합니다. 스킬은 자동화의 시작점이 아니라 반복 검증을 통과한 기준을 저장하는 방식입니다.
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>반복 업무</th><th>스킬로 만들면 좋은 이유</th><th>스킬 실행 단위</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>데일리뉴스 메일 작성</td>
+          <td>뉴스 50건 중 10건을 고르는 기준과 메일 문장 톤을 매번 다시 설명하기 번거롭습니다.</td>
+          <td>뉴스 목록 입력 → 선별 기준 적용 → 한 문장 요약 → 메일 초안 출력</td>
+        </tr>
+        <tr>
+          <td>유사사례 자료 수집</td>
+          <td>전문지 원고마다 3년 이내, 출처 명기, 원고 활용 가능성 기준이 반복됩니다.</td>
+          <td>원고 주제 입력 → 후보 사례 수집 → 기준 충족 여부 표시 → 출처 포함 목록 출력</td>
+        </tr>
+        <tr>
+          <td>본부별 엑셀 취합</td>
+          <td>엑셀 구조가 조금씩 달라도 컬럼 확인, 누락 점검, 취합 초안 생성 흐름은 반복됩니다.</td>
+          <td>엑셀 1개 입력 → 컬럼 구조 확인 → 취합 초안 → 누락·오류 컬럼 목록 출력</td>
+        </tr>
+        <tr>
+          <td>회의록 정리</td>
+          <td>결정사항, 논의 중인 내용, 액션 아이템, 보류 사항을 같은 구조로 계속 분류해야 합니다.</td>
+          <td>회의 원문 입력 → 기준 문서 적용 → 결정사항·액션 아이템 도출 → 회의록 출력</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>다음 단계</th><th>할 일</th><th>확인할 것</th></tr></thead>
+      <tbody>
+        <tr><td>1. 기준 고정</td><td>업무 기준, 출력 형식, 금지 사항을 기준문서로 정리합니다.</td><td>같은 입력을 보면 사람이 비슷하게 판단할 만큼 구체적인가?</td></tr>
+        <tr><td>2. 3회 반복 테스트</td><td>서로 다른 입력 3개로 같은 흐름을 돌려봅니다.</td><td>매번 다시 설명하지 않아도 결과 구조가 유지되는가?</td></tr>
+        <tr><td>3. 실패 패턴 기록</td><td>AI가 놓친 기준, 잘못 분류한 항목, 사람이 고친 문장을 적습니다.</td><td>실패가 데이터 문제인지, 기준 문제인지, 출력 형식 문제인지 구분되는가?</td></tr>
+        <tr><td>4. 스킬 후보화</td><td>반복 실행할 이름, 입력 파일, 출력 결과, 예외 처리를 정합니다.</td><td>다음 달에도 같은 방식으로 다시 쓸 일인가?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mentor-note">
+    <div class="mn-label">멘토 발표 멘트</div>
+    <p>스킬은 멋있어 보이려고 만드는 게 아닙니다. 매번 같은 기준을 다시 설명하고 있다면 그 반복을 줄이기 위해 만드는 겁니다. 그래서 먼저 기준 문서가 안정돼야 하고, 그 다음에 스킬로 고정합니다.</p>
+  </div>
+
+  <h2 id="mentor-case-closing">발표 마무리 메시지</h2>
+  <div style="background:linear-gradient(135deg,#111827,#1E3A8A);border-radius:10px;padding:20px 22px;margin:16px 0 24px;color:#fff;">
+    <strong>오늘 유진 멘토 파트의 핵심</strong>
+    <ul style="margin-top:10px;color:#fff;">
+      <li>큰 업무를 한 번에 자동화하려고 하지 않는다.</li>
+      <li>내가 평소 쓰던 판단 기준을 문서로 꺼낸다.</li>
+      <li>반복되는 업무는 스킬로 만들어 다시 설명하지 않게 한다.</li>
+    </ul>
+    <p style="margin-top:10px;color:#DBEAFE;">AI 에이전트는 처음부터 완성된 시스템을 만드는 것이 아니라, 작은 업무 하나를 맡기고 기준을 보완하면서 키워가는 방식으로 시작하면 됩니다.</p>
+  </div>
+</section>
+
 <!-- ═══ 패널 1: 오전 ═══ -->
-<section class="tab-panel active" id="panel-am" role="tabpanel">
+<section class="tab-panel" id="panel-am" role="tabpanel">
 
 <!-- ══════════════════════════════════════
      오전 세션
@@ -1126,32 +1281,6 @@ window.nacc = function(idx) {
 <!-- 기준 3가지 -->
 <h2 id="am-crit">문제를 좁히는 기준 3가지</h2>
 
-<div style="margin:0 0 18px;background:#fff;border:2px solid var(--blue-bd);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(37,99,235,.08);">
-  <div style="background:var(--blue-bg);padding:12px 18px;border-bottom:1px solid var(--blue-bd);">
-    <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;">문제 좁히기 사례 발표 — 교육 포인트</div>
-    <div style="font-size:15px;font-weight:800;color:var(--gray-900);">멘토는 “무엇을 만들까?”보다 “이번 주에 무엇을 검증할까?”를 먼저 봅니다.</div>
-  </div>
-  <div style="padding:16px 18px;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">멘토라면 이렇게 봄</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">최종 대시보드, 전체 보고서, 전체 자동화가 아니라 <strong>첫 실행으로 확인할 수 있는 가장 작은 결과</strong>를 찾습니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">다음 단계</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">샘플 파일 1개, 기준 1개, 출력 1개를 정하고 “잘 됐는지 확인할 방법”까지 같이 정합니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">청중 인사이트</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">내 업무도 “전체 자동화”가 아니라 <strong>AI에게 맡길 첫 번째 업무 장면</strong>으로 바꾸면 바로 시작할 수 있습니다.</div>
-      </div>
-    </div>
-    <div style="margin-top:12px;background:var(--gray-50);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:10px 13px;font-size:13px;color:var(--gray-700);line-height:1.75;">
-      <strong style="color:var(--blue);">발표 멘트 —</strong> “멘토링할 때 저는 이 아이디어가 좋은지 나쁜지를 먼저 보지 않습니다. 대신 이번 주에 실제로 돌려볼 수 있는 첫 장면이 있는지를 봅니다. 첫 장면이 잡히면, 그 다음부터 데이터와 기준과 스킬이 따라옵니다.”
-    </div>
-  </div>
-</div>
-
 <div class="crit-row">
   <div class="crit-card">
     <div class="cn">1</div>
@@ -1277,91 +1406,6 @@ window.nacc = function(idx) {
     <div class="ba-task">논문·뉴스 3건을 요약해서 보고서 서두 단락으로 만드는 에이전트</div>
     <ul><li>입력: PDF 또는 기사 본문 텍스트</li><li>출력: 핵심 내용 3줄 + 시사점 1줄</li><li>보고서 쓸 때마다 반복</li><li>출력 형식 고정</li></ul>
   </div>
-</div>
-
-<h3>실제 제출 사례에서 가져온 문제 좁히기 예시</h3>
-<div class="note blue">
-  아래 사례는 1주차 제출·검수 사례에서 가져온 업무를 발표용으로 재구성한 것입니다. 핵심은 “하고 싶은 최종 모습”을 바로 만들지 않고, 이번 주에 검증할 수 있는 첫 실행 단위로 줄이는 것입니다.
-</div>
-
-<div class="ba">
-  <div class="ba-item bef">
-    <div class="ba-label">Before — 최종 목표가 너무 앞에 있음</div>
-    <div class="ba-task">i-Tube 데이터와 원내 자산정보를 대조하고, 결과 대시보드까지 만들고 싶다</div>
-    <ul><li>2,000건 규모 데이터 대조</li><li>불일치 판단</li><li>유형 분류</li><li>대시보드 생성까지 포함</li></ul>
-  </div>
-  <div class="ba-item aft">
-    <div class="ba-label">After — 첫 실행 단위</div>
-    <div class="ba-task">샘플 데이터에서 불일치 항목만 찾아 목록으로 출력하는 에이전트</div>
-    <ul><li>입력: i-Tube 샘플 + 원내 자산정보 샘플</li><li>출력: 불일치 목록 + 불일치 유형 후보</li><li>다음 단계: 유형별 비율과 대시보드는 목록 검증 후 진행</li></ul>
-  </div>
-</div>
-
-<div class="ba">
-  <div class="ba-item bef">
-    <div class="ba-label">Before — 업무 범위가 섞여 있음</div>
-    <div class="ba-task">교육 신청 데이터를 분석해서 직군별 교육 기획 근거를 만들고 싶다</div>
-    <ul><li>내부 교육과 외부 교육이 섞임</li><li>직무전문교육 세분화 필요</li><li>트렌드 분석과 기획 근거 작성까지 포함</li></ul>
-  </div>
-  <div class="ba-item aft">
-    <div class="ba-label">After — 먼저 분류 기준부터</div>
-    <div class="ba-task">교육 신청 데이터에서 기관 주관 교육과 외부 교육을 분리하는 에이전트</div>
-    <ul><li>입력: 교육 신청 데이터 CSV</li><li>출력: 기관 주관 / 외부 교육 분류 결과</li><li>확인: 이상하게 분류된 교육명 1개를 찾아 기준 보완</li></ul>
-  </div>
-</div>
-
-<div class="ba">
-  <div class="ba-item bef">
-    <div class="ba-label">Before — 검색과 판단이 한꺼번에 들어감</div>
-    <div class="ba-task">전문지 원고에 쓸 유사 사례를 자동으로 찾아 정리하고 싶다</div>
-    <ul><li>사례 검색</li><li>출처 확인</li><li>최신성 판단</li><li>원고에 쓸 수 있는지 판단까지 포함</li></ul>
-  </div>
-  <div class="ba-item aft">
-    <div class="ba-label">After — 기준 검증부터</div>
-    <div class="ba-task">원고 주제 1개에 대해 3년 이내·출처 명기 사례만 추려보는 에이전트</div>
-    <ul><li>입력: 원고 주제 + 사례 수집 기준</li><li>출력: 후보 사례 목록 + 출처 + 기준 충족 여부</li><li>확인: 실제 원고에 쓸 수 없는 사례 유형 1개 메모</li></ul>
-  </div>
-</div>
-
-<div class="ba">
-  <div class="ba-item bef">
-    <div class="ba-label">Before — 데이터 구조 차이를 한 번에 해결하려 함</div>
-    <div class="ba-task">10개 본부의 엑셀과 직무기술서를 한 번에 취합하고 싶다</div>
-    <ul><li>본부별 컬럼 구조가 다름</li><li>직무기술서 매칭 필요</li><li>전체 취합 결과까지 기대</li></ul>
-  </div>
-  <div class="ba-item aft">
-    <div class="ba-label">After — 가장 작은 파일 1개로 테스트</div>
-    <div class="ba-task">본부 엑셀 1개를 넣고 취합이 어디서 막히는지 확인하는 에이전트</div>
-    <ul><li>입력: 본부 엑셀 파일 1개</li><li>출력: 취합 결과 초안 + 누락·오류 컬럼 목록</li><li>확인: 10개 본부 중 컬럼 구조가 가장 제각각인 곳 표시</li></ul>
-  </div>
-</div>
-
-<h3>멘토라면 이렇게 봅니다</h3>
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>멘토가 보는 포인트</th><th>수강생에게 되묻는 질문</th><th>다음 단계</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>최종 산출물이 아니라 첫 검증 단위를 찾는다.</td>
-        <td>“이번 주에 딱 하나만 확인한다면 무엇을 확인하면 될까요?”</td>
-        <td>전체 자동화 대신 샘플 1개, 파일 1개, 기준 1개로 줄인다.</td>
-      </tr>
-      <tr>
-        <td>AI가 어려워할 지점을 먼저 노출시킨다.</td>
-        <td>“사람도 헷갈리는 예외는 어디에서 생기나요?”</td>
-        <td>가장 헷갈리는 케이스 1개를 테스트 데이터로 넣는다.</td>
-      </tr>
-      <tr>
-        <td>성공 기준을 작게 잡는다.</td>
-        <td>“결과가 100점이 아니어도, 무엇이 나오면 다음 단계로 갈 수 있나요?”</td>
-        <td>목록 출력, 분류 결과, 누락 컬럼 표시처럼 확인 가능한 출력부터 만든다.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="note green">
-  <strong>다른 사람들도 가져갈 인사이트</strong> — 좋은 에이전트 주제는 “큰 업무”가 아니라 “반복되고, 기준을 설명할 수 있고, 이번 주에 결과를 확인할 수 있는 작은 장면”에서 시작됩니다.
 </div>
 
 
@@ -2478,98 +2522,11 @@ window.advTab = function(idx) {
 <!-- 암묵지란 -->
 <h2>암묵지란 무엇인가</h2>
 
-<div style="margin:0 0 18px;background:#fff;border:2px solid var(--purple-bd);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(109,40,217,.08);">
-  <div style="background:var(--purple-bg);padding:12px 18px;border-bottom:1px solid var(--purple-bd);">
-    <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);margin-bottom:3px;">암묵지 형식화 사례 발표 — 교육 포인트</div>
-    <div style="font-size:15px;font-weight:800;color:var(--gray-900);">멘토는 “AI가 왜 틀렸지?”를 “내가 어떤 기준을 안 알려줬지?”로 바꿔 묻습니다.</div>
-  </div>
-  <div style="padding:16px 18px;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--purple);margin-bottom:6px;">멘토라면 이렇게 봄</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">수강생이 결과물을 손으로 고치는 지점을 봅니다. 반복해서 고치는 부분이 곧 기준 문서에 들어갈 암묵지입니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--purple);margin-bottom:6px;">다음 단계</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">판단 기준, 예외 처리, 하면 안 되는 것을 표로 꺼내고 좋은 예시와 나쁜 예시를 하나씩 붙입니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--purple);margin-bottom:6px;">청중 인사이트</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">AI 결과가 흔들릴 때는 도구 문제가 아니라 <strong>업무 기준이 아직 문서 밖에 있기 때문</strong>일 수 있습니다.</div>
-      </div>
-    </div>
-    <div style="margin-top:12px;background:var(--gray-50);border-left:3px solid var(--purple);border-radius:0 6px 6px 0;padding:10px 13px;font-size:13px;color:var(--gray-700);line-height:1.75;">
-      <strong style="color:var(--purple);">발표 멘트 —</strong> “사람은 맥락을 보고 알아서 판단하지만 AI는 그 맥락을 모릅니다. 그래서 멘토는 수강생에게 ‘평소 어디를 보고 맞다, 틀리다 판단하세요?’라고 묻고, 그 답을 기준 문서로 바꾸게 도와줍니다.”
-    </div>
-  </div>
-</div>
-
 <div class="analogy">
   <div class="a-label">쉽게 말하면</div>
   암묵지는 <strong>"내가 당연하게 하고 있던 일 처리 기준"</strong>입니다.<br/><br/>
   나는 당연히 아는 기준이라 말하지 않았지만, AI는 그 기준을 모릅니다.<br/>
   그래서 AI가 이상한 결과를 낼 때는 <strong>"AI가 못한다"가 아니라 "내 기준을 아직 안 알려줬다"</strong>라고 보는 게 좋습니다.
-</div>
-
-<h3>실제 제출 사례에서 보는 암묵지 형식화</h3>
-<div class="note blue">
-  같은 업무라도 AI에게 맡기려면 “사람이 당연하게 판단하던 기준”을 꺼내야 합니다. 아래는 실제 제출·검수 사례를 발표용으로 익명화해 재구성한 예시입니다.
-</div>
-
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>실제 업무 상황</th><th>숨어 있던 암묵지</th><th>문서로 꺼내면</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>i-Tube 데이터와 원내 자산정보를 대조한다.</td>
-        <td>불일치가 모두 같은 문제가 아니다. 장비명 표기 차이, 등록번호 없음, 수량 불일치처럼 유형을 나눠야 한다.</td>
-        <td>불일치 유형 기준표를 만들고, 각 항목에 “확인 필요 사유”를 붙이게 한다.</td>
-      </tr>
-      <tr>
-        <td>교육 신청 데이터를 직무·교육 유형별로 분류한다.</td>
-        <td>기관 주관 교육과 외부 교육을 먼저 분리해야 이후 직무전문교육 분류 결과를 믿을 수 있다.</td>
-        <td>기관 주관 / 외부 교육을 나누는 컬럼 기준과 예외 교육명을 기준문서에 적는다.</td>
-      </tr>
-      <tr>
-        <td>원장 세부내역에서 불일치 원인을 역추적한다.</td>
-        <td>1원 차이도 그냥 넘기면 안 되고, 날짜·금액 합산·적요 키워드 같은 실무 추적 순서가 있다.</td>
-        <td>역추적 순서, 자주 발생하는 가설, 사람이 최종 확인해야 하는 지점을 체크리스트로 만든다.</td>
-      </tr>
-      <tr>
-        <td>뉴스 50건 중 데일리 메일에 넣을 10건을 고른다.</td>
-        <td>“좋은 뉴스”는 단순 최신순이 아니라 내부 공유 가치, 업무 관련성, 중복 여부, 문장으로 옮기기 쉬운지가 함께 작동한다.</td>
-        <td>선별 기준 4축과 좋은/나쁜 예시를 적고, AI가 놓친 축을 다음 프롬프트에 보강한다.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<h3>멘토라면 이렇게 도와줍니다</h3>
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>수강생이 막히는 지점</th><th>멘토 질문</th><th>기준 문서로 바꾸는 방법</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>“중요한 것만 골라주세요”처럼 기준이 추상적이다.</td>
-        <td>“중요하다고 느끼는 이유가 금액인가요, 일정인가요, 책임자인가요, 보고 대상인가요?”</td>
-        <td>중요도 판단 축을 2~4개로 나누고, 각 축의 예시를 1개씩 붙인다.</td>
-      </tr>
-      <tr>
-        <td>사람은 알지만 AI가 모르는 예외가 있다.</td>
-        <td>“평소 사람이 보면 바로 예외로 처리하는 케이스가 있나요?”</td>
-        <td>예외 처리 표를 만들고, “단정 금지 / 확인 필요 / 사람 검토”로 나눈다.</td>
-      </tr>
-      <tr>
-        <td>결과는 나오지만 매번 품질이 흔들린다.</td>
-        <td>“결과물을 손으로 고칠 때 가장 자주 고치는 부분은 무엇인가요?”</td>
-        <td>자주 고치는 부분을 금지 규칙이나 출력 형식 규칙으로 옮긴다.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="note amber">
-  <strong>교육 인사이트</strong> — 암묵지는 거창한 노하우가 아닙니다. “내가 결과물을 고칠 때 반복해서 보는 기준”이 바로 암묵지입니다. AI에게 일을 맡길 때는 이 기준을 먼저 꺼내야 결과가 안정됩니다.
 </div>
 
 <!-- 암묵지 → 기준문서 → 에이전트 흐름 다이어그램 -->
@@ -2945,32 +2902,6 @@ window.advTab = function(idx) {
 <!-- 스킬 -->
 <h2 id="pm-skill">스킬로 만들기</h2>
 
-<div style="margin:0 0 18px;background:#fff;border:2px solid var(--blue-bd);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(37,99,235,.08);">
-  <div style="background:linear-gradient(90deg,var(--blue-bg),var(--purple-bg));padding:12px 18px;border-bottom:1px solid var(--blue-bd);">
-    <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;">스킬 개발 및 활용 사례 발표 — 교육 포인트</div>
-    <div style="font-size:15px;font-weight:800;color:var(--gray-900);">멘토는 “스킬을 만들자”보다 “반복해서 안정적으로 돌릴 기준이 생겼나?”를 먼저 확인합니다.</div>
-  </div>
-  <div style="padding:16px 18px;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">멘토라면 이렇게 봄</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">한 번 돌린 결과가 아니라, 입력이 바뀌어도 같은 기준과 같은 출력 형식이 유지되는지 봅니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">다음 단계</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">3번 이상 반복 테스트하고, 실패 패턴을 기준 문서에 보완한 뒤 스킬 후보로 올립니다.</div>
-      </div>
-      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:13px;">
-        <div style="font-size:12px;font-weight:800;color:var(--blue);margin-bottom:6px;">청중 인사이트</div>
-        <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">스킬은 자동화의 시작점이 아니라, <strong>반복 검증을 통과한 업무 기준을 저장하는 방식</strong>입니다.</div>
-      </div>
-    </div>
-    <div style="margin-top:12px;background:var(--gray-50);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:10px 13px;font-size:13px;color:var(--gray-700);line-height:1.75;">
-      <strong style="color:var(--blue);">발표 멘트 —</strong> “스킬은 멋있어 보이려고 만드는 게 아닙니다. 매번 같은 기준을 다시 설명하고 있다면, 그 반복을 줄이기 위해 만드는 겁니다. 그래서 먼저 기준 문서가 안정돼야 하고, 그 다음에 스킬로 고정합니다.”
-    </div>
-  </div>
-</div>
-
 <div class="dl-block">
   <div class="dl-head">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
@@ -2993,72 +2924,6 @@ window.advTab = function(idx) {
   <div class="a-label">스킬이란</div>
   스킬은 <strong>매번 새로 설명하지 않아도 되게 만드는 반복 실행 버튼</strong>입니다.<br/><br/>
   한 번 기준을 잘 만들어두면, 다음부터 같은 일을 할 때 그 기준을 다시 설명하지 않아도 됩니다.
-</div>
-
-<h3>실제 제출 사례에서 보는 스킬 개발·활용</h3>
-<div class="note purple" style="border-color:var(--purple);background:var(--purple-bg);color:var(--purple);">
-  스킬 후보는 “멋있어 보이는 기능”이 아니라, 같은 기준을 반복해서 적용해야 하는 업무에서 나옵니다. 아래 사례들은 반복 실행 버튼으로 만들기 좋은 형태입니다.
-</div>
-
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>반복 업무</th><th>스킬로 만들면 좋은 이유</th><th>스킬 실행 단위</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>데일리뉴스 메일 작성</td>
-        <td>뉴스 50건 중 10건을 고르는 기준과 메일 문장 톤을 매번 다시 설명하기 번거롭다.</td>
-        <td>뉴스 목록 입력 → 선별 기준 적용 → 한 문장 요약 → 메일 초안 출력</td>
-      </tr>
-      <tr>
-        <td>유사사례 자료 수집</td>
-        <td>전문지 원고마다 “3년 이내, 출처 명기, 원고에 쓸 수 있는 사례” 기준이 반복된다.</td>
-        <td>원고 주제 입력 → 후보 사례 수집 → 기준 충족 여부 표시 → 출처 포함 목록 출력</td>
-      </tr>
-      <tr>
-        <td>본부별 엑셀 취합</td>
-        <td>엑셀 구조가 조금씩 달라도 매번 컬럼 확인, 누락 점검, 취합 초안 생성 흐름은 반복된다.</td>
-        <td>엑셀 1개 입력 → 컬럼 구조 확인 → 취합 초안 → 누락·오류 컬럼 목록 출력</td>
-      </tr>
-      <tr>
-        <td>회의록 정리</td>
-        <td>결정사항, 논의 중인 내용, 액션 아이템, 보류 사항을 같은 구조로 계속 분류해야 한다.</td>
-        <td>회의 원문 입력 → 기준 문서 적용 → 결정사항·액션 아이템 도출 → 회의록 출력</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<h3>멘토라면 다음 단계까지 이렇게 잡습니다</h3>
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>단계</th><th>할 일</th><th>확인할 것</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>1. 기준 고정</td>
-        <td>업무 기준, 출력 형식, 금지 사항을 기준문서로 정리한다.</td>
-        <td>사람이 같은 입력을 봐도 비슷한 판단을 할 수 있을 만큼 구체적인가?</td>
-      </tr>
-      <tr>
-        <td>2. 3회 반복 테스트</td>
-        <td>서로 다른 입력 3개로 같은 흐름을 돌려본다.</td>
-        <td>매번 설명을 다시 하지 않아도 결과 구조가 유지되는가?</td>
-      </tr>
-      <tr>
-        <td>3. 실패 패턴 기록</td>
-        <td>AI가 놓친 기준, 잘못 분류한 항목, 사람이 고친 문장을 적는다.</td>
-        <td>실패가 데이터 문제인지, 기준 문서 문제인지, 출력 형식 문제인지 구분되는가?</td>
-      </tr>
-      <tr>
-        <td>4. 스킬 후보화</td>
-        <td>반복 실행할 이름, 입력 파일, 출력 결과, 예외 처리를 정한다.</td>
-        <td>다음 달에도 같은 방식으로 다시 쓸 일인가?</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="note green">
-  <strong>다른 사람들도 가져갈 인사이트</strong> — 스킬은 자동화의 끝이 아니라 반복 테스트를 통과한 기준 문서의 다음 단계입니다. 먼저 기준이 안정돼야 스킬도 안정됩니다.
 </div>
 
 <p>모든 업무를 스킬로 만들 필요는 없어요. 아래 질문으로 판단하세요.</p>
@@ -3294,18 +3159,6 @@ window.advTab = function(idx) {
 
 
 <!-- 오늘 가져가는 것 -->
-<h2 id="mentor-closing">발표 마무리 메시지</h2>
-
-<div style="background:linear-gradient(135deg,#111827,#1E3A8A);border-radius:10px;padding:20px 22px;margin:16px 0 24px;color:#fff;">
-  <p style="color:#DBEAFE;font-size:14px;line-height:1.8;margin-bottom:10px;">오늘 유진 멘토 파트의 핵심은 세 가지입니다.</p>
-  <ol style="margin-left:18px;color:#fff;font-size:14px;line-height:1.9;">
-    <li>큰 업무를 한 번에 자동화하려고 하지 않는다.</li>
-    <li>내가 평소 쓰던 판단 기준을 문서로 꺼낸다.</li>
-    <li>반복되는 업무는 스킬로 만들어 다시 설명하지 않게 한다.</li>
-  </ol>
-  <p style="color:#DBEAFE;font-size:14px;line-height:1.8;margin:12px 0 0;">AI 에이전트는 처음부터 완성된 시스템을 만드는 것이 아니라, 작은 업무 하나를 맡기고 기준을 보완하면서 키워가는 방식으로 시작하면 됩니다.</p>
-</div>
-
 <h2>오늘 가져가는 것</h2>
 <ul class="check-list">
   <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8l2 2 4-4"/></svg>좁혀진 업무 과제 1개</li>

@@ -1,8 +1,19 @@
 <!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════════════════════════
+  © 2026 이유진 (jinsmiracle30@gmail.com) — All Rights Reserved.
+  KITECH AI 업무 자동화 2주차 강의안 / 이유진 멘토 담당 파트
+  본 문서의 무단 복제·재배포·상업적 이용을 금지합니다.
+  교육 목적의 인용은 저작자 표시 후 가능 (CC BY-NC-ND 4.0).
+  ════════════════════════════════════════════════════════════════
+-->
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="이유진 (Lee Yoojin)" />
+  <meta name="copyright" content="© 2026 이유진. All Rights Reserved." />
+  <meta name="robots" content="index, follow, noarchive, noimageindex" />
   <title>KITECH 2주차 | 이유진 멘토 강의안</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -298,6 +309,49 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── 본문 텍스트 선택 차단 (코드/표/입력 영역은 예외) ── */
+    body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    code, pre, .md-block, .md-block *, input, textarea, [contenteditable="true"] {
+      -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;
+    }
+
+    /* ── 이미지·SVG 드래그 차단 ── */
+    img, svg { -webkit-user-drag: none; user-drag: none; pointer-events: auto; }
+
+    /* ── 인쇄 시 워터마크 ── */
+    @media print {
+      body::after {
+        content: "© 2026 이유진 — KITECH 2주차 강의안 · 무단 복제 금지";
+        position: fixed; bottom: 8mm; right: 8mm;
+        font-size: 9pt; color: #999; opacity: .7;
+      }
+    }
+
+    /* ── 카피라이트 푸터 ── */
+    .copyright-footer {
+      margin-top: 80px; padding: 24px 0 0;
+      border-top: 1px solid var(--gray-200);
+      text-align: center; font-size: 12px; color: var(--gray-400); line-height: 1.7;
+    }
+    .copyright-footer strong { color: var(--gray-600); font-weight: 600; }
+
+    /* ── 다운로드 카드 (재사용) ── */
+    .dl-block { margin: 18px 0 22px; padding: 16px 18px; background:#fff; border:1.5px solid var(--blue-bd); border-radius:10px; }
+    .dl-block .dl-head { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .dl-block .dl-head svg { width:16px; height:16px; color:var(--blue); flex-shrink:0; }
+    .dl-block .dl-tag { font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--blue); }
+    .dl-block .dl-title { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
+    .dl-block .dl-desc { font-size:12.5px; color:var(--gray-600); line-height:1.65; margin-bottom:12px; }
+    .dl-grid { display:grid; gap:8px; }
+    .dl-grid.cols-1 { grid-template-columns:1fr; }
+    .dl-grid.cols-2 { grid-template-columns:1fr 1fr; }
+    .dl-card { display:flex; align-items:center; gap:10px; padding:11px 14px; background:#fff; border:1.5px solid var(--gray-200); border-radius:8px; text-decoration:none; color:inherit; transition:all .15s; }
+    .dl-card:hover { border-color:var(--blue); background:var(--blue-bg); transform:translateY(-1px); }
+    .dl-card svg { width:16px; height:16px; color:var(--blue); flex-shrink:0; }
+    .dl-card .dlc-name { font-size:13px; font-weight:700; color:var(--gray-900); }
+    .dl-card .dlc-meta { font-size:11.5px; color:var(--gray-500); margin-top:1px; }
+    @media (max-width:720px) { .dl-grid.cols-2 { grid-template-columns:1fr; } }
+
     /* ── 한 섹션씩 스크롤 안착 (proximity로 부드럽게) ── */
     html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
     h2 { scroll-snap-align: start; scroll-margin-top: 24px; }
@@ -451,6 +505,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
     }, { passive: true });
   }
+
+  /* ── 클론 코딩 방지 (우클릭/단축키/드래그 차단) ── */
+  const blockNotice = () => {
+    const t = document.createElement('div');
+    t.textContent = '© 2026 이유진 — 무단 복제 금지';
+    t.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:rgba(31,41,55,.95);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:opacity .3s;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;';
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 350); }, 1800);
+  };
+  /* 우클릭 차단 (input/textarea/code 영역은 예외) */
+  document.addEventListener('contextmenu', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (e.target.closest && e.target.closest('.md-block, code, pre')) return;
+    e.preventDefault();
+    blockNotice();
+  });
+  /* 키보드 단축키 차단: F12 / Ctrl|⌘+U(소스) / Ctrl|⌘+S(저장) / Ctrl|⌘+Shift+I,J,C(개발자도구) */
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const cmd = isMac ? e.metaKey : e.ctrlKey;
+    if (e.key === 'F12') { e.preventDefault(); blockNotice(); return; }
+    if (cmd && !e.shiftKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+      e.preventDefault(); blockNotice(); return;
+    }
+    if (cmd && e.shiftKey && ['I','J','C','i','j','c'].includes(e.key)) {
+      e.preventDefault(); blockNotice(); return;
+    }
+  });
+  /* 이미지·svg 드래그 차단 */
+  document.addEventListener('dragstart', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (['img','svg','path','rect','circle'].includes(tag)) e.preventDefault();
+  });
 
   /* ── 페이드인 효과: h2/카드/다이어그램이 뷰포트 진입 시 부드럽게 등장 ── */
   if ('IntersectionObserver' in window) {
@@ -1119,6 +1207,24 @@ window.nacc = function(idx) {
 <!-- 실습 -->
 <h2 id="am-practice">실습 — 내 과제 좁히기 <span style="font-size:13px; font-weight:400; color:var(--gray-400);">8분</span></h2>
 
+<div class="dl-block">
+  <div class="dl-head">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+    <span class="dl-tag">실습 자료</span>
+  </div>
+  <div class="dl-title">문제 좁히기 워크시트 (Markdown)</div>
+  <div class="dl-desc">VS Code나 노트앱에 그대로 붙여넣고 빈 칸을 채우면서 진행하세요. 4분면 매트릭스 + 자기 검증 체크리스트 포함.</div>
+  <div class="dl-grid cols-1">
+    <a class="dl-card" href="samples/worksheet-문제좁히기.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">worksheet-문제좁히기.md</div>
+        <div class="dlc-meta">4단계 워크시트 · 1사분면 자가진단 체크리스트 포함</div>
+      </div>
+    </a>
+  </div>
+</div>
+
 <div class="todo-box">
   <div class="todo-label">
     <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l2 2 4-4"/><rect x="2" y="2" width="12" height="12" rx="1"/></svg>
@@ -1258,6 +1364,31 @@ window.nacc = function(idx) {
 </div>
 
 <p>처음 VS Code를 써보시는 분들을 위해 실습 흐름을 단계별로 정리했습니다.</p>
+
+<div class="dl-block">
+  <div class="dl-head">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+    <span class="dl-tag">스타터 키트</span>
+  </div>
+  <div class="dl-title">에이전트 시작 파일 — 그대로 받아서 폴더에 넣기</div>
+  <div class="dl-desc">두 파일을 받아 새 프로젝트 폴더에 넣으면 Claude가 자동으로 읽어주는 환경이 완성됩니다. 본인 업무에 맞춰 빈 칸만 채우세요.</div>
+  <div class="dl-grid cols-2">
+    <a class="dl-card" href="samples/starter-CLAUDE.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">CLAUDE.md (스타터)</div>
+        <div class="dlc-meta">Claude가 자동으로 읽는 프로젝트 안내</div>
+      </div>
+    </a>
+    <a class="dl-card" href="samples/template-기준문서.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">기준문서.md (백지 템플릿)</div>
+        <div class="dlc-meta">7개 섹션 가이드 — 채우면 그대로 작동</div>
+      </div>
+    </a>
+  </div>
+</div>
 
 <div id="stepViewer" style="margin:24px 0;">
   <div style="margin-bottom:12px;">
@@ -2166,15 +2297,6 @@ window.advTab = function(idx) {
      오후 세션
 ══════════════════════════════════════ -->
 
-<!-- 오전→오후 연결 -->
-<div class="connect-banner">
-  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M8 14l-4-4M8 14l4-4"/></svg>
-  <div>
-    <strong>오전에서 오후로</strong><br/>
-    <span style="font-size:13px; color:var(--gray-600);">오전에 고른 업무가 오후 실습의 재료가 됩니다. 기준 문서는 오전에 좁힌 그 업무를 기준으로 작성합니다.</span>
-  </div>
-</div>
-
 <div class="session-head pm" id="pm-tacit">
   <div class="stag">오후</div>
   <div class="sinfo">
@@ -2463,6 +2585,31 @@ window.advTab = function(idx) {
 
 <p>기준 문서는 에이전트에게 업무 기준을 알려주는 파일입니다. VS Code에서 <code style="background:var(--gray-100); padding:1px 5px; border-radius:3px; font-size:12.5px;">기준문서.md</code>를 만들고 아래 구조로 채우면 됩니다.</p>
 
+<div class="dl-block">
+  <div class="dl-head">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+    <span class="dl-tag">기준문서 자료</span>
+  </div>
+  <div class="dl-title">백지 템플릿 + 다른 도메인 채워진 예시</div>
+  <div class="dl-desc">먼저 채워진 예시(보고서 검토)로 감을 잡고, 그 다음 백지 템플릿에 본인 업무를 옮겨 적으세요. 회의록 도메인 외 예시를 두는 이유는 "내 업무엔 안 맞을 것 같다"는 인식을 깨기 위함입니다.</div>
+  <div class="dl-grid cols-2">
+    <a class="dl-card" href="samples/template-기준문서.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">template-기준문서.md</div>
+        <div class="dlc-meta">7섹션 백지 — 모든 도메인 공통 구조</div>
+      </div>
+    </a>
+    <a class="dl-card" href="samples/example-기준문서-보고서검토.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">example-기준문서-보고서검토.md</div>
+        <div class="dlc-meta">분기 R&amp;D 보고서 빨간펜 도메인 채워진 예시</div>
+      </div>
+    </a>
+  </div>
+</div>
+
 <div class="tbl-wrap">
   <table>
     <thead><tr><th>항목</th><th>내용</th></tr></thead>
@@ -2548,6 +2695,24 @@ window.advTab = function(idx) {
 
 <!-- 스킬 -->
 <h2 id="pm-skill">스킬로 만들기</h2>
+
+<div class="dl-block">
+  <div class="dl-head">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+    <span class="dl-tag">스킬 양식</span>
+  </div>
+  <div class="dl-title">SKILL.md — Claude 스킬 만들기 양식</div>
+  <div class="dl-desc">Claude Code에서 <code style="background:var(--gray-100);padding:1px 5px;border-radius:3px;font-size:12px;">/스킬이름</code>으로 호출할 수 있게 해주는 파일. 기준문서를 한 단계 끌어올린 형태로, 자동 트리거·예외 처리·후속 작업까지 정의합니다.</div>
+  <div class="dl-grid cols-1">
+    <a class="dl-card" href="samples/template-SKILL.md" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 1v10M4 7l4 4 4-4M2 14h12"/></svg>
+      <div>
+        <div class="dlc-name">template-SKILL.md</div>
+        <div class="dlc-meta">frontmatter + 작업 순서 + 절대 금지 + 후속 작업 가이드</div>
+      </div>
+    </a>
+  </div>
+</div>
 
 <div class="analogy">
   <div class="a-label">스킬이란</div>
@@ -2802,6 +2967,13 @@ window.advTab = function(idx) {
 </div>
 
 </section><!-- /panel-pm -->
+
+<!-- ═══ 카피라이트 푸터 ═══ -->
+<div class="copyright-footer">
+  <div>© 2026 <strong>이유진</strong> — KITECH AI 업무 자동화 2주차 강의안</div>
+  <div style="margin-top:4px;">본 강의안의 무단 복제·재배포·상업적 이용을 금지합니다 · 인용 시 저작자 표시 (CC BY-NC-ND 4.0)</div>
+  <div style="margin-top:4px;font-size:11px;">문의: jinsmiracle30@gmail.com</div>
+</div>
 
 </main>
 </div>

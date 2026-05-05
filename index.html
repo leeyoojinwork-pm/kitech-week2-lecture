@@ -1253,6 +1253,63 @@ window.nacc = function(idx) {
   </div>
 </div>
 
+<h3>실제 제출 사례에서 가져온 문제 좁히기 예시</h3>
+<div class="note blue">
+  아래 사례는 1주차 제출·검수 사례에서 가져온 업무를 발표용으로 재구성한 것입니다. 핵심은 “하고 싶은 최종 모습”을 바로 만들지 않고, 이번 주에 검증할 수 있는 첫 실행 단위로 줄이는 것입니다.
+</div>
+
+<div class="ba">
+  <div class="ba-item bef">
+    <div class="ba-label">Before — 최종 목표가 너무 앞에 있음</div>
+    <div class="ba-task">i-Tube 데이터와 원내 자산정보를 대조하고, 결과 대시보드까지 만들고 싶다</div>
+    <ul><li>2,000건 규모 데이터 대조</li><li>불일치 판단</li><li>유형 분류</li><li>대시보드 생성까지 포함</li></ul>
+  </div>
+  <div class="ba-item aft">
+    <div class="ba-label">After — 첫 실행 단위</div>
+    <div class="ba-task">샘플 데이터에서 불일치 항목만 찾아 목록으로 출력하는 에이전트</div>
+    <ul><li>입력: i-Tube 샘플 + 원내 자산정보 샘플</li><li>출력: 불일치 목록 + 불일치 유형 후보</li><li>다음 단계: 유형별 비율과 대시보드는 목록 검증 후 진행</li></ul>
+  </div>
+</div>
+
+<div class="ba">
+  <div class="ba-item bef">
+    <div class="ba-label">Before — 업무 범위가 섞여 있음</div>
+    <div class="ba-task">교육 신청 데이터를 분석해서 직군별 교육 기획 근거를 만들고 싶다</div>
+    <ul><li>내부 교육과 외부 교육이 섞임</li><li>직무전문교육 세분화 필요</li><li>트렌드 분석과 기획 근거 작성까지 포함</li></ul>
+  </div>
+  <div class="ba-item aft">
+    <div class="ba-label">After — 먼저 분류 기준부터</div>
+    <div class="ba-task">교육 신청 데이터에서 기관 주관 교육과 외부 교육을 분리하는 에이전트</div>
+    <ul><li>입력: 교육 신청 데이터 CSV</li><li>출력: 기관 주관 / 외부 교육 분류 결과</li><li>확인: 이상하게 분류된 교육명 1개를 찾아 기준 보완</li></ul>
+  </div>
+</div>
+
+<div class="ba">
+  <div class="ba-item bef">
+    <div class="ba-label">Before — 검색과 판단이 한꺼번에 들어감</div>
+    <div class="ba-task">전문지 원고에 쓸 유사 사례를 자동으로 찾아 정리하고 싶다</div>
+    <ul><li>사례 검색</li><li>출처 확인</li><li>최신성 판단</li><li>원고에 쓸 수 있는지 판단까지 포함</li></ul>
+  </div>
+  <div class="ba-item aft">
+    <div class="ba-label">After — 기준 검증부터</div>
+    <div class="ba-task">원고 주제 1개에 대해 3년 이내·출처 명기 사례만 추려보는 에이전트</div>
+    <ul><li>입력: 원고 주제 + 사례 수집 기준</li><li>출력: 후보 사례 목록 + 출처 + 기준 충족 여부</li><li>확인: 실제 원고에 쓸 수 없는 사례 유형 1개 메모</li></ul>
+  </div>
+</div>
+
+<div class="ba">
+  <div class="ba-item bef">
+    <div class="ba-label">Before — 데이터 구조 차이를 한 번에 해결하려 함</div>
+    <div class="ba-task">10개 본부의 엑셀과 직무기술서를 한 번에 취합하고 싶다</div>
+    <ul><li>본부별 컬럼 구조가 다름</li><li>직무기술서 매칭 필요</li><li>전체 취합 결과까지 기대</li></ul>
+  </div>
+  <div class="ba-item aft">
+    <div class="ba-label">After — 가장 작은 파일 1개로 테스트</div>
+    <div class="ba-task">본부 엑셀 1개를 넣고 취합이 어디서 막히는지 확인하는 에이전트</div>
+    <ul><li>입력: 본부 엑셀 파일 1개</li><li>출력: 취합 결과 초안 + 누락·오류 컬럼 목록</li><li>확인: 10개 본부 중 컬럼 구조가 가장 제각각인 곳 표시</li></ul>
+  </div>
+</div>
+
 
 <!-- 실습 -->
 <h2 id="am-practice">실습 — 내 과제 좁히기 <span style="font-size:13px; font-weight:400; color:var(--gray-400);">8분</span></h2>

@@ -482,28 +482,23 @@ document.addEventListener('DOMContentLoaded', () => {
   /* URL 해시로 들어왔을 때 해당 탭 활성화 */
   if (location.hash) activateTabForAnchor(location.hash);
 
-  /* ── 스크롤할 때 탭바 숨김 / 위로 스크롤 시 다시 표시 ── */
+  /* ── 탭바: 페이지 최상단에서만 표시, 스크롤하면 즉시 숨김 ── */
   const tabs = document.querySelector('.main-tabs');
   if (tabs) {
-    let lastY = window.scrollY, ticking = false;
-    const SHOW_AT = 80;       // 페이지 최상단 영역에서는 항상 표시
-    const HIDE_DELTA = 6;     // 미세 스크롤은 무시
+    let ticking = false;
+    const SHOW_AT = 32; // 거의 최상단(< 32px)에서만 노출
     const onScroll = () => {
-      const y = window.scrollY;
-      const dy = y - lastY;
-      if (y < SHOW_AT) {
+      if (window.scrollY < SHOW_AT) {
         tabs.classList.remove('tabs-hidden');
-      } else if (dy > HIDE_DELTA) {
-        tabs.classList.add('tabs-hidden');     // 아래로 스크롤 → 숨김
-      } else if (dy < -HIDE_DELTA) {
-        tabs.classList.remove('tabs-hidden');  // 위로 스크롤 → 표시
+      } else {
+        tabs.classList.add('tabs-hidden');
       }
-      lastY = y;
       ticking = false;
     };
     window.addEventListener('scroll', () => {
       if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
     }, { passive: true });
+    onScroll(); // 초기 상태 동기화
   }
 
   /* ── 클론 코딩 방지 (우클릭/단축키/드래그 차단) ── */

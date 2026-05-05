@@ -1,0 +1,8 @@
+# Block everything by default
+*
+
+# Allow only the deployment files
+!index.html
+!.nojekyll
+!README.md
+!.gitignore

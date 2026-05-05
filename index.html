@@ -260,9 +260,17 @@
     /* ── 메인 탭 (오전 / VS Code 실습 / 오후) ── */
     .main-tabs {
       display: flex; gap: 6px; margin: 0 0 28px;
-      background: #fff; border: 1px solid var(--gray-200); border-radius: 12px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+      border: 1px solid var(--gray-200); border-radius: 12px;
       padding: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
-      position: sticky; top: 16px; z-index: 5;
+      position: sticky; top: 16px; z-index: 50;
+      transition: transform .28s cubic-bezier(.22,1,.36,1), opacity .22s ease;
+      will-change: transform, opacity;
+    }
+    .main-tabs.tabs-hidden {
+      transform: translateY(-130%);
+      opacity: 0;
+      pointer-events: none;
     }
     .main-tab {
       flex: 1; display: flex; flex-direction: column; gap: 2px;
@@ -289,6 +297,15 @@
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── 한 섹션씩 스크롤 안착 (proximity로 부드럽게) ── */
+    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+    h2 { scroll-snap-align: start; scroll-margin-top: 24px; }
+    .session-head, .page-head { scroll-snap-align: start; scroll-margin-top: 24px; }
+
+    /* ── 스크롤 시 페이드인 효과 ── */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
     /* ── 단락 분할 방지 (인쇄·반응형 시 카드가 중간에 끊기지 않도록) ── */
     .gb-item, .ba-item, .crit-card, .mentor-note, .todo-box,
@@ -410,6 +427,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   /* URL 해시로 들어왔을 때 해당 탭 활성화 */
   if (location.hash) activateTabForAnchor(location.hash);
+
+  /* ── 스크롤할 때 탭바 숨김 / 위로 스크롤 시 다시 표시 ── */
+  const tabs = document.querySelector('.main-tabs');
+  if (tabs) {
+    let lastY = window.scrollY, ticking = false;
+    const SHOW_AT = 80;       // 페이지 최상단 영역에서는 항상 표시
+    const HIDE_DELTA = 6;     // 미세 스크롤은 무시
+    const onScroll = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      if (y < SHOW_AT) {
+        tabs.classList.remove('tabs-hidden');
+      } else if (dy > HIDE_DELTA) {
+        tabs.classList.add('tabs-hidden');     // 아래로 스크롤 → 숨김
+      } else if (dy < -HIDE_DELTA) {
+        tabs.classList.remove('tabs-hidden');  // 위로 스크롤 → 표시
+      }
+      lastY = y;
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ── 페이드인 효과: h2/카드/다이어그램이 뷰포트 진입 시 부드럽게 등장 ── */
+  if ('IntersectionObserver' in window) {
+    const revealTargets = document.querySelectorAll('h2, .session-head, .gb-item, .ba-item, .crit-card, .practice, .mentor-note, .todo-box, .analogy, .connect-banner, .nacc-item');
+    revealTargets.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    revealTargets.forEach(el => io.observe(el));
+  }
 });
 </script>
 
@@ -675,8 +731,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Q4: 우하 (임팩트↓ 실현가능성↑) — 다음 후보 -->
     <rect x="288" y="198" width="252" height="162" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
 
-    <!-- Q1 강조 테두리 추가 -->
-    <rect x="288" y="20" width="252" height="170" rx="8" fill="none" stroke="#2563EB" stroke-width="2"/>
+    <!-- Q1 강조 테두리 (살짝만 도드라지게) -->
+    <rect x="288" y="20" width="252" height="170" rx="8" fill="none" stroke="#2563EB" stroke-width="1.5"/>
 
     <!-- 축 라인 -->
     <line x1="60" y1="190" x2="540" y2="190" stroke="#D1D5DB" stroke-width="1.5"/>

@@ -45,7 +45,7 @@
     }
 
     .wrap {
-      max-width: 760px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 80px 28px 100px;
     }
@@ -132,9 +132,20 @@
       gap: 14px;
     }
 
+    .case-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .practice-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
     .module-card {
       position: relative;
-      display: block;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       padding: 22px 26px;
       border: 1.5px solid var(--border);
@@ -142,6 +153,15 @@
       background: var(--card);
       box-shadow: var(--shadow-card);
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .case-grid .module-card {
+      min-height: 214px;
+    }
+
+    .practice-grid .module-card {
+      min-height: 172px;
+      padding: 18px 20px;
     }
 
     .module-card::before {
@@ -195,13 +215,24 @@
       line-height: 1.45;
     }
 
+    .practice-grid .module-title {
+      font-size: 16px;
+      line-height: 1.38;
+    }
+
     .module-desc {
       margin-bottom: 8px;
       color: var(--text-muted);
       font-size: 14.5px;
     }
 
+    .practice-grid .module-desc {
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+
     .module-meta {
+      margin-top: auto;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -213,6 +244,21 @@
       padding: 2px 8px;
       border-radius: 999px;
       background: var(--placeholder);
+    }
+
+    .practice-grid .module-meta {
+      display: none;
+    }
+
+    @media (max-width: 960px) {
+      .wrap {
+        max-width: 760px;
+      }
+
+      .case-grid,
+      .practice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     .divider {
@@ -270,6 +316,16 @@
         padding: 18px 20px;
       }
 
+      .case-grid,
+      .practice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-grid .module-card,
+      .practice-grid .module-card {
+        min-height: 0;
+      }
+
       .module-title {
         font-size: 17px;
       }
@@ -304,7 +360,7 @@
         <div class="section-name" id="case-section">1. 사례 읽기</div>
         <div class="section-meta">사례 검토 자료</div>
       </div>
-      <div class="card-list">
+      <div class="card-list case-grid">
         <a class="module-card" data-kind="mentor" href="mentor-problem-definition.html" target="_blank" rel="noopener">
           <div class="module-tag">멘토 사례 ① · 오전</div>
           <div class="module-title">문제 좁히기 — 이유진 멘토 사례</div>
@@ -326,7 +382,7 @@
         <div class="section-name" id="practice-section">2. 내 업무로 작성하기</div>
         <div class="section-meta">사례 검토 후 작성</div>
       </div>
-      <div class="card-list">
+      <div class="card-list practice-grid">
         <a class="module-card" data-kind="practice" href="ws-1-problem.html" target="_blank" rel="noopener">
           <div class="module-tag">실습 ①</div>
           <div class="module-title">문제 좁히기 5칸 워크시트</div>

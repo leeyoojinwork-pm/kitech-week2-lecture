@@ -198,6 +198,63 @@
       gap: 12px;
     }
 
+    .qa-report-card {
+      min-height: 150px;
+    }
+
+    .download-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px 26px;
+      border: 1.5px dashed var(--practice-border);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+
+    .download-label {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .download-title {
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .download-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .download-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-width: 172px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: var(--practice);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 10px 24px rgba(124, 58, 237, 0.18);
+    }
+
+    .download-button:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
     .module-card {
       position: relative;
       display: flex;
@@ -533,18 +590,18 @@
         <div class="section-meta">자주 묻는 4가지 · 보고서 + PDF</div>
       </div>
       <div class="card-list qa-grid">
-        <a class="module-card" data-kind="module" href="qa-report.html" target="_blank" rel="noopener">
+        <a class="module-card qa-report-card" data-kind="module" href="qa-report.html" target="_blank" rel="noopener">
           <div class="module-tag">Q&amp;A 보고서</div>
           <div class="module-title">업무 자동화 판단 보고서</div>
           <div class="module-desc">업무 분류 기준 / CLAUDE.md·command·Skill 차이 / md 파일 작동 방식 / 외부 시스템 연결 범위. 토글형 4문항.</div>
           <div class="module-meta"><span>Q1 분류 기준</span><span>Q2 구성요소</span><span>Q3 작동 방식</span><span>Q4 외부 연결</span></div>
         </a>
-        <a class="module-card" data-kind="practice" href="kitech-ai-automation-ebook.pdf" download>
-          <div class="module-tag">PDF 다운로드</div>
-          <div class="module-title">자동화 판단 e-book (PDF)</div>
-          <div class="module-desc">위 보고서 내용을 인쇄·소장용으로 정리한 PDF. 클릭 시 다운로드됩니다.</div>
-          <div class="module-meta"><span>357KB</span><span>오프라인 열람</span></div>
-        </a>
+        <div class="download-panel">
+          <div class="download-label">PDF 다운로드</div>
+          <div class="download-title">자동화 판단 e-book (PDF)</div>
+          <div class="download-desc">보고서 내용을 인쇄하거나 오프라인으로 볼 수 있도록 정리한 파일입니다.</div>
+          <a class="download-button" href="kitech-ai-automation-ebook.pdf" download>PDF 내려받기</a>
+        </div>
       </div>
     </section>
 

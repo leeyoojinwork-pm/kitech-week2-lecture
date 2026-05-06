@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>문제 좁히기 — 사례·노하우 | 이유진 멘토</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#2563EB;--blue-bg:rgba(37,99,235,.15);--blue-bd:rgba(37,99,235,.35);
+  --amber:#B45309;--amber-bg:rgba(180,83,9,.18);--amber-bd:rgba(252,211,77,.35);
+  --red:#B91C1C;--red-bg:rgba(185,28,28,.14);--red-bd:rgba(185,28,28,.3);
+  --green-bg:rgba(5,150,105,.15);--green-bd:rgba(5,150,105,.35);
+  --gray-bg:rgba(255,255,255,.05);--gray-bd:rgba(255,255,255,.12);
+}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
+body{background:#0F172A;display:flex;flex-direction:column;}
+
+/* ── Top bar ── */
+.topbar{
+  height:46px;flex-shrink:0;
+  background:rgba(15,23,42,.96);border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;padding:0 22px;gap:14px;
+}
+.tb-badge{background:#D97706;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.tb-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);}
+.tb-meta{font-size:11.5px;color:rgba(255,255,255,.3);}
+.tb-counter{margin-left:auto;font-size:12px;color:rgba(255,255,255,.3);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:10px;}
+.tb-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.45);font-size:11px;padding:4px 10px;cursor:pointer;transition:all .15s;}
+.tb-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);}
+.tb-btn.active{background:rgba(217,119,6,.2);border-color:#D97706;color:#FCD34D;}
+
+/* ── Progress ── */
+.progress{height:3px;background:rgba(255,255,255,.06);flex-shrink:0;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#D97706,#F59E0B);transition:width .4s cubic-bezier(.22,1,.36,1);}
+
+/* ── Stage ── */
+.stage{flex:1;position:relative;overflow:hidden;}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px 64px;
+  opacity:0;transform:translateX(56px);
+  transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;overflow-y:auto;
+}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+.slide.exit{opacity:0;transform:translateX(-56px);}
+.slide.enter{opacity:0;transform:translateX(56px);}
+.inner{width:100%;max-width:820px;}
+
+/* ── Nav ── */
+.nav-arr{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.35);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;z-index:10;
+}
+.nav-arr:hover{background:rgba(255,255,255,.13);color:#fff;}
+.nav-arr:disabled{opacity:.18;cursor:default;}
+.nav-arr.prev{left:13px;}
+.nav-arr.next{right:13px;}
+
+/* ── Notes ── */
+.notes{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(10,15,30,.97);border-top:1px solid rgba(255,255,255,.1);
+  padding:13px 24px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.7;
+  transform:translateY(100%);transition:transform .28s;max-height:140px;overflow-y:auto;
+}
+.notes.open{transform:translateY(0);}
+.notes-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#F59E0B;margin-bottom:5px;}
+
+/* ── Dot nav ── */
+.dots{display:flex;gap:7px;justify-content:center;margin-bottom:0;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .2s;border:none;}
+.dot.on{background:#D97706;transform:scale(1.25);}
+
+/* ── Typography ── */
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#D97706;margin-bottom:10px;}
+.h1{font-size:38px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;}
+.h2{font-size:24px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px;}
+.sub{font-size:13.5px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.6;}
+.body{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;}
+
+/* ── Card grid ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{border-radius:10px;padding:16px 18px;}
+.card.blue{background:var(--blue-bg);border:1px solid var(--blue-bd);}
+.card.red{background:var(--red-bg);border:1px solid var(--red-bd);}
+.card.amber{background:var(--amber-bg);border:1px solid var(--amber-bd);}
+.card.green{background:var(--green-bg);border:1px solid var(--green-bd);}
+.card.gray{background:var(--gray-bg);border:1px solid var(--gray-bd);}
+.ctag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
+.ctag.blue{color:#93C5FD;}
+.ctag.red{color:#FCA5A5;}
+.ctag.amber{color:#FCD34D;}
+.ctag.green{color:#6EE7B7;}
+.ctag.gray{color:rgba(255,255,255,.35);}
+.ctitle{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;}
+.cbody{font-size:13px;color:rgba(255,255,255,.6);line-height:1.75;}
+
+/* ── BA pair ── */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.bef{background:var(--red-bg);border:1px solid var(--red-bd);border-radius:8px;padding:14px 16px;}
+.aft{background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:14px 16px;}
+.ba-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.ba-lbl.b{color:#FCA5A5;}
+.ba-lbl.a{color:#93C5FD;}
+.ba-task{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4;}
+.ba-body{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.75;}
+
+/* ── Callout ── */
+.callout{border-radius:8px;padding:13px 17px;font-size:13.5px;line-height:1.75;margin-top:12px;}
+.callout.blue{background:var(--blue-bg);border-left:3px solid #2563EB;color:#BAE6FD;}
+.callout.amber{background:var(--amber-bg);border-left:3px solid #D97706;color:#FDE68A;}
+.callout.green{background:var(--green-bg);border-left:3px solid #10B981;color:#6EE7B7;}
+
+/* ── Quote ── */
+.quote{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-left:3px solid #D97706;border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.85;margin:10px 0;}
+.quote strong{color:#fff;}
+
+/* ── Step ── */
+.step{display:flex;gap:12px;align-items:flex-start;padding:11px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;}
+.snum{width:26px;height:26px;border-radius:50%;background:#D97706;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.stext{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.7;}
+.stext strong{color:#fff;}
+
+/* ── Table ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl thead th{background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 13px;text-align:left;}
+.tbl td{padding:9px 13px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.06);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl .ok{color:#6EE7B7;font-weight:600;}
+
+/* ── 4분면 ── */
+.quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.quad{padding:14px 16px;border-radius:8px;}
+.quad.q1{background:rgba(37,99,235,.18);border:2px solid rgba(37,99,235,.5);}
+.quad.q2{background:rgba(185,28,28,.12);border:1px solid rgba(185,28,28,.25);}
+.quad.q3,.quad.q4{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.quad-num{font-size:11px;font-weight:800;letter-spacing:.05em;margin-bottom:5px;}
+.quad-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
+.quad-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;}
+.quad-badge{display:inline-block;background:#2563EB;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px;}
+
+/* ── Axis labels ── */
+.axis-row{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.3);justify-content:center;margin-top:6px;}
+.axis-line{flex:1;height:1px;background:rgba(255,255,255,.1);}
+
+/* ── Cover ── */
+.cover-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;}
+.cpill{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;background:rgba(217,119,6,.15);color:#FCD34D;border:1px solid rgba(217,119,6,.35);}
+
+/* ── Ending ── */
+.big-rule{font-size:20px;font-weight:800;color:#fff;line-height:1.5;text-align:center;margin:20px 0;}
+.big-rule .hl{color:#F59E0B;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="tb-badge">멘토 사례</span>
+  <span class="tb-title">문제 좁히기 — 사례·노하우</span>
+  <span class="tb-meta">· 10:40–10:50 · 10분 · 이유진 멘토</span>
+  <span class="tb-counter">
+    <div class="dots" id="dots"></div>
+    <span id="cur">1</span> / <span id="tot">6</span>
+  </span>
+  <button class="tb-btn" id="noteBtn" onclick="toggleNotes()">발표 노트</button>
+</div>
+<div class="progress"><div class="progress-fill" id="pf"></div></div>
+
+<div class="stage" id="stage"></div>
+
+<button class="nav-arr prev" id="btnP" onclick="go(-1)">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l-5 5 5 5"/></svg>
+</button>
+<button class="nav-arr next" id="btnN" onclick="go(1)">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
+</button>
+
+<div class="notes" id="notesPanel">
+  <div class="notes-lbl">발표 노트</div>
+  <div id="notesText"></div>
+</div>
+
+<script>
+const SLIDES = [
+
+// 1. 표지
+{
+  notes:'10분 발표 시작. "지난 1주차에서 멘티분들이 가장 많이 막혔던 지점을 사례로 공유하겠습니다"로 오프닝.',
+  html:`<div class="inner" style="text-align:center;">
+    <div class="kicker">멘토 사례 · 10분</div>
+    <div class="h1">문제 좁히기<br/>— 사례·노하우</div>
+    <div style="font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;">광범위한 문제로 에이전트 개발이 어려웠던 사례<br/>+ 임팩트·실현가능성으로 좁힌 실제 판단 기준 공유</div>
+    <div class="cover-pills" style="justify-content:center;">
+      <span class="cpill">유형별 실제 사례 2가지</span>
+      <span class="cpill">4분면 판단 기준</span>
+      <span class="cpill">현장 노하우</span>
+    </div>
+  </div>`
+},
+
+// 2. 왜 좁히기가 어려운가 (2가지 패턴)
+{
+  notes:'"1주차에서 문제 좁히기 실수의 대부분은 두 가지 패턴 중 하나였습니다"라고 시작. 참여자들이 고개를 끄덕이게 하는 순간.',
+  html:`<div class="inner">
+    <div class="kicker">문제 좁히기가 어려운 이유</div>
+    <div class="h2">1주차에서 가장 많이 막힌 두 가지 패턴</div>
+    <div class="sub">방향을 잘못 잡거나 · 범위를 너무 크게 잡거나</div>
+    <div class="grid2" style="margin-bottom:14px;">
+      <div class="card red" style="padding:20px;">
+        <div class="ctag red">패턴 1 — 방향이 틀림</div>
+        <div class="ctitle">"결과물 이름"에 끌려간 경우</div>
+        <div class="cbody">"챗봇 만들겠다" → 챗봇 방식으로 설계<br/>"자동화 시스템" → 배포부터 생각<br/><br/>문제: 결과물 이름이 아니라 <strong style="color:#fff;">INPUT/OUTPUT</strong>이 먼저여야 함</div>
+      </div>
+      <div class="card amber" style="padding:20px;">
+        <div class="ctag amber">패턴 2 — 범위가 너무 넓음</div>
+        <div class="ctitle">"최종 산출물"부터 그린 경우</div>
+        <div class="cbody">"기획 제안서까지 자동화" → 5단계 워크플로우<br/>"보고서 전체" → 수집부터 편집까지<br/><br/>문제: 단계별 성격이 달라 <strong style="color:#fff;">첫 스킬을 못 정함</strong></div>
+      </div>
+    </div>
+    <div class="callout amber">공통 원인: "어디서 끝낼지"보다 "어디서 시작할지"를 먼저 정해야 합니다. 가장 작은 첫 스킬 이름부터.</div>
+  </div>`
+},
+
+// 3. 사례 A — 방향이 틀린 경우
+{
+  notes:'"이 분의 핵심 문제는 챗봇과 LLM 분석의 설계 구조 자체가 다르다는 것을 몰랐던 거예요. 결과물 이름이 아니라 데이터 흐름으로 생각했다면 처음부터 달랐을 겁니다."',
+  html:`<div class="inner">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <div style="background:rgba(185,28,28,.4);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCA5A5;letter-spacing:.06em;text-transform:uppercase;">사례 A — 방향이 틀린 경우</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.3);">정보화 기획 · 시스템 운영</div>
+    </div>
+    <div class="h2" style="margin-bottom:16px;">헬프데스크 분석 도우미</div>
+    <div class="ba" style="margin-bottom:12px;">
+      <div class="bef">
+        <div class="ba-lbl b">처음 잡은 문제</div>
+        <div class="ba-task">"헬프데스크 문의를 자동으로 답변해주는 챗봇"</div>
+        <div class="ba-body" style="margin-top:8px;">
+          챗봇 = 실시간 질의응답 + 미리 학습된 답변 매칭<br/>
+          → 이 구조로 설계하면 LLM이 필요 없음<br/>
+          → 설계 방향 자체가 틀린 것
+        </div>
+      </div>
+      <div class="aft">
+        <div class="ba-lbl a">코칭 후 전환</div>
+        <div class="ba-task">"누적 문의 데이터 → 반복 패턴 Top N 추출 보고서"</div>
+        <div class="ba-body" style="margin-top:8px;">
+          <span style="color:#93C5FD;font-weight:600;">입력:</span> 14컬럼 엑셀 (하루 평균 20건)<br/>
+          <span style="color:#93C5FD;font-weight:600;">출력:</span> 다축 분석 보고서 초안<br/>
+          <span style="color:#93C5FD;font-weight:600;">기준:</span> 분류된 데이터 기반 패턴 추출
+        </div>
+      </div>
+    </div>
+    <div class="callout blue"><strong style="color:#fff;">교훈:</strong> "어떤 결과물 이름"이 아니라, <strong>"어떤 데이터를 넣어서 어떤 값을 꺼낼 것인지"</strong>가 문제정의의 출발점입니다.</div>
+  </div>`
+},
+
+// 4. 사례 B — 범위가 너무 넓은 경우
+{
+  notes:'"이 분은 방향은 맞았어요. 근데 제안서라는 최종 산출물에 집중하다 보니 그 앞 4단계가 다 자동화 대상이 돼버린 거예요. 첫 스킬 이름을 물어봤을 때 바로 못 말하면 아직 좁히지 않은 겁니다."',
+  html:`<div class="inner">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <div style="background:rgba(146,64,14,.4);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCD34D;letter-spacing:.06em;text-transform:uppercase;">사례 B — 범위가 너무 넓은 경우</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.3);">교육담당자 · 연구원 행정직</div>
+    </div>
+    <div class="h2" style="margin-bottom:16px;">교육 수요 분류 도우미</div>
+    <div class="ba" style="margin-bottom:12px;">
+      <div class="bef">
+        <div class="ba-lbl b">처음 잡은 문제</div>
+        <div class="ba-task">"내부 교육 데이터 + 외부 트렌드 → 신규 교육 기획 제안서"</div>
+        <div class="ba-body" style="margin-top:8px;">
+          5단계 워크플로우가 한꺼번에 자동화 대상이 됨<br/>데이터 수집 → 분류 → 트렌드 조사 → 매칭 → 제안서<br/>
+          → 각 단계 성격이 달라 AI 역할이 뭔지 모호
+        </div>
+      </div>
+      <div class="aft">
+        <div class="ba-lbl a">좁힌 첫 스킬</div>
+        <div class="ba-task" style="font-family:monospace;font-size:13px;background:rgba(37,99,235,.25);padding:4px 10px;border-radius:5px;display:inline-block;margin-bottom:6px;">/주제별-분류</div>
+        <div class="ba-body" style="margin-top:4px;">
+          <span style="color:#93C5FD;font-weight:600;">입력:</span> 외부 교육 신청 엑셀 + 직군 매핑표<br/>
+          <span style="color:#93C5FD;font-weight:600;">출력:</span> 연구직/행정직별 주제 랭킹 + 기관 Top 5<br/>
+          <span style="color:#93C5FD;font-weight:600;">분류:</span> 리더십 / AI / 기획서 / 직무전문성 / 기타
+        </div>
+      </div>
+    </div>
+    <div class="callout amber"><strong style="color:#fff;">교훈:</strong> 문제 범위가 넓을 때는 <strong>"첫 번째 스킬 이름이 뭔지"를 물어보면 바로 드러납니다.</strong> 스킬 이름이 안 나오면 아직 좁히지 않은 것.</div>
+  </div>`
+},
+
+// 5. 실제 판단 기준 — 4분면
+{
+  notes:'"제가 실제로 코칭할 때 쓰는 기준입니다. 이 두 질문만 하면 어느 사분면인지 금방 알 수 있어요. 1사분면이 오늘 만들 에이전트의 출발점입니다."',
+  html:`<div class="inner">
+    <div class="kicker">실제 판단 기준</div>
+    <div class="h2">임팩트 × 실현가능성 — 4분면</div>
+    <div class="sub">세부과업을 여기에 올려놓고 1사분면을 고르세요</div>
+    <div class="quad-grid" style="margin-bottom:8px;">
+      <div class="quad q2">
+        <div class="quad-num" style="color:#FCA5A5;">2사분면</div>
+        <div class="quad-name">데이터·매뉴얼 먼저</div>
+        <div class="quad-desc">임팩트는 크지만 지금 기준이 없음<br/>→ 기준문서 먼저 만들고 다음 회차</div>
+      </div>
+      <div class="quad q1">
+        <div class="quad-num" style="color:#93C5FD;">1사분면 ★</div>
+        <div class="quad-name">즉시 실행</div>
+        <div class="quad-desc">반복적 + 지금 바로 기준을 줄 수 있음<br/>→ 이번 주 안에 작동시켜볼 수 있음</div>
+        <div class="quad-badge">오늘 여기서 시작</div>
+      </div>
+      <div class="quad q4">
+        <div class="quad-num" style="color:rgba(255,255,255,.25);">4사분면</div>
+        <div class="quad-name" style="color:rgba(255,255,255,.5);">보류</div>
+        <div class="quad-desc">임팩트도 낮고 기준도 없음<br/>→ 나중에 재평가</div>
+      </div>
+      <div class="quad q3">
+        <div class="quad-num" style="color:rgba(255,255,255,.25);">3사분면</div>
+        <div class="quad-name" style="color:rgba(255,255,255,.5);">보너스</div>
+        <div class="quad-desc">금방 돌리지만 임팩트가 작음<br/>→ 잉여 시간에만</div>
+      </div>
+    </div>
+    <div class="axis-row"><span>← 실현가능성 低</span><div class="axis-line"></div><span>실현가능성 高 →</span></div>
+    <div class="grid2" style="margin-top:10px;gap:8px;">
+      <div class="callout blue" style="margin:0;"><strong>임팩트 질문:</strong> 이 일을 얼마나 자주 하나요? 한 번에 얼마나 걸리나요?</div>
+      <div class="callout amber" style="margin:0;"><strong>실현가능성 질문:</strong> 지금 바로 기준을 말로 설명할 수 있나요?</div>
+    </div>
+  </div>`
+},
+
+// 6. 정리 — 노하우 3가지
+{
+  notes:'"마지막으로 제가 1주차 코칭하면서 정리한 현장 노하우 3가지입니다. 이 세 가지 질문을 본인 에이전트에 대입해보시면 바로 알 수 있어요."',
+  html:`<div class="inner">
+    <div class="kicker">정리 — 현장 노하우</div>
+    <div class="h2">문제를 좁힐 때 쓰는 3가지 질문</div>
+    <div class="sub" style="margin-bottom:18px;">이 세 가지에 바로 답이 나오면 오늘 실습 준비 완료</div>
+    <div style="margin-bottom:16px;">
+      <div class="step">
+        <div class="snum">Q1</div>
+        <div class="stext"><strong>첫 번째 스킬 이름이 뭔가요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">스킬 이름이 바로 안 나오면 → 아직 좁히지 않은 것. 계속 쪼개세요.</span></div>
+      </div>
+      <div class="step">
+        <div class="snum">Q2</div>
+        <div class="stext"><strong>입력은 무엇이고 출력은 어떤 형태인가요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">둘 다 한 문장으로 말할 수 있으면 → 에이전트 설계 시작 가능합니다.</span></div>
+      </div>
+      <div class="step">
+        <div class="snum">Q3</div>
+        <div class="stext"><strong>오늘 30분 안에 한 번 돌려볼 수 있나요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">No라면 → 범위를 더 줄이세요. 완성도가 아니라 "작동 여부" 확인이 오늘 목표입니다.</span></div>
+      </div>
+    </div>
+    <div style="background:rgba(217,119,6,.12);border:1.5px solid rgba(217,119,6,.35);border-radius:10px;padding:16px 20px;text-align:center;">
+      <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:6px;">핵심 한 줄</div>
+      <div style="font-size:18px;font-weight:800;color:#fff;line-height:1.5;">어떤 <span style="color:#F59E0B;">데이터</span>를 넣어서 어떤 <span style="color:#F59E0B;">값</span>을 꺼낼 것인가 —<br/>이 두 가지가 명확해지는 순간 에이전트는 만들어집니다.</div>
+    </div>
+  </div>`
+},
+
+];
+
+// ─── engine ───
+const stage = document.getElementById('stage');
+let cur = 0, notesOpen = false;
+
+function init() {
+  document.getElementById('tot').textContent = SLIDES.length;
+  const dotsEl = document.getElementById('dots');
+  SLIDES.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'slide';
+    div.id = 'sl' + i;
+    div.innerHTML = `<div class="inner">${s.html.replace(/<div class="inner">/,'').replace(/<\/div>\s*$/,'')}</div>`;
+    // Rewrite: just set innerHTML directly
+    div.innerHTML = s.html.includes('<div class="inner">') ? s.html : `<div class="inner">${s.html}</div>`;
+    stage.appendChild(div);
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' on' : '');
+    dot.onclick = () => go2(i);
+    dotsEl.appendChild(dot);
+  });
+  show(0, 0);
+}
+
+function show(idx, dir) {
+  const prev = document.getElementById('sl' + cur);
+  if (prev) { prev.classList.remove('active'); prev.classList.add(dir >= 0 ? 'exit' : 'enter'); setTimeout(() => prev.classList.remove('exit','enter'), 380); }
+  cur = idx;
+  const next = document.getElementById('sl' + cur);
+  next.classList.remove('exit','enter');
+  next.classList.add('active');
+  document.getElementById('cur').textContent = cur + 1;
+  document.getElementById('pf').style.width = ((cur+1)/SLIDES.length*100) + '%';
+  document.getElementById('notesText').textContent = SLIDES[cur].notes || '—';
+  document.getElementById('btnP').disabled = cur === 0;
+  document.getElementById('btnN').disabled = cur === SLIDES.length - 1;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('on', i === cur));
+}
+
+function go(dir) { const n = cur + dir; if (n >= 0 && n < SLIDES.length) show(n, dir); }
+function go2(idx) { show(idx, idx > cur ? 1 : -1); }
+
+function toggleNotes() {
+  notesOpen = !notesOpen;
+  document.getElementById('notesPanel').classList.toggle('open', notesOpen);
+  document.getElementById('noteBtn').classList.toggle('active', notesOpen);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); go(1); }
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); go(-1); }
+  if (e.key==='Escape') { if(notesOpen) toggleNotes(); }
+  if (e.key==='n'||e.key==='N') toggleNotes();
+});
+
+let tx = 0;
+stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+stage.addEventListener('touchend', e => { if (Math.abs(e.changedTouches[0].clientX - tx) > 50) go(e.changedTouches[0].clientX < tx ? 1 : -1); });
+
+init();
+</script>
+</body>
+</html>

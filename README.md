@@ -2,11 +2,20 @@
 
 **KITECH AI 협업 실무 · 2주차 · 이유진 멘토**
 
-단일 에이전트 설계와 업무 자동화 실습 강의안입니다.
+단일 에이전트 설계와 업무 자동화 실습 강의안입니다. 2주차 전체 강의 허브에서 이유진 멘토 담당 파트로 연결할 수 있는 개별 발표 자료와 실습 워크시트를 함께 둡니다.
 
 ## 바로 보기
 
 👉 **[강의안 열기](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/)**
+
+## Vercel 강의 허브 연결용 페이지
+
+- [문제 좁히기 — 이유진 멘토 사례](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/mentor-problem-definition.html)
+- [암묵지 형식화 + 스킬 개발 — 이유진 멘토 사례](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/mentor-tacit-skill.html)
+- [실습 1 — 문제 좁히기 5칸 워크시트](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/ws-1-problem.html)
+- [실습 2 — 데이터 확보 4단계 워크시트](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/ws-2-data.html)
+- [실습 3 — 암묵지 형식화 워크시트](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/ws-3-tacit.html)
+- [실습 4 — 스킬 구축 워크시트](https://leeyoojinwork-pm.github.io/kitech-week2-lecture/ws-4-skill.html)
 
 ## 내용 구성
 
@@ -24,6 +33,12 @@
 
 ```
 index.html          ← GitHub Pages 배포 파일 (메인)
+mentor-problem-definition.html
+mentor-tacit-skill.html
+ws-1-problem.html
+ws-2-data.html
+ws-3-tacit.html
+ws-4-skill.html
 .nojekyll           ← Jekyll 비활성화 (한글 경로 오류 방지)
 README.md           ← 이 파일
 ```

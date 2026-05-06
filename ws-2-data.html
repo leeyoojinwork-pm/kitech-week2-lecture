@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>워크시트 2 — 데이터 확보 4단계</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="wrap worksheet">
+    <a class="back-link" href="./">← 2주차 허브로 돌아가기</a>
+    <header class="header">
+      <span class="doc-tag">실습 ② · 데이터 확보</span>
+      <h1>데이터 확보 4단계 워크시트</h1>
+      <p class="subtitle">좁힌 문제에 필요한 자료가 실제로 있고, AI가 읽을 수 있는지 확인합니다.</p>
+    </header>
+
+    <section class="intro">
+      문제정의가 좋아도 데이터가 없거나 포맷이 맞지 않으면 실습이 멈춥니다.
+      이 단계의 목표는 <b>완벽한 데이터셋</b>이 아니라 <b>첫 실행 가능한 샘플</b>입니다.
+    </section>
+
+    <section class="sheet-section">
+      <h2>4단계 점검</h2>
+      <div class="worksheet-grid">
+        <div class="prompt-card"><b>1. 식별</b><span>필요한 자료 이름과 보관 위치를 적습니다.</span></div>
+        <div class="prompt-card"><b>2. 수집</b><span>엑셀, PDF, HWPX, 메일, 웹페이지 중 무엇인지 확인합니다.</span></div>
+        <div class="prompt-card"><b>3. 변환</b><span>AI가 읽기 쉬운 CSV, TXT, MD 형태로 바꿀 수 있는지 봅니다.</span></div>
+        <div class="prompt-card"><b>4. 정리</b><span>컬럼명, 파일명, 샘플 범위, 민감정보 제거 기준을 정합니다.</span></div>
+      </div>
+    </section>
+
+    <section class="sheet-section">
+      <h2>파일 포맷 체크</h2>
+      <table class="simple-table">
+        <tr><th>자료 유형</th><th>먼저 확인할 것</th><th>권장 첫 테스트</th></tr>
+        <tr><td>엑셀</td><td>컬럼명, 병합셀, 빈 행</td><td>샘플 20행 CSV로 저장</td></tr>
+        <tr><td>PDF</td><td>텍스트 추출 가능 여부</td><td>첫 2페이지 복사 테스트</td></tr>
+        <tr><td>HWPX</td><td>본문과 표 추출, 서식 재반영</td><td>텍스트 추출 후 MD 변환</td></tr>
+        <tr><td>웹/뉴스</td><td>출처, 날짜, 중복 기사</td><td>URL 목록 10개로 시작</td></tr>
+      </table>
+    </section>
+
+    <section class="sheet-section">
+      <h2>복붙 프롬프트</h2>
+      <pre class="copy-box">아래 문제정의에 필요한 데이터를 점검해줘.
+
+문제정의:
+필요하다고 생각하는 자료:
+현재 가지고 있는 파일:
+파일 포맷:
+민감정보 포함 여부:
+
+1. 바로 쓸 수 있는 자료
+2. 변환이 필요한 자료
+3. 추가로 확인해야 할 자료
+4. 오늘 첫 테스트에 쓸 최소 샘플
+로 나눠서 정리해줘.</pre>
+    </section>
+  </main>
+</body>
+</html>

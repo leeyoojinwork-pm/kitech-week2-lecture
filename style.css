@@ -514,3 +514,228 @@ h1 {
     overflow-x: auto;
   }
 }
+
+/* Screen-stable worksheet overrides */
+body {
+  padding: 40px 24px 72px;
+}
+
+.wrap.worksheet {
+  max-width: 1120px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
+}
+
+.back-link {
+  margin: 20px 28px 0;
+  color: var(--sub);
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.header {
+  display: block;
+  margin-top: 0;
+  padding: 42px 48px 36px;
+}
+
+.header::after {
+  display: none;
+  content: none;
+}
+
+.doc-tag {
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 34px;
+  letter-spacing: -0.4px;
+}
+
+.subtitle {
+  max-width: 760px;
+  font-size: 16px;
+}
+
+.intro {
+  padding: 24px 48px;
+  font-size: 15px;
+}
+
+.sheet-section {
+  padding: 34px 48px;
+}
+
+.sheet-section h2 {
+  font-size: 22px;
+}
+
+.worksheet-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+.prompt-card {
+  min-height: 124px;
+  padding: 18px 20px;
+  border-radius: 12px;
+}
+
+.prompt-card b {
+  font-size: 14px;
+}
+
+.prompt-card span {
+  font-size: 13.5px;
+}
+
+.example-panel {
+  margin-top: 16px;
+  padding: 24px;
+  border-radius: 14px;
+}
+
+.example-label {
+  font-size: 12px;
+}
+
+.example-title {
+  font-size: 19px;
+}
+
+.example-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.answer-card {
+  padding: 16px 18px;
+  border-radius: 10px;
+}
+
+.answer-card b,
+.answer-card span,
+.answer-card li {
+  font-size: 13.5px;
+}
+
+.check-list {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding: 20px 22px;
+  border-radius: 12px;
+}
+
+.check-list li {
+  font-size: 14px;
+}
+
+.simple-table th,
+.simple-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+.copy-box {
+  padding: 20px 22px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.matrix-wrapper {
+  margin: 40px 42px 48px;
+}
+
+.matrix-grid {
+  min-height: 460px;
+}
+
+.quadrant {
+  min-height: 230px;
+  padding: 22px;
+}
+
+.data-step {
+  margin: 0 48px 18px;
+  padding: 22px 24px;
+  border-radius: 12px;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.step-title {
+  font-size: 17px;
+}
+
+.step-subtitle,
+.checklist-label {
+  font-size: 13.5px;
+}
+
+.checklist-item {
+  grid-template-columns: 20px 1fr;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 0;
+  }
+
+  .wrap.worksheet {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header {
+    padding: 30px 22px 26px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .intro,
+  .sheet-section {
+    padding: 22px;
+  }
+
+  .matrix-wrapper {
+    margin: 24px 0 34px;
+  }
+
+  .matrix-wrapper [style*="left: -50px"],
+  .matrix-wrapper [style*="bottom: -40px"] {
+    display: none !important;
+  }
+
+  .matrix-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .quadrant {
+    min-height: 150px;
+  }
+
+  .data-step {
+    margin: 0 22px 16px;
+  }
+}

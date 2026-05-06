@@ -421,10 +421,116 @@
     }
 
     .case-grid .module-card {
-      min-height: 254px;
-      padding: 28px 30px;
+      min-height: 440px;
+      padding: 0;
       border-color: var(--mentor-border);
-      background: linear-gradient(180deg, #ffffff 0%, var(--mentor-light) 100%);
+      background: #ffffff;
+    }
+
+    .case-grid .module-card::before {
+      top: 20px;
+      bottom: 122px;
+    }
+
+    .case-card-copy {
+      padding: 28px 30px 18px;
+    }
+
+    .case-card-preview {
+      position: relative;
+      margin: auto 20px 20px;
+      min-height: 188px;
+      overflow: hidden;
+      border: 1px solid #dce8f5;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #15233d 0%, #121c30 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .case-preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 11px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .case-preview-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .case-preview-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #7c3aed;
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.14);
+    }
+
+    .case-preview-slides {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 136px;
+      padding: 18px;
+    }
+
+    .case-preview-slide {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px 20px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 18px 40px rgba(7, 12, 24, 0.35);
+      text-align: center;
+    }
+
+    .case-preview-overline {
+      margin-bottom: 10px;
+      color: #76839a;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .case-preview-title {
+      color: #182437;
+      font-size: 22px;
+      font-weight: 760;
+      line-height: 1.28;
+      letter-spacing: -0.3px;
+    }
+
+    .case-preview-sub {
+      margin-top: 10px;
+      color: #66758d;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .case-preview-chip-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .case-preview-chip {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #3559c7;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
     }
 
     .practice-grid .module-card {
@@ -649,6 +755,14 @@
         min-height: 0;
       }
 
+      .case-card-preview {
+        margin: 0 18px 18px;
+      }
+
+      .case-preview-slide {
+        padding: 20px 16px 16px;
+      }
+
       .module-title {
         font-size: 17px;
       }
@@ -701,17 +815,57 @@
       </div>
       <div class="card-list case-grid">
         <a class="module-card" data-kind="mentor" href="mentor-problem-definition.html" target="_blank" rel="noopener">
-          <div class="module-tag">멘토 사례 1 · 오전</div>
-          <div class="module-title">문제 좁히기 — 이유진 멘토 사례 (멘토용)</div>
-          <div class="module-desc">멘티 4명의 문제정의 사례 비교. <b>잘된 사례·아쉬운 사례에 멘토가 어떻게 피드백했는지</b>, 자주 발생하는 문제정의 오류 4가지, 그리고 초반에 잘 잡으려면 어디부터 점검해야 하는지까지.</div>
-          <div class="module-meta"><span>10:40–10:50</span><span>PPT 자료</span><span>피드백 사례 중심</span></div>
+          <div class="case-card-copy">
+            <div class="module-tag">멘토 사례 1 · 오전</div>
+            <div class="module-title">문제 좁히기 — 이유진 멘토 사례 (멘토용)</div>
+            <div class="module-desc">멘티 4명의 문제정의 사례 비교. <b>잘된 사례·아쉬운 사례에 멘토가 어떻게 피드백했는지</b>, 자주 발생하는 문제정의 오류 4가지, 그리고 초반에 잘 잡으려면 어디부터 점검해야 하는지까지.</div>
+            <div class="module-meta"><span>10:40–10:50</span><span>PPT 자료</span><span>피드백 사례 중심</span></div>
+          </div>
+          <div class="case-card-preview" aria-hidden="true">
+            <div class="case-preview-bar">
+              <div class="case-preview-brand"><span class="case-preview-dot"></span><span>KITECH 2주차</span></div>
+              <span>1 / 12</span>
+            </div>
+            <div class="case-preview-slides">
+              <div class="case-preview-slide">
+                <div class="case-preview-overline">Mentor Case 1</div>
+                <div class="case-preview-title">문제 좁히기</div>
+                <div class="case-preview-sub">잘된 문제정의와 아쉬운 문제정의를 비교하고, 멘토 피드백으로 첫 실행 단위를 좁히는 사례</div>
+                <div class="case-preview-chip-row">
+                  <span class="case-preview-chip">문제정의 오류</span>
+                  <span class="case-preview-chip">피드백 사례</span>
+                  <span class="case-preview-chip">첫 실행 단위</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </a>
 
         <a class="module-card" data-kind="mentor" href="mentor-tacit-skill.html" target="_blank" rel="noopener">
-          <div class="module-tag">멘토 사례 2 · 오후</div>
-          <div class="module-title">암묵지 형식화 + 스킬 개발 — 이유진 멘토 사례 (멘토용)</div>
-          <div class="module-desc">담당자 머릿속에만 있던 판단 기준을 문서로 꺼내고, 그 기준을 반복 실행 가능한 스킬로 전환한 실제 사례. 어떤 기준을 어떻게 정리했고, 스킬화 시점에 어디서 막혔는지를 봅니다.</div>
-          <div class="module-meta"><span>13:50–14:10</span><span>PPT 자료</span><span>사례 중심</span></div>
+          <div class="case-card-copy">
+            <div class="module-tag">멘토 사례 2 · 오후</div>
+            <div class="module-title">암묵지 형식화 + 스킬 개발 — 이유진 멘토 사례 (멘토용)</div>
+            <div class="module-desc">담당자 머릿속에만 있던 판단 기준을 문서로 꺼내고, 그 기준을 반복 실행 가능한 스킬로 전환한 실제 사례. 어떤 기준을 어떻게 정리했고, 스킬화 시점에 어디서 막혔는지를 봅니다.</div>
+            <div class="module-meta"><span>13:50–14:10</span><span>PPT 자료</span><span>사례 중심</span></div>
+          </div>
+          <div class="case-card-preview" aria-hidden="true">
+            <div class="case-preview-bar">
+              <div class="case-preview-brand"><span class="case-preview-dot"></span><span>KITECH 2주차</span></div>
+              <span>1 / 14</span>
+            </div>
+            <div class="case-preview-slides">
+              <div class="case-preview-slide">
+                <div class="case-preview-overline">Mentor Case 2</div>
+                <div class="case-preview-title">암묵지 형식화 + 스킬 개발</div>
+                <div class="case-preview-sub">담당자 기준을 문서로 꺼내고, 반복 실행 가능한 스킬 구조로 전환하는 흐름을 보여주는 사례</div>
+                <div class="case-preview-chip-row">
+                  <span class="case-preview-chip">판단 기준</span>
+                  <span class="case-preview-chip">형식화</span>
+                  <span class="case-preview-chip">스킬 전환</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </a>
       </div>
     </section>

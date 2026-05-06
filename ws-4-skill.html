@@ -3,22 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>워크시트 4 — 스킬 구축</title>
+  <title>skill-creator 설치·활성화 가이드 — KITECH 2주차</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <link rel="stylesheet" href="./style.css">
+  <style>
+    .guide-step {
+      margin-bottom: 32px;
+      padding: 28px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .guide-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .guide-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--mentor-light);
+      color: var(--mentor);
+      font-weight: 850;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .guide-title {
+      font-size: 18px;
+      font-weight: 850;
+      color: var(--text);
+    }
+
+    .guide-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .instruction-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .instruction-item {
+      padding: 14px;
+      background: var(--soft);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .code-example {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #111827;
+      border-radius: 6px;
+      color: #e5e7eb;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      overflow-x: auto;
+    }
+
+    .key-command {
+      display: inline-block;
+      padding: 3px 8px;
+      background: var(--border);
+      border-radius: 4px;
+      font-weight: 600;
+      margin: 0 2px;
+    }
+
+    .tips-box {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 12.5px;
+      color: var(--text);
+    }
+  </style>
 </head>
 <body>
   <main class="wrap worksheet">
     <a class="back-link" href="./">← 2주차 허브로 돌아가기</a>
     <header class="header">
-      <span class="doc-tag">실습 ④ · 스킬 구축</span>
-      <h1>스킬 구축 워크시트</h1>
-      <p class="subtitle">반복 업무를 한 줄 명령으로 다시 부를 수 있게 이름, 입력, 출력, 기준을 고정합니다.</p>
+      <span class="doc-tag">KITECH 2주차 — 스킬 구축</span>
+      <h1>skill-creator 설치·활성화 가이드</h1>
+      <p class="subtitle">메뉴 클릭만으로 설치 — 명령어를 외우지 않아도 됩니다</p>
     </header>
 
     <section class="intro">
-      스킬은 거창한 프로그램이 아니라, <b>반복해서 쓰는 업무 기준을 묶어둔 작은 도구</b>입니다.
-      한 번에 전체 업무를 만들기보다 가장 작은 반복 단위 하나부터 시작하세요.
+      <b>완료 시각</b>
+    </section>
+
+    <section style="margin-bottom: 32px; padding: 20px 24px; background: var(--soft); border-radius: 12px; border: 1px solid var(--border);">
+      <p style="font-size: 13.5px; color: var(--text); line-height: 1.6;">
+        이 워크시트는 <b>skill-creator를 Claude Code에 설치·활성화해 첫 호출까지 가는 흐름</b>을 안내합니다. 메뉴 클릭만으로 진행 가능하므로 명령어를 외울 필요는 없습니다.
+        <br><br>
+        <b>명령어 방식은</b> 마지막 섹션으로 보관합니다 (익숙해진 후 대안).
+      </p>
     </section>
 
     <section class="sheet-section">

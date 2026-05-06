@@ -1,34 +1,242 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang=”ko”>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>워크시트 1 — 문제 좁히기 5칸</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-  <link rel="stylesheet" href="./style.css">
+  <meta charset=”UTF-8”>
+  <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+  <title>문제 좁히기 워크시트 — KITECH 2주차</title>
+  <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css”>
+  <link rel=”stylesheet” href=”./style.css”>
+  <style>
+    .matrix-container {
+      display: grid;
+      gap: 2px;
+      margin-top: 28px;
+      background: var(--border);
+      padding: 2px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .quadrant {
+      background: var(--card);
+      padding: 28px 24px;
+      min-height: 280px;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .quadrant-label {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .quadrant-title {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .quadrant-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .task-input {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-item {
+      padding: 10px 12px;
+      background: var(--soft);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .task-item:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    .task-item.selected {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .axis-labels {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr;
+      gap: 2px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .axis-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .axis-label.vertical {
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      writing-mode: vertical-rl;
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .matrix-wrapper {
+      position: relative;
+      margin-left: 60px;
+      margin-top: 40px;
+    }
+
+    .result-panel {
+      margin-top: 32px;
+      padding: 24px;
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent-border);
+      border-radius: 14px;
+    }
+
+    .result-label {
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .result-title {
+      font-size: 20px;
+      font-weight: 850;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .result-value {
+      font-size: 15px;
+      color: var(--text);
+      padding: 12px;
+      background: var(--card);
+      border-radius: 8px;
+      border: 1px solid var(--accent-border);
+    }
+  </style>
 </head>
 <body>
-  <main class="wrap worksheet">
-    <a class="back-link" href="./">← 2주차 허브로 돌아가기</a>
-    <header class="header">
-      <span class="doc-tag">실습 ① · 문제 좁히기</span>
-      <h1>문제 좁히기 5칸 워크시트</h1>
-      <p class="subtitle">본인 업무에서 첫 스킬이 다룰 “가장 작은 반복 단위”를 정합니다.</p>
+  <main class=”wrap worksheet”>
+    <a class=”back-link” href=”./”>← 2주차 허브로 돌아가기</a>
+    <header class=”header”>
+      <span class=”doc-tag”>KITECH 2주차 — 문제 좁히기</span>
+      <h1>문제 좁히기 워크시트</h1>
+      <p class=”subtitle”>본인 과제정의서를 옆에 두고 작성합니다</p>
     </header>
 
-    <section class="intro">
-      목표는 최종 결과물을 한 번에 만드는 것이 아니라 <b>오늘 30분 안에 한 번 실행해볼 수 있는 첫 스킬</b>을 정하는 것입니다.
-      막히면 “이번 주에 검증할 첫 실행 단위는 무엇인가”부터 다시 확인합니다.
+    <section class=”intro”>
+      <b>팀(소속)</b>
     </section>
 
-    <section class="sheet-section">
-      <h2>5칸 채우기</h2>
-      <div class="worksheet-grid">
-        <div class="prompt-card"><b>1. 반복 업무</b><span>내가 자주 반복하는 일은 무엇인가?</span></div>
-        <div class="prompt-card"><b>2. 입력</b><span>처리에 사용할 파일, 표, 문서, 텍스트는 무엇인가?</span></div>
-        <div class="prompt-card"><b>3. 출력</b><span>결과물은 표, 초안, 체크리스트 중 어떤 형태인가?</span></div>
-        <div class="prompt-card"><b>4. 판단 기준</b><span>우수 결과와 보완 결과를 가르는 기준은 무엇인가?</span></div>
-        <div class="prompt-card"><b>5. 첫 스킬 이름</b><span>한 줄 명령으로 부른다면 이름은 무엇인가?</span></div>
+    <aside style=”margin-bottom: 36px; padding: 20px 24px; border: 1.5px solid var(--border); border-radius: 14px; background: var(--card);”>
+      <div style=”margin-bottom: 20px;”>
+        <h3 style=”font-size: 15px; font-weight: 850; margin-bottom: 8px; color: var(--text);”>두 축의 정의</h3>
+        <div style=”margin-bottom: 12px;”>
+          <div style=”font-weight: 700; color: var(--text); font-size: 14px;”>임팩트</div>
+          <div style=”color: var(--text-muted); font-size: 13.5px;”>반복적인 일인가? + 가장 소모적인(시간을 많이 쓰는) 일인가?</div>
+        </div>
+        <div>
+          <div style=”font-weight: 700; color: var(--text); font-size: 14px;”>실현가능성</div>
+          <div style=”color: var(--text-muted); font-size: 13.5px;”>데이터·정보가 정리되어 있는가? + 정리된 매뉴얼이 있거나, 본인의 암묘지가 존재하는가?</div>
+        </div>
+      </div>
+      <hr style=”border: 0; border-top: 1px solid var(--border); margin: 16px 0;”>
+      <div>
+        <h3 style=”font-size: 15px; font-weight: 850; margin-bottom: 12px; color: var(--text);”>분면별 처방</h3>
+        <table style=”width: 100%; border-collapse: collapse;”>
+          <tr>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text); font-size: 13px;”>1사분면</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 12px;”>— 이번 주 안에 작동시켜볼 수 있음</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--accent); font-size: 12px;”>즉시 실행</td>
+          </tr>
+          <tr>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text); font-size: 13px;”>2사분면</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 12px;”>— 준비 후 다음 회차</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text-muted); font-size: 12px;”>데이터·매뉴얼 먼저</td>
+          </tr>
+          <tr>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text); font-size: 13px;”>3사분면</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 12px;”>— 잉여 시간에만</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text-muted); font-size: 12px;”>보너스</td>
+          </tr>
+          <tr>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text); font-size: 13px;”>4사분면</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 12px;”>— 지금은 안 함</td>
+            <td style=”padding: 8px; border: 1px solid var(--border); font-weight: 700; color: var(--text-muted); font-size: 12px;”></td>
+          </tr>
+        </table>
+      </div>
+    </aside>
+
+    <section class=”sheet-section”>
+      <h2>본인의 세부 태스크를 배치하세요</h2>
+      <p class=”section-note” style=”margin-bottom: 24px;”>4분면</p>
+      <div class=”matrix-wrapper”>
+        <div style=”position: absolute; left: -50px; top: 0; height: 100%; display: flex; align-items: center;”>
+          <div style=”writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; color: var(--text-muted); font-size: 13px;”>임팩트</div>
+        </div>
+        <div style=”position: absolute; bottom: -40px; left: 0; width: 100%; text-align: center;”>
+          <div style=”font-weight: 700; color: var(--text-muted); font-size: 13px;”>실현가능성 낮음 ← → 실현가능성 높음</div>
+        </div>
+        <div class=”matrix-grid”>
+          <div class=”quadrant”>
+            <div class=”quadrant-label”>2사분면<br>데이터·매뉴얼 먼저</div>
+            <div class=”quadrant-title”>2사분면</div>
+          </div>
+          <div class=”quadrant”>
+            <div class=”quadrant-label”>1사분면 — 즉시 실행</div>
+            <div class=”quadrant-title”>1사분면</div>
+            <div class=”quadrant-subtitle”>가장 우상단 태스크에 ⓞ 동그라미</div>
+            <div style=”margin-top: 24px; padding: 16px; background: var(--accent-light); border-radius: 8px; border: 1px dashed var(--accent); text-align: center;”>
+              <div style=”font-size: 13px; font-weight: 700; color: var(--accent);”>★ 좁힌 결과</div>
+            </div>
+          </div>
+          <div class=”quadrant”>
+            <div class=”quadrant-label”>3사분면<br>보너스</div>
+            <div class=”quadrant-title”>3사분면</div>
+          </div>
+          <div class=”quadrant”>
+            <div class=”quadrant-label”>4사분면</div>
+            <div class=”quadrant-title”>4사분면</div>
+          </div>
+        </div>
       </div>
     </section>
 

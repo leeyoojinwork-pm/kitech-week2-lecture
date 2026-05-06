@@ -3,22 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>워크시트 3 — 암묵지 형식화</title>
+  <title>암묵지 형식화 라운드 워크시트 — KITECH 2주차</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <link rel="stylesheet" href="./style.css">
+  <style>
+    .round-step {
+      margin-bottom: 28px;
+      padding: 24px 24px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .round-title {
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .round-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .round-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .round-list li {
+      padding: 10px 12px;
+      background: var(--soft);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .cycle-arrow {
+      text-align: center;
+      padding: 12px 0;
+      color: var(--text-muted);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .instruction-panel {
+      margin-top: 28px;
+      padding: 20px 24px;
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+    }
+
+    .instruction-title {
+      font-weight: 850;
+      color: var(--accent);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .instruction-text {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
   <main class="wrap worksheet">
     <a class="back-link" href="./">← 2주차 허브로 돌아가기</a>
     <header class="header">
-      <span class="doc-tag">실습 ③ · 암묵지 형식화</span>
-      <h1>암묵지 형식화 워크시트</h1>
-      <p class="subtitle">내가 당연하게 판단하던 기준을 스킬이 따를 수 있는 문장으로 바꿉니다.</p>
+      <span class="doc-tag">KITECH 2주차 — 암묵지 형식화</span>
+      <h1>암묵지 형식화 라운드 워크시트</h1>
+      <p class="subtitle">에이전트를 돌리면서 빈틈을 한 라운드씩 보강합니다</p>
     </header>
 
     <section class="intro">
-      암묵지는 개인의 감각이 아니라 <b>반복해서 적용해 온 판단 기준</b>입니다.
-      우수 결과와 보완 결과를 가르는 기준을 적으면 스킬 설계의 뼈대가 됩니다.
+      <b>에이전트 이름</b>
+    </section>
+
+    <section style="margin-bottom: 32px; padding: 20px 24px; background: var(--soft); border-radius: 12px; border: 1px solid var(--border);">
+      <p style="font-size: 13.5px; color: var(--text); line-height: 1.6; margin-bottom: 8px;">
+        데이터가 갖춰진 상태에서 시작합니다. <b>직접 손으로 적지 않고 Claude와 대화로 생성·개선</b>합니다.
+        <b>한 라운드 = 1~5단계를 한 번씩 거치는 한 사이클</b> / <b>1~2개 빈틈씩 보강하며 여러 라운드</b>를 도는 것이 자연스러운 형식화 방식입니다.
+      </p>
     </section>
 
     <section class="sheet-section">

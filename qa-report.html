@@ -703,6 +703,22 @@
       border-radius: 6px;
       background: #fff;
       color: transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    .empty-check:hover {
+      border-color: #9eb3d9;
+      box-shadow: 0 4px 10px rgba(31, 79, 216, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .empty-check.checked {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(31, 79, 216, 0.16);
     }
 
     .interpretation {
@@ -953,32 +969,32 @@
                   <tr>
                     <td>이 업무는 주 1회 이상 또는 매월 반복되는가?</td>
                     <td>반복도가 높을수록 프로젝트화 가치가 큽니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                   <tr>
                     <td>좋은 결과의 기준을 말로 설명할 수 있는가?</td>
                     <td>AI에게 맡기려면 판단 기준이 언어화되어야 합니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                   <tr>
                     <td>참고할 양식, 예시 문서, 규정이 있는가?</td>
                     <td>reference로 넣을 자료가 있으면 Claude 프로젝트에 적합합니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                   <tr>
                     <td>결과물 형식이 매번 비슷한가?</td>
                     <td>출력 형식이 고정될수록 command나 Skill로 확장하기 좋습니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                   <tr>
                     <td>개인정보, 예산, 결재, 외부 발송과 관련 있는가?</td>
                     <td>리스크가 있으면 자동화보다 사람 검토 지점을 먼저 설계해야 합니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                   <tr>
                     <td>내부 시스템 로그인, 권한, API 연결이 필요한가?</td>
                     <td>외부 연결이 필요하면 비개발자 단독 자동화 범위를 넘을 수 있습니다.</td>
-                    <td><span class="empty-check">□</span></td>
+                    <td><button type="button" class="empty-check" aria-pressed="false" aria-label="체크">✓</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -1401,6 +1417,13 @@
         item.open = shouldOpen;
       });
       syncToggleButton();
+    });
+
+    document.querySelectorAll('.empty-check').forEach(check => {
+      check.addEventListener('click', () => {
+        const checked = check.classList.toggle('checked');
+        check.setAttribute('aria-pressed', String(checked));
+      });
     });
 
     items.forEach(item => item.addEventListener('toggle', syncToggleButton));

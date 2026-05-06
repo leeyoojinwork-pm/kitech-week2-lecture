@@ -573,6 +573,36 @@
       letter-spacing: 1.4px;
     }
 
+    .module-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .module-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--placeholder);
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.2px;
+    }
+
+    .module-chip.mentor {
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--mentor);
+    }
+
+    .module-chip.answer {
+      background: rgba(124, 58, 237, 0.08);
+      color: var(--practice);
+    }
+
     .module-card[data-kind="mentor"] .module-tag {
       color: var(--mentor);
     }
@@ -816,7 +846,10 @@
       <div class="card-list case-grid">
         <a class="module-card" data-kind="mentor" href="mentor-problem-definition.html" target="_blank" rel="noopener">
           <div class="case-card-copy">
-            <div class="module-tag">멘토 사례 1 · 오전</div>
+            <div class="module-tag-row">
+              <div class="module-tag">멘토 사례 1 · 오전</div>
+              <div class="module-chip mentor">(멘토용)</div>
+            </div>
             <div class="module-title">문제 좁히기 — 이유진 멘토 사례 (멘토용)</div>
             <div class="module-desc">멘티 4명의 문제정의 사례 비교. <b>잘된 사례·아쉬운 사례에 멘토가 어떻게 피드백했는지</b>, 자주 발생하는 문제정의 오류 4가지, 그리고 초반에 잘 잡으려면 어디부터 점검해야 하는지까지.</div>
             <div class="module-meta"><span>10:40–10:50</span><span>PPT 자료</span><span>피드백 사례 중심</span></div>
@@ -843,7 +876,10 @@
 
         <a class="module-card" data-kind="mentor" href="mentor-tacit-skill.html" target="_blank" rel="noopener">
           <div class="case-card-copy">
-            <div class="module-tag">멘토 사례 2 · 오후</div>
+            <div class="module-tag-row">
+              <div class="module-tag">멘토 사례 2 · 오후</div>
+              <div class="module-chip mentor">(멘토용)</div>
+            </div>
             <div class="module-title">암묵지 형식화 + 스킬 개발 — 이유진 멘토 사례 (멘토용)</div>
             <div class="module-desc">담당자 머릿속에만 있던 판단 기준을 문서로 꺼내고, 그 기준을 반복 실행 가능한 스킬로 전환한 실제 사례. 어떤 기준을 어떻게 정리했고, 스킬화 시점에 어디서 막혔는지를 봅니다.</div>
             <div class="module-meta"><span>13:50–14:10</span><span>PPT 자료</span><span>사례 중심</span></div>
@@ -877,25 +913,37 @@
       </div>
       <div class="card-list practice-grid">
         <a class="module-card" data-kind="practice" href="ws-1-problem.html" target="_blank" rel="noopener">
-          <div class="module-tag">실습 1</div>
+          <div class="module-tag-row">
+            <div class="module-tag">실습 1</div>
+            <div class="module-chip answer">정답 사례</div>
+          </div>
           <div class="module-title">문제 좁히기 5칸 워크시트</div>
-          <div class="module-desc">반복 업무, 입력 자료, 출력 형태, 판단 기준, 첫 스킬 이름을 정리합니다.</div>
+          <div class="module-desc">반복 업무, 입력, 출력, 판단 기준, 첫 스킬 이름을 정리합니다.</div>
         </a>
 
         <a class="module-card" data-kind="practice" href="ws-2-data.html" target="_blank" rel="noopener">
-          <div class="module-tag">실습 2</div>
+          <div class="module-tag-row">
+            <div class="module-tag">실습 2</div>
+            <div class="module-chip answer">정답 사례</div>
+          </div>
           <div class="module-title">데이터 확보 4단계 워크시트</div>
           <div class="module-desc">자료 식별, 수집, 변환, 정리 방식을 점검하고 실습에 사용할 샘플을 고릅니다.</div>
         </a>
 
         <a class="module-card" data-kind="practice" href="ws-3-tacit.html" target="_blank" rel="noopener">
-          <div class="module-tag">실습 3</div>
+          <div class="module-tag-row">
+            <div class="module-tag">실습 3</div>
+            <div class="module-chip answer">정답 사례</div>
+          </div>
           <div class="module-title">암묵지 형식화 워크시트</div>
-          <div class="module-desc">포함 기준, 제외 기준, 우수 예시와 보완 예시를 문장으로 정리합니다.</div>
+          <div class="module-desc">포함 기준, 제외 기준, 좋은 예시와 나쁜 예시를 문장으로 정리합니다.</div>
         </a>
 
         <a class="module-card" data-kind="practice" href="ws-4-skill.html" target="_blank" rel="noopener">
-          <div class="module-tag">실습 4</div>
+          <div class="module-tag-row">
+            <div class="module-tag">실습 4</div>
+            <div class="module-chip answer">정답 사례</div>
+          </div>
           <div class="module-title">스킬 구축 워크시트</div>
           <div class="module-desc">스킬 이름, 사용 상황, 입력, 처리 기준, 출력 형태를 고정합니다.</div>
         </a>
@@ -909,7 +957,10 @@
       </div>
       <div class="card-list">
         <a class="module-card" data-kind="module" href="ws-5-final-check.html" target="_blank" rel="noopener">
-          <div class="module-tag">최종 체크</div>
+          <div class="module-tag-row">
+            <div class="module-tag">최종 체크</div>
+            <div class="module-chip answer">정답 사례</div>
+          </div>
           <div class="module-title">입력, 출력, 판단 기준, 첫 스킬 이름이 명확한가요?</div>
           <div class="module-desc">최종 점검 시트에서 네 항목을 한 장으로 다시 모읍니다. 정답 사례, 체크리스트, 작성 순서까지 같이 보면서 마지막으로 다듬습니다.</div>
           <div class="module-meta"><span>정답 사례</span><span>체크리스트</span><span>작성 플로우</span></div>

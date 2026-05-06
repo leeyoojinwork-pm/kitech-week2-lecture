@@ -156,12 +156,12 @@ body{background:var(--bg)}
 .tb-btn{background:#fff;border-color:var(--border);border-radius:999px;color:var(--muted)}
 .tb-btn:hover,.tb-btn.on{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
 .progress{background:#f1f1ef}.pfill{background:linear-gradient(90deg,var(--accent),var(--mentor))}
-.slide{padding:36px 72px 62px}.inner{max-width:1020px}
-.slide>.inner,.slide .inner{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;padding:42px 48px;box-shadow:0 2px 10px rgba(0,0,0,.04);max-height:calc(100vh - 128px);overflow-y:auto}
+.stage{overflow:hidden}.slide{padding:36px 72px 62px;overflow-y:auto;align-items:flex-start;justify-content:flex-start}.inner{max-width:1020px;margin:auto}
+.slide>.inner,.slide .inner{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;padding:38px 44px;box-shadow:0 2px 10px rgba(0,0,0,.04);max-height:calc(100vh - 128px);overflow-y:auto}
 .slide .inner .inner{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;max-height:none;overflow:visible}
 .kicker{color:var(--accent);font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
 .h1{font-size:42px;color:var(--text);letter-spacing:-.5px;font-weight:850}.h2{font-size:30px;color:var(--text);letter-spacing:-.35px;font-weight:850}.sub{font-size:17px;color:var(--muted)}
-.card,.bef,.aft,.step,.fnode,.bigmsg{border-radius:12px;border:1.5px solid var(--border);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.02)}
+.card,.bef,.aft,.step,.fnode,.bigmsg{border-radius:10px;border:1.5px solid var(--border);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.02)}
 .card.pu,.aft,.bigmsg{background:var(--purple-light);border-color:rgba(124,58,237,.24)}
 .card.bl{background:var(--accent-light);border-color:var(--accent-border)}
 .card.rd,.bef{background:var(--red-light);border-color:rgba(185,28,28,.22)}
@@ -171,7 +171,7 @@ body{background:var(--bg)}
 .ct,.batask,.st strong,.bmtxt{color:var(--text)}
 .cb,.babody,.st,.tbl td{color:var(--muted)}
 .ctag.pu,.balbl.a,.skill,.bmtxt .hl{color:var(--practice)}.ctag.bl{color:var(--accent)}.ctag.rd,.balbl.b{color:var(--red)}.ctag.am{color:var(--amber)}.ctag.gr{color:var(--mentor)}.ctag.sl{color:var(--muted)}
-.cl{border-radius:12px;font-size:15px}.cl.pu{background:var(--purple-light);color:#5b21b6}.cl.bl{background:var(--accent-light);color:#1d4ed8}.cl.am{background:var(--amber-light);color:#92400e}.cl.gr{background:var(--green-light);color:#0f766e}
+.cl{border-radius:10px;font-size:14.5px}.cl.pu{background:var(--purple-light);color:#5b21b6}.cl.bl{background:var(--accent-light);color:#1d4ed8}.cl.am{background:var(--amber-light);color:#92400e}.cl.gr{background:var(--green-light);color:#0f766e}
 .sn{background:var(--accent)}.rtag{background:var(--purple-light);color:var(--practice);border-color:rgba(124,58,237,.24)}
 .skill{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
 .tbl{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}.tbl thead th{background:#f8fafc;color:var(--muted)}.tbl td{border-bottom-color:var(--border)}
@@ -180,6 +180,9 @@ body{background:var(--bg)}
 .arr:hover{background:var(--accent-light);color:var(--accent)}
 .dot{background:#d6d6d2}.dot.on{background:var(--accent)}
 .notes{background:#111827;color:#d1d5db;border-top:0;border-radius:14px 14px 0 0}.nlbl{color:#93c5fd}
+.g2{gap:14px}.g3{gap:12px}.card{padding:18px 20px}.step{padding:13px 15px;margin-bottom:9px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;overflow:visible}.farr{display:none}.fnode{min-width:0;padding:13px 12px}
+.tbadge{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
 .slide [style*="color:rgba(255"]{color:var(--muted)!important}
 .slide [style*="color:#fff"]{color:var(--text)!important}
 .slide [style*="background:rgba(255"]{background:#f8fafc!important;border-color:var(--border)!important}
@@ -188,7 +191,13 @@ body{background:var(--bg)}
 .slide [style*="background:rgba(5"]{background:var(--green-light)!important;border-color:rgba(15,118,110,.24)!important}
 .slide [style*="background:rgba(185"]{background:var(--red-light)!important;border-color:rgba(185,28,28,.22)!important}
 .slide [style*="background:rgba(180"]{background:var(--amber-light)!important;border-color:rgba(180,83,9,.22)!important}
-@media(max-width:900px){.slide{padding:26px 22px 54px}.slide>.inner,.slide .inner{padding:28px 22px;border-radius:14px}.h1{font-size:32px}.h2{font-size:25px}.g2,.g3,.ba{grid-template-columns:1fr}.flow{display:grid}.arr{display:none}.tb-meta{display:none}.topbar{padding:0 14px}}
+@media(max-height:760px){
+  .slide{padding:24px 56px 44px}
+  .slide>.inner,.slide .inner{padding:28px 34px;max-height:calc(100vh - 96px)}
+  .h1{font-size:36px}.h2{font-size:25px}.sub{font-size:15px}.card{padding:16px}.cl{padding:13px 16px}
+  .tbl td{padding:8px 11px}.tbl thead th{padding:8px 11px}
+}
+@media(max-width:900px){.slide{padding:26px 22px 54px}.slide>.inner,.slide .inner{padding:28px 22px;border-radius:14px}.h1{font-size:32px}.h2{font-size:25px}.g2,.g3,.ba,.flow{grid-template-columns:1fr}.arr{display:none}.tb-meta{display:none}.topbar{padding:0 14px}}
 </style>
 </head>
 <body>
@@ -223,12 +232,12 @@ const SLIDES = [
   html:`<div class="inner" style="text-align:center;">
     <div class="kicker">멘토 사례 ③·④ · 20분</div>
     <div class="h1">암묵지 형식화 +<br/>스킬 개발과 활용</div>
-    <div style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:4px;">본인이 가장 자신있는 암묵지 역량을 형식화해 에이전트화한 사례<br/>+ 가장 유용하게 사용 중인 스킬 사례 공유</div>
+    <div style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:4px;">담당자의 판단 기준을 문서화하고<br/>반복 실행 가능한 스킬 구조로 전환한 사례</div>
     <div class="pills" style="justify-content:center;">
       <span class="pill">암묵지 형식화란?</span>
-      <span class="pill">사례 A — 선별 기준이 프롬프트가 된다</span>
-      <span class="pill">사례 B — 관점이 스킬의 뼈대가 된다</span>
-      <span class="pill">사례 C — 현실 함정과 해결 방향</span>
+      <span class="pill">사례 A — 선별 기준을 처리 기준으로 정리한다</span>
+      <span class="pill">사례 B — 관점이 스킬 구조가 된다</span>
+      <span class="pill">사례 C — 현실 제약과 해결 방향</span>
     </div>
   </div>`
 },
@@ -236,90 +245,90 @@ const SLIDES = [
 
 // 추가. 20분 흐름
 {
-  notes:'20분 안에서 너무 많은 사례를 설명하지 말고, 각 사례가 어떤 역할을 하는지만 먼저 잡아준다.',
+  notes:'20분 안에서 사례를 과도하게 설명하기보다, 각 사례가 어떤 역할을 하는지만 먼저 정리한다.',
   html:`<div class="inner">
     <div class="kicker">20분 구성</div>
-    <div class="h2">오늘은 사례 3개만<br/>딱 잡고 가겠습니다</div>
-    <div class="sub">잘 된 케이스, 공공기관 문서에 바로 붙는 케이스, 그리고 현실에서 막히는 케이스까지 같이 봅니다.</div>
+    <div class="h2">핵심 사례 3건을 중심으로<br/>판단 기준을 정리합니다</div>
+    <div class="sub">문장 작성 기준, 규정 검토 관점, 문서 포맷 제약 사례를 순서대로 검토합니다.</div>
     <div style="margin-top:16px;">
-      <div class="step"><div class="sn">1</div><div class="st"><strong>0~5분: 암묵지 형식화란 무엇인가</strong><br/>평소 감으로 하던 판단이 어떻게 프롬프트가 되는지 먼저 잡습니다.</div></div>
-      <div class="step"><div class="sn">2</div><div class="st"><strong>5~10분: 사례 A, 뉴스 선별과 한 문장 요약</strong><br/>기사 고르는 기준과 문장 쓰는 습관이 어떻게 규칙으로 바뀌었는지 봅니다.</div></div>
-      <div class="step"><div class="sn">3</div><div class="st"><strong>10~15분: 사례 B, 원규 검토 스킬</strong><br/>원규 검토할 때 머릿속으로 돌리던 5가지 관점이 어떻게 스킬 뼈대가 됐는지 봅니다.</div></div>
-      <div class="step"><div class="sn">4</div><div class="st"><strong>15~20분: 사례 C와 내 케이스 점검</strong><br/>회의록 자동화가 어디서 잘 되고, 어디서 포맷 때문에 막히는지도 같이 짚습니다.</div></div>
+      <div class="step"><div class="sn">1</div><div class="st"><strong>0~5분: 암묵지 형식화란 무엇인가</strong><br/>업무 중 반복되는 판단 기준을 문서화하는 방식을 확인합니다.</div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><strong>5~10분: 사례 A, 뉴스 선별과 한 문장 요약</strong><br/>기사 선별 기준과 문장 작성 규칙이 어떻게 처리 기준으로 정리되는지 확인합니다.</div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><strong>10~15분: 사례 B, 원규 검토 스킬</strong><br/>원규 검토 시 사용하는 5가지 관점이 어떻게 스킬의 구조가 되는지 확인합니다.</div></div>
+      <div class="step"><div class="sn">4</div><div class="st"><strong>15~20분: 사례 C와 내 과제 점검</strong><br/>회의록 작성 기준과 HWPX 포맷 제약을 함께 점검합니다.</div></div>
     </div>
   </div>`
 },
 
 // 2. 암묵지 형식화란?
 {
-  notes:'유진 멘토님 본인 사례가 있으면 여기서 짧게 공유하면 좋습니다. 없으면 바로 멘티 사례 흐름으로 가도 무방합니다.',
+  notes:'회의록 사례를 통해 암묵지 형식화의 의미를 설명한다.',
   html:`<div class="inner">
     <div class="kicker">0–5분</div>
     <div class="h2">암묵지 형식화란 무엇인가</div>
-    <div class="sub">머릿속 판단 기준을 AI가 쓸 수 있는 문서로 끄집어내는 것</div>
+    <div class="sub">업무 담당자의 판단 기준을 문서와 절차로 정리하는 것</div>
     <div class="g2" style="margin-bottom:14px;">
       <div class="card sl" style="padding:20px;">
         <div class="ctag sl">형식지 — 이미 문서화된 것</div>
         <div class="ct">매뉴얼·규정·절차서</div>
-        <div class="cb">글로 이미 적혀 있어<br/>AI에게 바로 넣을 수 있음<br/><br/><span style="font-size:11.5px;color:rgba(255,255,255,.3);">예) 작성 양식, 결재 규정, 표준 프로세스</span></div>
+        <div class="cb">이미 문서화되어 있어<br/>처리 기준으로 활용 가능<br/><br/><span style="font-size:11.5px;color:rgba(255,255,255,.3);">예) 작성 양식, 결재 규정, 표준 프로세스</span></div>
       </div>
       <div class="card pu" style="padding:20px;">
-        <div class="ctag pu">암묵지 — 머릿속에만 있는 것</div>
+        <div class="ctag pu">암묵지 — 경험으로 축적된 것</div>
         <div class="ct">경험으로 쌓인 판단 기준</div>
-        <div class="cb">글로 적히지 않아<br/>AI에게 직접 가르쳐줘야 함<br/><br/><span style="font-size:11.5px;color:#C4B5FD;">예) 이 기사는 넣고 저 기사는 빼는 기준, 이 표현보다 저 표현이 더 자연스러운 이유</span></div>
+        <div class="cb">문서화되어 있지 않아<br/>담당자가 기준을 명시해야 함<br/><br/><span style="font-size:11.5px;color:#C4B5FD;">예) 포함·제외 기준, 선호 표현, 예외 처리 기준</span></div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:14px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:10px;padding:14px 18px;">
       <div style="flex:1;">
-        <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;">암묵지 형식화 = 오랫동안 같은 일을 하면서 쌓인<br/><strong style="color:#fff;">"왜 이게 더 좋은지 설명하기 어렵지만 나는 아는 것"</strong>을<br/>글로 쓰는 행위</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;">암묵지 형식화 = 반복 업무에서 사용하던<br/><strong style="color:#fff;">판단 기준과 예외 처리 방식</strong>을<br/>문서로 정리하는 과정</div>
       </div>
-      <div style="font-size:42px;color:rgba(124,58,237,.5);flex-shrink:0;">→</div>
+      <div style="font-size:13px;font-weight:800;color:#7C3AED;flex-shrink:0;">기준화</div>
       <div style="flex:1;text-align:right;">
-        <div style="font-size:13px;color:#C4B5FD;line-height:1.8;">이 글이<br/><strong style="color:#fff;">프롬프트가 되고</strong><br/>스킬이 됩니다</div>
+        <div style="font-size:13px;color:#C4B5FD;line-height:1.8;">이 문서가<br/><strong style="color:#fff;">처리 기준이 되고</strong><br/>스킬 구조가 됩니다</div>
       </div>
     </div>
   </div>`
 },
 
 
-// 추가. 유진 멘토 본인 사례
+// 추가. 유진 멘토 사례
 {
-  notes:'멘토 본인 사례를 짧게 넣으면 뒤의 멘티 사례가 훨씬 이해된다. 회의록도 단순 받아쓰기가 아니라 분류 판단이라는 점을 강조한다.',
+  notes:'멘토 사례를 짧게 넣으면 뒤의 멘티 사례가 이해하기 쉽다. 회의록도 단순 받아쓰기가 아니라 분류 판단이라는 점을 강조한다.',
   html:`<div class="inner">
-    <div class="kicker">멘토 본인 사례</div>
-    <div class="h2">회의록 작성도 사실<br/>그냥 받아쓰기가 아닙니다</div>
+    <div class="kicker">멘토 사례</div>
+    <div class="h2">회의록 작성은<br/>단순 기록 업무가 아닙니다</div>
     <div class="ba" style="margin-top:18px;margin-bottom:12px;">
       <div class="bef">
         <div class="balbl b">겉으로 보이는 일</div>
         <div class="batask">회의 내용을 잘 받아 적는다</div>
-        <div class="babody">겉으로는 발언을 옮기고 요약하는 일처럼 보입니다. 그래서 처음엔 그냥 요약 자동화로 생각하기 쉽습니다.</div>
+        <div class="babody">겉으로는 발언을 옮기고 요약하는 업무처럼 보입니다. 그러나 실제 산출물은 의사결정과 후속 조치가 드러나야 합니다.</div>
       </div>
       <div class="aft">
         <div class="balbl a">실제로 하는 판단</div>
         <div class="batask">안건, 쟁점, 결정사항, 할 일로 다시 나눈다</div>
-        <div class="babody">근데 좋은 회의록은 받아쓰기가 아니라 정리입니다. 뭐가 결정됐고, 누가 언제까지 뭘 해야 하는지가 남아야 합니다.</div>
+        <div class="babody">회의록의 핵심은 단순 요약이 아니라 결정사항, 쟁점, 담당자, 기한을 구조화하는 것입니다.</div>
       </div>
     </div>
-    <div class="cl pu"><strong style="color:#fff;">즉, 회의록 에이전트는 요약기가 아니라 회의를 실행 가능한 할 일로 다시 정리해주는 도우미에 가깝습니다.</strong></div>
+    <div class="cl pu"><strong style="color:#fff;">따라서 회의록 자동화는 요약보다 결정사항과 후속 조치 구조화에 초점을 둬야 합니다.</strong></div>
   </div>`
 },
 
 
 // 추가. 추천 사례 3개
 {
-  notes:'멘티 이름은 익명화해서 소개한다. 각 사례가 보여주는 포인트가 다르다는 점을 먼저 잡는다.',
+  notes:'멘티 이름은 익명화해서 소개한다. 각 사례가 보여주는 포인트가 다르다는 점을 먼저 정리한다.',
   html:`<div class="inner">
     <div class="kicker">추천 멘티 사례 3개</div>
-    <div class="h2">이 파트에서는<br/>이 3개 사례를 보면 됩니다</div>
+    <div class="h2">이 파트에서는<br/>세 가지 유형을 검토합니다</div>
     <table class="tbl" style="margin-top:18px;background:rgba(255,255,255,.03);border-radius:10px;overflow:hidden;">
-      <thead><tr><th>순서</th><th>사례</th><th>유형</th><th>왜 좋은 사례인가</th></tr></thead>
+      <thead><tr><th>순서</th><th>사례</th><th>유형</th><th>검토 포인트</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>멘티 A</td><td class="done">뉴스 선별과 한 문장 요약</td><td>머릿속 기준이 규칙으로 가장 잘 풀렸고, 스킬도 3개로 깔끔하게 나뉘어 있습니다.</td></tr>
-        <tr><td>2</td><td>멘티 B</td><td class="done">원규 검토 스킬</td><td>공공기관 문서 에이전트 예시랑 바로 맞닿아 있습니다. 5가지 검토 관점이 스킬의 뼈대가 됩니다.</td></tr>
-        <tr><td>3</td><td>멘티 C</td><td class="wip">회의록 에이전트</td><td>회의록 작성 예시와 바로 연결됩니다. 다만 HWPX 처리라는 현실적인 벽도 같이 보여줍니다.</td></tr>
+        <tr><td>1</td><td>멘티 A</td><td class="done">뉴스 선별과 한 문장 요약</td><td>선별 기준과 문장 규칙이 명확하며, 업무 단계를 3개 스킬로 분리했습니다.</td></tr>
+        <tr><td>2</td><td>멘티 B</td><td class="done">원규 검토 스킬</td><td>공공기관 문서 검토 업무에 적용하기 쉬운 사례입니다. 5가지 검토 관점이 스킬 구조가 됩니다.</td></tr>
+        <tr><td>3</td><td>멘티 C</td><td class="wip">회의록 작성 지원</td><td>회의록 작성 기준은 명확하지만, HWPX 포맷 처리 제약을 함께 보여줍니다.</td></tr>
       </tbody>
     </table>
-    <div class="cl bl">세 사례를 보면 암묵지 형식화가 단순 프롬프트 작성이 아니라, 업무 기준을 제품처럼 구조화하는 일이라는 게 보입니다.</div>
+    <div class="cl bl">세 사례는 암묵지 형식화가 단순 문장 작성이 아니라 업무 기준을 재사용 가능한 구조로 정리하는 과정임을 보여줍니다.</div>
   </div>`
 },
 
@@ -328,53 +337,53 @@ const SLIDES = [
 {
   notes:'각 사례를 볼 때 무엇을 봐야 하는지 안내한다. 사례 소개가 아니라 관찰 포인트를 잡아주는 페이지다.',
   html:`<div class="inner">
-    <div class="kicker">사례를 볼 때 봐야 할 것</div>
-    <div class="h2">이 사례들은 “누가 잘했나”보다<br/>뭘 보고 배울지가 더 중요합니다</div>
+    <div class="kicker">사례 검토 포인트</div>
+    <div class="h2">사례별로 확인해야 할<br/>판단 기준이 다릅니다</div>
     <div class="g3" style="margin-top:18px;">
       <div class="card bl">
         <div class="ctag bl">멘티 A를 볼 때</div>
         <div class="ct">암묵지가 규칙으로 바뀌는 과정</div>
-        <div class="cb">기사를 잘 고르는 감이 어떻게<br/>포함 기준, 제외 기준, 문장 스타일 규칙으로 바뀌었는지를 보면 됩니다.<br/><br/><strong style="color:#93C5FD;">도메인 규칙화</strong>를 보여주는 가장 강한 케이스입니다.</div>
+        <div class="cb">기사 선별 경험이 포함 기준, 제외 기준, 문장 작성 규칙으로 정리되는 과정을 확인합니다.<br/><br/><strong style="color:#93C5FD;">업무 기준 문서화</strong>를 보여주는 대표 사례입니다.</div>
       </div>
       <div class="card gr">
         <div class="ctag gr">멘티 B를 볼 때</div>
         <div class="ct">관점이 스킬의 뼈대가 되는 과정</div>
-        <div class="cb">원규 검토할 때마다 머릿속으로 돌리던 5가지 관점이<br/>어떻게 체크리스트와 검토 프롬프트가 되는지를 보면 됩니다.<br/><br/><strong style="color:#6EE7B7;">공공기관 문서 에이전트</strong>와 바로 연결됩니다.</div>
+        <div class="cb">원규 검토 시 반복적으로 적용하는 5가지 관점이 체크리스트와 검토 기준로 전환되는 과정을 확인합니다.<br/><br/><strong style="color:#6EE7B7;">공공기관 문서 검토 업무</strong>에 적용할 수 있습니다.</div>
       </div>
       <div class="card pu">
         <div class="ctag pu">멘티 C를 볼 때</div>
-        <div class="ct">잘 만든 스킬도 구현에서 막힐 수 있음</div>
-        <div class="cb">회의록을 나누는 기준은 잘 잡혔지만,<br/>실제로는 HWPX 처리와 서식 재반영에서 막힐 수 있습니다.<br/><br/><strong style="color:#C4B5FD;">현실적인 파일럿 점검</strong>을 보여주는 케이스입니다.</div>
+        <div class="ct">기준이 정리되어도 구현 제약은 별도로 남을 수 있음</div>
+        <div class="cb">회의록을 나누는 기준은 잘 잡혔지만,<br/>실제로는 HWPX 처리와 서식 재반영에서 막힐 수 있습니다.<br/><br/><strong style="color:#C4B5FD;">파일럿 전 검토 항목</strong>을 보여주는 사례입니다.</div>
       </div>
     </div>
-    <div class="cl pu">결국 이 세 사례는 각각 규칙으로 바꾸는 법, 관점으로 정리하는 법, 구현 전에 확인할 것을 보여줍니다. 내 업무가 어디에 가까운지 보면서 들으면 됩니다.</div>
+    <div class="cl pu">세 사례는 기준 정리, 관점 구조화, 구현 전 점검이라는 서로 다른 검토 지점을 보여줍니다.</div>
   </div>`
 },
 
 // 3. 사례 A — 뉴스 선별 기준
 {
-  notes:'"이 분이 매일 아침 07:40에 하는 일이 뭔지 들으면서 생각해보세요. 이 판단을 글로 쓰면 뭐가 될까요?"',
+  notes:'매일 아침 반복되는 기사 선별 판단을 문서화하면 무엇이 기준으로 남는지 설명한다.',
   html:`<div class="inner">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
       <span class="tbadge">5–10분</span>
-      <div style="background:rgba(124,58,237,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#C4B5FD;letter-spacing:.06em;text-transform:uppercase;">사례 A — 선별 기준이 프롬프트가 된다</div>
+      <div style="background:rgba(124,58,237,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#C4B5FD;letter-spacing:.06em;text-transform:uppercase;">사례 A — 선별 기준을 처리 기준으로 정리한다</div>
       <div style="font-size:12px;color:rgba(255,255,255,.3);">언론홍보 담당자</div>
     </div>
-    <div class="h2" style="margin-bottom:4px;">데일리뉴스 작성 도우미</div>
-    <div class="sub" style="margin-bottom:12px;">매일 아침 뉴스 50건 → 10건 선별 → 한 문장 요약 → 110명에게 메일링</div>
+    <div class="h2" style="margin-bottom:4px;">데일리 뉴스 작성 지원</div>
+    <div class="sub" style="margin-bottom:12px;">매일 아침 뉴스 50건을 검토해 주요 기사 10건을 선별하고, 한 문장 요약문으로 배포</div>
     <div class="g2" style="margin-bottom:12px;">
       <div>
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:7px;">왜 만들었나</div>
         <div class="card sl" style="padding:14px 16px;">
-          <div class="cb" style="line-height:1.9;">선별 기준 + 문장 스타일이<br/>담당자 머릿속에만 있었음<br/>누락 시 "왜 빠졌냐" 평판 리스크<br/><span style="color:#FCA5A5;">→ 기준을 글로 만들어야 했음</span></div>
+          <div class="cb" style="line-height:1.9;">선별 기준 + 문장 스타일이<br/>담당자에게만 축적되어 있었음<br/>누락 시 설명 책임 발생<br/><span style="color:#FCA5A5;">선별 기준 문서화 필요</span></div>
         </div>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:7px;">암묵지 → 도메인 규칙</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:7px;">암묵지에서 처리 기준으로</div>
         <div style="display:flex;flex-direction:column;gap:6px;">
           <div style="background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:6px;padding:8px 12px;">
             <div style="font-size:10.5px;font-weight:700;color:#C4B5FD;margin-bottom:5px;">선별 기준</div>
-            <div class="cb" style="font-size:12px;line-height:1.8;"><span style="color:#6EE7B7;">✓</span> 우리 원 언급 → 무조건 포함<br/><span style="color:#6EE7B7;">✓</span> R&D 예산/출연연 제도 → 가급적 포함<br/><span style="color:#FCA5A5;">✗</span> 동일 사안 3차 이상 후속 → 제외<br/><span style="color:#FCA5A5;">✗</span> 특정 정당 결부 기사 → 제외</div>
+            <div class="cb" style="font-size:12px;line-height:1.8;"><span style="color:#6EE7B7;">포함:</span> 우리 원 언급: 필수 포함<br/><span style="color:#6EE7B7;">포함:</span> R&D 예산/출연연 제도: 우선 검토<br/><span style="color:#FCA5A5;">제외:</span> 동일 사안 3차 이상 후속: 제외<br/><span style="color:#FCA5A5;">제외:</span> 특정 정당 결부 기사: 제외</div>
           </div>
           <div style="background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:6px;padding:8px 12px;">
             <div style="font-size:10.5px;font-weight:700;color:#C4B5FD;margin-bottom:5px;">문장 규칙</div>
@@ -383,42 +392,42 @@ const SLIDES = [
         </div>
       </div>
     </div>
-    <div class="cl pu"><strong style="color:#fff;">"매일 머릿속에서 자동으로 돌아가던 판단 기준이, 글로 쓰고 나니 프롬프트가 됐다."</strong></div>
+    <div class="cl pu"><strong style="color:#fff;">반복 판단 기준을 문서화하면 스킬 설계 기준으로 활용할 수 있습니다.</strong></div>
   </div>`
 },
 
 // 4. 사례 A — 3개 스킬 구조
 {
-  notes:'"한 가지 업무를 3개의 스킬로 쪼갠 게 포인트입니다. 한 번에 다 하려 하지 않고, 역할을 나눴어요."',
+  notes:'"업무 전체를 한 번에 처리하지 않고 역할별 스킬로 분리한 점을 설명한다."',
   html:`<div class="inner">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
       <span class="tbadge">5–10분 이어서</span>
-      <div style="font-size:13.5px;font-weight:700;color:rgba(255,255,255,.7);">사례 A — 한 업무를 3개 스킬로 분리한 구조</div>
+      <div style="font-size:13.5px;font-weight:700;color:rgba(255,255,255,.7);">사례 A — 업무를 3개 스킬로 분리한 구조</div>
     </div>
     <div class="flow" style="margin-bottom:16px;">
       <div class="fnode">
         <div style="font-size:10.5px;color:rgba(255,255,255,.4);margin-bottom:4px;">입력</div>
         <div style="font-size:12.5px;font-weight:700;color:#fff;">뉴스 50건<br/>PDF/HWP</div>
       </div>
-      <div class="farr">→</div>
+      <div class="farr"></div>
       <div class="fnode" style="background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.35);">
         <div style="font-size:10px;color:#C4B5FD;margin-bottom:4px;">Skill 1</div>
         <div class="skill" style="font-size:11px;">/한문장-작성</div>
         <div style="font-size:11.5px;color:rgba(255,255,255,.5);margin-top:4px;">선별 + 한 문장 초안</div>
       </div>
-      <div class="farr">→</div>
+      <div class="farr"></div>
       <div class="fnode" style="background:rgba(37,99,235,.12);border-color:rgba(37,99,235,.3);">
         <div style="font-size:10px;color:#93C5FD;margin-bottom:4px;">Skill 2</div>
         <div class="skill" style="font-size:11px;">/best-sentences</div>
         <div style="font-size:11.5px;color:rgba(255,255,255,.5);margin-top:4px;">과거 베스트 참조</div>
       </div>
-      <div class="farr">→</div>
+      <div class="farr"></div>
       <div class="fnode" style="background:rgba(5,150,105,.12);border-color:rgba(5,150,105,.3);">
         <div style="font-size:10px;color:#6EE7B7;margin-bottom:4px;">Skill 3</div>
         <div class="skill" style="font-size:11px;">/template-mail</div>
         <div style="font-size:11.5px;color:rgba(255,255,255,.5);margin-top:4px;">메일링용 포맷</div>
       </div>
-      <div class="farr">→</div>
+      <div class="farr"></div>
       <div class="fnode">
         <div style="font-size:10.5px;color:rgba(255,255,255,.4);margin-bottom:4px;">출력</div>
         <div style="font-size:12.5px;font-weight:700;color:#fff;">메일링<br/>완성본</div>
@@ -438,34 +447,34 @@ const SLIDES = [
         <div class="cb" style="font-size:12.5px;line-height:1.8;"><span style="color:#6EE7B7;font-weight:600;">입력:</span> 탈고 완료 문장들<br/><span style="color:#6EE7B7;font-weight:600;">출력:</span> 메일링용 포맷 완성본<br/><span style="font-size:11.5px;color:rgba(255,255,255,.35);">배포 즉시 사용 가능</span></div>
       </div>
     </div>
-    <div class="cl pu" style="margin-top:10px;"><strong style="color:#fff;">포인트:</strong> 한 업무를 단계별 스킬로 분리 → 각 스킬의 역할이 명확 → 개선이 쉬워짐. 한 번에 다 하려 하지 않는 것이 핵심.</div>
+    <div class="cl pu" style="margin-top:10px;"><strong style="color:#fff;">핵심:</strong> 업무를 단계별 스킬로 분리하면 각 단계의 기준과 개선 지점이 명확해집니다.</div>
   </div>`
 },
 
 // 5. 사례 B — 관점이 스킬의 뼈대
 {
-  notes:'"5가지 관점을 외우는 게 암묵지였다는 표현이 핵심입니다. 이 분은 본인이 매번 하는 생각을 목록으로 쓰는 것만으로 스킬의 뼈대가 완성됐어요."',
+  notes:'"반복 검토 관점을 목록화하는 것만으로도 스킬 구조의 핵심이 잡힌다는 점을 설명한다."',
   html:`<div class="inner">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
       <span class="tbadge">10–15분</span>
-      <div style="background:rgba(37,99,235,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#93C5FD;letter-spacing:.06em;text-transform:uppercase;">사례 B — 관점이 스킬의 뼈대가 된다</div>
+      <div style="background:rgba(37,99,235,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#93C5FD;letter-spacing:.06em;text-transform:uppercase;">사례 B — 관점이 스킬 구조가 된다</div>
       <div style="font-size:12px;color:rgba(255,255,255,.3);">규정관리 담당자</div>
     </div>
-    <div class="h2" style="margin-bottom:4px;">원규 검토 도우미 — <span class="skill">/원규-검토</span></div>
-    <div class="sub" style="margin-bottom:12px;">원규(기관 규정) 개정안 → 5가지 관점 검토의견서 자동 초안</div>
+    <div class="h2" style="margin-bottom:4px;">원규 검토 지원 — <span class="skill">/원규-검토</span></div>
+    <div class="sub" style="margin-bottom:12px;">원규(기관 규정) 개정안을 5가지 관점으로 검토한 의견서 초안</div>
     <div class="ba" style="margin-bottom:12px;">
       <div class="bef">
         <div class="balbl b">Before</div>
-        <div class="batask">검토자에 따라 어떤 관점은 빠짐</div>
-        <div class="babody" style="margin-top:6px;">5가지 관점이 담당자 머릿속에만 있었음<br/>매번 처음부터 다시 생각해야 했음<br/>→ 일관성 없는 검토 의견</div>
+        <div class="batask">검토자에 따라 관점 누락 가능</div>
+        <div class="babody" style="margin-top:6px;">5가지 관점이 담당자에게만 축적되어 있었음<br/>매번 처음부터 다시 생각해야 했음<br/>검토 의견의 일관성 저하</div>
       </div>
       <div class="aft">
         <div class="balbl a">After</div>
-        <div class="batask">관점을 스킬에 내장 → 항상 5가지 다 나옴</div>
+        <div class="batask">검토 관점 고정 및 5개 항목 일관 검토</div>
         <div class="babody" style="margin-top:6px;"><span style="color:#93C5FD;font-weight:600;">입력:</span> 원규 개정안 파일<br/><span style="color:#93C5FD;font-weight:600;">출력:</span> 5관점별 검토 의견서<br/><span style="color:#93C5FD;font-weight:600;">사람 개입:</span> 최종 제출 전 검토 + 서명</div>
       </div>
     </div>
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:8px;">5가지 검토 관점 — 이게 스킬의 뼈대</div>
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:8px;">5가지 검토 관점 — 이 항목이 스킬 구조</div>
     <div class="g2" style="gap:8px;margin-bottom:12px;">
       <div style="display:flex;flex-direction:column;gap:6px;">
         <div class="step" style="margin-bottom:0;"><div class="sn" style="background:#2563EB;font-size:11px;">1</div><div class="st" style="font-size:13px;"><strong>법적 정합성</strong> — 상위 법령·지침과 충돌 없는가</div></div>
@@ -487,13 +496,13 @@ const SLIDES = [
   notes:'스킬은 이름보다 입력, 기준, 출력, 사람 검토가 먼저라고 설명한다.',
   html:`<div class="inner">
     <div class="kicker">사례 B — 스킬 명세</div>
-    <div class="h2">스킬은 이름보다<br/>입력·기준·출력이 먼저입니다</div>
+    <div class="h2">스킬 설계는<br/>입력·기준·출력 정의에서 시작합니다</div>
     <table class="tbl" style="margin-top:18px;background:rgba(255,255,255,.03);border-radius:10px;overflow:hidden;">
       <thead><tr><th>항목</th><th>내용</th><th>멘토 관점</th></tr></thead>
       <tbody>
         <tr><td>스킬 이름</td><td class="done">원규 검토</td><td>이름만 봐도 무슨 일을 하는지 보입니다.</td></tr>
         <tr><td>입력</td><td>원규 개정안, 기존 규정, 검토 요청 배경</td><td>파일만 넣으면 부족합니다. 왜 검토하는지, 어떤 기준으로 봐야 하는지도 같이 줘야 합니다.</td></tr>
-        <tr><td>처리 기준</td><td>5가지 검토 관점과 누락 체크 기준</td><td>이 기준이 없으면 AI 답변은 금방 그럴듯한 일반론으로 흐릅니다.</td></tr>
+        <tr><td>처리 기준</td><td>5가지 검토 관점과 누락 체크 기준</td><td>이 기준이 없으면 결과물이 일반적인 설명에 머물 가능성이 높습니다.</td></tr>
         <tr><td>출력</td><td>관점별 검토 의견 초안, 보완 필요 항목, 질문 목록</td><td>처음부터 최종본을 맡기기보다, 사람이 검토할 초안으로 두는 게 안전합니다.</td></tr>
         <tr><td>사람 검토</td><td>최종 제출 전 담당자 확인</td><td>규정과 책임이 연결된 문서는 사람 판단 지점을 반드시 남겨야 합니다.</td></tr>
       </tbody>
@@ -501,37 +510,37 @@ const SLIDES = [
   </div>`
 },
 
-// 6. 사례 C — 현실 함정 + 해결 방향
+// 6. 사례 C — 현실 제약 + 해결 방향
 {
-  notes:'"이 사례는 암묵지 형식화를 다 해놨는데 데이터 포맷이 발목을 잡은 경우예요. 문제정의도 맞고 기준도 잘 만들었는데 hwpx 하나 때문에 전체가 멈췄습니다. 1주차에 포맷 확인이 왜 중요한지 보여주는 사례입니다."',
+  notes:'"이 사례는 암묵지 형식화를 정리된 기준이 있었지만 데이터 포맷 검토가 추가로 필요했던 사례입니다. 1주차에 포맷 확인이 왜 중요한지 보여주는 사례입니다."',
   html:`<div class="inner">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
       <span class="tbadge">15–18분</span>
-      <div style="background:rgba(180,83,9,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCD34D;letter-spacing:.06em;text-transform:uppercase;">사례 C — 현실 함정과 해결 방향</div>
+      <div style="background:rgba(180,83,9,.35);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCD34D;letter-spacing:.06em;text-transform:uppercase;">사례 C — 현실 제약과 해결 방향</div>
       <div style="font-size:12px;color:rgba(255,255,255,.3);">디지털인재교육팀</div>
     </div>
-    <div class="h2" style="margin-bottom:4px;">주간 회의 비서</div>
-    <div class="sub" style="margin-bottom:12px;">회의 내용 → 회의록 초안 (결정사항 / 액션아이템 / 논의내용 자동 분류)</div>
+    <div class="h2" style="margin-bottom:4px;">주간 회의록 작성 지원</div>
+    <div class="sub" style="margin-bottom:12px;">회의 내용에서 회의록 초안 작성 (결정사항 / 액션아이템 / 논의내용 구조화)</div>
     <div class="g2" style="margin-bottom:12px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div class="card gr" style="padding:14px 16px;">
-          <div class="ctag gr">잘 된 것 — 암묵지 형식화 ✓</div>
-          <div class="cb" style="font-size:12.5px;line-height:1.85;">회의록 구성: 참석자/안건/논의내용/결정사항/액션아이템<br/>결정사항 vs 논의사항 구분 기준<br/>"~하기로 했다" "~까지 검토" 패턴 감지<br/><span style="color:#6EE7B7;">→ 암묵지 규칙화 잘 됨</span></div>
+          <div class="ctag gr">정리된 기준 — 암묵지 형식화 포함:</div>
+          <div class="cb" style="font-size:12.5px;line-height:1.85;">회의록 구성: 참석자/안건/논의내용/결정사항/액션아이템<br/>결정사항과 논의사항 구분 기준<br/>"~하기로 했다" "~까지 검토" 패턴 감지<br/><span style="color:#6EE7B7;">회의록 작성 기준은 정리됨</span></div>
         </div>
         <div class="card rd" style="padding:14px 16px;">
-          <div class="ctag rd">막힌 것 — hwpx 포맷 ✗</div>
-          <div class="cb" style="font-size:12.5px;line-height:1.85;">공공기관 표준 파일: <strong style="color:#FCA5A5;">hwpx</strong><br/>hwp 또는 hwpx → md 또는 docs 변환 시<br/>서식 보존과 재반영에서 깨짐 발생<br/><span style="color:#FCA5A5;">→ AI 문제가 아니라 포맷 처리 방식 문제</span></div>
+          <div class="ctag rd">제약 사항 — hwpx 포맷:</div>
+          <div class="cb" style="font-size:12.5px;line-height:1.85;">공공기관 표준 파일: <strong style="color:#FCA5A5;">hwpx</strong><br/>hwp 또는 hwpx에서 md 또는 docs로 변환 시<br/>서식 보존과 재반영에서 깨짐 발생<br/><span style="color:#FCA5A5;">언어 처리 문제가 아니라 포맷 처리 방식 문제</span></div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:2px;">현재 탐색 중인 해결 방향</div>
         <div class="card bl" style="padding:14px 16px;">
           <div class="ctag bl">Option A — rhwp 탐색</div>
-          <div class="cb" style="font-size:12.5px;line-height:1.85;">한글과컴퓨터 웹 기반<br/>hwp 내에서 직접 처리 가능<br/><span style="color:#93C5FD;">→ 포맷 변환 없이 해결 가능성</span></div>
+          <div class="cb" style="font-size:12.5px;line-height:1.85;">한글과컴퓨터 웹 기반<br/>hwp 내에서 직접 처리 가능<br/><span style="color:#93C5FD;">포맷 변환 최소화 가능성</span></div>
         </div>
         <div class="card sl" style="padding:14px 16px;">
           <div class="ctag sl">Option B — md 기반 완성도</div>
-          <div class="cb" style="font-size:12.5px;line-height:1.85;">포맷 변환 포기<br/>md로 완성도 높이는 방향<br/><span style="color:rgba(255,255,255,.4);">→ hwpx 의존도 낮추기</span></div>
+          <div class="cb" style="font-size:12.5px;line-height:1.85;">포맷 변환 포기<br/>md로 완성도 높이는 방향<br/><span style="color:rgba(255,255,255,.4);">HWPX 의존도 축소</span></div>
         </div>
         <div class="cl am" style="margin-top:0;"><strong style="color:#fff;">교훈:</strong> HWPX는 XML 기반이라 추출 자체는 가능하지만, <strong>서식 보존과 재반영 방식</strong>을 1주차에 반드시 확인해야 합니다.</div>
       </div>
@@ -542,23 +551,23 @@ const SLIDES = [
 
 // 추가. HWPX 처리 방향
 {
-  notes:'HWPX를 AI 비친화적이라고 단정하지 않는다. HWPX 자체보다 추출, 검토, 재반영 흐름이 필요하다고 말한다.',
+  notes:'HWPX를 포맷 처리 제약이 큰이라고 단정하지 않는다. HWPX 자체보다 추출, 검토, 재반영 흐름이 필요하다고 말한다.',
   html:`<div class="inner">
     <div class="kicker">사례 C — HWPX 처리 방향</div>
-    <div class="h2">HWPX는 바로 완성하려 하지 말고<br/>처리 단계를 나눠야 합니다</div>
+    <div class="h2">HWPX 문서는<br/>처리 단계를 분리해야 합니다</div>
     <div style="margin-top:18px;">
       <div class="step"><div class="sn">1</div><div class="st"><strong>추출 가능성 확인</strong><br/>원본에서 텍스트, 표, 제목, 본문을 분리해서 읽을 수 있는지 먼저 확인합니다.</div></div>
-      <div class="step"><div class="sn">2</div><div class="st"><strong>AI 처리 범위 제한</strong><br/>회의록 초안, 누락 체크, 할 일 정리처럼 언어 처리 중심 작업만 먼저 맡깁니다.</div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><strong>처리 범위 제한</strong><br/>회의록 초안, 누락 체크, 할 일 정리처럼 언어 처리 중심 작업만 먼저 맡깁니다.</div></div>
       <div class="step"><div class="sn">3</div><div class="st"><strong>서식 재반영 방식 결정</strong><br/>최종 HWPX 반영은 변환 도구, 템플릿, 사람 검토 중 어떤 방식으로 갈지 정합니다.</div></div>
     </div>
-    <div class="cl bl">다음 제출물은 완성 에이전트보다 추출 테스트 결과와 서식 보존 체크리스트가 더 현실적입니다.</div>
+    <div class="cl bl">다음 제출물은 완성본보다 추출 테스트 결과와 서식 보존 체크리스트가 더 현실적입니다.</div>
   </div>`
 },
 
 
 // 추가. 세 사례 비교
 {
-  notes:'세 사례를 한 장으로 정리한다. 수강생이 자기 케이스를 어디에 대입할지 보게 한다.',
+  notes:'세 사례를 한 장으로 정리한다. 수강생이 자기 사례를 어디에 대입할지 확인하게 한다.',
   html:`<div class="inner">
     <div class="kicker">사례 비교</div>
     <div class="h2">세 사례는 각각 다른 포인트를 보여줍니다</div>
@@ -566,64 +575,64 @@ const SLIDES = [
       <thead><tr><th>사례</th><th>암묵지</th><th>스킬화 방식</th><th>다음 제출물</th></tr></thead>
       <tbody>
         <tr><td>멘티 A</td><td>기사 선별 기준과 문장 스타일</td><td>선별, 문장 작성, 메일 템플릿으로 분리</td><td>도메인 규칙표와 샘플 실행 결과</td></tr>
-        <tr><td>멘티 B</td><td>원규 검토 시 머릿속으로 돌리는 5가지 관점</td><td>관점별 검토 의견 초안 생성</td><td>5관점 체크리스트와 검토 프롬프트</td></tr>
+        <tr><td>멘티 B</td><td>원규 검토 시 머릿속으로 돌리는 5가지 관점</td><td>관점별 검토 의견 초안 생성</td><td>5관점 체크리스트와 검토 기준</td></tr>
         <tr><td>멘티 C</td><td>회의 내용을 결정사항과 액션아이템으로 분류하는 기준</td><td>회의록 초안 생성과 누락 체크</td><td>HWPX 추출 테스트와 포맷 처리 계획</td></tr>
       </tbody>
     </table>
-    <div class="cl pu">좋은 스킬은 AI 기술에서 먼저 나오지 않습니다. 사람이 이미 잘하던 판단을 얼마나 선명하게 꺼냈는지에서 시작합니다.</div>
+    <div class="cl pu">스킬 설계는 기술 기능보다 담당자의 판단 기준을 얼마나 명확히 정리했는지에서 시작합니다.</div>
   </div>`
 },
 
 
 // 추가. 미니 워크숍
 {
-  notes:'강의 후 바로 자기 업무에 적용하게 한다. 6개 질문 중 최소 3개라도 답하게 만드는 게 목표.',
+  notes:'강의 후 자기 업무에 적용하게 한다. 6개 질문 중 최소 3개라도 답하도록 안내한다.',
   html:`<div class="inner">
     <div class="kicker">Mini Workshop</div>
-    <div class="h2">내 암묵지를 스킬로 바꾸려면<br/>이 6가지만 먼저 보면 됩니다</div>
+    <div class="h2">내 업무 기준을 스킬로 전환하려면<br/>다음 6가지를 먼저 정리합니다</div>
     <div class="g2" style="margin-top:18px;">
       <div>
-        <div class="step"><div class="sn">1</div><div class="st"><strong>나는 어떤 판단을 반복하고 있나요?</strong><br/>매일 또는 매주 비슷하게 판단하는 일을 적어봅니다.</div></div>
-        <div class="step"><div class="sn">2</div><div class="st"><strong>좋은 결과와 아쉬운 결과를 가르는 기준은 뭔가요?</strong><br/>포함할 것, 제외할 것, 문장 톤을 나눠봅니다.</div></div>
-        <div class="step"><div class="sn">3</div><div class="st"><strong>AI에게 무엇을 넣을 건가요?</strong><br/>파일, 회의 원문, 기사, 규정안처럼 시작 자료를 정합니다.</div></div>
+        <div class="step"><div class="sn">1</div><div class="st"><strong>반복 판단 지점</strong><br/>매일 또는 매주 비슷하게 판단하는 일을 정리합니다.</div></div>
+        <div class="step"><div class="sn">2</div><div class="st"><strong>우수 결과와 보완 결과를 가르는 기준</strong><br/>포함할 것, 제외할 것, 문장 톤을 구분합니다.</div></div>
+        <div class="step"><div class="sn">3</div><div class="st"><strong>입력 자료</strong><br/>파일, 회의 원문, 기사, 규정안처럼 시작 자료를 정합니다.</div></div>
       </div>
       <div>
-        <div class="step"><div class="sn">4</div><div class="st"><strong>AI가 무엇을 뽑아줘야 하나요?</strong><br/>표, 초안, 체크리스트, 요약문처럼 결과 형태를 정합니다.</div></div>
-        <div class="step"><div class="sn">5</div><div class="st"><strong>사람이 마지막에 봐야 할 건 뭔가요?</strong><br/>법적 판단, 배포, 승인, 민감정보는 사람 검토를 남겨야 합니다.</div></div>
-        <div class="step"><div class="sn">6</div><div class="st"><strong>첫 번째 스킬 이름은 뭔가요?</strong><br/>한 번에 다 하지 말고 가장 작은 반복 단위에 이름을 붙입니다.</div></div>
+        <div class="step"><div class="sn">4</div><div class="st"><strong>출력 형태</strong><br/>표, 초안, 체크리스트, 요약문처럼 결과 형태를 정합니다.</div></div>
+        <div class="step"><div class="sn">5</div><div class="st"><strong>최종 검토 항목</strong><br/>법적 판단, 배포, 승인, 민감정보는 사람 검토를 남겨야 합니다.</div></div>
+        <div class="step"><div class="sn">6</div><div class="st"><strong>첫 실행 단위 이름</strong><br/>전체 업무가 아니라 가장 작은 반복 단위에 이름을 붙입니다.</div></div>
       </div>
     </div>
   </div>`
 },
 
 
-// 추가. 복붙 프롬프트
+// 추가. 작성 프롬프트
 {
-  notes:'수강생에게 그대로 복사해서 쓰라고 안내한다.',
+  notes:'수강생에게 그대로 실습에 활용할 수 있도록 안내한다.',
   html:`<div class="inner">
     <div class="kicker">Copy Prompt</div>
-    <div class="h2">내 기준을 꺼내는<br/>복붙 프롬프트</div>
-    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:16px 18px;margin-top:16px;font-family:monospace;font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.72);white-space:pre-wrap;">아래 업무를 보고, 내가 머릿속으로만 하던 암묵지를 AI 스킬로 만들 수 있게 정리해줘.
+    <div class="h2">업무 기준 정리용<br/>프롬프트</div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:16px 18px;margin-top:16px;font-family:monospace;font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.72);white-space:pre-wrap;">아래 업무를 기준으로 반복 판단 기준을 스킬 설계 초안으로 정리해줘.
 
 1. 이 업무에서 반복 판단이 들어가는 지점
-2. 좋은 결과와 나쁜 결과를 가르는 기준
+2. 우수 결과와 보완 결과를 가르는 기준
 3. 반드시 포함해야 할 기준
 4. 제외하거나 조심해야 할 기준
-5. AI에게 줄 입력 자료
-6. AI가 만들어야 할 출력 형태
+5. 사용할 입력 자료
+6. 필요한 출력 형태
 7. 사람이 최종 검토해야 할 지점
 8. 첫 번째로 만들 스킬 이름
 9. 다음 제출물 3개
 
 [내 업무 설명]
-여기에 원문 붙여넣기</div>
+여기에 본인 업무 설명 입력</div>
     <div class="cl bl">이 프롬프트의 목표는 자동화 아이디어를 키우는 게 아닙니다. 첫 번째 스킬을 만들 수 있을 만큼 기준을 작게 꺼내는 것입니다.</div>
   </div>`
 },
 
 // 7. 정리 — 핵심 메시지
 {
-  notes:'"마지막 2분입니다. 세 사례의 공통점을 정리하고 질문 받으세요."',
+  notes:'마지막 2분은 세 사례의 공통점을 정리하고 질문을 받는다.',
   html:`<div class="inner">
     <div class="kicker">18–20분 · 정리</div>
     <div class="h2">세 사례의 공통점</div>
@@ -631,20 +640,20 @@ const SLIDES = [
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
       <div class="step">
         <div class="sn">A</div>
-        <div class="st"><strong>선별 기준</strong>이 머릿속에 있었다 → 글로 쓰니 프롬프트가 됐다<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">언론홍보 담당자 — /한문장-작성 외 3개 스킬</span></div>
+        <div class="st"><strong>선별 기준</strong>을 문서화해 처리 기준으로 전환<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">언론홍보 담당자 — /한문장-작성 외 관련 스킬</span></div>
       </div>
       <div class="step">
         <div class="sn">B</div>
-        <div class="st"><strong>5가지 관점</strong>을 외우고 있었다 → 리스트로 쓰니 스킬의 뼈대가 됐다<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">규정관리 담당자 — /원규-검토</span></div>
+        <div class="st"><strong>5가지 관점</strong>을 목록화해 스킬 구조로 전환<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">규정관리 담당자 — /원규-검토</span></div>
       </div>
       <div class="step">
         <div class="sn">C</div>
-        <div class="st">암묵지 형식화는 잘 됐다 → <strong>포맷 확인</strong>을 놓쳤다<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">교육팀 담당자 — hwpx 함정, 지금 해결 중</span></div>
+        <div class="st">암묵지 기준은 정리됐지만 <strong>포맷 확인</strong>이 필요했다<br/><span style="font-size:12px;color:rgba(255,255,255,.35);">교육팀 담당자 — hwpx 제약, 해결 방향 검토 중</span></div>
       </div>
     </div>
     <div class="bigmsg">
       <div class="bmlbl">핵심 메시지</div>
-      <div class="bmtxt">스킬은 새로 만드는 게 아니라<br/>내가 이미 매번 하던 <span class="hl">판단 기준</span>을<br/>AI가 따라 할 수 있는 문장으로 바꾸는 것입니다.</div>
+      <div class="bmtxt">스킬은 새로운 업무를 추가하는 것이 아니라<br/>반복해서 적용하던 <span class="hl">판단 기준</span>을<br/>재사용 가능한 절차로 정리하는 것입니다.</div>
     </div>
   </div>`
 },

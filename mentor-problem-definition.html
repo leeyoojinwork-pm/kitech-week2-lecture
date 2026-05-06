@@ -1,425 +1,66 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>문제 좁히기 — 사례·노하우 | 이유진 멘토</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>문제 좁히기 사례 워크숍 | 이유진 멘토</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --blue:#2563EB;--blue-bg:rgba(37,99,235,.15);--blue-bd:rgba(37,99,235,.35);
-  --amber:#B45309;--amber-bg:rgba(180,83,9,.18);--amber-bd:rgba(252,211,77,.35);
-  --red:#B91C1C;--red-bg:rgba(185,28,28,.14);--red-bd:rgba(185,28,28,.3);
-  --green-bg:rgba(5,150,105,.15);--green-bd:rgba(5,150,105,.35);
-  --gray-bg:rgba(255,255,255,.05);--gray-bd:rgba(255,255,255,.12);
+  --bg:#f6f7fb;--paper:#fff;--ink:#111827;--text:#2f3137;--muted:#6b7280;--sub:#9ca3af;
+  --blue:#2563eb;--blue2:#eff6ff;--blue3:#dbeafe;
+  --orange:#ff6b35;--orange2:#fff3ed;--orange3:#ffd8c6;
+  --red:#dc2626;--red2:#fef2f2;--red3:#fecaca;
+  --green:#059669;--green2:#ecfdf5;--green3:#a7f3d0;
+  --purple:#7c3aed;--purple2:#f5f3ff;--purple3:#ddd6fe;
+  --line:#e5e7eb;--dark:#0f172a;
 }
-html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
-body{background:#0F172A;display:flex;flex-direction:column;}
-
-/* ── Top bar ── */
-.topbar{
-  height:46px;flex-shrink:0;
-  background:rgba(15,23,42,.96);border-bottom:1px solid rgba(255,255,255,.07);
-  display:flex;align-items:center;padding:0 22px;gap:14px;
-}
-.tb-badge{background:#D97706;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
-.tb-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);}
-.tb-meta{font-size:11.5px;color:rgba(255,255,255,.3);}
-.tb-counter{margin-left:auto;font-size:12px;color:rgba(255,255,255,.3);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:10px;}
-.tb-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.45);font-size:11px;padding:4px 10px;cursor:pointer;transition:all .15s;}
-.tb-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);}
-.tb-btn.active{background:rgba(217,119,6,.2);border-color:#D97706;color:#FCD34D;}
-
-/* ── Progress ── */
-.progress{height:3px;background:rgba(255,255,255,.06);flex-shrink:0;}
-.progress-fill{height:100%;background:linear-gradient(90deg,#D97706,#F59E0B);transition:width .4s cubic-bezier(.22,1,.36,1);}
-
-/* ── Stage ── */
-.stage{flex:1;position:relative;overflow:hidden;}
-.slide{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:28px 64px;
-  opacity:0;transform:translateX(56px);
-  transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);
-  pointer-events:none;overflow-y:auto;
-}
-.slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
-.slide.exit{opacity:0;transform:translateX(-56px);}
-.slide.enter{opacity:0;transform:translateX(56px);}
-.inner{width:100%;max-width:820px;}
-
-/* ── Nav ── */
-.nav-arr{
-  position:fixed;top:50%;transform:translateY(-50%);
-  width:42px;height:42px;border-radius:50%;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.35);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .15s;z-index:10;
-}
-.nav-arr:hover{background:rgba(255,255,255,.13);color:#fff;}
-.nav-arr:disabled{opacity:.18;cursor:default;}
-.nav-arr.prev{left:13px;}
-.nav-arr.next{right:13px;}
-
-/* ── Notes ── */
-.notes{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(10,15,30,.97);border-top:1px solid rgba(255,255,255,.1);
-  padding:13px 24px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.7;
-  transform:translateY(100%);transition:transform .28s;max-height:140px;overflow-y:auto;
-}
-.notes.open{transform:translateY(0);}
-.notes-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#F59E0B;margin-bottom:5px;}
-
-/* ── Dot nav ── */
-.dots{display:flex;gap:7px;justify-content:center;margin-bottom:0;}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .2s;border:none;}
-.dot.on{background:#D97706;transform:scale(1.25);}
-
-/* ── Typography ── */
-.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#D97706;margin-bottom:10px;}
-.h1{font-size:38px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;}
-.h2{font-size:24px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px;}
-.sub{font-size:13.5px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.6;}
-.body{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;}
-
-/* ── Card grid ── */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.card{border-radius:10px;padding:16px 18px;}
-.card.blue{background:var(--blue-bg);border:1px solid var(--blue-bd);}
-.card.red{background:var(--red-bg);border:1px solid var(--red-bd);}
-.card.amber{background:var(--amber-bg);border:1px solid var(--amber-bd);}
-.card.green{background:var(--green-bg);border:1px solid var(--green-bd);}
-.card.gray{background:var(--gray-bg);border:1px solid var(--gray-bd);}
-.ctag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.ctag.blue{color:#93C5FD;}
-.ctag.red{color:#FCA5A5;}
-.ctag.amber{color:#FCD34D;}
-.ctag.green{color:#6EE7B7;}
-.ctag.gray{color:rgba(255,255,255,.35);}
-.ctitle{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;}
-.cbody{font-size:13px;color:rgba(255,255,255,.6);line-height:1.75;}
-
-/* ── BA pair ── */
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.bef{background:var(--red-bg);border:1px solid var(--red-bd);border-radius:8px;padding:14px 16px;}
-.aft{background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;padding:14px 16px;}
-.ba-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
-.ba-lbl.b{color:#FCA5A5;}
-.ba-lbl.a{color:#93C5FD;}
-.ba-task{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4;}
-.ba-body{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.75;}
-
-/* ── Callout ── */
-.callout{border-radius:8px;padding:13px 17px;font-size:13.5px;line-height:1.75;margin-top:12px;}
-.callout.blue{background:var(--blue-bg);border-left:3px solid #2563EB;color:#BAE6FD;}
-.callout.amber{background:var(--amber-bg);border-left:3px solid #D97706;color:#FDE68A;}
-.callout.green{background:var(--green-bg);border-left:3px solid #10B981;color:#6EE7B7;}
-
-/* ── Quote ── */
-.quote{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-left:3px solid #D97706;border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.85;margin:10px 0;}
-.quote strong{color:#fff;}
-
-/* ── Step ── */
-.step{display:flex;gap:12px;align-items:flex-start;padding:11px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;}
-.snum{width:26px;height:26px;border-radius:50%;background:#D97706;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.stext{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.7;}
-.stext strong{color:#fff;}
-
-/* ── Table ── */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;}
-.tbl thead th{background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 13px;text-align:left;}
-.tbl td{padding:9px 13px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.06);}
-.tbl tr:last-child td{border-bottom:none;}
-.tbl .ok{color:#6EE7B7;font-weight:600;}
-
-/* ── 4분면 ── */
-.quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
-.quad{padding:14px 16px;border-radius:8px;}
-.quad.q1{background:rgba(37,99,235,.18);border:2px solid rgba(37,99,235,.5);}
-.quad.q2{background:rgba(185,28,28,.12);border:1px solid rgba(185,28,28,.25);}
-.quad.q3,.quad.q4{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
-.quad-num{font-size:11px;font-weight:800;letter-spacing:.05em;margin-bottom:5px;}
-.quad-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
-.quad-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;}
-.quad-badge{display:inline-block;background:#2563EB;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px;}
-
-/* ── Axis labels ── */
-.axis-row{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.3);justify-content:center;margin-top:6px;}
-.axis-line{flex:1;height:1px;background:rgba(255,255,255,.1);}
-
-/* ── Cover ── */
-.cover-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;}
-.cpill{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;background:rgba(217,119,6,.15);color:#FCD34D;border:1px solid rgba(217,119,6,.35);}
-
-/* ── Ending ── */
-.big-rule{font-size:20px;font-weight:800;color:#fff;line-height:1.5;text-align:center;margin:20px 0;}
-.big-rule .hl{color:#F59E0B;}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+body{display:flex;flex-direction:column}.topbar{height:54px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 26px;z-index:30}.badge{font-size:12px;font-weight:950;color:var(--orange);letter-spacing:-.02em}.badge-dot{width:14px;height:14px;border:2px solid var(--orange);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;margin-left:4px}.tb-title{font-weight:850;font-size:14px;color:#4b5563}.tb-meta{font-size:13px;color:#8b8f98}.spacer{flex:1}.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:12px;color:#6b7280;cursor:pointer}.btn:hover{border-color:#cbd5e1;color:#111827}.btn.active{background:#111827;color:#fff;border-color:#111827}.counter{font-variant-numeric:tabular-nums;font-size:13px;color:#9ca3af;font-weight:800}.progress{height:3px;background:#eef2f7}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--blue));transition:width .28s ease}.stage{flex:1;position:relative;overflow:hidden}.slide{position:absolute;inset:0;padding:34px 72px 58px;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(48px);transition:.32s cubic-bezier(.22,1,.36,1);pointer-events:none}.slide.active{opacity:1;transform:translateX(0);pointer-events:auto}.slide.exit{opacity:0;transform:translateX(-48px)}.inner{width:100%;max-width:1120px;margin:auto}.paper{background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:46px 54px;box-shadow:0 22px 60px rgba(15,23,42,.08)}.kicker{font-size:14px;font-weight:950;color:var(--orange);letter-spacing:-.02em;margin-bottom:12px}.h1{font-size:48px;line-height:1.13;letter-spacing:-.065em;font-weight:950;color:var(--text)}.h2{font-size:34px;line-height:1.2;letter-spacing:-.05em;font-weight:950;color:var(--text)}.h3{font-size:22px;line-height:1.35;letter-spacing:-.035em;font-weight:950}.sub{font-size:20px;color:#7b7f86;line-height:1.65;margin-top:18px}.small{font-size:14px;color:#7b7f86;line-height:1.75}.muted{color:#8a8f98}.hl{color:var(--orange)}.blue{color:var(--blue)}.green{color:var(--green)}.purple{color:var(--purple)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{border-radius:22px;padding:24px;border:1px solid var(--line);background:#fff}.bluebg{background:var(--blue2);border-color:var(--blue3)}.orangebg{background:var(--orange2);border-color:var(--orange3)}.redbg{background:var(--red2);border-color:var(--red3)}.greenbg{background:var(--green2);border-color:var(--green3)}.purplebg{background:var(--purple2);border-color:var(--purple3)}.graybg{background:#f8fafc;border-color:#e2e8f0}.label{font-size:12px;font-weight:950;letter-spacing:.02em;color:#9ca3af;text-transform:uppercase;margin-bottom:10px}.label.orange{color:var(--orange)}.label.blue{color:var(--blue)}.label.red{color:var(--red)}.label.green{color:var(--green)}.label.purple{color:var(--purple)}.ctitle{font-size:20px;font-weight:950;letter-spacing:-.035em;line-height:1.32;margin-bottom:10px}.cbody{font-size:15px;color:#6b7280;line-height:1.72}.cbody b{color:#111827}.callout{border-radius:20px;padding:19px 23px;margin-top:18px;font-size:17px;line-height:1.65;font-weight:760}.callout.orange{background:var(--orange2);border:1px solid var(--orange3);color:#9a3412}.callout.blue{background:var(--blue2);border:1px solid var(--blue3);color:#1d4ed8}.callout.green{background:var(--green2);border:1px solid var(--green3);color:#047857}.callout.purple{background:var(--purple2);border:1px solid var(--purple3);color:#5b21b6}.callout.dark{background:#111827;color:#fff}.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}.pill{border-radius:999px;background:#f3f4f6;border:1px solid #e5e7eb;padding:8px 15px;font-size:14px;font-weight:850;color:#6b7280}.pill.orange{background:var(--orange2);border-color:var(--orange3);color:var(--orange)}.pill.blue{background:var(--blue2);border-color:var(--blue3);color:var(--blue)}.pill.green{background:var(--green2);border-color:var(--green3);color:var(--green)}.pill.purple{background:var(--purple2);border-color:var(--purple3);color:var(--purple)}
+.step{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:17px;border-radius:18px;border:1px solid var(--line);background:#fff;margin-bottom:12px}.num{width:42px;height:42px;border-radius:50%;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:950}.num.red{background:var(--red)}.num.orange{background:var(--orange)}.num.green{background:var(--green)}.num.purple{background:var(--purple)}.step strong{display:block;font-size:18px;letter-spacing:-.035em;margin-bottom:5px}.step span{font-size:15px;color:#6b7280;line-height:1.65}.table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff}.table th{background:#f8fafc;font-size:13px;color:#6b7280;text-align:left;padding:14px 16px}.table td{padding:15px 16px;border-top:1px solid var(--line);font-size:15px;line-height:1.65;vertical-align:top}.table td:first-child{font-weight:900;color:#111827}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:12px;padding:11px 14px;font-size:14px;line-height:1.7;color:#374151}.bigquote{font-size:30px;line-height:1.45;letter-spacing:-.055em;font-weight:950;text-align:center;color:#111827}.arrow{font-size:24px;color:#cbd5e1;font-weight:950;display:flex;align-items:center;justify-content:center}.caseTag{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:900;margin-bottom:18px}.caseTag.red{background:var(--red2);color:var(--red);border:1px solid var(--red3)}.caseTag.orange{background:var(--orange2);color:var(--orange);border:1px solid var(--orange3)}.caseTag.green{background:var(--green2);color:var(--green);border:1px solid var(--green3)}.caseTag.purple{background:var(--purple2);color:var(--purple);border:1px solid var(--purple3)}.twoflow{display:grid;grid-template-columns:1fr 46px 1fr;gap:12px;align-items:stretch}.notes{position:fixed;left:24px;right:24px;bottom:18px;background:#111827;color:#d1d5db;border-radius:22px;padding:18px 22px;font-size:14px;line-height:1.7;box-shadow:0 20px 60px rgba(0,0,0,.22);transform:translateY(150%);transition:.25s;z-index:40}.notes.open{transform:translateY(0)}.notes b{color:#fbbf24}.nav{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#9ca3af;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:20;box-shadow:0 10px 30px rgba(15,23,42,.08);font-size:28px}.nav:hover{color:#111827}.nav:disabled{opacity:.25}.prev{left:24px}.next{right:24px}.dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:20}.dot{width:7px;height:7px;border-radius:999px;background:#cbd5e1;border:0;transition:.2s}.dot.on{width:24px;background:var(--orange)}
+@media(max-width:900px){.slide{padding:26px 22px 54px}.paper{padding:32px 24px;border-radius:24px}.h1{font-size:36px}.h2{font-size:28px}.grid2,.grid3,.grid4,.twoflow{grid-template-columns:1fr}.arrow{display:none}.topbar{padding:0 14px}.tb-meta{display:none}.nav{display:none}}
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <span class="tb-badge">멘토 사례</span>
-  <span class="tb-title">문제 좁히기 — 사례·노하우</span>
-  <span class="tb-meta">· 10:40–10:50 · 10분 · 이유진 멘토</span>
-  <span class="tb-counter">
-    <div class="dots" id="dots"></div>
-    <span id="cur">1</span> / <span id="tot">6</span>
-  </span>
-  <button class="tb-btn" id="noteBtn" onclick="toggleNotes()">발표 노트</button>
-</div>
-<div class="progress"><div class="progress-fill" id="pf"></div></div>
-
-<div class="stage" id="stage"></div>
-
-<button class="nav-arr prev" id="btnP" onclick="go(-1)">
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l-5 5 5 5"/></svg>
-</button>
-<button class="nav-arr next" id="btnN" onclick="go(1)">
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
-</button>
-
-<div class="notes" id="notesPanel">
-  <div class="notes-lbl">발표 노트</div>
-  <div id="notesText"></div>
-</div>
-
+<header class="topbar">
+  <span class="badge">멘토 사례 <span class="badge-dot">1</span></span>
+  <span class="tb-title">문제 좁히기 사례 워크숍</span>
+  <span class="tb-meta">10:40–10:50 · 발표 이유진 멘토</span>
+  <span class="spacer"></span>
+  <span class="counter"><span id="cur">1</span> / <span id="tot">16</span></span>
+  <button class="btn" id="noteBtn">발표 노트</button>
+</header>
+<div class="progress"><div id="bar"></div></div>
+<main class="stage" id="stage"></main>
+<button class="nav prev" id="prev">‹</button><button class="nav next" id="next">›</button>
+<div class="dots" id="dots"></div>
+<div class="notes" id="notes"><b>발표 노트</b><br><span id="noteText"></span></div>
 <script>
-const SLIDES = [
-
-// 1. 표지
-{
-  notes:'10분 발표 시작. "지난 1주차에서 멘티분들이 가장 많이 막혔던 지점을 사례로 공유하겠습니다"로 오프닝.',
-  html:`<div class="inner" style="text-align:center;">
-    <div class="kicker">멘토 사례 · 10분</div>
-    <div class="h1">문제 좁히기<br/>— 사례·노하우</div>
-    <div style="font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;">광범위한 문제로 에이전트 개발이 어려웠던 사례<br/>+ 임팩트·실현가능성으로 좁힌 실제 판단 기준 공유</div>
-    <div class="cover-pills" style="justify-content:center;">
-      <span class="cpill">유형별 실제 사례 2가지</span>
-      <span class="cpill">4분면 판단 기준</span>
-      <span class="cpill">현장 노하우</span>
-    </div>
-  </div>`
-},
-
-// 2. 왜 좁히기가 어려운가 (2가지 패턴)
-{
-  notes:'"1주차에서 문제 좁히기 실수의 대부분은 두 가지 패턴 중 하나였습니다"라고 시작. 참여자들이 고개를 끄덕이게 하는 순간.',
-  html:`<div class="inner">
-    <div class="kicker">문제 좁히기가 어려운 이유</div>
-    <div class="h2">1주차에서 가장 많이 막힌 두 가지 패턴</div>
-    <div class="sub">방향을 잘못 잡거나 · 범위를 너무 크게 잡거나</div>
-    <div class="grid2" style="margin-bottom:14px;">
-      <div class="card red" style="padding:20px;">
-        <div class="ctag red">패턴 1 — 방향이 틀림</div>
-        <div class="ctitle">"결과물 이름"에 끌려간 경우</div>
-        <div class="cbody">"챗봇 만들겠다" → 챗봇 방식으로 설계<br/>"자동화 시스템" → 배포부터 생각<br/><br/>문제: 결과물 이름이 아니라 <strong style="color:#fff;">INPUT/OUTPUT</strong>이 먼저여야 함</div>
-      </div>
-      <div class="card amber" style="padding:20px;">
-        <div class="ctag amber">패턴 2 — 범위가 너무 넓음</div>
-        <div class="ctitle">"최종 산출물"부터 그린 경우</div>
-        <div class="cbody">"기획 제안서까지 자동화" → 5단계 워크플로우<br/>"보고서 전체" → 수집부터 편집까지<br/><br/>문제: 단계별 성격이 달라 <strong style="color:#fff;">첫 스킬을 못 정함</strong></div>
-      </div>
-    </div>
-    <div class="callout amber">공통 원인: "어디서 끝낼지"보다 "어디서 시작할지"를 먼저 정해야 합니다. 가장 작은 첫 스킬 이름부터.</div>
-  </div>`
-},
-
-// 3. 사례 A — 방향이 틀린 경우
-{
-  notes:'"이 분의 핵심 문제는 챗봇과 LLM 분석의 설계 구조 자체가 다르다는 것을 몰랐던 거예요. 결과물 이름이 아니라 데이터 흐름으로 생각했다면 처음부터 달랐을 겁니다."',
-  html:`<div class="inner">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <div style="background:rgba(185,28,28,.4);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCA5A5;letter-spacing:.06em;text-transform:uppercase;">사례 A — 방향이 틀린 경우</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.3);">정보화 기획 · 시스템 운영</div>
-    </div>
-    <div class="h2" style="margin-bottom:16px;">헬프데스크 분석 도우미</div>
-    <div class="ba" style="margin-bottom:12px;">
-      <div class="bef">
-        <div class="ba-lbl b">처음 잡은 문제</div>
-        <div class="ba-task">"헬프데스크 문의를 자동으로 답변해주는 챗봇"</div>
-        <div class="ba-body" style="margin-top:8px;">
-          챗봇 = 실시간 질의응답 + 미리 학습된 답변 매칭<br/>
-          → 이 구조로 설계하면 LLM이 필요 없음<br/>
-          → 설계 방향 자체가 틀린 것
-        </div>
-      </div>
-      <div class="aft">
-        <div class="ba-lbl a">코칭 후 전환</div>
-        <div class="ba-task">"누적 문의 데이터 → 반복 패턴 Top N 추출 보고서"</div>
-        <div class="ba-body" style="margin-top:8px;">
-          <span style="color:#93C5FD;font-weight:600;">입력:</span> 14컬럼 엑셀 (하루 평균 20건)<br/>
-          <span style="color:#93C5FD;font-weight:600;">출력:</span> 다축 분석 보고서 초안<br/>
-          <span style="color:#93C5FD;font-weight:600;">기준:</span> 분류된 데이터 기반 패턴 추출
-        </div>
-      </div>
-    </div>
-    <div class="callout blue"><strong style="color:#fff;">교훈:</strong> "어떤 결과물 이름"이 아니라, <strong>"어떤 데이터를 넣어서 어떤 값을 꺼낼 것인지"</strong>가 문제정의의 출발점입니다.</div>
-  </div>`
-},
-
-// 4. 사례 B — 범위가 너무 넓은 경우
-{
-  notes:'"이 분은 방향은 맞았어요. 근데 제안서라는 최종 산출물에 집중하다 보니 그 앞 4단계가 다 자동화 대상이 돼버린 거예요. 첫 스킬 이름을 물어봤을 때 바로 못 말하면 아직 좁히지 않은 겁니다."',
-  html:`<div class="inner">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <div style="background:rgba(146,64,14,.4);border-radius:6px;padding:4px 11px;font-size:10px;font-weight:700;color:#FCD34D;letter-spacing:.06em;text-transform:uppercase;">사례 B — 범위가 너무 넓은 경우</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.3);">교육담당자 · 연구원 행정직</div>
-    </div>
-    <div class="h2" style="margin-bottom:16px;">교육 수요 분류 도우미</div>
-    <div class="ba" style="margin-bottom:12px;">
-      <div class="bef">
-        <div class="ba-lbl b">처음 잡은 문제</div>
-        <div class="ba-task">"내부 교육 데이터 + 외부 트렌드 → 신규 교육 기획 제안서"</div>
-        <div class="ba-body" style="margin-top:8px;">
-          5단계 워크플로우가 한꺼번에 자동화 대상이 됨<br/>데이터 수집 → 분류 → 트렌드 조사 → 매칭 → 제안서<br/>
-          → 각 단계 성격이 달라 AI 역할이 뭔지 모호
-        </div>
-      </div>
-      <div class="aft">
-        <div class="ba-lbl a">좁힌 첫 스킬</div>
-        <div class="ba-task" style="font-family:monospace;font-size:13px;background:rgba(37,99,235,.25);padding:4px 10px;border-radius:5px;display:inline-block;margin-bottom:6px;">/주제별-분류</div>
-        <div class="ba-body" style="margin-top:4px;">
-          <span style="color:#93C5FD;font-weight:600;">입력:</span> 외부 교육 신청 엑셀 + 직군 매핑표<br/>
-          <span style="color:#93C5FD;font-weight:600;">출력:</span> 연구직/행정직별 주제 랭킹 + 기관 Top 5<br/>
-          <span style="color:#93C5FD;font-weight:600;">분류:</span> 리더십 / AI / 기획서 / 직무전문성 / 기타
-        </div>
-      </div>
-    </div>
-    <div class="callout amber"><strong style="color:#fff;">교훈:</strong> 문제 범위가 넓을 때는 <strong>"첫 번째 스킬 이름이 뭔지"를 물어보면 바로 드러납니다.</strong> 스킬 이름이 안 나오면 아직 좁히지 않은 것.</div>
-  </div>`
-},
-
-// 5. 실제 판단 기준 — 4분면
-{
-  notes:'"제가 실제로 코칭할 때 쓰는 기준입니다. 이 두 질문만 하면 어느 사분면인지 금방 알 수 있어요. 1사분면이 오늘 만들 에이전트의 출발점입니다."',
-  html:`<div class="inner">
-    <div class="kicker">실제 판단 기준</div>
-    <div class="h2">임팩트 × 실현가능성 — 4분면</div>
-    <div class="sub">세부과업을 여기에 올려놓고 1사분면을 고르세요</div>
-    <div class="quad-grid" style="margin-bottom:8px;">
-      <div class="quad q2">
-        <div class="quad-num" style="color:#FCA5A5;">2사분면</div>
-        <div class="quad-name">데이터·매뉴얼 먼저</div>
-        <div class="quad-desc">임팩트는 크지만 지금 기준이 없음<br/>→ 기준문서 먼저 만들고 다음 회차</div>
-      </div>
-      <div class="quad q1">
-        <div class="quad-num" style="color:#93C5FD;">1사분면 ★</div>
-        <div class="quad-name">즉시 실행</div>
-        <div class="quad-desc">반복적 + 지금 바로 기준을 줄 수 있음<br/>→ 이번 주 안에 작동시켜볼 수 있음</div>
-        <div class="quad-badge">오늘 여기서 시작</div>
-      </div>
-      <div class="quad q4">
-        <div class="quad-num" style="color:rgba(255,255,255,.25);">4사분면</div>
-        <div class="quad-name" style="color:rgba(255,255,255,.5);">보류</div>
-        <div class="quad-desc">임팩트도 낮고 기준도 없음<br/>→ 나중에 재평가</div>
-      </div>
-      <div class="quad q3">
-        <div class="quad-num" style="color:rgba(255,255,255,.25);">3사분면</div>
-        <div class="quad-name" style="color:rgba(255,255,255,.5);">보너스</div>
-        <div class="quad-desc">금방 돌리지만 임팩트가 작음<br/>→ 잉여 시간에만</div>
-      </div>
-    </div>
-    <div class="axis-row"><span>← 실현가능성 低</span><div class="axis-line"></div><span>실현가능성 高 →</span></div>
-    <div class="grid2" style="margin-top:10px;gap:8px;">
-      <div class="callout blue" style="margin:0;"><strong>임팩트 질문:</strong> 이 일을 얼마나 자주 하나요? 한 번에 얼마나 걸리나요?</div>
-      <div class="callout amber" style="margin:0;"><strong>실현가능성 질문:</strong> 지금 바로 기준을 말로 설명할 수 있나요?</div>
-    </div>
-  </div>`
-},
-
-// 6. 정리 — 노하우 3가지
-{
-  notes:'"마지막으로 제가 1주차 코칭하면서 정리한 현장 노하우 3가지입니다. 이 세 가지 질문을 본인 에이전트에 대입해보시면 바로 알 수 있어요."',
-  html:`<div class="inner">
-    <div class="kicker">정리 — 현장 노하우</div>
-    <div class="h2">문제를 좁힐 때 쓰는 3가지 질문</div>
-    <div class="sub" style="margin-bottom:18px;">이 세 가지에 바로 답이 나오면 오늘 실습 준비 완료</div>
-    <div style="margin-bottom:16px;">
-      <div class="step">
-        <div class="snum">Q1</div>
-        <div class="stext"><strong>첫 번째 스킬 이름이 뭔가요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">스킬 이름이 바로 안 나오면 → 아직 좁히지 않은 것. 계속 쪼개세요.</span></div>
-      </div>
-      <div class="step">
-        <div class="snum">Q2</div>
-        <div class="stext"><strong>입력은 무엇이고 출력은 어떤 형태인가요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">둘 다 한 문장으로 말할 수 있으면 → 에이전트 설계 시작 가능합니다.</span></div>
-      </div>
-      <div class="step">
-        <div class="snum">Q3</div>
-        <div class="stext"><strong>오늘 30분 안에 한 번 돌려볼 수 있나요?</strong><br/><span style="color:rgba(255,255,255,.4);font-size:12.5px;">No라면 → 범위를 더 줄이세요. 완성도가 아니라 "작동 여부" 확인이 오늘 목표입니다.</span></div>
-      </div>
-    </div>
-    <div style="background:rgba(217,119,6,.12);border:1.5px solid rgba(217,119,6,.35);border-radius:10px;padding:16px 20px;text-align:center;">
-      <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:6px;">핵심 한 줄</div>
-      <div style="font-size:18px;font-weight:800;color:#fff;line-height:1.5;">어떤 <span style="color:#F59E0B;">데이터</span>를 넣어서 어떤 <span style="color:#F59E0B;">값</span>을 꺼낼 것인가 —<br/>이 두 가지가 명확해지는 순간 에이전트는 만들어집니다.</div>
-    </div>
-  </div>`
-},
-
+const SLIDES=[
+{note:'오프닝. 오늘은 좋은 사례만 보여주는 시간이 아니라, 왜 좁히기가 필요한지 감을 잡는 시간이라고 말한다.',html:`<div class="paper"><div class="kicker">Mentor Case Workshop</div><div class="h1">나쁜 사례 2개<br>좋은 사례 1개<br>숨겨진 함정 1개</div><div class="sub">문제정의가 틀어진 케이스부터 구현에서 막히는 케이스까지 보고<br>내 과제를 어디서부터 좁혀야 하는지 점검합니다.</div><div class="pillrow"><span class="pill orange">멘티 A</span><span class="pill orange">멘티 B</span><span class="pill green">멘티 C</span><span class="pill purple">멘티 D</span><span class="pill blue">내 케이스 점검</span><span class="pill dark">익명화</span></div></div>`},
+{note:'강의 흐름 설명. 사례 소개가 목적이 아니라 판단 기준을 가져가는 것이 목적임을 강조한다.',html:`<div class="paper"><div class="kicker">Today Flow</div><div class="h2">오늘 흐름은 이렇게 갑니다</div><div style="margin-top:26px"><div class="step"><div class="num red">1</div><div><strong>문제정의가 잘못된 사례</strong><span>결과물 이름에 끌려 실제 설계 방식까지 틀어진 케이스를 봅니다.</span></div></div><div class="step"><div class="num orange">2</div><div><strong>문제가 너무 넓은 사례</strong><span>최종 산출물을 한 번에 만들려다 첫 스킬 이름을 못 정한 케이스를 봅니다.</span></div></div><div class="step"><div class="num green">3</div><div><strong>잘 된 사례</strong><span>입력, 출력, 조건, 규모가 보여서 바로 파일럿 가능한 케이스를 봅니다.</span></div></div><div class="step"><div class="num purple">4</div><div><strong>숨겨진 함정 사례</strong><span>문제정의는 맞아도 포맷 처리와 배포 조건 때문에 파일럿 설계를 먼저 점검해야 하는 케이스를 봅니다.</span></div></div></div><div class="callout dark">목표는 사례 암기가 아니라, 내 과제를 어느 유형으로 봐야 하는지 판단하는 것입니다.</div></div>`},
+{note:'3+1 추천 결과를 표로 정리. 각 케이스의 역할이 다르다는 점을 말한다.',html:`<div class="paper"><div class="kicker">Case Selection</div><div class="h2">추천 사례 3+1 <span style="font-size:18px;color:#94a3b8;font-weight:700">· 익명화 버전</span></div><table class="table" style="margin-top:24px"><tr><th>순서</th><th>이름</th><th>유형</th><th>핵심 포인트</th></tr><tr><td>1</td><td>멘티 A</td><td>문제정의 잘못됨</td><td>챗봇과 LLM 분석을 혼동해 결과물 이름에 설계 방식까지 끌려감</td></tr><tr><td>2</td><td>멘티 B</td><td>문제 범위 과잉</td><td>5단계를 모두 하려다 첫 스킬 이름을 못 정함</td></tr><tr><td>3</td><td>멘티 C</td><td>잘 된 사례</td><td>입력, 출력, 조건, 규모가 보여 바로 검증 가능한 교과서 케이스</td></tr><tr><td>+1</td><td>멘티 D</td><td>구현과 배포 막힘</td><td>문제정의가 맞아도 HWPX 포맷 처리 방식을 모르면 구현에서 막힘</td></tr></table></div>`},
+{note:'멘티 A 사례. 챗봇이 틀렸다는 말이 아니라, 먼저 해야 할 일이 답변 생성이 아니라 패턴 분석이라는 점을 강조한다.',html:`<div class="paper"><div class="caseTag red">Case 1 · 멘티 A · 문제정의가 잘못된 경우</div><div class="h2">챗봇을 만들고 싶었지만<br>사실 먼저 필요한 건 분석 리포트였습니다</div><div class="twoflow" style="margin-top:26px"><div class="card redbg"><div class="label red">처음 접근</div><div class="ctitle">헬프데스크 문의를 자동 답변하는 챗봇</div><div class="cbody">챗봇이라는 결과물 이름이 먼저 나오면서 실시간 응답, FAQ 매칭, 답변 정확도 문제가 먼저 떠올랐습니다. 단순 FAQ 응대라면 LLM보다 검색형 챗봇이나 룰 기반 흐름이 더 맞을 수도 있습니다.</div></div><div class="arrow">→</div><div class="card bluebg"><div class="label blue">멘토가 바꾼 관점</div><div class="ctitle">누적 문의 데이터에서 반복 패턴을 뽑는 LLM 분석</div><div class="cbody">먼저 반복 문의가 무엇인지 알아야 답변 기준도 만들 수 있습니다. 그래서 1차 목표는 자동 답변이 아니라 문의 유형 분석입니다.</div></div></div><div class="callout orange">이 사례는 결과물 이름에 끌려가면 문제정의가 어떻게 틀어지는지 보여주기 좋습니다.</div></div>`},
+{note:'멘티 A 사례의 이해 포인트. 멘티들이 챗봇과 LLM을 자주 혼동하므로 구분표를 보여준다.',html:`<div class="paper"><div class="caseTag red">Case 1 · 이해 포인트</div><div class="h2">챗봇과 LLM 분석은 출발점이 다릅니다</div><table class="table" style="margin-top:24px"><tr><th>구분</th><th>챗봇으로 보면</th><th>LLM 분석으로 보면</th></tr><tr><td>질문</td><td>사용자 질문에 어떻게 답할까?</td><td>반복 문의가 어떤 패턴으로 쌓였을까?</td></tr><tr><td>필요 기준</td><td>FAQ, 답변 정책, 예외 응대 기준</td><td>분류 기준, 빈도 기준, 처리시간 기준</td></tr><tr><td>첫 산출물</td><td>답변 시나리오</td><td>반복 문의 Top N 분석표</td></tr><tr><td>첫 스킬</td><td>자동 답변 생성</td><td><span class="mono">문의유형 분류</span></td></tr></table><div class="callout blue">쉽게 말하면, 챗봇은 답을 주는 구조이고 LLM 분석은 먼저 문제를 읽는 구조입니다.</div></div>`},
+{note:'추가 설명 페이지. 챗봇과 LLM은 같은 것이 아니라 층위가 다르다는 점을 분명히 짚는다.',html:`<div class="paper"><div class="caseTag red">Extra Page · 챗봇 vs LLM</div><div class="h2">챗봇과 LLM은 같은 것이 아니라<br>역할이 다른 두 층위입니다</div><div class="grid2" style="margin-top:24px"><div class="card orangebg"><div class="label orange">Chatbot</div><div class="ctitle">사용자와 대화하는 인터페이스 또는 제품</div><div class="cbody">웹, 앱, 메신저 안에서 사용자가 질문을 던지고 답을 받는 <b>대화형 접점</b>입니다. 규칙 기반일 수도 있고, 검색 기반일 수도 있고, LLM을 붙인 AI 챗봇일 수도 있습니다.</div><div class="pillrow"><span class="pill orange">보이는 것</span><span class="pill orange">대화 흐름</span><span class="pill orange">채널·UI</span></div></div><div class="card bluebg"><div class="label blue">LLM</div><div class="ctitle">텍스트를 이해·생성하는 언어 모델</div><div class="cbody">대량의 텍스트를 바탕으로 학습된 <b>언어 처리 엔진</b>입니다. 대화형 답변뿐 아니라 분류, 요약, 초안 작성, 패턴 분석처럼 챗봇이 아닌 업무에도 쓸 수 있습니다.</div><div class="pillrow"><span class="pill blue">보이지 않는 엔진</span><span class="pill blue">분류·요약·생성</span><span class="pill blue">분석 작업</span></div></div></div><table class="table" style="margin-top:22px"><tr><th>구분</th><th>챗봇</th><th>LLM</th></tr><tr><td>무엇인가</td><td>사용자와 대화하는 애플리케이션·인터페이스</td><td>자연어를 이해하고 생성하는 모델</td></tr><tr><td>꼭 서로 필요한가</td><td>아니요. 룰 기반·검색형 챗봇도 가능</td><td>아니요. 챗봇 없이도 분류, 요약, 보고서 작성에 사용 가능</td></tr><tr><td>잘 맞는 첫 질문</td><td>사용자에게 어떤 답을 돌려줄까?</td><td>이 데이터를 어떻게 읽고 분류할까?</td></tr><tr><td>예시</td><td>FAQ 응대, 예약, 신청 상태 조회</td><td>문의유형 분류, 반복 이슈 요약, 보고서 초안</td></tr></table><div class="callout dark">헷갈리지 않게 한 줄로 말하면, <b>챗봇은 대화 창이고 LLM은 그 안에서 일할 수도 있는 두뇌</b>입니다. 그래서 모든 챗봇이 LLM은 아니고, 모든 LLM이 챗봇도 아닙니다.</div></div>`},
+{note:'멘티 B 사례. 방향은 맞는데 너무 크다. 최종 제안서와 첫 스킬을 분리하는 코칭이 필요하다.',html:`<div class="paper"><div class="caseTag orange">Case 2 · 멘티 B · 문제가 너무 넓은 경우</div><div class="h2">최종 산출물을 한 번에 잡으면<br>첫 실행이 안 보입니다</div><div class="twoflow" style="margin-top:26px"><div class="card orangebg"><div class="label orange">처음 접근</div><div class="ctitle">교육 데이터와 외부 트렌드로 신규 교육 제안서 만들기</div><div class="cbody">수집, 분류, 트렌드 조사, 매칭, 제안서 작성이 모두 포함되면서 AI가 어디서 시작해야 하는지 흐려졌습니다.</div></div><div class="arrow">→</div><div class="card bluebg"><div class="label blue">멘토가 줄인 범위</div><div class="ctitle">외부 교육 신청 데이터를 주제별로 분류하기</div><div class="cbody">최종 산출물은 제안서여도 첫 실행은 제안서가 아닙니다. 먼저 주제 분류가 되어야 이후 매칭과 제안이 가능합니다.</div></div></div><div class="callout orange">이 케이스는 나쁜 기획이 아니라 너무 큰 기획입니다. 그래서 버리는 게 아니라 순서를 다시 잡아야 합니다.</div></div>`},
+{note:'멘티 B 사례를 5단계에서 첫 스킬로 줄이는 장표. 이 구조는 다른 멘티에게도 바로 적용할 수 있다.',html:`<div class="paper"><div class="caseTag orange">Case 2 · 범위 축소 방식</div><div class="h2">5단계 전체가 아니라<br>첫 번째 스킬 이름부터 정합니다</div><div class="grid2" style="margin-top:24px"><div class="card orangebg"><div class="label orange">너무 넓은 흐름</div><div class="ctitle">데이터 수집 → 분류 → 트렌드 조사 → 매칭 → 제안서</div><div class="cbody">각 단계의 성격이 달라 한 번에 자동화하면 기준이 계속 바뀝니다.</div></div><div class="card bluebg"><div class="label blue">이번 주 실행 단위</div><div class="ctitle"><span class="mono">주제별 분류</span></div><div class="cbody"><b>입력</b> 교육 신청 엑셀, 직군 매핑표<br><b>출력</b> 직군별 주제 랭킹<br><b>조건</b> 분류 기준 5개 이내</div></div></div><div class="callout blue">멘토가 물어볼 질문은 간단합니다. 이번 주 안에 만들 첫 스킬 이름이 뭔가요?</div></div>`},
+{note:'멘티 C 사례. 좋은 사례는 왜 좋은지 해석해야 한다. 단순히 잘했다고 하지 않고, AI 설계 관점에서 왜 실행 가능한지 짚는다.',html:`<div class="paper"><div class="caseTag green">Case 3 · 멘티 C · 잘 된 사례</div><div class="h2">좋은 사례는 이미<br>입력, 출력, 조건, 규모가 보입니다</div><div class="grid4" style="margin-top:28px"><div class="card greenbg"><div class="label green">INPUT</div><div class="ctitle">무엇을 넣는지</div><div class="cbody">AI가 읽을 자료가 명확합니다. 파일, 표, 텍스트처럼 시작점이 보입니다.</div></div><div class="card greenbg"><div class="label green">OUTPUT</div><div class="ctitle">무엇을 뽑는지</div><div class="cbody">보고서, 표, 초안, 체크리스트처럼 결과 형태가 보입니다.</div></div><div class="card greenbg"><div class="label green">CONDITION</div><div class="ctitle">어떤 기준인지</div><div class="cbody">분류 기준이나 판단 조건을 사람이 설명할 수 있습니다.</div></div><div class="card greenbg"><div class="label green">SCALE</div><div class="ctitle">얼마나 돌릴지</div><div class="cbody">샘플 개수나 파일럿 범위를 정할 수 있습니다.</div></div></div><div class="callout green">이 정도가 보이면 멘토는 바로 다음 제출물을 지정할 수 있습니다. 문제정의보다 파일럿 설계로 넘어가도 되는 단계입니다.</div></div>`},
+{note:'멘티 C 사례를 교과서 케이스로 설명. 좋은 케이스는 칭찬보다 검증 계획이 중요하다.',html:`<div class="paper"><div class="caseTag green">Case 3 · 멘토 피드백 방향</div><div class="h2">잘 된 사례에는 더 큰 기획보다<br>검증 기준을 붙여줘야 합니다</div><table class="table" style="margin-top:24px"><tr><th>볼 것</th><th>멘토 판단</th><th>다음 제출 가이드</th></tr><tr><td>문제정의</td><td>이미 업무 장면과 반복성이 보임</td><td>문제정의 문장은 짧게 고정</td></tr><tr><td>업무 구조</td><td>입력과 출력이 연결됨</td><td>중간 처리 기준만 표로 정리</td></tr><tr><td>AI 활용</td><td>초안 생성이나 분류에 바로 적용 가능</td><td>샘플 10건으로 1차 실행</td></tr><tr><td>검증</td><td>이제 성공 기준이 필요함</td><td>정확도, 수정 횟수, 시간 단축 중 1개를 대표 지표로 선택</td></tr></table><div class="callout dark">좋은 케이스에 필요한 피드백은 “더 해보세요”가 아니라 “이제 무엇으로 성공을 판단할지 정하세요”입니다.</div></div>`},
+{note:'멘티 D 사례. 숨겨진 함정. 문제정의가 맞아도 포맷에서 막힐 수 있다는 점을 강하게 전달한다.',html:`<div class="paper"><div class="caseTag purple">Case +1 · 멘티 D · 구현과 배포에서 막히는 경우</div><div class="h2">문제정의가 맞아도<br>파일 포맷이 막으면 시작도 어렵습니다</div><div class="grid2" style="margin-top:24px"><div class="card purplebg"><div class="label purple">겉으로 보이는 문제</div><div class="ctitle">HWPX 문서를 AI로 자동 처리하고 싶다</div><div class="cbody">업무 문제 자체는 분명합니다. 반복 문서 작성이나 검토를 줄이려는 방향도 맞습니다.</div></div><div class="card redbg"><div class="label red">실제 함정</div><div class="ctitle">LLM에 그대로 넣기보다 추출·변환 설계가 필요한 포맷</div><div class="cbody">HWPX는 ZIP 기반 XML 구조라 텍스트 추출 자체는 HWP보다 유리한 편입니다. 다만 LLM에 파일을 그대로 던져서 서식까지 보존한 결과물을 만들기는 어렵기 때문에, 추출·검토·재반영 단계를 나눠야 합니다.</div></div></div><div class="callout purple">이 사례는 문제정의 다음에 구현 가능성 체크가 바로 붙어야 하는 케이스입니다. 좋은 문제라도 포맷 처리 방식이 불명확하면 파일럿 설계를 바꿔야 합니다.</div></div>`},
+{note:'멘티 D 케이스 해결 방향. HWPX 원본 자동화가 아니라 추출 가능한 단위로 분리하는 게 먼저라고 말한다.',html:`<div class="paper"><div class="caseTag purple">Case +1 · 현실적인 우회 방식</div><div class="h2">HWPX는 바로 자동화하지 말고<br>읽을 수 있는 단위로 먼저 분해합니다</div><div style="margin-top:24px"><div class="step"><div class="num purple">1</div><div><strong>원본 문서에서 텍스트와 표 구조를 먼저 추출</strong><span>문서 전체를 AI에게 그대로 맡기기보다 압축 해제 또는 변환을 통해 제목, 본문, 표, 서식 요소를 나눠 확인합니다.</span></div></div><div class="step"><div class="num purple">2</div><div><strong>AI에게 맡길 범위를 초안 작성이나 검토로 제한</strong><span>최종 HWPX 재생성이 아니라 문장 초안, 누락 체크, 요약처럼 안전한 범위부터 시작합니다.</span></div></div><div class="step"><div class="num purple">3</div><div><strong>최종 문서 반영은 사람이 하거나 별도 변환 도구를 둠</strong><span>서식 보존과 기관 제출용 문서는 변환 도구 또는 한글 편집기를 거친 뒤 사람이 마지막 검토 지점을 잡아야 합니다.</span></div></div></div><div class="callout blue">이 케이스의 첫 제출물은 자동화 결과물이 아니라 포맷 처리 가능성 체크리스트가 더 맞습니다.</div></div>`},
+{note:'네 사례를 한 장으로 종합. 듣는 사람들이 내 케이스가 어느 칸인지 판단하게 한다.',html:`<div class="paper"><div class="kicker">Case Map</div><div class="h2">네 사례는 서로 다른 실패 지점을 보여줍니다</div><table class="table" style="margin-top:24px"><tr><th>이름</th><th>막힌 지점</th><th>멘토 처방</th><th>다음 제출물</th></tr><tr><td>멘티 A</td><td>결과물 이름이 문제정의를 끌고 감</td><td>챗봇에서 LLM 분석으로 전환</td><td>분류 기준표와 반복 패턴 리포트</td></tr><tr><td>멘티 B</td><td>범위가 커서 첫 실행이 안 보임</td><td>5단계 중 첫 스킬만 선택</td><td>주제별 분류표와 샘플 실행 로그</td></tr><tr><td>멘티 C</td><td>구조는 잡혔고 검증 기준이 필요함</td><td>파일럿 성공 기준 설정</td><td>샘플 실행 결과와 성공 지표</td></tr><tr><td>멘티 D</td><td>파일 포맷 처리 방식 때문에 구현이 막힘</td><td>추출·서식 보존 가능성 먼저 점검</td><td>추출 테스트와 서식 보존 체크리스트</td></tr></table></div>`},
+{note:'멘티들이 스스로 유형을 판단하는 의사결정 트리. 질문 순서를 알려준다.',html:`<div class="paper"><div class="kicker">Mentor Decision Tree</div><div class="h2">내 케이스는 어디부터 봐야 할까?</div><div style="margin-top:24px"><div class="step"><div class="num">1</div><div><strong>결과물 이름부터 말하고 있나요?</strong><span>그렇다면 멘티 A 케이스처럼 문제정의와 데이터 흐름을 다시 봅니다.</span></div></div><div class="step"><div class="num">2</div><div><strong>해야 할 단계가 4개 이상인가요?</strong><span>그렇다면 멘티 B 케이스처럼 첫 스킬 하나만 남깁니다.</span></div></div><div class="step"><div class="num">3</div><div><strong>입력, 출력, 조건, 규모가 보이나요?</strong><span>그렇다면 멘티 C 케이스처럼 검증 기준과 파일럿으로 넘어갑니다.</span></div></div><div class="step"><div class="num">4</div><div><strong>파일 포맷 처리나 배포 조건이 막고 있나요?</strong><span>그렇다면 멘티 D 케이스처럼 추출·변환·서식 보존 가능성부터 테스트합니다.</span></div></div></div><div class="callout orange">문제정의, 범위, 검증, 구현 중 어디서 막혔는지만 찾아도 다음 행동이 훨씬 선명해집니다.</div></div>`},
+{note:'워크숍 안내. 수강생들이 바로 자기 케이스를 점검하게 만든다.',html:`<div class="paper"><div class="kicker">Mini Workshop</div><div class="h2">내 케이스를 3문장으로 다시 써봅니다</div><div class="grid3" style="margin-top:26px"><div class="card orangebg"><div class="label orange">문장 1</div><div class="ctitle">문제정의</div><div class="cbody">누가, 언제, 무엇 때문에 반복적으로 막히나요?</div></div><div class="card bluebg"><div class="label blue">문장 2</div><div class="ctitle">첫 스킬</div><div class="cbody">AI가 가장 먼저 처리할 입력과 출력은 무엇인가요?</div></div><div class="card greenbg"><div class="label green">문장 3</div><div class="ctitle">다음 제출물</div><div class="cbody">이번 주 안에 문서, 표, 실행 로그 중 무엇을 가져오나요?</div></div></div><div class="callout dark">이 세 문장이 바로 안 나오면 아직 에이전트 만드는 단계가 아니라 문제를 좁히는 단계입니다.</div></div>`},
+{note:'실습용 프롬프트. 슬라이드에서 바로 복붙 가능하게 한다.',html:`<div class="paper"><div class="kicker">Workshop Prompt</div><div class="h2">내 과제 점검용 복붙 프롬프트</div><div class="mono" style="margin-top:24px;white-space:pre-wrap">아래 과제를 보고 내가 어느 유형에 가까운지 판단해줘.\n\n유형은 4개로 나눠줘.\n1. 결과물 이름에 끌려 문제정의가 틀어진 경우\n2. 문제 범위가 너무 넓어 첫 스킬이 안 보이는 경우\n3. 입력, 출력, 조건, 규모가 보여 파일럿 가능한 경우\n4. 파일 포맷 처리나 배포 조건 때문에 구현 가능성 점검이 필요한 경우\n\n그 다음 아래 3가지를 제안해줘.\n- 다시 써야 할 문제정의 문장 1개\n- 이번 주에 만들 첫 스킬 이름 1개\n- 다음 제출물 3개 이내\n\n[내 과제]\n여기에 원문 붙여넣기</div><div class="callout blue">프롬프트의 목적은 멋진 답변을 받는 게 아니라, 내 과제를 실행 가능한 첫 단위로 줄이는 것입니다.</div></div>`},
+{note:'마무리. 핵심 한 줄로 끝낸다.',html:`<div class="paper"><div class="kicker">Final Message</div><div class="bigquote">좋은 에이전트는<br>큰 문제를 한 번에 푸는 게 아니라<br><span class="hl">첫 실행 단위</span>를 정확히 고르는 데서 시작합니다.</div><div class="pillrow" style="justify-content:center;margin-top:34px"><span class="pill orange">문제정의</span><span class="pill blue">첫 스킬</span><span class="pill green">파일럿</span><span class="pill purple">구현 가능성</span></div></div>`}
 ];
-
-// ─── engine ───
-const stage = document.getElementById('stage');
-let cur = 0, notesOpen = false;
-
-function init() {
-  document.getElementById('tot').textContent = SLIDES.length;
-  const dotsEl = document.getElementById('dots');
-  SLIDES.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'slide';
-    div.id = 'sl' + i;
-    div.innerHTML = `<div class="inner">${s.html.replace(/<div class="inner">/,'').replace(/<\/div>\s*$/,'')}</div>`;
-    // Rewrite: just set innerHTML directly
-    div.innerHTML = s.html.includes('<div class="inner">') ? s.html : `<div class="inner">${s.html}</div>`;
-    stage.appendChild(div);
-    const dot = document.createElement('button');
-    dot.className = 'dot' + (i === 0 ? ' on' : '');
-    dot.onclick = () => go2(i);
-    dotsEl.appendChild(dot);
-  });
-  show(0, 0);
-}
-
-function show(idx, dir) {
-  const prev = document.getElementById('sl' + cur);
-  if (prev) { prev.classList.remove('active'); prev.classList.add(dir >= 0 ? 'exit' : 'enter'); setTimeout(() => prev.classList.remove('exit','enter'), 380); }
-  cur = idx;
-  const next = document.getElementById('sl' + cur);
-  next.classList.remove('exit','enter');
-  next.classList.add('active');
-  document.getElementById('cur').textContent = cur + 1;
-  document.getElementById('pf').style.width = ((cur+1)/SLIDES.length*100) + '%';
-  document.getElementById('notesText').textContent = SLIDES[cur].notes || '—';
-  document.getElementById('btnP').disabled = cur === 0;
-  document.getElementById('btnN').disabled = cur === SLIDES.length - 1;
-  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('on', i === cur));
-}
-
-function go(dir) { const n = cur + dir; if (n >= 0 && n < SLIDES.length) show(n, dir); }
-function go2(idx) { show(idx, idx > cur ? 1 : -1); }
-
-function toggleNotes() {
-  notesOpen = !notesOpen;
-  document.getElementById('notesPanel').classList.toggle('open', notesOpen);
-  document.getElementById('noteBtn').classList.toggle('active', notesOpen);
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); go(1); }
-  if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); go(-1); }
-  if (e.key==='Escape') { if(notesOpen) toggleNotes(); }
-  if (e.key==='n'||e.key==='N') toggleNotes();
-});
-
-let tx = 0;
-stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
-stage.addEventListener('touchend', e => { if (Math.abs(e.changedTouches[0].clientX - tx) > 50) go(e.changedTouches[0].clientX < tx ? 1 : -1); });
-
+const stage=document.getElementById('stage'),dots=document.getElementById('dots');let cur=0,notes=false;
+function init(){document.getElementById('tot').textContent=SLIDES.length;SLIDES.forEach((s,i)=>{let el=document.createElement('section');el.className='slide';el.innerHTML='<div class="inner">'+s.html+'</div>';stage.appendChild(el);let d=document.createElement('button');d.className='dot';d.onclick=()=>show(i);dots.appendChild(d)});show(0)}
+function show(i){if(i<0||i>=SLIDES.length)return;const old=stage.children[cur];if(old){old.classList.remove('active');old.classList.add('exit');setTimeout(()=>old.classList.remove('exit'),320)}cur=i;const el=stage.children[cur];el.classList.add('active');document.getElementById('cur').textContent=cur+1;document.getElementById('bar').style.width=((cur+1)/SLIDES.length*100)+'%';document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===SLIDES.length-1;document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('on',idx===cur));document.getElementById('noteText').textContent=SLIDES[cur].note;}
+document.getElementById('prev').onclick=()=>show(cur-1);document.getElementById('next').onclick=()=>show(cur+1);document.getElementById('noteBtn').onclick=()=>{notes=!notes;document.getElementById('notes').classList.toggle('open',notes);document.getElementById('noteBtn').classList.toggle('active',notes)};
+document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();show(cur+1)} if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();show(cur-1)} if(e.key==='n'||e.key==='N'){document.getElementById('noteBtn').click()} if(e.key==='Escape'&&notes){document.getElementById('noteBtn').click()}});
 init();
 </script>
 </body>

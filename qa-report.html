@@ -870,8 +870,7 @@
 
     <div class="toolbar">
       <div class="toolbar-inner">
-        <button id="openAll">모두 펼치기</button>
-        <button id="closeAll">모두 접기</button>
+        <button id="toggleAll" type="button" aria-pressed="false">전체 펼치기</button>
       </div>
     </div>
 
@@ -1376,9 +1375,25 @@
   </div>
 
   <script>
-    const items = document.querySelectorAll('details.report-qa');
-    document.getElementById('openAll').addEventListener('click', () => items.forEach(item => item.open = true));
-    document.getElementById('closeAll').addEventListener('click', () => items.forEach(item => item.open = false));
+    const items = [...document.querySelectorAll('details.report-qa')];
+    const toggleAllButton = document.getElementById('toggleAll');
+
+    const syncToggleButton = () => {
+      const allOpen = items.every(item => item.open);
+      toggleAllButton.textContent = allOpen ? '전체 접기' : '전체 펼치기';
+      toggleAllButton.setAttribute('aria-pressed', String(allOpen));
+    };
+
+    toggleAllButton.addEventListener('click', () => {
+      const shouldOpen = items.some(item => !item.open);
+      items.forEach(item => {
+        item.open = shouldOpen;
+      });
+      syncToggleButton();
+    });
+
+    items.forEach(item => item.addEventListener('toggle', syncToggleButton));
+    syncToggleButton();
   </script>
 </body>
 </html>

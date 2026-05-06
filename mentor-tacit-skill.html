@@ -1,3 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>암묵지를 스킬로 바꾸는 사례 | 이유진 멘토</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
+body{background:#0D1117;display:flex;flex-direction:column;}
+
+/* ── Top bar ── */
+.topbar{height:46px;flex-shrink:0;background:rgba(13,17,23,.97);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 22px;gap:12px;}
+.tb-badge{background:#7C3AED;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
+.tb-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);}
+.tb-meta{font-size:11.5px;color:rgba(255,255,255,.3);}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.tb-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.45);font-size:11px;padding:4px 10px;cursor:pointer;transition:all .15s;}
+.tb-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);}
+.tb-btn.on{background:rgba(124,58,237,.2);border-color:#7C3AED;color:#C4B5FD;}
+.dots{display:flex;gap:7px;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .2s;border:none;}
+.dot.on{background:#7C3AED;transform:scale(1.3);}
+.counter{font-size:12px;color:rgba(255,255,255,.3);font-variant-numeric:tabular-nums;}
+
+/* ── Progress ── */
+.progress{height:3px;background:rgba(255,255,255,.06);flex-shrink:0;}
+.pfill{height:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);transition:width .4s cubic-bezier(.22,1,.36,1);}
+
+/* ── Stage ── */
+.stage{flex:1;position:relative;overflow:hidden;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 64px;opacity:0;transform:translateX(56px);transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);pointer-events:none;overflow-y:auto;}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+.slide.exit{opacity:0;transform:translateX(-56px);}
+.inner{width:100%;max-width:840px;}
+
+/* ── Nav arrows ── */
+.arr{position:fixed;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;z-index:10;}
+.arr:hover{background:rgba(255,255,255,.12);color:#fff;}
+.arr:disabled{opacity:.15;cursor:default;}
+.arr.p{left:13px;}
+.arr.n{right:13px;}
+
+/* ── Notes ── */
+.notes{position:fixed;bottom:0;left:0;right:0;background:rgba(8,12,20,.97);border-top:1px solid rgba(255,255,255,.1);padding:13px 24px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.7;transform:translateY(100%);transition:transform .28s;max-height:140px;overflow-y:auto;}
+.notes.open{transform:translateY(0);}
+.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#A78BFA;margin-bottom:5px;}
+
+/* ── Text ── */
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;}
+.h1{font-size:36px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;}
+.h2{font-size:23px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:5px;}
+.sub{font-size:13px;color:rgba(255,255,255,.38);margin-bottom:18px;line-height:1.6;}
+
+/* ── Cards ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{border-radius:10px;padding:16px 18px;}
+.card.pu{background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.32);}
+.card.bl{background:rgba(37,99,235,.14);border:1px solid rgba(37,99,235,.32);}
+.card.rd{background:rgba(185,28,28,.13);border:1px solid rgba(185,28,28,.28);}
+.card.am{background:rgba(180,83,9,.16);border:1px solid rgba(252,211,77,.3);}
+.card.gr{background:rgba(5,150,105,.13);border:1px solid rgba(5,150,105,.3);}
+.card.sl{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}
+.ctag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
+.ctag.pu{color:#C4B5FD;}.ctag.bl{color:#93C5FD;}.ctag.rd{color:#FCA5A5;}.ctag.am{color:#FCD34D;}.ctag.gr{color:#6EE7B7;}.ctag.sl{color:rgba(255,255,255,.35);}
+.ct{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;}
+.cb{font-size:13px;color:rgba(255,255,255,.58);line-height:1.75;}
+
+/* ── BA ── */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.bef{background:rgba(185,28,28,.12);border:1px solid rgba(185,28,28,.28);border-radius:8px;padding:14px 16px;}
+.aft{background:rgba(124,58,237,.13);border:1px solid rgba(124,58,237,.32);border-radius:8px;padding:14px 16px;}
+.balbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.balbl.b{color:#FCA5A5;}.balbl.a{color:#C4B5FD;}
+.batask{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;}
+.babody{font-size:12.5px;color:rgba(255,255,255,.52);line-height:1.75;}
+
+/* ── Callout ── */
+.cl{border-radius:8px;padding:12px 16px;font-size:13.5px;line-height:1.75;margin-top:11px;}
+.cl.pu{background:rgba(124,58,237,.14);border-left:3px solid #7C3AED;color:#DDD6FE;}
+.cl.bl{background:rgba(37,99,235,.14);border-left:3px solid #2563EB;color:#BAE6FD;}
+.cl.am{background:rgba(180,83,9,.16);border-left:3px solid #D97706;color:#FDE68A;}
+.cl.gr{background:rgba(5,150,105,.13);border-left:3px solid #10B981;color:#6EE7B7;}
+
+/* ── Step ── */
+.step{display:flex;gap:12px;align-items:flex-start;padding:11px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;}
+.sn{width:26px;height:26px;border-radius:50%;background:#7C3AED;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.st{font-size:13.5px;color:rgba(255,255,255,.73);line-height:1.7;}
+.st strong{color:#fff;}
+
+/* ── Rule tag ── */
+.rtag{display:inline-flex;align-items:center;gap:5px;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.35);border-radius:5px;padding:3px 9px;font-size:11.5px;color:#C4B5FD;font-weight:600;margin:2px 3px 2px 0;}
+
+/* ── Skill pill ── */
+.skill{display:inline-block;background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.4);border-radius:5px;padding:3px 10px;font-family:monospace;font-size:12.5px;color:#93C5FD;font-weight:700;margin:2px;}
+
+/* ── Flow ── */
+.flow{display:flex;align-items:center;gap:0;overflow-x:auto;}
+.fnode{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 14px;text-align:center;min-width:110px;}
+.farr{flex-shrink:0;color:rgba(255,255,255,.25);padding:0 6px;}
+
+/* ── Table ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl thead th{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 13px;text-align:left;}
+.tbl td{padding:9px 13px;color:rgba(255,255,255,.68);border-bottom:1px solid rgba(255,255,255,.06);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl .done{color:#6EE7B7;font-weight:600;}
+.tbl .wip{color:#FCD34D;}
+.tbl .warn{color:#FCA5A5;}
+
+/* ── Big message ── */
+.bigmsg{background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(37,99,235,.15));border:1.5px solid rgba(124,58,237,.38);border-radius:12px;padding:22px 28px;text-align:center;margin-top:14px;}
+.bmlbl{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
+.bmtxt{font-size:18px;font-weight:800;color:#fff;line-height:1.6;}
+.bmtxt .hl{color:#A78BFA;}
+
+/* ── Time badge ── */
+.tbadge{display:inline-block;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.3);border-radius:99px;padding:3px 11px;font-size:11px;font-weight:700;color:#C4B5FD;margin-right:6px;}
+
+/* cover pills */
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.pill{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;background:rgba(124,58,237,.14);color:#C4B5FD;border:1px solid rgba(124,58,237,.32);}
+
+/* v4 자연스러운 문장/간격 보정 */
+.slide{overflow-y:auto}
+.paper{max-height:calc(100vh - 128px);overflow-y:auto}
+.h1,.h2,.h3{word-break:keep-all}
+.sub,.cbody,.small,.step span,.st,.cb,.callout,.cl{word-break:keep-all}
+.cbody,.cb{line-height:1.66}
+.step{align-items:flex-start}
+.grid3 .card{min-height:0}
+.table td,.tbl td{word-break:keep-all}
+@media(max-height:760px){
+  .paper{padding:34px 42px}
+  .h1{font-size:42px}
+  .h2{font-size:30px}
+  .sub{font-size:18px;margin-top:12px}
+  .card{padding:20px}
+  .callout{font-size:16px;padding:16px 20px}
+}
+
+/* Design-system alignment: KITECH 운영용 강의자료 톤 */
+:root{
+  --bg:#fafaf9;--paper:#fff;--text:#2c2c2c;--muted:#6b6b6b;--border:#e5e5e3;
+  --accent:#2563eb;--accent-light:rgba(37,99,235,.08);--accent-border:rgba(37,99,235,.25);
+  --mentor:#0f766e;--practice:#7c3aed;--red:#b91c1c;--amber:#b45309;
+  --red-light:rgba(185,28,28,.07);--amber-light:rgba(180,83,9,.08);
+  --green-light:rgba(15,118,110,.08);--purple-light:rgba(124,58,237,.08);
+}
+html,body{background:var(--bg);color:var(--text)}
+body{background:var(--bg)}
+.topbar{height:52px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:0 28px}
+.tb-badge{background:var(--accent-light);border:1px solid var(--accent-border);color:var(--accent);border-radius:999px}
+.tb-title{color:var(--text);font-weight:800}.tb-meta,.counter{color:var(--muted)}
+.tb-btn{background:#fff;border-color:var(--border);border-radius:999px;color:var(--muted)}
+.tb-btn:hover,.tb-btn.on{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
+.progress{background:#f1f1ef}.pfill{background:linear-gradient(90deg,var(--accent),var(--mentor))}
+.stage{overflow:hidden}.slide{padding:36px 72px 62px;overflow-y:auto;align-items:flex-start;justify-content:flex-start}.inner{max-width:1020px;margin:auto}
+.slide>.inner,.slide .inner{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;padding:38px 44px;box-shadow:0 2px 10px rgba(0,0,0,.04);max-height:calc(100vh - 128px);overflow-y:auto}
+.slide .inner .inner{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;max-height:none;overflow:visible}
+.kicker{color:var(--accent);font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
+.h1{font-size:42px;color:var(--text);letter-spacing:-.5px;font-weight:850}.h2{font-size:30px;color:var(--text);letter-spacing:-.35px;font-weight:850}.sub{font-size:17px;color:var(--muted)}
+.card,.bef,.aft,.step,.fnode,.bigmsg{border-radius:10px;border:1.5px solid var(--border);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.02)}
+.card.pu,.aft,.bigmsg{background:var(--purple-light);border-color:rgba(124,58,237,.24)}
+.card.bl{background:var(--accent-light);border-color:var(--accent-border)}
+.card.rd,.bef{background:var(--red-light);border-color:rgba(185,28,28,.22)}
+.card.am{background:var(--amber-light);border-color:rgba(180,83,9,.22)}
+.card.gr{background:var(--green-light);border-color:rgba(15,118,110,.24)}
+.card.sl{background:#f8fafc;border-color:var(--border)}
+.ct,.batask,.st strong,.bmtxt{color:var(--text)}
+.cb,.babody,.st,.tbl td{color:var(--muted)}
+.ctag.pu,.balbl.a,.skill,.bmtxt .hl{color:var(--practice)}.ctag.bl{color:var(--accent)}.ctag.rd,.balbl.b{color:var(--red)}.ctag.am{color:var(--amber)}.ctag.gr{color:var(--mentor)}.ctag.sl{color:var(--muted)}
+.cl{border-radius:10px;font-size:14.5px}.cl.pu{background:var(--purple-light);color:#5b21b6}.cl.bl{background:var(--accent-light);color:#1d4ed8}.cl.am{background:var(--amber-light);color:#92400e}.cl.gr{background:var(--green-light);color:#0f766e}
+.sn{background:var(--accent)}.rtag{background:var(--purple-light);color:var(--practice);border-color:rgba(124,58,237,.24)}
+.skill{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
+.tbl{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}.tbl thead th{background:#f8fafc;color:var(--muted)}.tbl td{border-bottom-color:var(--border)}
+.pills .pill,.pill{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
+.arr{width:42px;height:42px;background:#fff;border-color:var(--border);color:var(--muted);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.arr:hover{background:var(--accent-light);color:var(--accent)}
+.dot{background:#d6d6d2}.dot.on{background:var(--accent)}
+.notes{background:#111827;color:#d1d5db;border-top:0;border-radius:14px 14px 0 0}.nlbl{color:#93c5fd}
+.g2{gap:14px}.g3{gap:12px}.card{padding:18px 20px}.step{padding:13px 15px;margin-bottom:9px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;overflow:visible}.farr{display:none}.fnode{min-width:0;padding:13px 12px}
+.tbadge{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
+.slide [style*="color:rgba(255"]{color:var(--muted)!important}
+.slide [style*="color:#fff"]{color:var(--text)!important}
+.slide [style*="background:rgba(255"]{background:#f8fafc!important;border-color:var(--border)!important}
+.slide [style*="background:rgba(124"]{background:var(--purple-light)!important;border-color:rgba(124,58,237,.24)!important}
+.slide [style*="background:rgba(37"]{background:var(--accent-light)!important;border-color:var(--accent-border)!important}
+.slide [style*="background:rgba(5"]{background:var(--green-light)!important;border-color:rgba(15,118,110,.24)!important}
+.slide [style*="background:rgba(185"]{background:var(--red-light)!important;border-color:rgba(185,28,28,.22)!important}
+.slide [style*="background:rgba(180"]{background:var(--amber-light)!important;border-color:rgba(180,83,9,.22)!important}
+@media(max-height:760px){
+  .slide{padding:24px 56px 44px}
+  .slide>.inner,.slide .inner{padding:28px 34px;max-height:calc(100vh - 96px)}
+  .h1{font-size:36px}.h2{font-size:25px}.sub{font-size:15px}.card{padding:16px}.cl{padding:13px 16px}
+  .tbl td{padding:8px 11px}.tbl thead th{padding:8px 11px}
+}
+@media(max-width:900px){.slide{padding:26px 22px 54px}.slide>.inner,.slide .inner{padding:28px 22px;border-radius:14px}.h1{font-size:32px}.h2{font-size:25px}.g2,.g3,.ba,.flow{grid-template-columns:1fr}.arr{display:none}.tb-meta{display:none}.topbar{padding:0 14px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="tb-badge">멘토 사례 ③·④</span>
+  <span class="tb-title">암묵지를 스킬로 바꾸는 사례</span>
+  <span class="tb-meta">· 13:50–14:10 · 20분 · 이유진 멘토</span>
+  <div class="tb-right">
+    <div class="dots" id="dots"></div>
+    <span class="counter"><span id="cur">1</span> / <span id="tot">7</span></span>
+    <button class="tb-btn" id="noteBtn" onclick="toggleNotes()">발표 노트</button>
+  </div>
+</div>
+<div class="progress"><div class="pfill" id="pf"></div></div>
+
+<div class="stage" id="stage"></div>
+<button class="arr p" id="btnP" onclick="go(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l-5 5 5 5"/></svg></button>
+<button class="arr n" id="btnN" onclick="go(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg></button>
+
+<div class="notes" id="notesPanel">
+  <div class="nlbl">발표 노트</div>
+  <div id="notesText"></div>
+</div>
+
+<script>
 const SLIDES = [
 
 // 1. 표지
@@ -466,4 +692,64 @@ const SLIDES = [
 
 요청: 위 기준으로 [입력 형태] 데이터를 [처리 방식]으로 처리하는 Skill을 작성해 주세요.</div><div class="callout blue">이 구조로 제출하면 Claude가 일관된 기준으로 반복 실행할 수 있는 Skill을 만들 수 있습니다.</div></div>`},
 {notes:'아침과 오후를 연결하는 최종 정리.',html:`<div class="paper"><div class="kicker">핵심 정리</div><div class="h2">문제정의에서 스킬까지<br/>한 번에 이어지는 흐름</div><div class="grid2" style="margin-top:26px"><div class="card bluebg"><div class="label blue">아침 · 문제정의</div><div class="ctitle">입력, 출력, 조건, 규모</div><div class="cbody">AI에게 맡길 일이 무엇인지, 범위가 얼마나 되는지 명확히 합니다. 이것이 Skill의 <b>목표</b>입니다.</div></div><div class="card greenbg"><div class="label green">오후 · 암묘지 형식화</div><div class="ctitle">포함, 제외, 우수, 보완</div><div class="cbody">AI가 그 일을 어떻게 판단해야 하는지 기준을 명확히 합니다. 이것이 Skill의 <b>규칙</b>입니다.</div></div></div><div class="callout dark" style="margin-top:22px">처음부터 완벽할 필요는 없습니다. <br/>오류를 분석하고 기준을 수정하는 반복이 형식화된 암묘지를 만듭니다.<br/><b style="font-size:17px">유형 A → B → C로의 진화는 자연스럽습니다.</b></div></div>`}
-];
+];];
+
+// ─── engine ───
+const stage = document.getElementById('stage');
+let cur = 0, notesOpen = false;
+
+function init() {
+  document.getElementById('tot').textContent = SLIDES.length;
+  const dotsEl = document.getElementById('dots');
+  SLIDES.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'slide';
+    div.id = 'sl' + i;
+    div.innerHTML = s.html;
+    stage.appendChild(div);
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' on' : '');
+    dot.onclick = () => go2(i);
+    dotsEl.appendChild(dot);
+  });
+  show(0, 0);
+}
+
+function show(idx, dir) {
+  const prev = document.getElementById('sl' + cur);
+  if (prev) { prev.classList.remove('active'); prev.classList.add('exit'); setTimeout(() => prev.classList.remove('exit'), 380); }
+  cur = idx;
+  const next = document.getElementById('sl' + cur);
+  next.classList.remove('exit'); next.classList.add('active');
+  document.getElementById('cur').textContent = cur + 1;
+  document.getElementById('pf').style.width = ((cur+1)/SLIDES.length*100) + '%';
+  document.getElementById('notesText').textContent = SLIDES[cur].notes || '—';
+  document.getElementById('btnP').disabled = cur === 0;
+  document.getElementById('btnN').disabled = cur === SLIDES.length - 1;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('on', i === cur));
+}
+
+function go(dir) { const n = cur + dir; if (n >= 0 && n < SLIDES.length) show(n, dir); }
+function go2(idx) { show(idx, idx > cur ? 1 : -1); }
+
+function toggleNotes() {
+  notesOpen = !notesOpen;
+  document.getElementById('notesPanel').classList.toggle('open', notesOpen);
+  document.getElementById('noteBtn').classList.toggle('on', notesOpen);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); go(1); }
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); go(-1); }
+  if (e.key==='Escape' && notesOpen) toggleNotes();
+  if (e.key==='n'||e.key==='N') toggleNotes();
+});
+
+let tx = 0;
+stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+stage.addEventListener('touchend', e => { if (Math.abs(e.changedTouches[0].clientX - tx) > 50) go(e.changedTouches[0].clientX < tx ? 1 : -1); });
+
+init();
+</script>
+</body>
+</html>

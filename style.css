@@ -1,16 +1,15 @@
 :root {
-  --accent: #2563eb;
-  --accent-light: rgba(37, 99, 235, 0.08);
-  --accent-border: rgba(37, 99, 235, 0.25);
-  --mentor: #0f766e;
-  --mentor-light: rgba(15, 118, 110, 0.08);
-  --practice: #7c3aed;
-  --practice-light: rgba(124, 58, 237, 0.08);
+  --accent: #ff6000;
+  --accent-light: rgba(255, 96, 0, 0.08);
+  --accent-border: rgba(255, 96, 0, 0.25);
+  --dark: #1c1c1c;
+  --text: #2c2c2c;
+  --sub: #6b6b6b;
+  --text-muted: #6b6b6b;
   --bg: #fafaf9;
   --card: #ffffff;
-  --text: #2c2c2c;
-  --text-muted: #6b6b6b;
   --border: #e5e5e3;
+  --guide: #fcfbfa;
   --soft: #f5f5f4;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
@@ -21,13 +20,18 @@
   padding: 0;
 }
 
+html,
 body {
-  min-height: 100vh;
+  min-height: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
-  line-height: 1.7;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding: 10mm 12mm;
 }
 
 a {
@@ -35,69 +39,90 @@ a {
   text-decoration: none;
 }
 
-.wrap {
-  max-width: 1040px;
+.wrap.worksheet {
+  width: 100%;
+  max-width: 277mm;
   margin: 0 auto;
-  padding: 72px 28px 96px;
-}
-
-.worksheet {
-  max-width: 1040px;
+  border: 1px solid var(--border);
+  background: var(--card);
 }
 
 .back-link {
   display: inline-flex;
-  margin-bottom: 22px;
-  color: var(--text-muted);
-  font-size: 13px;
+  margin: 5mm 10mm 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 9pt;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
 }
 
 .back-link:hover {
-  color: var(--accent);
+  color: #ffffff;
 }
 
 .header {
-  margin-bottom: 34px;
-  padding-bottom: 26px;
-  border-bottom: 4px solid var(--accent);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10mm;
+  margin-top: -9mm;
+  padding: 13mm 10mm 7mm;
+  border-bottom: 3px solid var(--accent);
+  background: var(--dark);
+  color: #ffffff;
+}
+
+.header::after {
+  display: grid;
+  grid-template-columns: 18mm 1fr;
+  gap: 3mm 4mm;
+  min-width: 82mm;
+  padding: 4mm 5mm;
+  border-radius: 2mm;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 9.5pt;
+  font-weight: 600;
+  content: "작성자" "____________________" "날짜" "2026-05-06";
+  white-space: pre;
 }
 
 .doc-tag {
   display: inline-block;
-  margin-bottom: 14px;
-  padding: 5px 14px;
+  margin-bottom: 2.5mm;
+  padding: 2px 9px;
   border-radius: 999px;
-  background: var(--accent-light);
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 h1 {
-  margin-bottom: 12px;
-  color: var(--text);
-  font-size: 38px;
-  font-weight: 850;
-  letter-spacing: -0.5px;
-  line-height: 1.22;
+  margin-bottom: 1.5mm;
+  color: #ffffff;
+  font-size: 19pt;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  line-height: 1.15;
 }
 
 .subtitle {
-  color: var(--text-muted);
-  font-size: 17px;
-  font-weight: 500;
+  max-width: 132mm;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 9.5pt;
 }
 
 .intro {
-  margin-bottom: 34px;
-  padding: 24px 28px;
-  border-radius: 14px;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  margin: 0;
+  padding: 5mm 10mm;
+  border-bottom: 1px solid var(--border);
+  background: var(--guide);
   color: var(--text);
-  font-size: 15.5px;
+  font-size: 10pt;
 }
 
 .intro b {
@@ -105,163 +130,300 @@ h1 {
 }
 
 .sheet-section {
-  margin-top: 34px;
+  padding: 7mm 10mm;
+  border-bottom: 1px solid var(--border);
+}
+
+.sheet-section:last-child {
+  border-bottom: 0;
 }
 
 .sheet-section h2 {
-  margin-bottom: 14px;
+  margin-bottom: 4mm;
   color: var(--text);
-  font-size: 22px;
-  font-weight: 850;
-  letter-spacing: -0.2px;
+  font-size: 12pt;
+  font-weight: 800;
 }
 
 .section-note {
-  margin: -6px 0 16px;
-  color: var(--text-muted);
-  font-size: 14px;
+  margin: -2mm 0 4mm;
+  color: var(--sub);
+  font-size: 9pt;
 }
 
 .worksheet-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3mm;
 }
 
 .prompt-card {
-  min-height: 126px;
-  padding: 20px 22px;
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  min-height: 31mm;
+  padding: 3.5mm 4mm;
+  border: 1px solid var(--border);
+  border-left: 2.5px solid var(--accent);
+  border-radius: 1.5mm;
+  background: #ffffff;
 }
 
 .prompt-card b {
   display: block;
-  margin-bottom: 8px;
-  color: var(--practice);
-  font-size: 14px;
-  font-weight: 850;
+  margin-bottom: 1.2mm;
+  color: var(--accent);
+  font-size: 9.5pt;
+  font-weight: 800;
 }
 
 .prompt-card span {
   display: block;
-  color: var(--text-muted);
-  font-size: 14.5px;
+  color: var(--sub);
+  font-size: 8.8pt;
+  line-height: 1.55;
+}
+
+.matrix-wrapper {
+  position: relative;
+  margin: 10mm 8mm 8mm;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 105mm;
+  border: 2px solid var(--dark);
+  background: #ffffff;
+}
+
+.quadrant {
+  position: relative;
+  min-height: 52mm;
+  padding: 4mm;
+  border: 1px solid var(--border);
+}
+
+.quadrant-label {
+  position: absolute;
+  right: 3mm;
+  top: 3mm;
+  color: var(--sub);
+  font-size: 8pt;
+  font-weight: 700;
+  text-align: right;
+}
+
+.quadrant-title {
+  color: var(--accent);
+  font-size: 11pt;
+  font-weight: 800;
+}
+
+.quadrant-subtitle {
+  margin-top: 1.5mm;
+  color: var(--sub);
+  font-size: 8.5pt;
+}
+
+.data-step {
+  margin: 0 10mm 5mm;
+  padding: 4.5mm 5mm;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 2mm;
+  background: #ffffff;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin-bottom: 2mm;
+}
+
+.step-number {
+  width: 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 9pt;
+  font-weight: 800;
+  line-height: 7mm;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.step-title {
+  color: var(--text);
+  font-size: 11pt;
+  font-weight: 800;
+}
+
+.step-subtitle {
+  margin-bottom: 3mm;
+  color: var(--sub);
+  font-size: 9pt;
+}
+
+.checklist-items {
+  display: grid;
+  gap: 2.5mm;
+}
+
+.checklist-item {
+  display: grid;
+  grid-template-columns: 5mm 1fr;
+  gap: 3mm;
+  align-items: start;
+  padding: 2.5mm 3mm;
+  border: 1px solid var(--border);
+  border-radius: 1.5mm;
+  background: var(--guide);
+}
+
+.checkbox {
+  width: 4mm;
+  height: 4mm;
+  margin-top: 0.8mm;
+  border: 1.4px solid var(--accent);
+  border-radius: 0.8mm;
+  background: #ffffff;
+}
+
+.checklist-label {
+  color: var(--text);
+  font-size: 9pt;
+  line-height: 1.55;
+}
+
+.checklist-desc {
+  margin-top: 0.8mm;
+  color: var(--sub);
+  font-size: 8.2pt;
+}
+
+.emphasis {
+  color: var(--accent);
+  font-weight: 800;
 }
 
 .example-panel {
-  margin-top: 16px;
-  padding: 24px;
-  border: 1.5px solid var(--accent-border);
-  border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(37, 99, 235, 0.04) 100%);
-  box-shadow: var(--shadow);
+  margin-top: 4mm;
+  padding: 4.5mm 5mm;
+  border: 1px solid var(--accent-border);
+  border-left: 3px solid var(--accent);
+  border-radius: 2mm;
+  background: #ffffff;
 }
 
 .example-label {
   display: inline-flex;
-  margin-bottom: 14px;
-  padding: 4px 12px;
+  margin-bottom: 2.5mm;
+  padding: 2px 9px;
   border-radius: 999px;
   background: var(--accent-light);
   color: var(--accent);
-  font-size: 12px;
-  font-weight: 850;
+  font-size: 8.8pt;
+  font-weight: 800;
 }
 
 .example-title {
-  margin-bottom: 10px;
+  margin-bottom: 3mm;
   color: var(--text);
-  font-size: 19px;
-  font-weight: 850;
+  font-size: 12pt;
+  font-weight: 800;
   letter-spacing: -0.2px;
 }
 
 .example-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3mm;
 }
 
 .answer-card {
-  padding: 16px 18px;
+  padding: 3mm 3.5mm;
   border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #ffffff;
+  border-radius: 1.5mm;
+  background: var(--guide);
 }
 
 .answer-card b {
   display: block;
-  margin-bottom: 5px;
-  color: var(--mentor);
-  font-size: 13px;
-  font-weight: 850;
+  margin-bottom: 1mm;
+  color: var(--accent);
+  font-size: 8.8pt;
+  font-weight: 800;
 }
 
 .answer-card span,
 .answer-card li {
-  color: var(--text-muted);
-  font-size: 13.5px;
+  color: var(--text);
+  font-size: 8.6pt;
+  line-height: 1.55;
 }
 
 .answer-card ul {
-  padding-left: 18px;
+  padding-left: 4mm;
 }
 
 .check-list {
   display: grid;
-  gap: 10px;
-  padding: 20px 22px;
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5mm 5mm;
+  padding: 4.5mm 5mm;
+  border: 1px solid var(--border);
+  border-radius: 2mm;
+  background: var(--guide);
   list-style: none;
 }
 
 .check-list li {
   position: relative;
-  padding-left: 24px;
-  color: var(--text-muted);
-  font-size: 14.5px;
+  padding-left: 6mm;
+  color: var(--text);
+  font-size: 9pt;
 }
 
 .check-list li::before {
   position: absolute;
   left: 0;
-  color: var(--mentor);
-  font-weight: 900;
+  top: 0.2mm;
+  width: 4mm;
+  height: 4mm;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 7pt;
+  font-weight: 800;
+  line-height: 4mm;
+  text-align: center;
   content: "✓";
 }
 
 .simple-table {
   width: 100%;
   overflow: hidden;
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
+  border: 1px solid var(--border);
+  border-radius: 2mm;
   border-collapse: separate;
   border-spacing: 0;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  background: #ffffff;
 }
 
 .simple-table th,
 .simple-table td {
-  padding: 14px 16px;
+  padding: 3mm 3.5mm;
   border-bottom: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 14px;
+  color: var(--text);
+  font-size: 8.8pt;
   text-align: left;
   vertical-align: top;
 }
 
 .simple-table th {
-  background: #f8fafc;
-  color: var(--text);
-  font-weight: 850;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 800;
 }
 
 .simple-table tr:last-child td {
@@ -271,28 +433,75 @@ h1 {
 .copy-box {
   overflow-x: auto;
   white-space: pre-wrap;
-  padding: 20px 22px;
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
+  padding: 4.5mm 5mm;
+  border: 1px solid var(--border);
+  border-radius: 2mm;
   background: #111827;
   color: #e5e7eb;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 13.5px;
-  line-height: 1.72;
+  font-size: 8.8pt;
+  line-height: 1.6;
 }
 
-@media (max-width: 760px) {
-  .wrap,
-  .worksheet {
-    padding: 48px 20px 72px;
+@media print {
+  body {
+    padding: 0;
+  }
+
+  .back-link {
+    display: none;
+  }
+
+  .wrap.worksheet {
+    max-width: none;
+    border: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    padding: 0;
+  }
+
+  .wrap.worksheet {
+    border: 0;
+  }
+
+  .back-link {
+    margin: 16px 20px 0;
+    color: var(--sub);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .header {
+    display: block;
+    margin-top: 0;
+    padding: 28px 20px 22px;
+  }
+
+  .header::after {
+    display: block;
+    min-width: 0;
+    margin-top: 18px;
+    content: "작성자 ____________________    날짜 2026-05-06";
+    white-space: normal;
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 27px;
+  }
+
+  .intro,
+  .sheet-section {
+    padding: 22px 20px;
   }
 
   .worksheet-grid,
-  .example-grid {
+  .example-grid,
+  .check-list {
     grid-template-columns: 1fr;
   }
 

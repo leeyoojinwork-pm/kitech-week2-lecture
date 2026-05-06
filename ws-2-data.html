@@ -13,11 +13,11 @@
     <header class="header">
       <span class="doc-tag">실습 ② · 데이터 확보</span>
       <h1>데이터 확보 4단계 워크시트</h1>
-      <p class="subtitle">좁힌 문제에 필요한 자료가 실제로 있고, AI가 읽을 수 있는지 확인합니다.</p>
+      <p class="subtitle">좁힌 문제에 필요한 자료가 실제로 있고, 처리 가능한 형태인지 확인합니다.</p>
     </header>
 
     <section class="intro">
-      문제정의가 좋아도 데이터가 없거나 포맷이 맞지 않으면 실습이 멈춥니다.
+      문제정의가 적절해도 데이터가 없거나 포맷이 맞지 않으면 실습이 멈춥니다.
       이 단계의 목표는 <b>완벽한 데이터셋</b>이 아니라 <b>첫 실행 가능한 샘플</b>입니다.
     </section>
 
@@ -26,8 +26,34 @@
       <div class="worksheet-grid">
         <div class="prompt-card"><b>1. 식별</b><span>필요한 자료 이름과 보관 위치를 적습니다.</span></div>
         <div class="prompt-card"><b>2. 수집</b><span>엑셀, PDF, HWPX, 메일, 웹페이지 중 무엇인지 확인합니다.</span></div>
-        <div class="prompt-card"><b>3. 변환</b><span>AI가 읽기 쉬운 CSV, TXT, MD 형태로 바꿀 수 있는지 봅니다.</span></div>
+        <div class="prompt-card"><b>3. 변환</b><span>CSV, TXT, MD처럼 처리하기 쉬운 형태로 바꿀 수 있는지 봅니다.</span></div>
         <div class="prompt-card"><b>4. 정리</b><span>컬럼명, 파일명, 샘플 범위, 민감정보 제거 기준을 정합니다.</span></div>
+      </div>
+    </section>
+
+    <section class="sheet-section">
+      <h2>작성 예시</h2>
+      <p class="section-note">문제 좁히기에서 정한 첫 스킬을 실제로 실행하기 위한 자료 점검 예시입니다.</p>
+      <div class="example-panel">
+        <span class="example-label">예시 답안 · 뉴스 선별 자료</span>
+        <div class="example-title">처음부터 전체 데이터셋을 만들지 않고, 검증 가능한 샘플만 고릅니다</div>
+        <div class="example-grid">
+          <div class="answer-card"><b>1. 식별</b><span>오늘 오전 기관명·R&D 예산·출연연 키워드로 검색된 뉴스 URL 20개</span></div>
+          <div class="answer-card"><b>2. 수집</b><span>URL, 매체명, 제목, 본문 일부, 발행일을 스프레드시트로 정리</span></div>
+          <div class="answer-card"><b>3. 변환</b><span>엑셀 원본은 보관하고, 테스트용으로 CSV 20행을 별도 저장</span></div>
+          <div class="answer-card"><b>4. 정리</b><span>중복 기사 제거, 출처 불명 URL 제외, 정치 쟁점 기사는 “보류” 컬럼으로 표시</span></div>
+        </div>
+      </div>
+
+      <div class="example-panel">
+        <span class="example-label">예시 답안 · HWPX 회의록 자료</span>
+        <div class="example-title">문서 포맷은 본문 처리와 최종 서식 반영을 분리해서 봅니다</div>
+        <div class="example-grid">
+          <div class="answer-card"><b>필요 자료</b><span>회의록 HWPX 원본 1개, 회의 녹취 요약 텍스트 1개, 기존 회의록 양식</span></div>
+          <div class="answer-card"><b>첫 테스트</b><span>HWPX 전체 자동화가 아니라 제목·안건·결정사항 부분만 텍스트로 추출</span></div>
+          <div class="answer-card"><b>포맷 제약</b><span>서식 보존은 별도 검토. 첫 실습에서는 MD 초안까지를 성공 기준으로 둠</span></div>
+          <div class="answer-card"><b>민감정보</b><span>실명, 전화번호, 외부기관 연락처는 샘플에서 비식별 처리</span></div>
+        </div>
       </div>
     </section>
 
@@ -43,7 +69,7 @@
     </section>
 
     <section class="sheet-section">
-      <h2>복붙 프롬프트</h2>
+      <h2>점검 프롬프트</h2>
       <pre class="copy-box">아래 문제정의에 필요한 데이터를 점검해줘.
 
 문제정의:

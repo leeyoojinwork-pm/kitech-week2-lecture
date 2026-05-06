@@ -13,12 +13,12 @@
     <header class="header">
       <span class="doc-tag">실습 ③ · 암묵지 형식화</span>
       <h1>암묵지 형식화 워크시트</h1>
-      <p class="subtitle">내가 당연하게 판단하던 기준을 AI가 읽을 수 있는 문장으로 바꿉니다.</p>
+      <p class="subtitle">내가 당연하게 판단하던 기준을 스킬이 따를 수 있는 문장으로 바꿉니다.</p>
     </header>
 
     <section class="intro">
-      암묵지는 “감”이 아니라 <b>반복해서 적용해 온 판단 기준</b>입니다.
-      좋은 결과와 아쉬운 결과를 가르는 기준을 적으면 프롬프트의 뼈대가 됩니다.
+      암묵지는 개인의 감각이 아니라 <b>반복해서 적용해 온 판단 기준</b>입니다.
+      우수 결과와 보완 결과를 가르는 기준을 적으면 스킬 설계의 뼈대가 됩니다.
     </section>
 
     <section class="sheet-section">
@@ -27,9 +27,37 @@
         <div class="prompt-card"><b>1. 반복 판단</b><span>이 업무에서 내가 매번 판단하는 것은 무엇인가?</span></div>
         <div class="prompt-card"><b>2. 포함 기준</b><span>반드시 넣어야 하는 것은 무엇인가?</span></div>
         <div class="prompt-card"><b>3. 제외 기준</b><span>빼야 하거나 조심해야 하는 것은 무엇인가?</span></div>
-        <div class="prompt-card"><b>4. 좋은 예시</b><span>내가 보기 좋은 결과물의 샘플은 무엇인가?</span></div>
-        <div class="prompt-card"><b>5. 나쁜 예시</b><span>왜 아쉬운지 설명 가능한 결과물은 무엇인가?</span></div>
-        <div class="prompt-card"><b>6. 사람 검토</b><span>AI가 해도 마지막에 사람이 봐야 하는 지점은?</span></div>
+        <div class="prompt-card"><b>4. 우수 예시</b><span>내가 보기 좋은 결과물의 샘플은 무엇인가?</span></div>
+        <div class="prompt-card"><b>5. 보완 예시</b><span>왜 아쉬운지 설명 가능한 결과물은 무엇인가?</span></div>
+        <div class="prompt-card"><b>6. 사람 검토</b><span>마지막에 사람이 확인해야 하는 지점은 무엇인가?</span></div>
+      </div>
+    </section>
+
+    <section class="sheet-section">
+      <h2>작성 예시</h2>
+      <p class="section-note">멘토 사례처럼 머릿속 기준을 “포함, 제외, 표현, 검토” 기준으로 바꿔 적습니다.</p>
+      <div class="example-panel">
+        <span class="example-label">예시 답안 · 데일리 뉴스 선별</span>
+        <div class="example-title">기사 선별 기준과 문장 규칙을 명시한 사례</div>
+        <div class="example-grid">
+          <div class="answer-card"><b>반복 판단</b><span>기관 관련성이 높은 기사인지, 배포용으로 적절한 문장인지 매일 판단한다.</span></div>
+          <div class="answer-card"><b>포함 기준</b><span>우리 원 직접 언급, 출연연 제도 변화, R&D 예산 변동, 산업계 파급이 큰 정책</span></div>
+          <div class="answer-card"><b>제외 기준</b><span>동일 사안 3차 이상 후속, 특정 정당 중심 기사, 출처가 불명확한 인용 기사</span></div>
+          <div class="answer-card"><b>문장 규칙</b><span>한 기사당 한 문장, 매체명·핵심 주체·변화 내용을 포함, 과장 표현은 제외</span></div>
+          <div class="answer-card"><b>우수 예시</b><span>“산업부는 출연연 제조AI 실증 예산을 확대하며 중소 제조기업 대상 지원을 강화한다고 밝혔다.”</span></div>
+          <div class="answer-card"><b>사람 검토</b><span>기관 입장으로 오해될 표현, 정책 해석, 민감한 정치 표현은 담당자가 최종 확인</span></div>
+        </div>
+      </div>
+
+      <div class="example-panel">
+        <span class="example-label">예시 답안 · 회의록 작성 기준</span>
+        <div class="example-title">결정사항과 논의사항을 구분하는 기준</div>
+        <div class="example-grid">
+          <div class="answer-card"><b>결정사항</b><span>“하기로 했다”, “확정했다”, “담당자를 정했다”처럼 합의와 실행 주체가 분명한 내용</span></div>
+          <div class="answer-card"><b>논의사항</b><span>의견 교환은 있었지만 담당자, 기한, 실행 방식이 확정되지 않은 내용</span></div>
+          <div class="answer-card"><b>액션아이템</b><span>담당자와 마감일이 있으면 별도 표로 분리하고, 없으면 “[확인 필요]”로 표시</span></div>
+          <div class="answer-card"><b>사람 검토</b><span>외부 공유 여부, 실명 표기, 결정사항 표현의 강도는 작성자가 최종 확인</span></div>
+        </div>
       </div>
     </section>
 

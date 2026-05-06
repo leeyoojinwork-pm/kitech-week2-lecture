@@ -16,3 +16,6 @@
 !.gitignore
 !samples/
 !samples/*.md
+
+!qa-report.html
+!kitech-ai-automation-ebook.pdf

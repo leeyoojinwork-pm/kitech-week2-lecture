@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KITECH AI 업무 자동화 판단 보고서</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #5b6472;
+      --subtle: #8b95a1;
+      --line: #e5e8eb;
+      --line-dark: #d1d6db;
+      --blue: #1f4fd8;
+      --blue-soft: #eef4ff;
+      --gray: #f7f8fa;
+      --gray-2: #f1f3f5;
+      --green: #0f766e;
+      --orange: #9a5b00;
+      --red: #b4233c;
+      --radius: 18px;
+      --shadow: 0 14px 32px rgba(17, 24, 39, 0.06);
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Segoe UI", sans-serif;
+      line-height: 1.75;
+      letter-spacing: -0.015em;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .cover {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 54px 54px 46px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .doc-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid #dbe4f3;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -0.055em;
+      font-weight: 850;
+    }
+
+    .cover-desc {
+      max-width: 760px;
+      margin: 20px 0 0;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .meta-card {
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .meta-title {
+      font-size: 12px;
+      color: var(--subtle);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 15px;
+      font-weight: 750;
+      color: var(--ink);
+    }
+
+    .report-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .report-box.compact {
+      padding: 26px 30px;
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.28;
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 21px;
+      line-height: 1.35;
+      letter-spacing: -0.035em;
+    }
+
+    h4 {
+      margin: 20px 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 10px 0;
+      color: #333b46;
+      font-size: 16px;
+    }
+
+    .lead {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .toc {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .toc a {
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      transition: 0.18s ease;
+    }
+
+    .toc a:hover {
+      border-color: #cfd8e6;
+      background: #f9fbff;
+      transform: translateY(-1px);
+    }
+
+    .toc-num {
+      color: var(--blue);
+      font-weight: 850;
+      font-size: 13px;
+    }
+
+    .toc-title {
+      font-weight: 760;
+      font-size: 15px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(244, 246, 248, 0.86);
+      padding: 14px 0;
+      margin: 0 0 10px;
+    }
+
+    .toolbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 0 4px;
+    }
+
+    button {
+      border: 1px solid var(--line-dark);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    button:hover {
+      border-color: #b9c6d8;
+      box-shadow: 0 8px 18px rgba(17, 24, 39, 0.06);
+    }
+
+    details.report-qa {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    details.report-qa[open] {
+      border-color: #cbd8ee;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 26px 30px;
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 18px;
+      align-items: start;
+      background: #fff;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .q-no {
+      font-size: 15px;
+      color: var(--blue);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      padding-top: 4px;
+    }
+
+    .q-title {
+      font-size: 25px;
+      line-height: 1.32;
+      font-weight: 850;
+      letter-spacing: -0.045em;
+    }
+
+    .q-sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .toggle-mark {
+      color: var(--subtle);
+      font-size: 13px;
+      font-weight: 800;
+      padding-top: 8px;
+      white-space: nowrap;
+    }
+
+    .answer {
+      border-top: 1px solid var(--line);
+      padding: 28px 30px 34px;
+      background: #fff;
+    }
+
+    .answer-inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .summary-callout {
+      border-left: 4px solid var(--blue);
+      background: #f8fbff;
+      padding: 18px 20px;
+      border-radius: 0 16px 16px 0;
+      margin: 0 0 26px;
+    }
+
+    .summary-callout p {
+      margin: 0;
+      color: #243247;
+      font-weight: 650;
+    }
+
+    .visual-title {
+      margin: 30px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .visual-title::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--blue);
+      display: inline-block;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .factor-card {
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 138px;
+    }
+
+    .factor-card .label {
+      display: inline-flex;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .factor-card strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .factor-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .q1-intro-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+      margin: 0 0 26px;
+    }
+
+    .criteria-panel {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .criteria-panel-title {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    .criteria-mini-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .criteria-mini {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .criteria-mini:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .criteria-mini-no {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .criteria-mini strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 1px;
+    }
+
+    .criteria-mini span {
+      display: block;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line-dark);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 15px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f6fa;
+      color: #273240;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .type-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 18px;
+    }
+
+    .type-card .type {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .type-card.llm .type { color: var(--green); background: #ecfdf7; }
+    .type-card.project .type { color: var(--blue); background: var(--blue-soft); }
+    .type-card.auto .type { color: var(--orange); background: var(--orange-soft); }
+
+    .type-card strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .type-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .component-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .component {
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .component:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: 22px;
+      color: #98a4b3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .component .name {
+      font-weight: 850;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .component .role {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .compare-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      background: var(--gray);
+    }
+
+    .compare-box h4 { margin-top: 0; }
+    .compare-box ul, .report-list {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      color: #394453;
+    }
+
+    .compare-box li, .report-list li {
+      margin: 5px 0;
+      color: #394453;
+      font-size: 15px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 138px;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #98a4b3;
+      background: #fff;
+      border: 1px solid var(--line);
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .step-num {
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .flow-step strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .flow-step span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .code-block {
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: 16px;
+      padding: 18px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre;
+      border: 1px solid #1f2937;
+    }
+
+
+    .practice-box {
+      border: 1px solid #d7deea;
+      background: #fbfcfe;
+      border-radius: 18px;
+      padding: 20px;
+      margin: 18px 0 8px;
+    }
+
+    .practice-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .practice-title {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .practice-caption {
+      color: var(--subtle);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .check-table td:last-child,
+    .check-table th:last-child {
+      width: 96px;
+      text-align: center;
+    }
+
+    .empty-check {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid #c5ccd6;
+      border-radius: 6px;
+      background: #fff;
+      color: transparent;
+    }
+
+    .interpretation {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .interpret-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .interpret-card strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .interpret-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .role-table td:nth-child(2),
+    .role-table td:nth-child(3) {
+      width: 32%;
+    }
+
+    .level-possible {
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .level-caution {
+      color: var(--orange);
+      font-weight: 850;
+    }
+
+    .level-limit {
+      color: var(--red);
+      font-weight: 850;
+    }
+
+    .boundary-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .boundary-item {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 14px;
+      border: 1px solid var(--line);
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .boundary-item .level {
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .boundary-item strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .boundary-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .final {
+      background: #111827;
+      color: #fff;
+      border-radius: 24px;
+      padding: 34px;
+      margin-top: 22px;
+    }
+
+    .final h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .final p, .final li {
+      color: #d1d5db;
+    }
+
+    .final ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--subtle);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .meta-row, .grid-3, .component-row, .flow { grid-template-columns: repeat(2, 1fr); }
+      .component:not(:last-child)::after, .flow-step:not(:last-child)::after { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 22px 14px 60px; }
+      .cover { padding: 30px 22px; }
+      .report-box { padding: 22px; }
+      summary { grid-template-columns: 1fr; padding: 22px; gap: 8px; }
+      .q-no { padding-top: 0; }
+      .q-title { font-size: 21px; }
+      .toggle-mark { display: none; }
+      .answer { padding: 22px; }
+      .meta-row, .grid-2, .grid-3, .component-row, .compare, .flow, .q1-intro-grid, .interpretation { grid-template-columns: 1fr; }
+      .boundary-item { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { max-width: none; padding: 0; }
+      .cover, .report-box, details.report-qa { box-shadow: none; border-radius: 0; page-break-inside: avoid; }
+      details.report-qa { display: block; }
+      details.report-qa:not([open]) .answer { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="cover">
+      <div class="doc-label">KITECH AI 업무 자동화 교육자료</div>
+      <h1>비개발자를 위한<br>AI 업무 자동화 판단 보고서</h1>
+      <p class="cover-desc">
+        업무를 무작정 자동화하기 전에, 어떤 일은 LLM에 직접 물어보면 충분하고,
+        어떤 일은 Claude 프로젝트로 구조화해야 하며, 어떤 일은 자동화 도구나 개발 협업까지 필요한지 판단하기 위한 실무형 보고서입니다.
+      </p>
+      <div class="meta-row">
+        <div class="meta-card">
+          <div class="meta-title">Audience</div>
+          <div class="meta-value">행정직 · 비개발자 · 실무 담당자</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-title">Format</div>
+          <div class="meta-value">토글형 보고서 · Q&A 구성</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-title">Core Message</div>
+          <div class="meta-value">완전 자동화보다 기준 구조화가 먼저</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-box compact">
+      <div class="section-kicker">Executive Summary</div>
+      <h2>핵심 요약</h2>
+      <p class="lead">
+        이 자료의 핵심은 “AI를 어디까지 쓸 수 있는가”보다 “어떤 업무를 어떤 수준까지 구조화할 것인가”입니다.
+        비개발자에게 가장 현실적인 1차 목표는 완전 자동화가 아니라, 반복 업무의 판단 기준과 문서 양식을 Claude 프로젝트 안에 넣어
+        AI가 초안 작성과 정리를 안정적으로 수행하게 만드는 것입니다. 각 질문에는 실무자가 자신의 업무에 바로 대입해볼 수 있는 체크리스트와 판단표를 함께 넣었습니다.
+      </p>
+    </section>
+
+    <section class="report-box compact">
+      <div class="section-kicker">Table of Contents</div>
+      <h2>질문별 구성</h2>
+      <div class="toc">
+        <a href="#q1"><span class="toc-num">Q1</span><span class="toc-title">업무를 자동화 후보, Claude 프로젝트 후보, LLM 직접 사용 후보로 나누는 기준</span></a>
+        <a href="#q2"><span class="toc-num">Q2</span><span class="toc-title">CLAUDE.md, reference, command, Skill의 역할 차이</span></a>
+        <a href="#q3"><span class="toc-num">Q3</span><span class="toc-title">md 파일과 command 파일이 실제로 작동하는 방식</span></a>
+        <a href="#q4"><span class="toc-num">Q4</span><span class="toc-title">메일, 게시판, 내부 시스템 등 외부 연결의 현실적인 범위</span></a>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <button id="openAll">모두 펼치기</button>
+        <button id="closeAll">모두 접기</button>
+      </div>
+    </div>
+
+    <details class="report-qa" id="q1" open>
+      <summary>
+        <div class="q-no">Q1</div>
+        <div>
+          <div class="q-title">업무를 자동화 후보, Claude 프로젝트 후보, LLM 직접 사용 후보로 나누는 기준은 무엇인가?</div>
+          <div class="q-sub">반복도와 변동성만으로는 부족하며, 판단 기준·자료 구조·리스크·외부 연결성을 함께 봐야 합니다.</div>
+        </div>
+        <div class="toggle-mark">열기 / 닫기</div>
+      </summary>
+      <div class="answer">
+        <div class="answer-inner">
+          <div class="q1-intro-grid">
+            <div>
+              <div class="summary-callout">
+                <p>결론적으로 업무 분류는 “얼마나 반복되는가”가 아니라, “AI가 안정적으로 처리할 수 있을 만큼 기준과 입력·출력이 구조화되어 있는가”를 보는 문제입니다.</p>
+              </div>
+
+              <p>
+                실무에서는 단순히 반복도와 변동성만으로 자동화 여부를 판단하지 않습니다.
+                어떤 업무는 자주 반복되더라도 판단 기준이 모호하면 자동화하기 어렵고, 반대로 반복 빈도는 낮아도 입력과 출력 형식이 명확하면 Claude 프로젝트로 묶어두는 가치가 있습니다.
+              </p>
+              <p>
+                따라서 업무를 분류할 때는 먼저 오른쪽의 여섯 가지 기준을 빠르게 점검한 뒤,
+                아래 표에서 현재 업무가 LLM 직접 사용, Claude 프로젝트, command, Skill, 자동화 후보 중 어디에 가까운지 판단하면 됩니다.
+              </p>
+            </div>
+
+            <aside class="criteria-panel">
+              <div class="criteria-panel-title">판단 프레임 6</div>
+              <div class="criteria-mini-list">
+                <div class="criteria-mini"><div class="criteria-mini-no">1</div><div><strong>반복도</strong><span>같은 흐름이 얼마나 자주 반복되는가</span></div></div>
+                <div class="criteria-mini"><div class="criteria-mini-no">2</div><div><strong>판단 기준</strong><span>좋은 결과의 기준을 설명할 수 있는가</span></div></div>
+                <div class="criteria-mini"><div class="criteria-mini-no">3</div><div><strong>입력 구조</strong><span>양식·예시·규정이 정리되어 있는가</span></div></div>
+                <div class="criteria-mini"><div class="criteria-mini-no">4</div><div><strong>출력 형식</strong><span>결과물 형식이 반복적으로 고정되는가</span></div></div>
+                <div class="criteria-mini"><div class="criteria-mini-no">5</div><div><strong>리스크</strong><span>오류 시 책임과 검토 지점이 큰가</span></div></div>
+                <div class="criteria-mini"><div class="criteria-mini-no">6</div><div><strong>외부 연결</strong><span>메일·게시판·내부 시스템까지 이어지는가</span></div></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="visual-title">실무 적용 · 내 업무 분류 체크리스트</div>
+          <div class="practice-box">
+            <div class="practice-head">
+              <div class="practice-title">업무를 하나 떠올리고 체크해보세요</div>
+              <div class="practice-caption">예/아니오 판단용</div>
+            </div>
+            <div class="table-wrap">
+              <table class="check-table">
+                <thead>
+                  <tr>
+                    <th>체크 질문</th>
+                    <th>판단 의도</th>
+                    <th>예</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>이 업무는 주 1회 이상 또는 매월 반복되는가?</td>
+                    <td>반복도가 높을수록 프로젝트화 가치가 큽니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                  <tr>
+                    <td>좋은 결과의 기준을 말로 설명할 수 있는가?</td>
+                    <td>AI에게 맡기려면 판단 기준이 언어화되어야 합니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                  <tr>
+                    <td>참고할 양식, 예시 문서, 규정이 있는가?</td>
+                    <td>reference로 넣을 자료가 있으면 Claude 프로젝트에 적합합니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                  <tr>
+                    <td>결과물 형식이 매번 비슷한가?</td>
+                    <td>출력 형식이 고정될수록 command나 Skill로 확장하기 좋습니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                  <tr>
+                    <td>개인정보, 예산, 결재, 외부 발송과 관련 있는가?</td>
+                    <td>리스크가 있으면 자동화보다 사람 검토 지점을 먼저 설계해야 합니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                  <tr>
+                    <td>내부 시스템 로그인, 권한, API 연결이 필요한가?</td>
+                    <td>외부 연결이 필요하면 비개발자 단독 자동화 범위를 넘을 수 있습니다.</td>
+                    <td><span class="empty-check">□</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="interpretation">
+              <div class="interpret-card"><strong>예가 1~2개</strong><span>LLM 직접 사용으로 충분할 가능성이 큽니다. 대화형으로 질문하고 결과를 조정하세요.</span></div>
+              <div class="interpret-card"><strong>예가 3~4개</strong><span>Claude 프로젝트 후보입니다. 기준과 참고자료를 먼저 묶어두는 것이 좋습니다.</span></div>
+              <div class="interpret-card"><strong>예가 5개 이상</strong><span>자동화 후보일 수 있습니다. 단, 리스크 항목이 있으면 사람 검토 지점을 먼저 설계해야 합니다.</span></div>
+            </div>
+          </div>
+
+          <div class="visual-title">업무 유형별 권장 처리 방식</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>분류</th>
+                  <th>판단 기준</th>
+                  <th>대표 업무</th>
+                  <th>권장 방식</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>LLM 직접 사용 후보</strong></td>
+                  <td>일회성 질문이거나 결과 형식이 고정되어 있지 않은 경우</td>
+                  <td>사업계획서 방향 검토, 문장 다듬기, 쟁점 정리, 회의 질문 도출</td>
+                  <td>Claude나 ChatGPT에 직접 질문하고 대화로 조정</td>
+                </tr>
+                <tr>
+                  <td><strong>Claude 프로젝트 후보</strong></td>
+                  <td>반복되지만 완전 자동화 전 단계이며, 참고자료와 기준을 계속 활용해야 하는 경우</td>
+                  <td>기관 스타일 공문 작성, 사업공고 요약, 회의록 정리, 민원 답변 초안</td>
+                  <td>CLAUDE.md, reference, 예시 문서, command로 프로젝트 구성</td>
+                </tr>
+                <tr>
+                  <td><strong>command 후보</strong></td>
+                  <td>같은 작업 지시를 반복해서 사용하는 경우</td>
+                  <td>회의록 요약, 요건표 정리, 보고서 문체 변환</td>
+                  <td>자주 쓰는 프롬프트를 파일로 저장</td>
+                </tr>
+                <tr>
+                  <td><strong>Skill 후보</strong></td>
+                  <td>단순 지시를 넘어 작업 절차와 산출물 형식이 어느 정도 정해진 경우</td>
+                  <td>회의록 입력 → 요약 → 액션아이템 추출 → 보고용 문장 생성</td>
+                  <td>반복 업무 처리 절차 패키지로 구성</td>
+                </tr>
+                <tr>
+                  <td><strong>자동화 후보</strong></td>
+                  <td>입력, 처리, 출력이 거의 고정되어 있고 사람이 매번 같은 순서로 반복하는 경우</td>
+                  <td>폴더에 들어온 문서 요약, 보고서 취합, 제출서류 누락 체크</td>
+                  <td>Claude Code, 스크립트, n8n, Power Automate 등 활용</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="visual-title">실무 분류 예시</div>
+          <div class="grid-3">
+            <div class="type-card llm">
+              <span class="type">LLM 직접 사용</span>
+              <strong>기획 방향 검토</strong>
+              <p>결과가 매번 다르고 판단 비중이 크기 때문에 프로젝트화보다 직접 대화가 적합합니다.</p>
+            </div>
+            <div class="type-card project">
+              <span class="type">Claude 프로젝트</span>
+              <strong>공문 초안 작성</strong>
+              <p>문체, 포함 항목, 제외 표현, 결재권자 수정 포인트가 정리되면 프로젝트화하기 좋습니다.</p>
+            </div>
+            <div class="type-card auto">
+              <span class="type">자동화 후보</span>
+              <strong>폴더 문서 요약</strong>
+              <p>입력 폴더, 처리 방식, 출력 폴더가 고정되면 자동화 도구를 활용할 수 있습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="report-qa" id="q2" open>
+      <summary>
+        <div class="q-no">Q2</div>
+        <div>
+          <div class="q-title">CLAUDE.md, reference, command, Skill은 각각 어떤 역할을 하는가?</div>
+          <div class="q-sub">command는 요청문이고, Skill은 반복 업무를 처리하는 방식입니다.</div>
+        </div>
+        <div class="toggle-mark">열기 / 닫기</div>
+      </summary>
+      <div class="answer">
+        <div class="answer-inner">
+          <div class="summary-callout">
+            <p>CLAUDE.md는 프로젝트의 기본 규칙, reference는 참고자료, command는 저장해둔 요청문, Skill은 업무 매뉴얼과 실행 절차에 가깝습니다.</p>
+          </div>
+
+          <p>
+            Claude 프로젝트를 처음 구성할 때 가장 많이 헷갈리는 부분은 command와 Skill의 차이입니다.
+            command는 사람이 반복해서 입력하는 요청문을 파일로 저장한 것입니다. 반면 Skill은 단순히 “무엇을 해줘”가 아니라, 업무를 어떤 순서로 처리하고 어떤 기준으로 판단할지까지 포함합니다.
+          </p>
+
+          <div class="visual-title">구성요소 역할 맵</div>
+          <div class="component-row">
+            <div class="component">
+              <div class="name">CLAUDE.md</div>
+              <div class="role">AI가 따라야 할 프로젝트 기본 운영 규칙</div>
+            </div>
+            <div class="component">
+              <div class="name">reference</div>
+              <div class="role">AI가 참고해야 할 자료, 예시, 규정, 양식</div>
+            </div>
+            <div class="component">
+              <div class="name">command</div>
+              <div class="role">자주 쓰는 요청문을 저장해둔 프롬프트 파일</div>
+            </div>
+            <div class="component">
+              <div class="name">Skill</div>
+              <div class="role">반복 업무 처리 방식과 실행 절차</div>
+            </div>
+          </div>
+
+          <div class="visual-title">command와 Skill의 차이</div>
+          <div class="compare">
+            <div class="compare-box">
+              <h4>command: 무엇을 해줘?</h4>
+              <p>command는 비교적 짧고 직접적인 요청입니다. 사람이 자주 쓰는 프롬프트를 저장해두고 필요할 때 다시 호출하는 개념입니다.</p>
+              <ul>
+                <li>이 회의록을 요약해줘.</li>
+                <li>이 공고문을 요건표로 정리해줘.</li>
+                <li>이 문서를 공공기관 보고서 문체로 바꿔줘.</li>
+              </ul>
+            </div>
+            <div class="compare-box">
+              <h4>Skill: 어떻게 처리할까?</h4>
+              <p>Skill은 반복 업무를 수행하는 방식 전체입니다. 작업 순서, 판단 기준, 결과 형식, 예외 처리 기준까지 포함할 수 있습니다.</p>
+              <ul>
+                <li>회의 목적을 먼저 파악한다.</li>
+                <li>결정사항과 논의사항을 분리한다.</li>
+                <li>담당자와 마감일을 추출한다.</li>
+                <li>불확실한 내용은 확인 필요로 표시한다.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="visual-title">처음 시작할 때 권장 순서</div>
+          <div class="flow">
+            <div class="flow-step"><div class="step-num">STEP 1</div><strong>Claude 프로젝트 만들기</strong><span>회의록 정리, 공문 초안 작성, 사업공고 요약처럼 하나의 업무 단위로 시작합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 2</div><strong>reference 넣기</strong><span>기존 문서, 양식, 예시, 표현집, 규정 문서를 넣습니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 3</div><strong>CLAUDE.md 작성</strong><span>문체, 금지사항, 출력 순서, 확인 필요 기준을 정리합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 4</div><strong>command 2~3개 작성</strong><span>자주 쓰는 요청부터 저장하고, 반복이 안정되면 Skill로 확장합니다.</span></div>
+          </div>
+
+          <p>
+            비개발자 기준에서는 처음부터 Skill까지 만들 필요가 없습니다.
+            먼저 프로젝트와 reference, CLAUDE.md, command 몇 개로 시작한 뒤, 같은 수정이 반복되거나 절차가 고정되면 그때 Skill로 확장하는 방식이 가장 안전합니다.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <details class="report-qa" id="q3" open>
+      <summary>
+        <div class="q-no">Q3</div>
+        <div>
+          <div class="q-title">md 파일이나 command 파일은 실제로 어떻게 작동하는가?</div>
+          <div class="q-sub">파일은 스스로 실행되지 않으며, 사람이 명령하면 AI가 지침으로 읽고 처리합니다.</div>
+        </div>
+        <div class="toggle-mark">열기 / 닫기</div>
+      </summary>
+      <div class="answer">
+        <div class="answer-inner">
+          <div class="summary-callout">
+            <p>md 파일은 프로그램이라기보다 AI가 읽는 업무 매뉴얼입니다. 사람이 “이 매뉴얼대로 처리해줘”라고 요청할 때 작동합니다.</p>
+          </div>
+
+          <p>
+            md 파일이나 command 파일은 그 자체로 실행되는 프로그램이 아닙니다.
+            사람이 명령을 내리거나, Claude Code 같은 도구가 특정 파일을 읽도록 요청해야 작동합니다.
+            비개발자 관점에서는 “파일이 실행된다”기보다 “AI가 파일을 읽고 그 안의 규칙을 작업 지시로 해석한다”고 이해하는 것이 정확합니다.
+          </p>
+
+          <div class="visual-title">회의록 요약 프로젝트의 폴더 구조</div>
+          <div class="code-block">meeting-summary-project/
+├── CLAUDE.md
+├── reference/
+│   └── meeting_format.md
+├── commands/
+│   └── summarize_meeting.md
+├── input/
+│   └── 2026-05-06_meeting.md
+└── output/</div>
+
+          <div class="visual-title">작동 순서</div>
+          <div class="flow">
+            <div class="flow-step"><div class="step-num">STEP 1</div><strong>입력 파일 배치</strong><span>사람이 회의록 파일을 input 폴더에 넣습니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 2</div><strong>명령 입력</strong><span>commands/summarize_meeting.md 지침에 따라 요약해달라고 요청합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 3</div><strong>AI가 순서대로 읽음</strong><span>CLAUDE.md → command → reference → input 순서로 해석합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 4</div><strong>결과 저장</strong><span>규칙과 형식에 맞춰 output 폴더에 결과 파일을 저장합니다.</span></div>
+          </div>
+
+          <div class="visual-title">실무 적용 · 사람과 AI의 역할 분리</div>
+          <div class="practice-box">
+            <div class="practice-head">
+              <div class="practice-title">파일이 “자동 실행”되는 것이 아니라, 사람의 트리거와 AI의 해석이 결합됩니다</div>
+              <div class="practice-caption">역할 분리표</div>
+            </div>
+            <div class="table-wrap">
+              <table class="role-table">
+                <thead>
+                  <tr>
+                    <th>단계</th>
+                    <th>사람이 하는 일</th>
+                    <th>AI가 하는 일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. 입력 준비</strong></td>
+                    <td>회의록, 공문, 보고서 등 처리할 파일을 input 폴더에 넣습니다.</td>
+                    <td>아직 작업하지 않습니다. 읽을 대상이 준비된 상태입니다.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. 작업 요청</strong></td>
+                    <td>command 파일 또는 직접 문장으로 “이 지침대로 처리해줘”라고 명령합니다.</td>
+                    <td>이번 작업의 목적과 처리 범위를 파악합니다.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. 지침 해석</strong></td>
+                    <td>필요하면 참고자료나 출력 형식을 추가로 지정합니다.</td>
+                    <td>CLAUDE.md, command, reference, input 파일을 읽고 규칙을 조합합니다.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. 결과 확인</strong></td>
+                    <td>output 결과물을 검토하고, 오류나 누락 정보를 확인합니다.</td>
+                    <td>정해진 형식에 맞춰 결과를 작성하고 output 폴더에 저장합니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="visual-title">AI가 읽는 파일별 역할</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>파일</th>
+                  <th>역할</th>
+                  <th>예시 내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>CLAUDE.md</strong></td>
+                  <td>프로젝트 전체 규칙</td>
+                  <td>결정사항과 논의사항 구분, 공공기관 보고용 문체, 확인 필요 표시</td>
+                </tr>
+                <tr>
+                  <td><strong>reference/meeting_format.md</strong></td>
+                  <td>결과물 형식 예시</td>
+                  <td>회의 개요, 주요 논의사항, 결정사항, 액션아이템, 확인 필요 사항</td>
+                </tr>
+                <tr>
+                  <td><strong>commands/summarize_meeting.md</strong></td>
+                  <td>이번 작업 요청문</td>
+                  <td>input 폴더의 회의록을 읽고 reference 형식에 맞춰 output에 저장</td>
+                </tr>
+                <tr>
+                  <td><strong>input 파일</strong></td>
+                  <td>실제 처리 대상</td>
+                  <td>회의 원문, 담당자, 일정, 논의 내용</td>
+                </tr>
+                <tr>
+                  <td><strong>output 폴더</strong></td>
+                  <td>결과 저장 위치</td>
+                  <td>회의 요약본, 액션아이템 표, 확인 필요 사항</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            따라서 가장 단순한 자동화 작동 방식은 “사람이 자료를 넣고, 명령을 내리고, AI가 지침 파일을 읽고, 결과를 저장하는 구조”입니다.
+            여기서 자동화 수준을 더 높이면 특정 폴더에 파일이 들어왔을 때 자동으로 처리하거나, 다른 도구와 연결해 결과를 보내는 방식으로 확장할 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <details class="report-qa" id="q4" open>
+      <summary>
+        <div class="q-no">Q4</div>
+        <div>
+          <div class="q-title">메일, 내부 게시판, 기관 시스템과 연결되는 업무는 어디까지 비개발자가 처리할 수 있는가?</div>
+          <div class="q-sub">파일 기반 자동화와 반자동화는 현실적이지만, 내부 시스템 직접 연결은 개발·보안 협업이 필요합니다.</div>
+        </div>
+        <div class="toggle-mark">열기 / 닫기</div>
+      </summary>
+      <div class="answer">
+        <div class="answer-inner">
+          <div class="summary-callout">
+            <p>행정 업무에서 가장 안전한 설계는 AI가 초안·요약·분류를 맡고, 최종 판단·승인·발송·등록은 사람이 맡는 Human-in-the-loop 반자동화입니다.</p>
+          </div>
+
+          <p>
+            행정 업무는 메일, 내부 게시판, 그룹웨어, 전자결재, 내부 시스템과 연결되는 경우가 많습니다.
+            하지만 비개발자가 처음부터 모든 시스템을 자동 연결하려고 하면 보안, 권한, 책임 문제가 발생할 수 있습니다.
+            따라서 외부 연결은 단계적으로 접근해야 합니다.
+          </p>
+
+          <div class="visual-title">외부 연결의 현실적 범위</div>
+          <div class="boundary-list">
+            <div class="boundary-item">
+              <div class="level">1단계</div>
+              <div>
+                <strong>파일 기반 자동화</strong>
+                <p>문서 요약, 회의록 정리, 공문 초안 작성, 보고서 문체 변환, 제출서류 체크리스트 생성 등. 내 PC나 프로젝트 폴더 안의 파일을 대상으로 하므로 비개발자도 충분히 가능합니다.</p>
+              </div>
+            </div>
+            <div class="boundary-item">
+              <div class="level">2단계</div>
+              <div>
+                <strong>반자동화</strong>
+                <p>AI가 메일 초안이나 공지문, 보고서 요약을 만들고 사람이 Outlook, Gmail, 내부 게시판, 결재 시스템에 반영하는 방식입니다. 행정 실무에서 가장 현실적인 형태입니다.</p>
+              </div>
+            </div>
+            <div class="boundary-item">
+              <div class="level">3단계</div>
+              <div>
+                <strong>외부 도구 연동</strong>
+                <p>Google Apps Script, Zapier, Make, n8n, Slack Workflow, Notion Automation, Microsoft Power Automate 등을 활용할 수 있습니다. 다만 기관 내부망이나 보안 정책에 따라 제한될 수 있습니다.</p>
+              </div>
+            </div>
+            <div class="boundary-item">
+              <div class="level">4단계</div>
+              <div>
+                <strong>개발 협업 필요 영역</strong>
+                <p>내부 시스템 로그인 자동화, 전자결재 자동 상신, 개인정보 포함 데이터 처리, 메일 자동 발송, 외부 API 연동, 내부망 시스템 직접 연결은 개발자·보안 담당자·시스템 담당자와 협업해야 합니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-title">권장 운영 구조</div>
+          <div class="flow">
+            <div class="flow-step"><div class="step-num">STEP 1</div><strong>내부 시스템</strong><span>사람이 필요한 자료를 다운로드하거나 복사합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 2</div><strong>AI 처리</strong><span>AI가 요약, 분류, 초안 생성, 표 정리를 수행합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 3</div><strong>사람 검토</strong><span>오류, 민감정보, 표현, 책임 범위를 확인합니다.</span></div>
+            <div class="flow-step"><div class="step-num">STEP 4</div><strong>최종 반영</strong><span>사람이 메일 발송, 게시판 등록, 결재 상신을 수행합니다.</span></div>
+          </div>
+
+          <div class="visual-title">실무 적용 · 가능 / 주의 / 제한 판단표</div>
+          <div class="practice-box">
+            <div class="practice-head">
+              <div class="practice-title">외부 연결 업무는 자동화 가능 여부보다 책임 경계를 먼저 봅니다</div>
+              <div class="practice-caption">위험도 기준</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th>업무 예시</th>
+                    <th>권장 처리 방식</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="level-possible">가능</span></td>
+                    <td>문서 요약, 회의록 정리, 보고서 초안, 제출서류 체크리스트 생성</td>
+                    <td>AI 활용 가능. 단, 최종 제출 전 사람 검토는 유지합니다.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="level-caution">주의</span></td>
+                    <td>메일 초안, 게시판 공지문, 민원 답변 초안, 결재 문서 초안</td>
+                    <td>AI가 초안을 만들고 사람이 표현, 사실관계, 책임 범위를 검토한 뒤 반영합니다.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="level-limit">제한 / 협업 필요</span></td>
+                    <td>자동 발송, 전자결재 자동 상신, 개인정보 처리, 예산·계약·인사 판단, 내부 시스템 직접 입력</td>
+                    <td>비개발자 단독 자동화는 피하고, 개발자·보안 담당자·시스템 담당자와 협업합니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="visual-title">외부 연결 판단 질문</div>
+          <ul class="report-list">
+            <li>로그인이나 권한이 필요한가?</li>
+            <li>개인정보나 민감정보가 포함되는가?</li>
+            <li>결과가 외부로 발송되거나 등록되는가?</li>
+            <li>실패했을 때 책임 문제가 생기는가?</li>
+            <li>공식 API나 안정적인 연동 방식이 있는가?</li>
+          </ul>
+
+          <p>
+            위 질문 중 하나라도 해당된다면 완전 자동화보다 사람 검토 지점을 먼저 설계해야 합니다.
+            공식 API가 있고 보안 검토를 통과한 경우에는 개발 협업으로 안정적인 연결을 만들 수 있지만,
+            공식 연동이 없고 화면을 억지로 조작해야 한다면 위험도가 높습니다.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <section class="final">
+      <h2>최종 결론</h2>
+      <ul>
+        <li>비개발자가 처음부터 완전 자동화를 목표로 할 필요는 없습니다.</li>
+        <li>현실적인 1차 목표는 반복 업무의 판단 기준과 문서 양식을 Claude 프로젝트 안에 넣는 것입니다.</li>
+        <li>AI는 초안, 요약, 분류, 정리를 맡고 최종 판단, 승인, 발송, 책임은 사람이 맡아야 합니다.</li>
+        <li>외부 시스템 연결은 자동화의 마지막 단계이며, 그 전까지는 반자동화 구조가 가장 안전합니다.</li>
+      </ul>
+    </section>
+
+    <div class="footer">KITECH AI 업무 자동화 판단 보고서 · Report-style accordion HTML</div>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('details.report-qa');
+    document.getElementById('openAll').addEventListener('click', () => items.forEach(item => item.open = true));
+    document.getElementById('closeAll').addEventListener('click', () => items.forEach(item => item.open = false));
+  </script>
+</body>
+</html>

@@ -265,28 +265,20 @@ const SLIDES = [
   html:`<div class="inner">
     <div class="kicker">0–5분</div>
     <div class="h2">암묵지 형식화란 무엇인가</div>
-    <div class="sub">업무 담당자의 판단 기준을 문서와 절차로 정리하는 것</div>
-    <div class="g2" style="margin-bottom:14px;">
-      <div class="card sl" style="padding:20px;">
-        <div class="ctag sl">형식지 — 이미 문서화된 것</div>
-        <div class="ct">매뉴얼·규정·절차서</div>
-        <div class="cb">이미 문서화되어 있어<br/>처리 기준으로 활용 가능<br/><br/><span style="font-size:11.5px;color:rgba(255,255,255,.3);">예) 작성 양식, 결재 규정, 표준 프로세스</span></div>
+    <div class="sub">담당자의 판단 기준을 문서로 꺼내,<br/>처리 기준과 Skill 구조로 바꾸는 과정입니다.</div>
+    <div class="g2" style="margin-top:18px;margin-bottom:18px;">
+      <div class="card sl" style="padding:22px;">
+        <div class="ctag sl">형식지 — 이미 문서화된 기준</div>
+        <div class="ct">매뉴얼 · 규정 · 절차서 · 작성 양식</div>
+        <div class="cb">이미 글로 정리되어 있어,<br/>그대로 처리 기준으로 활용할 수 있는 것입니다.</div>
       </div>
-      <div class="card pu" style="padding:20px;">
-        <div class="ctag pu">암묵지 — 경험으로 축적된 것</div>
-        <div class="ct">경험으로 쌓인 판단 기준</div>
-        <div class="cb">문서화되어 있지 않아<br/>담당자가 기준을 명시해야 함<br/><br/><span style="font-size:11.5px;color:#C4B5FD;">예) 포함·제외 기준, 선호 표현, 예외 처리 기준</span></div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:14px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:10px;padding:14px 18px;">
-      <div style="flex:1;">
-        <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;">암묵지 형식화 = 반복 업무에서 사용하던<br/><strong style="color:#fff;">판단 기준과 예외 처리 방식</strong>을<br/>문서로 정리하는 과정</div>
-      </div>
-      <div style="font-size:13px;font-weight:800;color:#7C3AED;flex-shrink:0;">기준화</div>
-      <div style="flex:1;text-align:right;">
-        <div style="font-size:13px;color:#C4B5FD;line-height:1.8;">이 문서가<br/><strong style="color:#fff;">처리 기준이 되고</strong><br/>스킬 구조가 됩니다</div>
+      <div class="card pu" style="padding:22px;">
+        <div class="ctag pu">암묵지 — 경험으로 쌓인 판단 기준</div>
+        <div class="ct">포함·제외 기준 · 선호 표현 · 예외 처리</div>
+        <div class="cb">담당자 머릿속에는 있지만,<br/>아직 문서로 정리되지 않은 기준입니다.</div>
       </div>
     </div>
+    <div class="cl pu" style="text-align:center;font-size:14.5px;line-height:1.75;"><strong>핵심 메시지 —</strong> 암묵지 형식화는 담당자의 판단 기준을 문서로 정리해, <strong>처리 기준과 Skill 구조</strong>로 바꾸는 과정입니다.</div>
   </div>`
 },
 
@@ -542,25 +534,26 @@ const SLIDES = [
           <div class="ctag sl">Option B — md 기반 완성도</div>
           <div class="cb" style="font-size:12.5px;line-height:1.85;">포맷 변환 포기<br/>md로 완성도 높이는 방향<br/><span style="color:rgba(255,255,255,.4);">HWPX 의존도 축소</span></div>
         </div>
-        <div class="cl am" style="margin-top:0;"><strong style="color:#fff;">교훈:</strong> HWPX는 XML 기반이라 추출 자체는 가능하지만, <strong>서식 보존과 재반영 방식</strong>을 1주차에 반드시 확인해야 합니다.</div>
       </div>
     </div>
+    <div class="cl am" style="margin:18px auto 0;max-width:760px;text-align:center;"><strong>교훈 —</strong> HWPX는 XML 기반이라 추출은 가능하지만, <strong>서식 보존과 재반영 방식</strong>은 1주차에 반드시 확인해야 합니다.</div>
   </div>`
 },
 
 
-// 추가. HWPX 처리 방향
+// 추가. 설계하면서 암묵지를 만들어가는 사례
 {
-  notes:'HWPX를 포맷 처리 제약이 큰이라고 단정하지 않는다. HWPX 자체보다 추출, 검토, 재반영 흐름이 필요하다고 말한다.',
+  notes:'사례 C를 아쉬운 사례로 보지 않고, 설계하면서 기준을 만들어가는 사례로 소개한다. 처음부터 기준이 완벽할 수 없다는 점을 강조한다.',
   html:`<div class="inner">
-    <div class="kicker">사례 C — HWPX 처리 방향</div>
-    <div class="h2">HWPX 문서는<br/>처리 단계를 분리해야 합니다</div>
-    <div style="margin-top:18px;">
-      <div class="step"><div class="sn">1</div><div class="st"><strong>추출 가능성 확인</strong><br/>원본에서 텍스트, 표, 제목, 본문을 분리해서 읽을 수 있는지 먼저 확인합니다.</div></div>
-      <div class="step"><div class="sn">2</div><div class="st"><strong>처리 범위 제한</strong><br/>회의록 초안, 누락 체크, 할 일 정리처럼 언어 처리 중심 작업만 먼저 맡깁니다.</div></div>
-      <div class="step"><div class="sn">3</div><div class="st"><strong>서식 재반영 방식 결정</strong><br/>최종 HWPX 반영은 변환 도구, 템플릿, 사람 검토 중 어떤 방식으로 갈지 정합니다.</div></div>
+    <div class="kicker">관점 전환</div>
+    <div class="h2">설계하면서<br/>암묵지를 만들어가는 사례</div>
+    <div class="sub">처음부터 기준이 완벽하지 않아도 괜찮습니다.<br/>결과물을 돌려보고 비교하면서 기준을 채워가는 것도 암묵지 형식화입니다.</div>
+    <div style="margin-top:20px;">
+      <div class="step"><div class="sn">1</div><div class="st"><strong>일단 한 번 돌려본다</strong><br/>작은 입력으로 결과물을 만들어 보고, 어디가 부족한지 눈으로 확인합니다.</div></div>
+      <div class="step"><div class="sn">2</div><div class="st"><strong>결과물을 비교하면서 기준을 끌어낸다</strong><br/>마음에 드는 결과와 그렇지 않은 결과를 나란히 두고, <strong>포함·제외 기준 / 표현 기준 / 예외 처리 기준</strong>을 한 줄씩 적어 갑니다.</div></div>
+      <div class="step"><div class="sn">3</div><div class="st"><strong>기준을 다시 반영하고 또 돌려본다</strong><br/>늘어난 기준을 다음 실행에 반영하고, 같은 자리에서 막히는 부분이 있으면 그 자리에 기준을 한 줄 더 채워 넣습니다.</div></div>
     </div>
-    <div class="cl bl">다음 제출물은 완성본보다 추출 테스트 결과와 서식 보존 체크리스트가 더 현실적입니다.</div>
+    <div class="cl pu" style="margin-top:18px;text-align:center;">완벽한 기준 문서를 먼저 쓰는 게 아니라, <strong>돌려보고 비교하면서 기준이 쌓이는 과정</strong> 자체가 암묵지 형식화입니다.</div>
   </div>`
 },
 

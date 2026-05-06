@@ -36,6 +36,26 @@
       letter-spacing: -0.015em;
     }
 
+    @keyframes fadeUpIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(31, 79, 216, 0);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(31, 79, 216, 0.06);
+      }
+    }
+
     .page {
       max-width: var(--max);
       margin: 0 auto;
@@ -247,6 +267,7 @@
 
     details.report-qa[open] {
       border-color: #cbd8ee;
+      animation: softPulse 0.6s ease;
     }
 
     summary {
@@ -316,6 +337,10 @@
       border-top: 1px solid var(--line);
       padding: 28px 30px 34px;
       background: #fff;
+    }
+
+    details.report-qa[open] .answer-inner {
+      animation: fadeUpIn 0.32s ease;
     }
 
     .answer-inner {
@@ -688,6 +713,25 @@
       font-weight: 700;
     }
 
+    .practice-caption.count-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 76px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid #d8e3f5;
+      background: #fff;
+      color: var(--blue);
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+    }
+
+    .practice-caption.count-badge.active {
+      border-color: #bfd2f3;
+      background: var(--blue-soft);
+      color: #1744ba;
+    }
+
     .check-table td:last-child,
     .check-table th:last-child {
       width: 96px;
@@ -823,6 +867,18 @@
       padding-left: 20px;
     }
 
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .footer {
       margin-top: 24px;
       color: var(--subtle);
@@ -954,7 +1010,7 @@
           <div class="practice-box">
             <div class="practice-head">
               <div class="practice-title">업무를 하나 떠올리고 체크해보세요</div>
-              <div class="practice-caption">예/아니오 판단용</div>
+              <div class="practice-caption count-badge" id="q1ChecklistCount">0 / 6 체크</div>
             </div>
             <div class="table-wrap">
               <table class="check-table">
@@ -1404,11 +1460,21 @@
   <script>
     const items = [...document.querySelectorAll('details.report-qa')];
     const toggleAllButton = document.getElementById('toggleAll');
+    const revealTargets = document.querySelectorAll('.meta-card, .report-box, details.report-qa, .factor-card, .type-card, .component, .flow-step, .boundary-item, .interpret-card, .practice-box, .summary-callout');
+    const q1Checks = [...document.querySelectorAll('#q1 .empty-check')];
+    const q1ChecklistCount = document.getElementById('q1ChecklistCount');
 
     const syncToggleButton = () => {
       const allOpen = items.every(item => item.open);
       toggleAllButton.textContent = allOpen ? '전체 접기' : '전체 펼치기';
       toggleAllButton.setAttribute('aria-pressed', String(allOpen));
+    };
+
+    const syncChecklistCount = () => {
+      if (!q1ChecklistCount) return;
+      const checkedCount = q1Checks.filter(check => check.classList.contains('checked')).length;
+      q1ChecklistCount.textContent = `${checkedCount} / ${q1Checks.length} 체크`;
+      q1ChecklistCount.classList.toggle('active', checkedCount > 0);
     };
 
     toggleAllButton.addEventListener('click', () => {
@@ -1423,10 +1489,28 @@
       check.addEventListener('click', () => {
         const checked = check.classList.toggle('checked');
         check.setAttribute('aria-pressed', String(checked));
+        syncChecklistCount();
       });
     });
 
+    revealTargets.forEach((target, index) => {
+      target.classList.add('reveal-on-scroll');
+      target.style.transitionDelay = `${Math.min(index % 6, 5) * 40}ms`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealTargets.forEach(target => observer.observe(target));
+
     items.forEach(item => item.addEventListener('toggle', syncToggleButton));
+    syncChecklistCount();
     syncToggleButton();
   </script>
 </body>

@@ -171,11 +171,40 @@
     }
 
     .section-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       color: var(--text-muted);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.4px;
       text-align: right;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .section-meta-text {
+      color: var(--text-muted);
+    }
+
+    .section-meta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: #ffffff;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .section-meta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.1);
     }
 
     .card-list {
@@ -689,7 +718,7 @@
     <section class="section" aria-labelledby="qa-section">
       <div class="section-header">
         <div class="section-name" id="qa-section">4. 비개발자를 위한 자동화 판단 Q&amp;A</div>
-        <div class="section-meta">질문 4가지 미리보기 · 보고서 + PDF</div>
+        <div class="section-meta"><span class="section-meta-text">질문 4가지 미리보기 · 보고서</span><a class="section-meta-button" href="kitech-ai-automation-ebook.pdf" download>PDF 다운로드 (전자책)</a></div>
       </div>
       <div class="qa-preview">
         <div class="qa-preview-top">
@@ -728,7 +757,6 @@
           <div class="qa-preview-note">질문별 상세 설명은 보고서 본문에서 확인하고, PDF는 인쇄용 또는 오프라인 참고용으로 열 수 있습니다.</div>
           <div class="qa-preview-actions">
             <a class="preview-button primary" href="qa-report.html" target="_blank" rel="noopener">전체 보고서 보기</a>
-            <a class="preview-button" href="kitech-ai-automation-ebook.pdf" download>PDF 내려받기</a>
           </div>
         </div>
       </div>

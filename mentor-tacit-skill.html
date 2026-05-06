@@ -1,229 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>암묵지를 스킬로 바꾸는 사례 | 이유진 멘토</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
-body{background:#0D1117;display:flex;flex-direction:column;}
-
-/* ── Top bar ── */
-.topbar{height:46px;flex-shrink:0;background:rgba(13,17,23,.97);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 22px;gap:12px;}
-.tb-badge{background:#7C3AED;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;}
-.tb-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);}
-.tb-meta{font-size:11.5px;color:rgba(255,255,255,.3);}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
-.tb-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.45);font-size:11px;padding:4px 10px;cursor:pointer;transition:all .15s;}
-.tb-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);}
-.tb-btn.on{background:rgba(124,58,237,.2);border-color:#7C3AED;color:#C4B5FD;}
-.dots{display:flex;gap:7px;align-items:center;}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .2s;border:none;}
-.dot.on{background:#7C3AED;transform:scale(1.3);}
-.counter{font-size:12px;color:rgba(255,255,255,.3);font-variant-numeric:tabular-nums;}
-
-/* ── Progress ── */
-.progress{height:3px;background:rgba(255,255,255,.06);flex-shrink:0;}
-.pfill{height:100%;background:linear-gradient(90deg,#7C3AED,#A78BFA);transition:width .4s cubic-bezier(.22,1,.36,1);}
-
-/* ── Stage ── */
-.stage{flex:1;position:relative;overflow:hidden;}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 64px;opacity:0;transform:translateX(56px);transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);pointer-events:none;overflow-y:auto;}
-.slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
-.slide.exit{opacity:0;transform:translateX(-56px);}
-.inner{width:100%;max-width:840px;}
-
-/* ── Nav arrows ── */
-.arr{position:fixed;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;z-index:10;}
-.arr:hover{background:rgba(255,255,255,.12);color:#fff;}
-.arr:disabled{opacity:.15;cursor:default;}
-.arr.p{left:13px;}
-.arr.n{right:13px;}
-
-/* ── Notes ── */
-.notes{position:fixed;bottom:0;left:0;right:0;background:rgba(8,12,20,.97);border-top:1px solid rgba(255,255,255,.1);padding:13px 24px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.7;transform:translateY(100%);transition:transform .28s;max-height:140px;overflow-y:auto;}
-.notes.open{transform:translateY(0);}
-.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#A78BFA;margin-bottom:5px;}
-
-/* ── Text ── */
-.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px;}
-.h1{font-size:36px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;}
-.h2{font-size:23px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:5px;}
-.sub{font-size:13px;color:rgba(255,255,255,.38);margin-bottom:18px;line-height:1.6;}
-
-/* ── Cards ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.card{border-radius:10px;padding:16px 18px;}
-.card.pu{background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.32);}
-.card.bl{background:rgba(37,99,235,.14);border:1px solid rgba(37,99,235,.32);}
-.card.rd{background:rgba(185,28,28,.13);border:1px solid rgba(185,28,28,.28);}
-.card.am{background:rgba(180,83,9,.16);border:1px solid rgba(252,211,77,.3);}
-.card.gr{background:rgba(5,150,105,.13);border:1px solid rgba(5,150,105,.3);}
-.card.sl{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}
-.ctag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.ctag.pu{color:#C4B5FD;}.ctag.bl{color:#93C5FD;}.ctag.rd{color:#FCA5A5;}.ctag.am{color:#FCD34D;}.ctag.gr{color:#6EE7B7;}.ctag.sl{color:rgba(255,255,255,.35);}
-.ct{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;}
-.cb{font-size:13px;color:rgba(255,255,255,.58);line-height:1.75;}
-
-/* ── BA ── */
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.bef{background:rgba(185,28,28,.12);border:1px solid rgba(185,28,28,.28);border-radius:8px;padding:14px 16px;}
-.aft{background:rgba(124,58,237,.13);border:1px solid rgba(124,58,237,.32);border-radius:8px;padding:14px 16px;}
-.balbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
-.balbl.b{color:#FCA5A5;}.balbl.a{color:#C4B5FD;}
-.batask{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;}
-.babody{font-size:12.5px;color:rgba(255,255,255,.52);line-height:1.75;}
-
-/* ── Callout ── */
-.cl{border-radius:8px;padding:12px 16px;font-size:13.5px;line-height:1.75;margin-top:11px;}
-.cl.pu{background:rgba(124,58,237,.14);border-left:3px solid #7C3AED;color:#DDD6FE;}
-.cl.bl{background:rgba(37,99,235,.14);border-left:3px solid #2563EB;color:#BAE6FD;}
-.cl.am{background:rgba(180,83,9,.16);border-left:3px solid #D97706;color:#FDE68A;}
-.cl.gr{background:rgba(5,150,105,.13);border-left:3px solid #10B981;color:#6EE7B7;}
-
-/* ── Step ── */
-.step{display:flex;gap:12px;align-items:flex-start;padding:11px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;}
-.sn{width:26px;height:26px;border-radius:50%;background:#7C3AED;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.st{font-size:13.5px;color:rgba(255,255,255,.73);line-height:1.7;}
-.st strong{color:#fff;}
-
-/* ── Rule tag ── */
-.rtag{display:inline-flex;align-items:center;gap:5px;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.35);border-radius:5px;padding:3px 9px;font-size:11.5px;color:#C4B5FD;font-weight:600;margin:2px 3px 2px 0;}
-
-/* ── Skill pill ── */
-.skill{display:inline-block;background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.4);border-radius:5px;padding:3px 10px;font-family:monospace;font-size:12.5px;color:#93C5FD;font-weight:700;margin:2px;}
-
-/* ── Flow ── */
-.flow{display:flex;align-items:center;gap:0;overflow-x:auto;}
-.fnode{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 14px;text-align:center;min-width:110px;}
-.farr{flex-shrink:0;color:rgba(255,255,255,.25);padding:0 6px;}
-
-/* ── Table ── */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;}
-.tbl thead th{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 13px;text-align:left;}
-.tbl td{padding:9px 13px;color:rgba(255,255,255,.68);border-bottom:1px solid rgba(255,255,255,.06);}
-.tbl tr:last-child td{border-bottom:none;}
-.tbl .done{color:#6EE7B7;font-weight:600;}
-.tbl .wip{color:#FCD34D;}
-.tbl .warn{color:#FCA5A5;}
-
-/* ── Big message ── */
-.bigmsg{background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(37,99,235,.15));border:1.5px solid rgba(124,58,237,.38);border-radius:12px;padding:22px 28px;text-align:center;margin-top:14px;}
-.bmlbl{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.bmtxt{font-size:18px;font-weight:800;color:#fff;line-height:1.6;}
-.bmtxt .hl{color:#A78BFA;}
-
-/* ── Time badge ── */
-.tbadge{display:inline-block;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.3);border-radius:99px;padding:3px 11px;font-size:11px;font-weight:700;color:#C4B5FD;margin-right:6px;}
-
-/* cover pills */
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
-.pill{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;background:rgba(124,58,237,.14);color:#C4B5FD;border:1px solid rgba(124,58,237,.32);}
-
-/* v4 자연스러운 문장/간격 보정 */
-.slide{overflow-y:auto}
-.paper{max-height:calc(100vh - 128px);overflow-y:auto}
-.h1,.h2,.h3{word-break:keep-all}
-.sub,.cbody,.small,.step span,.st,.cb,.callout,.cl{word-break:keep-all}
-.cbody,.cb{line-height:1.66}
-.step{align-items:flex-start}
-.grid3 .card{min-height:0}
-.table td,.tbl td{word-break:keep-all}
-@media(max-height:760px){
-  .paper{padding:34px 42px}
-  .h1{font-size:42px}
-  .h2{font-size:30px}
-  .sub{font-size:18px;margin-top:12px}
-  .card{padding:20px}
-  .callout{font-size:16px;padding:16px 20px}
-}
-
-/* Design-system alignment: KITECH 운영용 강의자료 톤 */
-:root{
-  --bg:#fafaf9;--paper:#fff;--text:#2c2c2c;--muted:#6b6b6b;--border:#e5e5e3;
-  --accent:#2563eb;--accent-light:rgba(37,99,235,.08);--accent-border:rgba(37,99,235,.25);
-  --mentor:#0f766e;--practice:#7c3aed;--red:#b91c1c;--amber:#b45309;
-  --red-light:rgba(185,28,28,.07);--amber-light:rgba(180,83,9,.08);
-  --green-light:rgba(15,118,110,.08);--purple-light:rgba(124,58,237,.08);
-}
-html,body{background:var(--bg);color:var(--text)}
-body{background:var(--bg)}
-.topbar{height:52px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:0 28px}
-.tb-badge{background:var(--accent-light);border:1px solid var(--accent-border);color:var(--accent);border-radius:999px}
-.tb-title{color:var(--text);font-weight:800}.tb-meta,.counter{color:var(--muted)}
-.tb-btn{background:#fff;border-color:var(--border);border-radius:999px;color:var(--muted)}
-.tb-btn:hover,.tb-btn.on{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
-.progress{background:#f1f1ef}.pfill{background:linear-gradient(90deg,var(--accent),var(--mentor))}
-.stage{overflow:hidden}.slide{padding:36px 72px 62px;overflow-y:auto;align-items:flex-start;justify-content:flex-start}.inner{max-width:1020px;margin:auto}
-.slide>.inner,.slide .inner{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;padding:38px 44px;box-shadow:0 2px 10px rgba(0,0,0,.04);max-height:calc(100vh - 128px);overflow-y:auto}
-.slide .inner .inner{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;max-height:none;overflow:visible}
-.kicker{color:var(--accent);font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
-.h1{font-size:42px;color:var(--text);letter-spacing:-.5px;font-weight:850}.h2{font-size:30px;color:var(--text);letter-spacing:-.35px;font-weight:850}.sub{font-size:17px;color:var(--muted)}
-.card,.bef,.aft,.step,.fnode,.bigmsg{border-radius:10px;border:1.5px solid var(--border);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.02)}
-.card.pu,.aft,.bigmsg{background:var(--purple-light);border-color:rgba(124,58,237,.24)}
-.card.bl{background:var(--accent-light);border-color:var(--accent-border)}
-.card.rd,.bef{background:var(--red-light);border-color:rgba(185,28,28,.22)}
-.card.am{background:var(--amber-light);border-color:rgba(180,83,9,.22)}
-.card.gr{background:var(--green-light);border-color:rgba(15,118,110,.24)}
-.card.sl{background:#f8fafc;border-color:var(--border)}
-.ct,.batask,.st strong,.bmtxt{color:var(--text)}
-.cb,.babody,.st,.tbl td{color:var(--muted)}
-.ctag.pu,.balbl.a,.skill,.bmtxt .hl{color:var(--practice)}.ctag.bl{color:var(--accent)}.ctag.rd,.balbl.b{color:var(--red)}.ctag.am{color:var(--amber)}.ctag.gr{color:var(--mentor)}.ctag.sl{color:var(--muted)}
-.cl{border-radius:10px;font-size:14.5px}.cl.pu{background:var(--purple-light);color:#5b21b6}.cl.bl{background:var(--accent-light);color:#1d4ed8}.cl.am{background:var(--amber-light);color:#92400e}.cl.gr{background:var(--green-light);color:#0f766e}
-.sn{background:var(--accent)}.rtag{background:var(--purple-light);color:var(--practice);border-color:rgba(124,58,237,.24)}
-.skill{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
-.tbl{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}.tbl thead th{background:#f8fafc;color:var(--muted)}.tbl td{border-bottom-color:var(--border)}
-.pills .pill,.pill{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
-.arr{width:42px;height:42px;background:#fff;border-color:var(--border);color:var(--muted);box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.arr:hover{background:var(--accent-light);color:var(--accent)}
-.dot{background:#d6d6d2}.dot.on{background:var(--accent)}
-.notes{background:#111827;color:#d1d5db;border-top:0;border-radius:14px 14px 0 0}.nlbl{color:#93c5fd}
-.g2{gap:14px}.g3{gap:12px}.card{padding:18px 20px}.step{padding:13px 15px;margin-bottom:9px}
-.flow{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;overflow:visible}.farr{display:none}.fnode{min-width:0;padding:13px 12px}
-.tbadge{background:var(--accent-light);border-color:var(--accent-border);color:var(--accent)}
-.slide [style*="color:rgba(255"]{color:var(--muted)!important}
-.slide [style*="color:#fff"]{color:var(--text)!important}
-.slide [style*="background:rgba(255"]{background:#f8fafc!important;border-color:var(--border)!important}
-.slide [style*="background:rgba(124"]{background:var(--purple-light)!important;border-color:rgba(124,58,237,.24)!important}
-.slide [style*="background:rgba(37"]{background:var(--accent-light)!important;border-color:var(--accent-border)!important}
-.slide [style*="background:rgba(5"]{background:var(--green-light)!important;border-color:rgba(15,118,110,.24)!important}
-.slide [style*="background:rgba(185"]{background:var(--red-light)!important;border-color:rgba(185,28,28,.22)!important}
-.slide [style*="background:rgba(180"]{background:var(--amber-light)!important;border-color:rgba(180,83,9,.22)!important}
-@media(max-height:760px){
-  .slide{padding:24px 56px 44px}
-  .slide>.inner,.slide .inner{padding:28px 34px;max-height:calc(100vh - 96px)}
-  .h1{font-size:36px}.h2{font-size:25px}.sub{font-size:15px}.card{padding:16px}.cl{padding:13px 16px}
-  .tbl td{padding:8px 11px}.tbl thead th{padding:8px 11px}
-}
-@media(max-width:900px){.slide{padding:26px 22px 54px}.slide>.inner,.slide .inner{padding:28px 22px;border-radius:14px}.h1{font-size:32px}.h2{font-size:25px}.g2,.g3,.ba,.flow{grid-template-columns:1fr}.arr{display:none}.tb-meta{display:none}.topbar{padding:0 14px}}
-</style>
-</head>
-<body>
-
-<div class="topbar">
-  <span class="tb-badge">멘토 사례 ③·④</span>
-  <span class="tb-title">암묵지를 스킬로 바꾸는 사례</span>
-  <span class="tb-meta">· 13:50–14:10 · 20분 · 이유진 멘토</span>
-  <div class="tb-right">
-    <div class="dots" id="dots"></div>
-    <span class="counter"><span id="cur">1</span> / <span id="tot">7</span></span>
-    <button class="tb-btn" id="noteBtn" onclick="toggleNotes()">발표 노트</button>
-  </div>
-</div>
-<div class="progress"><div class="pfill" id="pf"></div></div>
-
-<div class="stage" id="stage"></div>
-<button class="arr p" id="btnP" onclick="go(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l-5 5 5 5"/></svg></button>
-<button class="arr n" id="btnN" onclick="go(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg></button>
-
-<div class="notes" id="notesPanel">
-  <div class="nlbl">발표 노트</div>
-  <div id="notesText"></div>
-</div>
-
-<script>
 const SLIDES = [
 
 // 1. 표지
@@ -651,64 +425,45 @@ const SLIDES = [
   </div>`
 },
 
+{notes:'오후 시작. 암묘지 형식화란 무엇인지, 왜 필요한지, 그리고 멘토 사례를 통해 어떻게 형식화하는지를 다루는 시간임을 안내한다.',html:`<div class="paper"><div class="kicker">Tacit Knowledge · Skill Development</div><div class="h1">판단 기준을 문서로 꺼내고<br>스킬로 옮기기<br><span class="hl">암묘지 형식화 + 스킬 개발</span></div><div class="sub">담당자 머릿속에만 있던 판단 기준을 어떻게 문서화하고, 그 기준을 반복 실행 가능한 스킬로 전환했는지를 멘토 사례로 다룹니다.</div><div class="pillrow"><span class="pill orange">유형 A 사례</span><span class="pill orange">유형 B 사례</span><span class="pill green">유형 C 사례</span><span class="pill blue">멘토 질문</span><span class="pill dark">형식화 프로세스</span></div></div>`},
+{notes:'암묘지의 정의와 업무 장면에서의 예시를 보여준다.',html:`<div class="paper"><div class="kicker">개념 정의</div><div class="h2">암묘지란<br>머릿속의 판단 기준입니다</div><div class="grid2" style="margin-top:26px"><div class="card bluebg"><div class="label blue">형식지</div><div class="ctitle">문서·규칙·매뉴얼</div><div class="cbody">이미 글로 쓰여 있거나 누군가에게 가르칠 수 있는 지식입니다. 절차서, 기준표, FAQ처럼 누가 봐도 같은 판단을 내릴 수 있습니다.</div></div><div class="card orangebg"><div class="label orange">암묘지</div><div class="ctitle">머릿속의 판단 경험</div><div class="cbody">한 사람이 경험으로 쌓은 판단 감각이지만, 아직 문서화되지 않았습니다. <b>"뭔가 이상한데…"</b>라는 직관이 실제로는 복잡한 규칙의 조합입니다.</div></div></div><div class="grid3" style="margin-top:20px"><div class="card graybg"><div class="ctitle" style="font-size:14px">질문 분류 담당자</div><div class="cbody">50건을 봐온 경험으로 "이건 Category A, 저건 B"라고 판단하지만, 왜인지 명확히 설명하지 못함</div></div><div class="card graybg"><div class="ctitle" style="font-size:14px">콘텐츠 검수자</div><div class="cbody">좋은 문장과 어색한 문장을 구분하는 감각이 있지만, 기준을 다른 사람에게 전수하기 어려움</div></div><div class="card graybg"><div class="ctitle" style="font-size:14px">마케팅 담당자</div><div class="cbody">타겟 고객이 누인지는 알지만, 구체적인 기준표를 만들지 못함</div></div></div><div class="callout dark">AI는 형식지로만 일합니다. 암묘지를 형식화해야 AI가 반복 실행할 수 있습니다.</div></div>`},
+{notes:'형식화가 필요한 이유. AI 관점과 업무 효율 관점 모두에서 설명한다.',html:`<div class="paper"><div class="kicker">형식화 필요성</div><div class="h2">암묘지를 형식화해야 하는 이유</div><div class="grid2" style="margin-top:24px"><div class="card redbg"><div class="label red">형식화 없이</div><div class="ctitle">매번 사람이 직접 지시</div><div class="cbody"><b>문제</b> "이건 어떻게 처리해?" 같은 질문이 반복되고, 답도 그때그때 다릅니다. <b>비용</b> 담당자 시간 + 일관성 문제</div></div><div class="card greenbg"><div class="label green">형식화 후</div><div class="ctitle">규칙을 한 번 정하고 반복 실행</div><div class="cbody"><b>효과</b> 같은 데이터는 항상 같은 기준으로 처리. 예외가 생기면 규칙을 개선합니다. <b>비용</b> 초기 형식화 + 정기적 검증만</div></div></div><div class="twoflow" style="margin-top:20px"><div class="card orangebg"><div class="label orange">AI 입장에서</div><div class="cbody">규칙이 명확하지 않으면 "~일까요?"라는 식으로 매번 묻게 됩니다. 기준이 문서화되면 같은 기준을 100번 실행할 수 있습니다.</div></div><div class="arrow">→</div><div class="card bluebg"><div class="label blue">당신 입장에서</div><div class="cbody">규칙을 한 번 만들면 담당자 시간이 줄고, 처리 품질이 일관됩니다. 예외는 규칙 개선으로 처리합니다.</div></div></div><div class="callout purple">형식화는 자동화의 필수 단계입니다. 규칙이 명확하지 않으면 AI도 사람처럼 매번 물어봅니다.</div></div>`},
+{notes:'시각적 비교. 형식화 없을 때의 문제점과 형식화 후의 개선 모습을 보여준다.',html:`<div class="paper"><div class="kicker">프로세스 비교</div><div class="h2">형식화 전후 비교<br>같은 데이터, 다른 결과</div><div class="twoflow" style="margin-top:28px"><div class="card redbg"><div class="label red">❌ 형식화 없음</div><div style="margin-top:14px"><div class="step" style="margin-bottom:8px"><div class="num red">1</div><div><strong>데이터 입력</strong></div></div><div class="step" style="margin-bottom:8px"><div class="num red">2</div><div><strong>AI 실행</strong><br><span style="font-size:13px">규칙이 명확하지 않아 "어떻게 처리할까요?"라고 매번 물음</span></div></div><div class="step" style="margin-bottom:8px"><div class="num red">3</div><div><strong>사람 판단</strong><br><span style="font-size:13px">정해진 기준이 없어 그때그때 지시</span></div></div><div class="step"><div class="num red">4</div><div><strong>검증 불가</strong><br><span style="font-size:13px">왜 그렇게 처리했는지 설명 불가능</span></div></div></div></div><div class="arrow" style="font-size:28px">→</div><div class="card greenbg"><div class="label green">✓ 형식화 완료</div><div style="margin-top:14px"><div class="step" style="margin-bottom:8px"><div class="num green">1</div><div><strong>규칙 문서화</strong></div></div><div class="step" style="margin-bottom:8px"><div class="num green">2</div><div><strong>AI 자동 실행</strong><br><span style="font-size:13px">같은 기준을 100번 반복 실행</span></div></div><div class="step" style="margin-bottom:8px"><div class="num green">3</div><div><strong>오류 분석</strong><br><span style="font-size:13px">왜 틀렸는지, 규칙의 어느 부분 때문인지 파악</span></div></div><div class="step"><div class="num green">4</div><div><strong>규칙 개선</strong><br><span style="font-size:13px">오류 분석으로 다음 버전 규칙 업데이트</span></div></div></div></div></div><div class="callout dark">형식화는 일을 추가하는 게 아닙니다. 반복 업무를 자동화 가능한 형태로 바꾸는 일입니다.</div></div>`},
+{notes:'유형 A 사례 소개. 완전히 형식화되지 않은 경우다.',html:`<div class="paper"><div class="caseTag red">유형 A · 암묘지 형식화 전</div><div class="h2">규칙이 전혀 문서화되지 않은 경우</div><div class="grid2" style="margin-top:26px"><div class="card redbg"><div class="label red">실제 상황</div><div class="ctitle">고객 이메일을 우선순위별로 분류</div><div class="cbody">해당 담당자가 100건을 봐왔으니 "이건 High, 저건 Low"라는 판단은 빠릅니다. 다만 기준을 누군가에게 설명하지 못합니다.</div></div><div class="card orangebg"><div class="label orange">형식화 현황</div><div class="ctitle">포함·제외·예시 전부 머릿속에만</div><div class="cbody">기준표도 없고, 우수 사례와 예외 사례도 문서로 남지 않았습니다. 그래서 AI도 매번 물어봅니다.</div></div></div><div class="callout red">이 유형은 형식화 작업 자체를 시작하지 않은 상태입니다. 판단 기준을 말로 끌어내고 문서로 정리하는 게 첫 번째 과제입니다.</div></div>`},
+{notes:'유형 B 사례. 부분적으로만 형식화된 경우다. 포함·제외는 있지만 예시가 부족하다.',html:`<div class="paper"><div class="caseTag orange">유형 B · 암묘지 부분 형식화</div><div class="h2">기준은 있지만 예시가 부족한 경우</div><div class="grid2" style="margin-top:26px"><div class="card orangebg"><div class="label orange">실제 상황</div><div class="ctitle">결재 문서에서 결함을 찾기</div><div class="cbody">담당자가 "이런 건 결함이다"는 포함 기준과 제외 기준은 만들었습니다. 다만 이건 틀리면 다음에 어떻게 고칠지를 모릅니다.</div></div><div class="card bluebg"><div class="label blue">형식화 현황</div><div class="ctitle">포함·제외만 있고 예시가 부족</div><div class="cbody">기준은 다음과 같습니다: <b>포함</b> 필수 항목 누락, 금액 오류, 승인자 대체 / <b>제외</b> 표준 서식, 정상 범위의 수정. 하지만 "경계 사례"는 어떻게 처리해야 하는지는 불명확합니다.</div></div></div><div class="callout orange">이 유형은 형식화가 되었지만 가장 복잡한 경계 사례까지는 다루지 못했습니다. 오류가 날 때마다 예외를 추가하는 방식으로 개선합니다.</div></div>`},
+{notes:'유형 C 사례. 완전히 형식화된 경우다. 포함·제외·우수예시·보완예시가 모두 있다.',html:`<div class="paper"><div class="caseTag green">유형 C · 암묘지 완전 형식화</div><div class="h2">포함·제외·우수예시·보완예시가 모두 갖춰진 경우</div><div class="grid2" style="margin-top:26px"><div class="card greenbg"><div class="label green">실제 상황</div><div class="ctitle">기술 문서에서 콘텐츠를 초안으로 변환</div><div class="cbody">담당자가 어떤 내용을 포함하고 어떤 내용을 빼야 하는지, 그리고 좋은 예와 보완할 예까지 모두 정리했습니다.</div></div><div class="card greenbg"><div class="label green">형식화 현황</div><div class="ctitle">4 elements가 완성된 상태</div><div class="cbody"><b>포함</b> 기술 스펙과 사용법 / <b>제외</b> 마케팅 카피와 이론 배경 / <b>우수예시</b> O 초안 3개 / <b>보완예시</b> X 초안 + 개선안 3개. AI가 반복 실행 가능합니다.</div></div></div><div class="callout green">이 유형이 이상적입니다. 형식화 후에는 AI가 일관되게 같은 기준을 적용하고, 오류 분석으로만 규칙을 개선합니다.</div></div>`},
+{notes:'Before/After 멘토 질문 흐름 1. 유형 A가 유형 C로 변하는 과정.',html:`<div class="paper"><div class="kicker">멘토 코칭 프로세스</div><div class="h2">유형 A → C로 진화하는 질문 흐름</div><div style="margin-top:26px"><div class="step"><div class="num">1</div><div><strong>멘토의 첫 질문: 기준이 보이나요?</strong><span><b>A의 답변</b> "음… 보면 알아요" / <b>멘토의 반응</b> 기준을 글로 쓸 수 없으면 AI도 모릅니다. 지금 판단하실 때 머릿속에서 어떤 과정이 일어나는지 말씀해 주세요.</span></div></div><div class="step"><div class="num">2</div><div><strong>멘토의 두 번째 질문: 포함·제외 기준이 뭔가요?</strong><span><b>A의 답변</b> "이건 포함합니다. 저건 안 합니다" / <b>멘토의 반응</b> 좋습니다. 이제 우수 예시 3개와 경계 사례 3개를 보여주세요.</span></div></div><div class="step"><div class="num">3</div><div><strong>멘토의 세 번째 질문: 경계 사례는 왜 그렇게 판단했나요?</strong><span><b>A의 답변</b> "이 경우는…" / <b>멘토의 반응</b> 그 설명이 바로 형식화된 기준입니다. 우수 예시와 보완 예시를 이 기준으로 정렬하면 AI가 같은 규칙을 반복할 수 있습니다.</span></div></div><div class="step"><div class="num">4</div><div><strong>멘토의 결론: 4가지가 정리되었습니다</strong><span><b>포함기준</b> "고객 이메일 중 긴급 표시나 명확한 요청이 있는 경우" → <b>제외기준</b> "일반 안내나 감사 인사" → <b>우수예시</b> 3개 → <b>보완예시</b> 3개. 이제 이 4가지를 Skill로 만들 준비가 됐습니다.</span></div></div></div><div class="callout blue">형식화의 핵심은 <b>AI가 이해할 수 있는 언어로 기준을 설명</b>하는 것입니다.</div></div>`},
+{notes:'Before/After 멘토 질문 흐름 2. 유형 B의 오류 분석으로 형식을 개선하는 경우.',html:`<div class="paper"><div class="kicker">형식화 개선 프로세스</div><div class="h2">유형 B → C로 개선하는 오류 분석 흐름</div><div style="margin-top:26px"><div class="step"><div class="num">1</div><div><strong>상황: 유형 B 기준으로 AI 실행해 보니 오류 발생</strong><span>기존 기준 <b>포함</b> "필수 항목 누락, 금액 오류, 승인자 대체" <b>제외</b> "표준 서식, 정상 범위 수정"으로 100건 처리 → 8건 오류</span></div></div><div class="step"><div class="num">2</div><div><strong>멘토의 첫 질문: 8건의 오류가 모두 같은 패턴인가요?</strong><span><b>분석 결과</b> 오류 5건은 "금액 오류인데도 승인자가 확인했으면 정상"인 경우. 오류 3건은 "과거 수정 이력과 다른 방식으로 수정"된 경우.</span></div></div><div class="step"><div class="num">3</div><div><strong>멘토의 두 번째 질문: 그럼 포함 기준을 다시 쓸 수 있나요?</strong><span><b>개선된 기준</b> <b>포함</b> "필수 항목 누락, 금액 오류(단, 승인자 확인 사항 제외), 승인자 대체(다만 히스토리와 일관된 경우만)" → 정확도 97%로 개선</span></div></div><div class="step"><div class="num">4</div><div><strong>멘토의 결론: 이제 우수·보완 예시까지 업데이트하면 유형 C가 됩니다</strong><span>오류 사례들이 바로 "보완 예시"가 됩니다. 왜 틀렸는지, 어떻게 고칠지를 보여주는 사례로 정리합니다.</span></div></div></div><div class="callout green">형식화는 완성이 아니라 <b>오류로 배우는 반복</b>입니다. 오류 분석이 규칙 개선을 만듭니다.</div></div>`},
+{notes:'세 유형을 비교하는 표. 언제 어떤 유형에서 어떤 일을 해야 하는지 정리한다.',html:`<div class="paper"><div class="kicker">유형 비교</div><div class="h2">A · B · C 유형의 특징과 다음 단계</div><table class="table" style="margin-top:24px"><tr><th>구분</th><th>유형 A<br><span style="font-weight:600;color:#b91c1c">형식화 前</span></th><th>유형 B<br><span style="font-weight:600;color:#b45309">부분 형식화</span></th><th>유형 C<br><span style="font-weight:600;color:#0f766e">완전 형식화</span></th></tr><tr><td>포함 기준</td><td>머릿속에만 있음</td><td>문서화됨</td><td>문서화됨</td></tr><tr><td>제외 기준</td><td>불명확</td><td>문서화됨</td><td>문서화됨</td></tr><tr><td>우수 예시</td><td>없음</td><td>일부만</td><td>3개 이상</td></tr><tr><td>보완 예시</td><td>없음</td><td>없음</td><td>3개 이상 + 개선안</td></tr><tr><td>AI 실행</td><td>매번 물어봄</td><td>틀릴 수 있음</td><td>일관되게 실행</td></tr><tr><td>해야 할 일</td><td>멘토 질문으로 기준 추출</td><td>오류 분석 + 예시 추가</td><td>1차 실행 + 검증</td></tr></table><div class="callout dark">특별히 주목할 점: <b>유형 B는 문제가 아닙니다</b>. 계획대로 유형 C로 개선하면 됩니다.</div></div>`},
+{notes:'4가지 형식화 구조를 설명한다. 이것이 오후 강의의 핵심이다.',html:`<div class="paper"><div class="kicker">형식화 구조</div><div class="h2">유형 C를 만드는 4가지 필수 요소<br><span style="font-size:20px;color:#8a8a8a;font-weight:700">포함·제외·우수·보완</span></div><div class="grid4" style="margin-top:28px"><div class="card bluebg"><div class="label blue">① 포함기준</div><div class="ctitle">무엇을 YES로 할까</div><div class="cbody">이 조건에 맞으면 처리합니다. 명확한 신호나 패턴으로 표현합니다.</div></div><div class="card orangebg"><div class="label orange">② 제외기준</div><div class="ctitle">무엇을 NO로 할까</div><div class="cbody">이 조건에 맞으면 건너뜁니다. 포함과는 명백히 다른 특징으로 구분합니다.</div></div><div class="card greenbg"><div class="label green">③ 우수예시</div><div class="ctitle">좋은 사례는 이렇습니다</div><div class="cbody"><b>O</b> 표시가 맞는 3개 사례. AI가 정확하게 했을 때의 결과물입니다.</div></div><div class="card purplebg"><div class="label purple">④ 보완예시</div><div class="ctitle">이렇게 틀렸는데 이렇게 고칩니다</div><div class="cbody"><b>X</b> 표시된 오류 사례 + 개선안 3개. 왜 틀렸는지, 어떻게 고칠지를 보여줍니다.</div></div></div><div class="callout dark">이 4가지를 모두 갖추면 AI가 같은 기준을 반복 실행할 수 있습니다. 이것이 형식화의 목표입니다.</div></div>`},
+{notes:'실습 안내. 수강생들이 자신의 암묘지를 정리하는 워크시트.',html:`<div class="paper"><div class="kicker">실습</div><div class="h2">내 업무의 암묘지를 형식화합니다</div><div class="sub" style="margin-top:14px">아침에 배운 문제정의를 바탕으로, 이번엔 그 문제를 푸는 판단 기준을 정리합니다.</div><div class="grid2" style="margin-top:26px"><div class="card orangebg"><div class="label orange">Step 1</div><div class="ctitle">포함 기준</div><div class="cbody">내가 처리하는 데이터는 어떤 조건일 때 YES입니까? 명확한 신호 1-2개로 표현하세요.</div></div><div class="card orangebg"><div class="label orange">Step 2</div><div class="ctitle">제외 기준</div><div class="cbody">어떤 조건일 때는 절대 처리하지 않습니까? 포함과는 명백히 다른 특징을 적으세요.</div></div><div class="card greenbg"><div class="label green">Step 3</div><div class="ctitle">우수 예시 3개</div><div class="cbody">포함 기준을 정확하게 따른 결과물 예시 3개를 모으세요. 실제 결과물이 가장 좋습니다.</div></div><div class="card purplebg"><div class="label purple">Step 4</div><div class="ctitle">보완 예시 3개</div><div class="cbody">과거에 틀렸던 사례를 찾거나, 앞으로 예상되는 경계 사례를 정리하세요. 각각 왜 틀렸는지, 어떻게 고칠지도 함께.</div></div></div><div class="callout blue">네 항목이 모두 정리되면 이를 Skill로 변환할 준비가 됐습니다.</div></div>`},
+{notes:'AI에게 암묘지를 전달할 때 지켜야 할 보안 원칙들을 안내한다.',html:`<div class="paper"><div class="kicker">보안 체크</div><div class="h2">암묘지를 AI에게 넘길 때 지켜야 할 것들</div><div style="margin-top:26px"><div class="step"><div class="num orange">1</div><div><strong>민감 정보 마스킹</strong><span>포함·제외·예시 안의 고객명, 금액, 회사명, 이메일은 마스킹해 제출합니다. <span class="mono">[고객명]</span>, <span class="mono">[금액]</span>, <span class="mono">[이메일]</span> 같은 형태로.</span></div></div><div class="step"><div class="num orange">2</div><div><strong>샘플 범위 제한</strong><span>예시를 만들 때 실제 데이터 전체가 아니라 대표성 있는 샘플만 사용합니다. 보통 상품 10건, 고객 20건 정도면 충분합니다.</span></div></div><div class="step"><div class="num orange">3</div><div><strong>로컬 저장소에서만 작업</strong><span>Claude에 제출하기 전에, 먼저 로컬 파일이나 내부 문서 관리 시스템에서 포함·제외·예시를 정리해 검토합니다.</span></div></div><div class="step"><div class="num orange">4</div><div><strong>제출 전 최종 검토</strong><span>포함·제외·우수예시·보완예시를 다시 한 번 읽고, 민감 정보가 남아 있지는 않은지 확인한 후 Claude에 제출합니다.</span></div></div><div class="step"><div class="num orange">5</div><div><strong>실행 후 결과 검증</strong><span>AI 결과물이 나오면, 실제 조건과 맞는지 먼저 샘플로 검증합니다. 오류 패턴이 보이면 기준을 개선합니다.</span></div></div></div><div class="callout purple">암묘지 형식화는 효율이지만, 정보 보안도 동시에 고려해야 합니다.</div></div>`},
+{notes:'Claude에 암묘지를 제출하는 프롬프트 템플릿을 제시한다.',html:`<div class="paper"><div class="kicker">프롬프트 템플릿</div><div class="h2">Claude에 암묘지를 전달하는 프롬프트</div><div class="mono" style="margin-top:24px;white-space:pre-wrap">아래 업무에 대해 Skill을 구축해 주세요.
+
+【문제정의】
+[아침에 정리한 문제정의 1문장]
+
+【포함기준】
+[내가 처리하는 데이터는 어떤 조건일 때 YES입니까?]
+
+【제외기준】
+[어떤 조건일 때는 절대 처리하지 않습니까?]
+
+【우수예시】
+예시1: [입력] … → [출력] …
+예시2: [입력] … → [출력] …
+예시3: [입력] … → [출력] …
+
+【보완예시】
+예시1: [입력] … → [현재 결과] … ✗
+보완: [어떻게 고칠까]
+
+예시2: [입력] … → [현재 결과] … ✗
+보완: [어떻게 고칠까]
+
+예시3: [입력] … → [현재 결과] … ✗
+보완: [어떻게 고칠까]
+
+요청: 위 기준으로 [입력 형태] 데이터를 [처리 방식]으로 처리하는 Skill을 작성해 주세요.</div><div class="callout blue">이 구조로 제출하면 Claude가 일관된 기준으로 반복 실행할 수 있는 Skill을 만들 수 있습니다.</div></div>`},
+{notes:'아침과 오후를 연결하는 최종 정리.',html:`<div class="paper"><div class="kicker">핵심 정리</div><div class="h2">문제정의에서 스킬까지<br/>한 번에 이어지는 흐름</div><div class="grid2" style="margin-top:26px"><div class="card bluebg"><div class="label blue">아침 · 문제정의</div><div class="ctitle">입력, 출력, 조건, 규모</div><div class="cbody">AI에게 맡길 일이 무엇인지, 범위가 얼마나 되는지 명확히 합니다. 이것이 Skill의 <b>목표</b>입니다.</div></div><div class="card greenbg"><div class="label green">오후 · 암묘지 형식화</div><div class="ctitle">포함, 제외, 우수, 보완</div><div class="cbody">AI가 그 일을 어떻게 판단해야 하는지 기준을 명확히 합니다. 이것이 Skill의 <b>규칙</b>입니다.</div></div></div><div class="callout dark" style="margin-top:22px">처음부터 완벽할 필요는 없습니다. <br/>오류를 분석하고 기준을 수정하는 반복이 형식화된 암묘지를 만듭니다.<br/><b style="font-size:17px">유형 A → B → C로의 진화는 자연스럽습니다.</b></div></div>`}
 ];
-
-// ─── engine ───
-const stage = document.getElementById('stage');
-let cur = 0, notesOpen = false;
-
-function init() {
-  document.getElementById('tot').textContent = SLIDES.length;
-  const dotsEl = document.getElementById('dots');
-  SLIDES.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'slide';
-    div.id = 'sl' + i;
-    div.innerHTML = s.html;
-    stage.appendChild(div);
-    const dot = document.createElement('button');
-    dot.className = 'dot' + (i === 0 ? ' on' : '');
-    dot.onclick = () => go2(i);
-    dotsEl.appendChild(dot);
-  });
-  show(0, 0);
-}
-
-function show(idx, dir) {
-  const prev = document.getElementById('sl' + cur);
-  if (prev) { prev.classList.remove('active'); prev.classList.add('exit'); setTimeout(() => prev.classList.remove('exit'), 380); }
-  cur = idx;
-  const next = document.getElementById('sl' + cur);
-  next.classList.remove('exit'); next.classList.add('active');
-  document.getElementById('cur').textContent = cur + 1;
-  document.getElementById('pf').style.width = ((cur+1)/SLIDES.length*100) + '%';
-  document.getElementById('notesText').textContent = SLIDES[cur].notes || '—';
-  document.getElementById('btnP').disabled = cur === 0;
-  document.getElementById('btnN').disabled = cur === SLIDES.length - 1;
-  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('on', i === cur));
-}
-
-function go(dir) { const n = cur + dir; if (n >= 0 && n < SLIDES.length) show(n, dir); }
-function go2(idx) { show(idx, idx > cur ? 1 : -1); }
-
-function toggleNotes() {
-  notesOpen = !notesOpen;
-  document.getElementById('notesPanel').classList.toggle('open', notesOpen);
-  document.getElementById('noteBtn').classList.toggle('on', notesOpen);
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); go(1); }
-  if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); go(-1); }
-  if (e.key==='Escape' && notesOpen) toggleNotes();
-  if (e.key==='n'||e.key==='N') toggleNotes();
-});
-
-let tx = 0;
-stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
-stage.addEventListener('touchend', e => { if (Math.abs(e.changedTouches[0].clientX - tx) > 50) go(e.changedTouches[0].clientX < tx ? 1 : -1); });
-
-init();
-</script>
-</body>
-</html>
